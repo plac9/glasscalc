@@ -7,45 +7,87 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C68696F3D1EA81F43EDC87E /* TipCalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E4337BEB32BA163040E425 /* TipCalculatorView.swift */; };
 		256EF2A503E16C904FA82122 /* GlassTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166E376548BCB9D6251E58F4 /* GlassTheme.swift */; };
+		2ED4602614D08D71AF772098 /* ArcSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4509FB883BDADD494189B540 /* ArcSlider.swift */; };
 		33DBDF8BB7E309831BB1158B /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84354347C4E03339C1BCFDB4 /* Main.swift */; };
+		440F9A13E80D54D3B05C5748 /* CurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19AC441303D0EF8DA02BAF5 /* CurrencyService.swift */; };
+		4C5EBC8629C107CED5591807 /* SplitBillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF71E0D10E8AB31B834216B /* SplitBillView.swift */; };
 		53858D8A69A3CB813701C69C /* CalculatorEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CDF7C18E0A08A831AB9E32 /* CalculatorEngine.swift */; };
+		632B0893C23FBA6E1580B08E /* UnitConverterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152DD16CCBD8CC75EBB3CF1 /* UnitConverterView.swift */; };
+		732D7782FA37FF91CF7043A7 /* DiscountCalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D7992608E1F5963B90E503 /* DiscountCalculatorView.swift */; };
+		7522AE1FA0411E79B7BF455C /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011FDE3FAE243DB0F7F06F3D /* ViewExtensions.swift */; };
+		75ADB0A92959F93F11BBB0DE /* DiscountCalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A67931C7E2E5EB73C0B3B376 /* DiscountCalculatorViewModel.swift */; };
 		851B668F704A979EACA4528D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0928A2F10C4A1BC36441EF60 /* ContentView.swift */; };
 		853CBE38EC8CCBA684A8D5F3 /* GlassCalcApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CB4D0753E3072FCA67F542 /* GlassCalcApp.swift */; };
+		85F05CFB02ED91E5786D0356 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66CE5B701DF5A9A0367E6BE /* SettingsView.swift */; };
+		9C0BB51DB91005648F8C089F /* UnitConverterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40CFEFC4EC5549F59BE5325 /* UnitConverterViewModel.swift */; };
+		C0529C5D7A7FC223BABFD238 /* SplitBillViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C833C98CF2CDDA190C3BEAB /* SplitBillViewModel.swift */; };
 		C758A13774711033A2C2CFCA /* GlassCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4194E0993381BD54D743A6D1 /* GlassCard.swift */; };
 		E982FA44BD84210DCACC5BA2 /* GlassDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67CC6560CD1FCC27CA6702D /* GlassDisplay.swift */; };
 		EE256CEC1C1D2FA80B9D3E66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B88C2B145989CCF729E6C81 /* Assets.xcassets */; };
 		EEB3561F3E0339477391F824 /* CalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFEB1D67682DB6C959FBF44 /* CalculatorViewModel.swift */; };
+		F15386F6B7A23EC9FBEFE00A /* TipCalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CCE2807D00E71D605C9EDF /* TipCalculatorViewModel.swift */; };
 		F1A6EA874B225FAA431A3A88 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CEF784C8D8CB4B0D1F0E30 /* CalculatorView.swift */; };
 		FF21AC5921DE37D9985079A8 /* GlassButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C27C5D6BD72F15EA88DE7B /* GlassButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		011FDE3FAE243DB0F7F06F3D /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		06CEF784C8D8CB4B0D1F0E30 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		0928A2F10C4A1BC36441EF60 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		166E376548BCB9D6251E58F4 /* GlassTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassTheme.swift; sourceTree = "<group>"; };
 		18CDF7C18E0A08A831AB9E32 /* CalculatorEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorEngine.swift; sourceTree = "<group>"; };
+		2152DD16CCBD8CC75EBB3CF1 /* UnitConverterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConverterView.swift; sourceTree = "<group>"; };
+		38CCE2807D00E71D605C9EDF /* TipCalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipCalculatorViewModel.swift; sourceTree = "<group>"; };
 		3B88C2B145989CCF729E6C81 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3DFEB1D67682DB6C959FBF44 /* CalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewModel.swift; sourceTree = "<group>"; };
 		4194E0993381BD54D743A6D1 /* GlassCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassCard.swift; sourceTree = "<group>"; };
+		4509FB883BDADD494189B540 /* ArcSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcSlider.swift; sourceTree = "<group>"; };
+		53E4337BEB32BA163040E425 /* TipCalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipCalculatorView.swift; sourceTree = "<group>"; };
 		6042CD375253D31F9C043C2B /* GlassCalc.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = GlassCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DF71E0D10E8AB31B834216B /* SplitBillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitBillView.swift; sourceTree = "<group>"; };
 		75C27C5D6BD72F15EA88DE7B /* GlassButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassButton.swift; sourceTree = "<group>"; };
 		84354347C4E03339C1BCFDB4 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
+		9C833C98CF2CDDA190C3BEAB /* SplitBillViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitBillViewModel.swift; sourceTree = "<group>"; };
+		A67931C7E2E5EB73C0B3B376 /* DiscountCalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountCalculatorViewModel.swift; sourceTree = "<group>"; };
+		B19AC441303D0EF8DA02BAF5 /* CurrencyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyService.swift; sourceTree = "<group>"; };
+		C2D7992608E1F5963B90E503 /* DiscountCalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountCalculatorView.swift; sourceTree = "<group>"; };
+		C40CFEFC4EC5549F59BE5325 /* UnitConverterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConverterViewModel.swift; sourceTree = "<group>"; };
 		D6361ACEB26A1C8B9C4C5A52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E4CB4D0753E3072FCA67F542 /* GlassCalcApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassCalcApp.swift; sourceTree = "<group>"; };
+		E66CE5B701DF5A9A0367E6BE /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		E67CC6560CD1FCC27CA6702D /* GlassDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassDisplay.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		0B74F98ED3C9DEA471F6C58F /* DiscountCalculator */ = {
+			isa = PBXGroup;
+			children = (
+				C2D7992608E1F5963B90E503 /* DiscountCalculatorView.swift */,
+				A67931C7E2E5EB73C0B3B376 /* DiscountCalculatorViewModel.swift */,
+			);
+			path = DiscountCalculator;
+			sourceTree = "<group>";
+		};
 		21E54184E526F50BA3F14D52 /* GlassCalc */ = {
 			isa = PBXGroup;
 			children = (
 				FF09123D51E2FB8FC4BBC9DE /* App */,
+				9A95DD9C43455BF6302A9990 /* Core */,
 				8BAEB621A4163068A8456199 /* DesignSystem */,
 				F9892D895E073F57DEE623CD /* Features */,
 			);
 			name = GlassCalc;
 			path = Sources/GlassCalc;
+			sourceTree = "<group>";
+		};
+		24FBE59F79153ABF302F3CC0 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B19AC441303D0EF8DA02BAF5 /* CurrencyService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		7C1A3815FF2BBF82FA8D43B0 /* Products */ = {
@@ -59,12 +101,47 @@
 		8BAEB621A4163068A8456199 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
+				4509FB883BDADD494189B540 /* ArcSlider.swift */,
 				75C27C5D6BD72F15EA88DE7B /* GlassButton.swift */,
 				4194E0993381BD54D743A6D1 /* GlassCard.swift */,
 				E67CC6560CD1FCC27CA6702D /* GlassDisplay.swift */,
 				166E376548BCB9D6251E58F4 /* GlassTheme.swift */,
 			);
 			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		9A95DD9C43455BF6302A9990 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				C7F5111D7D54BC9B1269E180 /* Extensions */,
+				24FBE59F79153ABF302F3CC0 /* Services */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		A3D97E06B5CA5B255A63E9F4 /* SplitBill */ = {
+			isa = PBXGroup;
+			children = (
+				6DF71E0D10E8AB31B834216B /* SplitBillView.swift */,
+				9C833C98CF2CDDA190C3BEAB /* SplitBillViewModel.swift */,
+			);
+			path = SplitBill;
+			sourceTree = "<group>";
+		};
+		C7F5111D7D54BC9B1269E180 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				011FDE3FAE243DB0F7F06F3D /* ViewExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CA216803D14A19FF3392F7DE /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				E66CE5B701DF5A9A0367E6BE /* SettingsView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		E507AF7FBEC3765F8D82727C = {
@@ -90,8 +167,22 @@
 			isa = PBXGroup;
 			children = (
 				FE82348A3DE808FD2CBAED46 /* Calculator */,
+				0B74F98ED3C9DEA471F6C58F /* DiscountCalculator */,
+				CA216803D14A19FF3392F7DE /* Settings */,
+				A3D97E06B5CA5B255A63E9F4 /* SplitBill */,
+				FF30EC85DB9FBC9332029B9D /* TipCalculator */,
+				FA67981FDE64026DC6182F37 /* UnitConverter */,
 			);
 			path = Features;
+			sourceTree = "<group>";
+		};
+		FA67981FDE64026DC6182F37 /* UnitConverter */ = {
+			isa = PBXGroup;
+			children = (
+				2152DD16CCBD8CC75EBB3CF1 /* UnitConverterView.swift */,
+				C40CFEFC4EC5549F59BE5325 /* UnitConverterViewModel.swift */,
+			);
+			path = UnitConverter;
 			sourceTree = "<group>";
 		};
 		FE82348A3DE808FD2CBAED46 /* Calculator */ = {
@@ -113,18 +204,20 @@
 			path = App;
 			sourceTree = "<group>";
 		};
-		"TEMP_3341C037-AABB-42B7-8A42-F3A45AB85026" /* Widgets */ = {
+		FF30EC85DB9FBC9332029B9D /* TipCalculator */ = {
+			isa = PBXGroup;
+			children = (
+				53E4337BEB32BA163040E425 /* TipCalculatorView.swift */,
+				38CCE2807D00E71D605C9EDF /* TipCalculatorViewModel.swift */,
+			);
+			path = TipCalculator;
+			sourceTree = "<group>";
+		};
+		"TEMP_9C922120-1052-4889-B32B-C1201A4982CF" /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			path = Widgets;
-			sourceTree = "<group>";
-		};
-		"TEMP_9317B84D-EB74-46C5-9F18-82BEFD4675C9" /* Core */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,16 +285,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ED4602614D08D71AF772098 /* ArcSlider.swift in Sources */,
 				53858D8A69A3CB813701C69C /* CalculatorEngine.swift in Sources */,
 				F1A6EA874B225FAA431A3A88 /* CalculatorView.swift in Sources */,
 				EEB3561F3E0339477391F824 /* CalculatorViewModel.swift in Sources */,
 				851B668F704A979EACA4528D /* ContentView.swift in Sources */,
+				440F9A13E80D54D3B05C5748 /* CurrencyService.swift in Sources */,
+				732D7782FA37FF91CF7043A7 /* DiscountCalculatorView.swift in Sources */,
+				75ADB0A92959F93F11BBB0DE /* DiscountCalculatorViewModel.swift in Sources */,
 				FF21AC5921DE37D9985079A8 /* GlassButton.swift in Sources */,
 				853CBE38EC8CCBA684A8D5F3 /* GlassCalcApp.swift in Sources */,
 				C758A13774711033A2C2CFCA /* GlassCard.swift in Sources */,
 				E982FA44BD84210DCACC5BA2 /* GlassDisplay.swift in Sources */,
 				256EF2A503E16C904FA82122 /* GlassTheme.swift in Sources */,
 				33DBDF8BB7E309831BB1158B /* Main.swift in Sources */,
+				85F05CFB02ED91E5786D0356 /* SettingsView.swift in Sources */,
+				4C5EBC8629C107CED5591807 /* SplitBillView.swift in Sources */,
+				C0529C5D7A7FC223BABFD238 /* SplitBillViewModel.swift in Sources */,
+				1C68696F3D1EA81F43EDC87E /* TipCalculatorView.swift in Sources */,
+				F15386F6B7A23EC9FBEFE00A /* TipCalculatorViewModel.swift in Sources */,
+				632B0893C23FBA6E1580B08E /* UnitConverterView.swift in Sources */,
+				9C0BB51DB91005648F8C089F /* UnitConverterViewModel.swift in Sources */,
+				7522AE1FA0411E79B7BF455C /* ViewExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

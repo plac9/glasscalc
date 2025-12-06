@@ -1,13 +1,41 @@
 import SwiftUI
+#if os(iOS)
+import UIKit
+#endif
 
-/// Main content view with animated gradient background
-///
-/// Provides the glassmorphism foundation layer that all views sit on.
-/// Future: Will include tab bar for Pro features (Tip, Discount, Split, Convert)
+/// Main content view with tab navigation and animated gradient background
 public struct ContentView: View {
+    @State private var selectedTab: Tab = .calculator
     @State private var animateGradient = false
 
     public init() {}
+
+    public enum Tab: String, CaseIterable {
+        case calculator = "Calculator"
+        case tip = "Tip"
+        case discount = "Discount"
+        case split = "Split"
+        case convert = "Convert"
+        case settings = "Settings"
+
+        var icon: String {
+            switch self {
+            case .calculator: return "plus.forwardslash.minus"
+            case .tip: return "dollarsign.circle"
+            case .discount: return "tag"
+            case .split: return "person.2"
+            case .convert: return "arrow.left.arrow.right"
+            case .settings: return "gearshape"
+            }
+        }
+
+        var isPro: Bool {
+            switch self {
+            case .calculator, .settings: return false
+            case .tip, .discount, .split, .convert: return true
+            }
+        }
+    }
 
     public var body: some View {
         ZStack {
@@ -15,15 +43,62 @@ public struct ContentView: View {
             backgroundGradient
                 .ignoresSafeArea()
 
-            // Calculator (default view)
-            CalculatorView()
+            // Tab Content
+            TabView(selection: $selectedTab) {
+                CalculatorView()
+                    .tag(Tab.calculator)
+                    .tabItem {
+                        Label(Tab.calculator.rawValue, systemImage: Tab.calculator.icon)
+                    }
+
+                TipCalculatorView()
+                    .tag(Tab.tip)
+                    .tabItem {
+                        Label(Tab.tip.rawValue, systemImage: Tab.tip.icon)
+                    }
+
+                DiscountCalculatorView()
+                    .tag(Tab.discount)
+                    .tabItem {
+                        Label(Tab.discount.rawValue, systemImage: Tab.discount.icon)
+                    }
+
+                SplitBillView()
+                    .tag(Tab.split)
+                    .tabItem {
+                        Label(Tab.split.rawValue, systemImage: Tab.split.icon)
+                    }
+
+                UnitConverterView()
+                    .tag(Tab.convert)
+                    .tabItem {
+                        Label(Tab.convert.rawValue, systemImage: Tab.convert.icon)
+                    }
+
+                SettingsView()
+                    .tag(Tab.settings)
+                    .tabItem {
+                        Label(Tab.settings.rawValue, systemImage: Tab.settings.icon)
+                    }
+            }
+            .tint(GlassTheme.primary)
         }
         .onAppear {
+            #if os(iOS)
+            // Transparent tab bar background for glass effect
+            let appearance = UITabBarAppearance()
+            appearance.configureWithTransparentBackground()
+            appearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+            UITabBar.appearance().standardAppearance = appearance
+            UITabBar.appearance().scrollEdgeAppearance = appearance
+            #endif
+
+            // Start gradient animation
             withAnimation(.easeInOut(duration: 5).repeatForever(autoreverses: true)) {
                 animateGradient = true
             }
         }
-        .preferredColorScheme(.dark) // Glass looks best on dark
+        .preferredColorScheme(.dark)
     }
 
     @MainActor
@@ -34,7 +109,6 @@ public struct ContentView: View {
             endPoint: animateGradient ? .bottomTrailing : .topTrailing
         )
         .overlay(
-            // Subtle noise texture for depth
             Color.white.opacity(0.02)
                 .blendMode(.overlay)
         )
