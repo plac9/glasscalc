@@ -1,0 +1,72 @@
+# Xcode
+*.xcodeproj/**/xcuserdata/
+*.xcworkspace/**/xcuserdata/
+*.xcodeproj/**/project.xcworkspace/
+!*.xcodeproj/**/project.xcworkspace/contents.xcworkspacedata
+*.playground/**/timeline.xctimeline
+*.playground/**/playground.xcworkspace
+
+# Build
+build/
+DerivedData/
+*.build/
+.build/
+
+# Swift Package Manager
+.swiftpm/
+Package.resolved
+
+# CocoaPods
+Pods/
+*.xcworkspace
+
+# Carthage
+Carthage/Build/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# Code Injection
+iOSInjectionProject/
+
+# macOS
+.DS_Store
+*.swp
+*~.nib
+
+# AppCode
+.idea/
+
+# Archives
+*.xcarchive
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Swift Package Manager
+/.build
+/Packages
+
+# Secrets (never commit)
+*.pem
+*.p12
+*.key
+.env
+.env.*
+secrets/
+
+# IDE
+.vscode/
+*.code-workspace
+
+# Testing
+*.xcresult/
+coverage/
+
+# Release artifacts
+releases/*.ipa
+releases/*.app
