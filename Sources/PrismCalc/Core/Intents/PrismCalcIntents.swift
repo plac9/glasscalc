@@ -170,31 +170,86 @@ struct ConvertUnitsIntent: AppIntent {
     }
 
     private func convert(_ value: Double, from: UnitType, to: UnitType) -> Double {
-        // Convert to base unit then to target
+        // Handle same-unit case
+        guard from != to else { return value }
+
+        // Length conversions (via meters)
         let toMeters: [UnitType: Double] = [
             .meters: 1, .feet: 0.3048, .inches: 0.0254,
-            .kilometers: 1000, .miles: 1609.34, .yards: 0.9144
+            .centimeters: 0.01, .kilometers: 1000, .miles: 1609.34, .yards: 0.9144
         ]
 
         if let fromFactor = toMeters[from], let toFactor = toMeters[to] {
             return (value * fromFactor) / toFactor
         }
 
+        // Weight conversions (via kilograms)
+        let toKg: [UnitType: Double] = [
+            .kilograms: 1, .pounds: 0.453592, .ounces: 0.0283495,
+            .grams: 0.001, .stones: 6.35029
+        ]
+
+        if let fromFactor = toKg[from], let toFactor = toKg[to] {
+            return (value * fromFactor) / toFactor
+        }
+
+        // Temperature conversions
+        let tempUnits: [UnitType] = [.celsius, .fahrenheit, .kelvin]
+        if tempUnits.contains(from) && tempUnits.contains(to) {
+            return convertTemperature(value, from: from, to: to)
+        }
+
         return value
     }
 
+    private func convertTemperature(_ value: Double, from: UnitType, to: UnitType) -> Double {
+        // Convert to Celsius first
+        var celsius: Double
+        switch from {
+        case .celsius: celsius = value
+        case .fahrenheit: celsius = (value - 32) * 5 / 9
+        case .kelvin: celsius = value - 273.15
+        default: return value
+        }
+
+        // Convert from Celsius to target
+        switch to {
+        case .celsius: return celsius
+        case .fahrenheit: return celsius * 9 / 5 + 32
+        case .kelvin: return celsius + 273.15
+        default: return value
+        }
+    }
+
     enum UnitType: String, AppEnum {
-        case meters, feet, inches, kilometers, miles, yards
+        // Length
+        case meters, feet, inches, centimeters, kilometers, miles, yards
+        // Weight
+        case kilograms, pounds, ounces, grams, stones
+        // Temperature
+        case celsius, fahrenheit, kelvin
 
         static let typeDisplayRepresentation: TypeDisplayRepresentation = "Unit"
 
         static let caseDisplayRepresentations: [UnitType: DisplayRepresentation] = [
+            // Length
             .meters: "meters",
             .feet: "feet",
             .inches: "inches",
+            .centimeters: "centimeters",
             .kilometers: "kilometers",
             .miles: "miles",
-            .yards: "yards"
+            .yards: "yards",
+            // Weight
+            .kilograms: "kilograms",
+            .pounds: "pounds",
+            .ounces: "ounces",
+            .grams: "grams",
+            .stones: "stones",
+            // Temperature
+            .celsius: "celsius",
+            .fahrenheit: "fahrenheit",
+            .kelvin: "kelvin"
         ]
     }
 }
