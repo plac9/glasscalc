@@ -1,4 +1,4 @@
-# GlassCalc - Code Maturity Implementation Plan
+# PrismCalc - Code Maturity Implementation Plan
 
 ## Overview
 Complete remaining work for production-ready testing (excluding localization).
@@ -9,16 +9,16 @@ Leverage iOS 18+ cutting-edge features for a modern experience.
 ## 1. Accessibility Labels
 
 ### Files to Modify:
-- `Sources/GlassCalc/DesignSystem/GlassButton.swift`
-- `Sources/GlassCalc/DesignSystem/GlassDisplay.swift`
-- `Sources/GlassCalc/DesignSystem/ArcSlider.swift`
-- `Sources/GlassCalc/Features/Calculator/CalculatorView.swift`
-- `Sources/GlassCalc/Features/TipCalculator/TipCalculatorView.swift`
-- `Sources/GlassCalc/Features/DiscountCalculator/DiscountCalculatorView.swift`
-- `Sources/GlassCalc/Features/SplitBill/SplitBillView.swift`
-- `Sources/GlassCalc/Features/UnitConverter/UnitConverterView.swift`
-- `Sources/GlassCalc/Features/History/HistoryView.swift`
-- `Sources/GlassCalc/Features/Paywall/PaywallView.swift`
+- `Sources/PrismCalc/DesignSystem/GlassButton.swift`
+- `Sources/PrismCalc/DesignSystem/GlassDisplay.swift`
+- `Sources/PrismCalc/DesignSystem/ArcSlider.swift`
+- `Sources/PrismCalc/Features/Calculator/CalculatorView.swift`
+- `Sources/PrismCalc/Features/TipCalculator/TipCalculatorView.swift`
+- `Sources/PrismCalc/Features/DiscountCalculator/DiscountCalculatorView.swift`
+- `Sources/PrismCalc/Features/SplitBill/SplitBillView.swift`
+- `Sources/PrismCalc/Features/UnitConverter/UnitConverterView.swift`
+- `Sources/PrismCalc/Features/History/HistoryView.swift`
+- `Sources/PrismCalc/Features/Paywall/PaywallView.swift`
 
 ### Implementation:
 1. **GlassButton** - Add `accessibilityLabel` parameter, apply to all buttons
@@ -76,10 +76,10 @@ Leverage iOS 18+ cutting-edge features for a modern experience.
 Add scheme configuration with StoreKit testing:
 ```yaml
 schemes:
-  GlassCalc:
+  PrismCalc:
     build:
       targets:
-        GlassCalc: all
+        PrismCalc: all
     run:
       config: Debug
       storeKitConfiguration: App/Configuration.storekit
@@ -90,11 +90,11 @@ schemes:
 ## 4. Additional Tests
 
 ### Files to Create:
-- `Tests/GlassCalcTests/TipCalculatorViewModelTests.swift`
-- `Tests/GlassCalcTests/DiscountCalculatorViewModelTests.swift`
-- `Tests/GlassCalcTests/SplitBillViewModelTests.swift`
-- `Tests/GlassCalcTests/UnitConverterViewModelTests.swift`
-- `Tests/GlassCalcTests/HistoryServiceTests.swift`
+- `Tests/PrismCalcTests/TipCalculatorViewModelTests.swift`
+- `Tests/PrismCalcTests/DiscountCalculatorViewModelTests.swift`
+- `Tests/PrismCalcTests/SplitBillViewModelTests.swift`
+- `Tests/PrismCalcTests/UnitConverterViewModelTests.swift`
+- `Tests/PrismCalcTests/HistoryServiceTests.swift`
 
 ### Test Coverage:
 1. **TipCalculatorViewModel**
@@ -129,8 +129,8 @@ schemes:
 ## 5. Input Validation & Edge Cases
 
 ### Files to Modify:
-- `Sources/GlassCalc/Features/Calculator/CalculatorViewModel.swift`
-- `Sources/GlassCalc/Features/Calculator/CalculatorEngine.swift`
+- `Sources/PrismCalc/Features/Calculator/CalculatorViewModel.swift`
+- `Sources/PrismCalc/Features/Calculator/CalculatorEngine.swift`
 - All Pro calculator ViewModels
 
 ### Implementation:
@@ -146,7 +146,7 @@ schemes:
 ## 6. Interactive Widgets (iOS 17+)
 
 ### Files to Modify:
-- `Sources/GlassCalc/Widgets/GlassCalcWidget.swift`
+- `Sources/PrismCalc/Widgets/PrismCalcWidget.swift`
 
 ### Implementation:
 Add `Button` with `AppIntent` for widget interactions:
@@ -171,7 +171,7 @@ struct CalculateIntent: AppIntent {
 ## 7. Control Center Widget (iOS 18+)
 
 ### Files to Create:
-- `Sources/GlassCalc/Widgets/GlassCalcControlWidget.swift`
+- `Sources/PrismCalc/Widgets/PrismCalcControlWidget.swift`
 
 ### Implementation:
 ControlKit widget for Control Center:
@@ -180,14 +180,14 @@ ControlKit widget for Control Center:
 - Toggleable (Pro feature indicator)
 
 ```swift
-struct GlassCalcControl: ControlWidget {
+struct PrismCalcControl: ControlWidget {
     var body: some ControlWidgetConfiguration {
-        StaticControlConfiguration(kind: "GlassCalcControl") {
+        StaticControlConfiguration(kind: "PrismCalcControl") {
             ControlWidgetButton(action: OpenCalculatorIntent()) {
-                Label("GlassCalc", systemImage: "equal.square.fill")
+                Label("PrismCalc", systemImage: "equal.square.fill")
             }
         }
-        .displayName("GlassCalc")
+        .displayName("PrismCalc")
     }
 }
 ```
@@ -197,9 +197,9 @@ struct GlassCalcControl: ControlWidget {
 ## 8. App Intents / Siri Shortcuts (iOS 16+)
 
 ### Files to Create:
-- `Sources/GlassCalc/Core/Intents/CalculateTipIntent.swift`
-- `Sources/GlassCalc/Core/Intents/ConvertUnitIntent.swift`
-- `Sources/GlassCalc/Core/Intents/GlassCalcShortcuts.swift`
+- `Sources/PrismCalc/Core/Intents/CalculateTipIntent.swift`
+- `Sources/PrismCalc/Core/Intents/ConvertUnitIntent.swift`
+- `Sources/PrismCalc/Core/Intents/PrismCalcShortcuts.swift`
 
 ### Siri Phrases:
 - "Calculate 18% tip on $45"
@@ -228,7 +228,7 @@ struct CalculateTipIntent: AppIntent {
 ## 9. TipKit - Feature Discovery (iOS 17+)
 
 ### Files to Create:
-- `Sources/GlassCalc/Core/Tips/GlassCalcTips.swift`
+- `Sources/PrismCalc/Core/Tips/PrismCalcTips.swift`
 
 ### Tips to Show:
 - First launch: "Swipe between calculators"

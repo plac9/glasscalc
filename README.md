@@ -1,4 +1,4 @@
-# GlassCalc
+# PrismCalc
 
 **Spectacular glassmorphic calculator for iOS**
 
@@ -13,7 +13,7 @@ Part of the LaClair Tech suite - Beautiful, functional tools with stunning UI de
 
 ## Overview
 
-GlassCalc is a beautifully designed calculator app featuring full glassmorphism effects, leveraging iOS 18's Liquid Glass design language. Primary focus on spectacular UI while providing practical real-world calculation tools.
+PrismCalc is a beautifully designed calculator app featuring full glassmorphism effects, leveraging iOS 18's Liquid Glass design language. Primary focus on spectacular UI while providing practical real-world calculation tools.
 
 **Design Philosophy**:
 - **UI First**: Stunning glassmorphism with layered materials
@@ -85,14 +85,15 @@ GlassCalc is a beautifully designed calculator app featuring full glassmorphism 
 - **Language**: Swift 6.0 (strict concurrency enabled)
 - **UI Framework**: 100% SwiftUI
 - **Platforms**: iOS 18.0+, iPadOS 18.0+, macOS 15.0+
-- **Bundle ID**: com.laclairtech.glasscalc
+- **Bundle IDs**: App `com.laclairtech.prismcalc`, Widget `com.laclairtech.prismcalc.widget`
+- **App Group**: `group.com.laclairtech.prismcalc`
 - **Package Manager**: Swift Package Manager
 - **Currency API**: Frankfurter (free, ECB data)
 
 ### Project Structure
 ```
-GlassCalc/
-├── Sources/GlassCalc/
+PrismCalc/
+├── Sources/PrismCalc/
 │   ├── App/                      # App entry, navigation
 │   ├── Features/
 │   │   ├── Calculator/           # Basic calculator
@@ -121,8 +122,8 @@ GlassCalc/
 ### Building
 ```bash
 # Clone repository
-git clone https://github.com/plac9/glasscalc.git
-cd glasscalc
+git clone https://github.com/plac9/prismcalc.git
+cd prismcalc
 
 # Build with Swift Package Manager
 swift build
@@ -132,6 +133,8 @@ swift test
 
 # Or open in Xcode
 open Package.swift
+
+# In Xcode, select scheme "PrismCalc" and run on iOS 18+ simulator/device
 ```
 
 ---

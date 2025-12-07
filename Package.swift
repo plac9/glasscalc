@@ -4,31 +4,31 @@
 import PackageDescription
 
 let package = Package(
-    name: "GlassCalc",
+    name: "PrismCalc",
     platforms: [
         .iOS(.v18),
         .macOS(.v15)
     ],
     products: [
         .library(
-            name: "GlassCalc",
-            targets: ["GlassCalc"]
+            name: "PrismCalc",
+            targets: ["PrismCalc"]
         )
     ],
     dependencies: [],
     targets: [
         .target(
-            name: "GlassCalc",
+            name: "PrismCalc",
             dependencies: [],
-            path: "Sources/GlassCalc",
+            path: "Sources/PrismCalc",
             swiftSettings: [
                 .enableExperimentalFeature("StrictConcurrency")
             ]
         ),
         .testTarget(
-            name: "GlassCalcTests",
-            dependencies: ["GlassCalc"],
-            path: "Tests/GlassCalcTests"
+            name: "PrismCalcTests",
+            dependencies: ["PrismCalc"],
+            path: "Tests/PrismCalcTests"
         )
     ]
 )

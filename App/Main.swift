@@ -1,8 +1,8 @@
 import SwiftUI
 
-/// GlassCalc iOS App Entry Point
+/// PrismCalc iOS App Entry Point
 @main
-struct GlassCalcMainApp: App {
+struct PrismCalcMainApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

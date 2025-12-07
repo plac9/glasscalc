@@ -11,12 +11,12 @@
       "localizations" : [
         {
           "description" : "Unlock all calculators, themes, and features",
-          "displayName" : "GlassCalc Pro",
+          "displayName" : "PrismCalc Pro",
           "locale" : "en_US"
         }
       ],
-      "productID" : "com.laclairtech.glasscalc.pro",
-      "referenceName" : "GlassCalc Pro",
+      "productID" : "com.laclairtech.prismcalc.pro",
+      "referenceName" : "PrismCalc Pro",
       "type" : "NonConsumable"
     }
   ],

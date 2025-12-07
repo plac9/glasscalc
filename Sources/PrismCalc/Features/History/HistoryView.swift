@@ -1,0 +1,299 @@
+import SwiftUI
+import SwiftData
+import TipKit
+
+/// History view showing past calculations with iOS 18 zoom transitions
+public struct HistoryView: View {
+    @State private var entries: [HistoryEntry] = []
+    @State private var selectedType: CalculationType?
+    @State private var showClearConfirm = false
+
+    // iOS 18 zoom transition support
+    @Namespace private var historyNamespace
+    @State private var selectedEntry: HistoryEntry?
+
+    private let addWidgetTip = AddWidgetTip()
+
+    public init() {}
+
+    public var body: some View {
+        NavigationStack {
+            ScrollView {
+                VStack(spacing: GlassTheme.spacingMedium) {
+                    // Header with filter and clear
+                    headerSection
+
+                    // Widget tip
+                    TipView(addWidgetTip)
+                        .tipBackground(Color.clear)
+
+                    // Filter chips
+                    filterSection
+
+                    // History entries
+                    if filteredEntries.isEmpty {
+                        emptyState
+                    } else {
+                        entriesList
+                    }
+                }
+                .padding()
+            }
+            .onAppear {
+                loadHistory()
+            }
+            .confirmationDialog(
+                "Clear History",
+                isPresented: $showClearConfirm,
+                titleVisibility: .visible
+            ) {
+                Button("Clear All", role: .destructive) {
+                    clearHistory()
+                }
+                Button("Cancel", role: .cancel) {}
+            } message: {
+                Text("This will permanently delete all calculation history.")
+            }
+            // iOS 18 zoom navigation destination
+            .navigationDestination(item: $selectedEntry) { entry in
+                if #available(iOS 18.0, *) {
+                    #if os(iOS)
+                    HistoryDetailView(entry: entry)
+                        .navigationTransition(.zoom(sourceID: entry.id, in: historyNamespace))
+                    #else
+                    HistoryDetailView(entry: entry)
+                    #endif
+                } else {
+                    // Fallback for iOS 17 (shouldn't be needed as app requires iOS 18+)
+                    Text("Detail view requires iOS 18+")
+                }
+            }
+        }
+    }
+
+    // MARK: - Filtered Entries
+
+    private var filteredEntries: [HistoryEntry] {
+        if let selectedType {
+            return entries.filter { $0.type == selectedType }
+        }
+        return entries
+    }
+
+    // MARK: - Header
+
+    @MainActor
+    private var headerSection: some View {
+        HStack {
+            VStack(alignment: .leading, spacing: GlassTheme.spacingXS) {
+                Text("History")
+                    .font(GlassTheme.titleFont)
+                    .foregroundStyle(GlassTheme.text)
+
+                Text("\(entries.count) calculations")
+                    .font(GlassTheme.captionFont)
+                    .foregroundStyle(GlassTheme.textSecondary)
+            }
+
+            Spacer()
+
+            if !entries.isEmpty {
+                Button {
+                    showClearConfirm = true
+                } label: {
+                    Image(systemName: "trash")
+                        .foregroundStyle(GlassTheme.error)
+                        .frame(width: 44, height: 44)
+                        .background(
+                            Circle()
+                                .fill(.ultraThinMaterial)
+                        )
+                }
+                .buttonStyle(.plain)
+            }
+        }
+    }
+
+    // MARK: - Filter
+
+    @MainActor
+    private var filterSection: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: GlassTheme.spacingSmall) {
+                // All filter
+                filterChip(label: "All", icon: "list.bullet", isSelected: selectedType == nil) {
+                    selectedType = nil
+                }
+                .scrollTransition(.interactive) { content, phase in
+                    content.opacity(phase.isIdentity ? 1 : 0.6)
+                }
+
+                // Type filters
+                ForEach(CalculationType.allCases, id: \.rawValue) { type in
+                    filterChip(
+                        label: type.rawValue,
+                        icon: type.icon,
+                        isSelected: selectedType == type
+                    ) {
+                        selectedType = type
+                    }
+                    .scrollTransition(.interactive) { content, phase in
+                        content.opacity(phase.isIdentity ? 1 : 0.6)
+                    }
+                }
+            }
+        }
+    }
+
+    @MainActor
+    private func filterChip(
+        label: String,
+        icon: String,
+        isSelected: Bool,
+        action: @escaping () -> Void
+    ) -> some View {
+        Button(action: action) {
+            HStack(spacing: GlassTheme.spacingXS) {
+                Image(systemName: icon)
+                    .font(.caption)
+
+                Text(label)
+                    .font(GlassTheme.captionFont)
+            }
+            .foregroundStyle(isSelected ? .white : GlassTheme.text)
+            .padding(.horizontal, GlassTheme.spacingSmall)
+            .padding(.vertical, GlassTheme.spacingXS)
+            .background(
+                Capsule()
+                    .fill(isSelected ? GlassTheme.primary : .clear)
+                    .background(
+                        Capsule()
+                            .fill(.thinMaterial)
+                    )
+            )
+        }
+        .buttonStyle(.plain)
+        .sensoryFeedback(.selection, trigger: selectedType)
+    }
+
+    // MARK: - Entries List
+
+    @MainActor
+    private var entriesList: some View {
+        LazyVStack(spacing: GlassTheme.spacingSmall) {
+            ForEach(filteredEntries) { entry in
+                historyCard(entry)
+                    .scrollTransition { content, phase in
+                        content
+                            .opacity(phase.isIdentity ? 1 : 0.7)
+                            .scaleEffect(phase.isIdentity ? 1 : 0.95)
+                            .offset(y: phase.isIdentity ? 0 : phase.value * 15)
+                    }
+            }
+        }
+    }
+
+    @MainActor
+    private func historyCard(_ entry: HistoryEntry) -> some View {
+        GlassCard(material: .ultraThinMaterial, padding: GlassTheme.spacingSmall) {
+            HStack(spacing: GlassTheme.spacingSmall) {
+                // Type icon
+                Image(systemName: entry.type.icon)
+                    .font(.title3)
+                    .foregroundStyle(GlassTheme.primary)
+                    .frame(width: 40, height: 40)
+                    .background(
+                        Circle()
+                            .fill(GlassTheme.primary.opacity(0.15))
+                    )
+
+                // Details
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(entry.result)
+                        .font(GlassTheme.headlineFont)
+                        .foregroundStyle(GlassTheme.text)
+
+                    Text(entry.details)
+                        .font(GlassTheme.captionFont)
+                        .foregroundStyle(GlassTheme.textSecondary)
+                        .lineLimit(1)
+                }
+
+                Spacer()
+
+                // Time
+                Text(entry.relativeDate)
+                    .font(.system(size: 11))
+                    .foregroundStyle(GlassTheme.textTertiary)
+            }
+        }
+        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+            Button(role: .destructive) {
+                deleteEntry(entry)
+            } label: {
+                Label("Delete", systemImage: "trash")
+            }
+        }
+        // iOS 18 zoom transition source
+        .matchedTransitionSource(id: entry.id, in: historyNamespace)
+        .onTapGesture {
+            selectedEntry = entry
+        }
+    }
+
+    // MARK: - Empty State
+
+    @MainActor
+    private var emptyState: some View {
+        VStack(spacing: GlassTheme.spacingMedium) {
+            Image(systemName: "clock.arrow.circlepath")
+                .font(.system(size: 48))
+                .foregroundStyle(GlassTheme.textTertiary)
+
+            Text("No History Yet")
+                .font(GlassTheme.headlineFont)
+                .foregroundStyle(GlassTheme.text)
+
+            Text("Your calculations will appear here")
+                .font(GlassTheme.captionFont)
+                .foregroundStyle(GlassTheme.textSecondary)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, GlassTheme.spacingXL * 2)
+    }
+
+    // MARK: - Actions
+
+    private func loadHistory() {
+        entries = HistoryService.shared.fetchAll()
+    }
+
+    private func deleteEntry(_ entry: HistoryEntry) {
+        HistoryService.shared.delete(entry)
+        withAnimation {
+            entries.removeAll { $0.id == entry.id }
+        }
+    }
+
+    private func clearHistory() {
+        HistoryService.shared.clearAll()
+        withAnimation {
+            entries.removeAll()
+        }
+    }
+}
+
+// MARK: - Preview
+
+#Preview {
+    ZStack {
+        LinearGradient(
+            colors: GlassTheme.auroraGradient,
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+        .ignoresSafeArea()
+
+        HistoryView()
+    }
+}

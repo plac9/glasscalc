@@ -1,56 +1,58 @@
-name: GlassCalc
+name: PrismCalc
 options:
   bundleIdPrefix: com.laclairtech
   deploymentTarget:
     iOS: 18.0
 
 schemes:
-  GlassCalc:
+  PrismCalc:
     build:
       targets:
-        GlassCalc: all
-        GlassCalcWidgetExtension: all
+        PrismCalc: all
+        PrismCalcWidgetExtension: all
     run:
       config: Debug
       storeKitConfiguration: App/Configuration.storekit
     test:
       config: Debug
       targets:
-        - GlassCalcTests
+        - PrismCalcTests
 
 targets:
-  GlassCalc:
+  PrismCalc:
     type: application
     platform: iOS
     sources:
       - App
-      - path: Sources/GlassCalc
+      - App/PrivacyInfo.xcprivacy
+      - path: Sources/PrismCalc
         excludes:
           - Widgets/**
     dependencies:
-      - target: GlassCalcWidgetExtension
+      - target: PrismCalcWidgetExtension
     entitlements:
-      path: App/GlassCalc.entitlements
+      path: App/PrismCalc.entitlements
     settings:
-      PRODUCT_BUNDLE_IDENTIFIER: com.laclairtech.glasscalc
+      PRODUCT_BUNDLE_IDENTIFIER: com.laclairtech.prismcalc
       GENERATE_INFOPLIST_FILE: YES
       INFOPLIST_KEY_UILaunchScreen_Generation: YES
       SWIFT_VERSION: 6.0
       TARGETED_DEVICE_FAMILY: 1,2
       MARKETING_VERSION: 1.0.0
       CURRENT_PROJECT_VERSION: 1
-      CODE_SIGN_ENTITLEMENTS: App/GlassCalc.entitlements
+      CODE_SIGN_ENTITLEMENTS: App/PrismCalc.entitlements
       CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION: YES
+      INFOPLIST_KEY_CFBundleDisplayName: PrismCalc
 
-  GlassCalcWidgetExtension:
+  PrismCalcWidgetExtension:
     type: app-extension
     platform: iOS
     sources:
       - WidgetExtension
-      - Sources/GlassCalc/Widgets
-      - path: Sources/GlassCalc/Core/Services/SharedDataService.swift
+      - Sources/PrismCalc/Widgets
+      - path: Sources/PrismCalc/Core/Services/SharedDataService.swift
         group: Services
-      - path: Sources/GlassCalc/Core/Intents/GlassCalcIntents.swift
+      - path: Sources/PrismCalc/Core/Intents/PrismCalcIntents.swift
         group: Intents
     dependencies:
       - framework: SwiftUI.framework
@@ -58,16 +60,16 @@ targets:
       - framework: WidgetKit.framework
         implicit: true
     entitlements:
-      path: WidgetExtension/GlassCalcWidget.entitlements
+      path: WidgetExtension/PrismCalcWidget.entitlements
     settings:
-      PRODUCT_BUNDLE_IDENTIFIER: com.laclairtech.glasscalc.widget
+      PRODUCT_BUNDLE_IDENTIFIER: com.laclairtech.prismcalc.widget
       GENERATE_INFOPLIST_FILE: YES
       SWIFT_VERSION: 6.0
       TARGETED_DEVICE_FAMILY: 1,2
       MARKETING_VERSION: 1.0.0
       CURRENT_PROJECT_VERSION: 1
-      INFOPLIST_KEY_CFBundleDisplayName: GlassCalc Widget
-      CODE_SIGN_ENTITLEMENTS: WidgetExtension/GlassCalcWidget.entitlements
+      INFOPLIST_KEY_CFBundleDisplayName: PrismCalc Widget
+      CODE_SIGN_ENTITLEMENTS: WidgetExtension/PrismCalcWidget.entitlements
       CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION: YES
     info:
       path: WidgetExtension/Info.plist
@@ -75,14 +77,14 @@ targets:
         NSExtension:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension
 
-  GlassCalcTests:
+  PrismCalcTests:
     type: bundle.unit-test
     platform: iOS
     sources:
-      - Tests/GlassCalcTests
+      - Tests/PrismCalcTests
     dependencies:
-      - target: GlassCalc
+      - target: PrismCalc
     settings:
       SWIFT_VERSION: 6.0
       GENERATE_INFOPLIST_FILE: YES
-      PRODUCT_BUNDLE_IDENTIFIER: com.laclairtech.glasscalc.tests
+      PRODUCT_BUNDLE_IDENTIFIER: com.laclairtech.prismcalc.tests
