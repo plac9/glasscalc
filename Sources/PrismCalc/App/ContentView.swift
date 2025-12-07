@@ -34,8 +34,8 @@ public struct ContentView: View {
 
         var isPro: Bool {
             switch self {
-            case .calculator, .settings: return false
-            case .history, .tip, .discount, .split, .convert: return true
+            case .calculator, .settings, .history: return false
+            case .tip, .discount, .split, .convert: return true
             }
         }
     }
@@ -94,11 +94,9 @@ public struct ContentView: View {
             }
             .customizationID("tab.convert")
 
-            // History - Pro feature
+            // History - Free (last 10), Pro (unlimited)
             Tab("History", systemImage: TabIdentifier.history.icon, value: .history) {
-                ProGatedView(featureName: "History", featureIcon: TabIdentifier.history.icon) {
-                    HistoryView()
-                }
+                HistoryView()
             }
             .customizationID("tab.history")
 

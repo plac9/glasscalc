@@ -7,12 +7,17 @@ public struct HistoryView: View {
     @State private var entries: [HistoryEntry] = []
     @State private var selectedType: CalculationType?
     @State private var showClearConfirm = false
+    @State private var showPaywall = false
 
     // iOS 18 zoom transition support
     @Namespace private var historyNamespace
     @State private var selectedEntry: HistoryEntry?
 
     private let addWidgetTip = AddWidgetTip()
+    private var storeKit: StoreKitManager { StoreKitManager.shared }
+
+    // Free tier limit
+    private let freeLimit = 10
 
     public init() {}
 
@@ -74,10 +79,22 @@ public struct HistoryView: View {
     // MARK: - Filtered Entries
 
     private var filteredEntries: [HistoryEntry] {
+        var filtered: [HistoryEntry]
         if let selectedType {
-            return entries.filter { $0.type == selectedType }
+            filtered = entries.filter { $0.type == selectedType }
+        } else {
+            filtered = entries
         }
-        return entries
+
+        // Limit to 10 most recent for free users
+        if !storeKit.isPro {
+            return Array(filtered.prefix(freeLimit))
+        }
+        return filtered
+    }
+
+    private var hasMoreThanFree: Bool {
+        entries.count > freeLimit && !storeKit.isPro
     }
 
     // MARK: - Header
@@ -192,6 +209,11 @@ public struct HistoryView: View {
                             .offset(y: phase.isIdentity ? 0 : phase.value * 15)
                     }
             }
+
+            // Upgrade banner for free users with more than 10 items
+            if hasMoreThanFree {
+                upgradePromoBanner
+            }
         }
     }
 
@@ -243,6 +265,64 @@ public struct HistoryView: View {
         .accessibilityHint("Double tap to view details, swipe left to delete")
         .onTapGesture {
             selectedEntry = entry
+        }
+    }
+
+    // MARK: - Upgrade Banner
+
+    @MainActor
+    private var upgradePromoBanner: some View {
+        GlassCard(material: .thinMaterial) {
+            VStack(spacing: GlassTheme.spacingMedium) {
+                HStack {
+                    Image(systemName: "lock.fill")
+                        .font(.title2)
+                        .foregroundStyle(
+                            LinearGradient(
+                                colors: [GlassTheme.primary, GlassTheme.secondary],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
+
+                    VStack(alignment: .leading, spacing: GlassTheme.spacingXS) {
+                        Text("You have \(entries.count - freeLimit) more calculations")
+                            .font(GlassTheme.headlineFont)
+                            .foregroundStyle(GlassTheme.text)
+
+                        Text("Upgrade to Pro for unlimited history")
+                            .font(GlassTheme.captionFont)
+                            .foregroundStyle(GlassTheme.textSecondary)
+                    }
+
+                    Spacer()
+                }
+
+                Button {
+                    showPaywall = true
+                } label: {
+                    Text("Upgrade to Pro")
+                        .font(GlassTheme.headlineFont)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, GlassTheme.spacingSmall)
+                        .background(
+                            Capsule()
+                                .fill(
+                                    LinearGradient(
+                                        colors: [GlassTheme.primary, GlassTheme.secondary],
+                                        startPoint: .leading,
+                                        endPoint: .trailing
+                                    )
+                                )
+                        )
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .sheet(isPresented: $showPaywall) {
+            PaywallView(featureName: "Unlimited History", featureIcon: "clock.arrow.circlepath")
         }
     }
 
