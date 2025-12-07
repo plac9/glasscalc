@@ -18,14 +18,12 @@ public struct GlassDisplay: View {
     public var body: some View {
         GlassCard(material: .ultraThinMaterial, cornerRadius: GlassTheme.cornerRadiusLarge) {
             VStack(alignment: .trailing, spacing: GlassTheme.spacingXS) {
-                // Expression line
-                if !expression.isEmpty {
-                    Text(expression)
-                        .font(GlassTheme.captionFont)
-                        .foregroundStyle(GlassTheme.textTertiary)
-                        .lineLimit(1)
-                        .transition(.opacity)
-                }
+                // Expression line (always takes up space, even when empty)
+                Text(expression.isEmpty ? " " : expression)
+                    .font(GlassTheme.captionFont)
+                    .foregroundStyle(GlassTheme.textTertiary)
+                    .lineLimit(1)
+                    .opacity(expression.isEmpty ? 0 : 1)
 
                 // Main value
                 Text(value)
@@ -38,6 +36,7 @@ public struct GlassDisplay: View {
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
             .padding(.vertical, GlassTheme.spacingSmall)
+            .animation(.easeInOut(duration: GlassTheme.animationQuick), value: expression.isEmpty)
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel(accessibilityDescription)

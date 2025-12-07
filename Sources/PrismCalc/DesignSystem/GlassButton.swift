@@ -105,15 +105,10 @@ public struct GlassButton: View {
                 .shadow(color: Color.black.opacity(0.1), radius: 8, y: 4)
                 .scaleEffect(isPressed ? 0.92 : 1.0)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(GlassButtonStyle(isPressed: $isPressed))
         .accessibilityLabel(accessibilityText)
         .accessibilityAddTraits(.isButton)
         .sensoryFeedback(.impact(flexibility: .soft), trigger: isPressed)
-        .onLongPressGesture(minimumDuration: .infinity, pressing: { pressing in
-            withAnimation(GlassTheme.buttonSpring) {
-                isPressed = pressing
-            }
-        }, perform: {})
     }
 
     private var textColor: Color {
@@ -193,15 +188,10 @@ public struct GlassWideButton: View {
                 .shadow(color: Color.black.opacity(0.1), radius: 8, y: 4)
                 .scaleEffect(isPressed ? 0.96 : 1.0)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(GlassButtonStyle(isPressed: $isPressed))
         .accessibilityLabel(accessibilityText)
         .accessibilityAddTraits(.isButton)
         .sensoryFeedback(.impact(flexibility: .soft), trigger: isPressed)
-        .onLongPressGesture(minimumDuration: .infinity, pressing: { pressing in
-            withAnimation(GlassTheme.buttonSpring) {
-                isPressed = pressing
-            }
-        }, perform: {})
     }
 
     private func triggerHaptic() {
@@ -209,6 +199,22 @@ public struct GlassWideButton: View {
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.impactOccurred()
         #endif
+    }
+}
+
+// MARK: - Button Style
+
+/// Custom button style that responds instantly to touch
+private struct GlassButtonStyle: ButtonStyle {
+    @Binding var isPressed: Bool
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .onChange(of: configuration.isPressed) { _, newValue in
+                withAnimation(GlassTheme.buttonSpring) {
+                    isPressed = newValue
+                }
+            }
     }
 }
 
