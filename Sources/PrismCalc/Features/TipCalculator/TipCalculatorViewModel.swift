@@ -8,32 +8,70 @@ public final class TipCalculatorViewModel {
 
     // MARK: - Input State
 
-    public var billAmount: String = ""
-    public var tipPercentage: Double = 18
-    public var numberOfPeople: Int = 1
+    private var _billAmount: String = ""
+    public var billAmount: String {
+        get { _billAmount }
+        set {
+            // Filter to only valid characters
+            let filtered = newValue.filter { $0.isNumber || $0 == "." }
+            // Limit to 10 characters
+            let limited = String(filtered.prefix(10))
+            // Prevent multiple decimals
+            let parts = limited.split(separator: ".", omittingEmptySubsequences: false)
+            if parts.count > 2 {
+                _billAmount = String(parts[0]) + "." + String(parts[1])
+            } else {
+                _billAmount = limited
+            }
+        }
+    }
+
+    private var _tipPercentage: Double = 18
+    public var tipPercentage: Double {
+        get { _tipPercentage }
+        set {
+            // Clamp to valid percentage range 0-100
+            _tipPercentage = min(100, max(0, newValue))
+        }
+    }
+
+    private var _numberOfPeople: Int = 1
+    public var numberOfPeople: Int {
+        get { _numberOfPeople }
+        set {
+            // Clamp to valid range 1-99
+            _numberOfPeople = min(99, max(1, newValue))
+        }
+    }
 
     // MARK: - Computed Results
 
     public var billValue: Double {
-        Double(billAmount.replacingOccurrences(of: ",", with: "")) ?? 0
+        let value = Double(billAmount.replacingOccurrences(of: ",", with: "")) ?? 0
+        // Guard against overflow
+        return value.isFinite ? value : 0
     }
 
     public var tipAmount: Double {
-        billValue * (tipPercentage / 100)
+        let amount = billValue * (tipPercentage / 100)
+        return amount.isFinite ? amount : 0
     }
 
     public var totalAmount: Double {
-        billValue + tipAmount
+        let total = billValue + tipAmount
+        return total.isFinite ? total : 0
     }
 
     public var perPersonAmount: Double {
         guard numberOfPeople > 0 else { return totalAmount }
-        return totalAmount / Double(numberOfPeople)
+        let share = totalAmount / Double(numberOfPeople)
+        return share.isFinite ? share : 0
     }
 
     public var tipPerPerson: Double {
         guard numberOfPeople > 0 else { return tipAmount }
-        return tipAmount / Double(numberOfPeople)
+        let share = tipAmount / Double(numberOfPeople)
+        return share.isFinite ? share : 0
     }
 
     // MARK: - Formatted Output
@@ -66,38 +104,38 @@ public final class TipCalculatorViewModel {
 
     public func inputDigit(_ digit: String) {
         // Limit to reasonable bill amount (10 digits)
-        guard billAmount.count < 10 else { return }
+        guard _billAmount.count < 10 else { return }
 
         if digit == "." {
-            guard !billAmount.contains(".") else { return }
-            if billAmount.isEmpty {
-                billAmount = "0."
+            guard !_billAmount.contains(".") else { return }
+            if _billAmount.isEmpty {
+                _billAmount = "0."
                 return
             }
         }
 
-        billAmount += digit
+        _billAmount += digit
     }
 
     public func backspace() {
-        guard !billAmount.isEmpty else { return }
-        billAmount.removeLast()
+        guard !_billAmount.isEmpty else { return }
+        _billAmount.removeLast()
     }
 
     public func clear() {
-        billAmount = ""
-        tipPercentage = 18
-        numberOfPeople = 1
+        _billAmount = ""
+        _tipPercentage = 18
+        _numberOfPeople = 1
     }
 
     public func incrementPeople() {
-        guard numberOfPeople < 99 else { return }
-        numberOfPeople += 1
+        guard _numberOfPeople < 99 else { return }
+        _numberOfPeople += 1
     }
 
     public func decrementPeople() {
-        guard numberOfPeople > 1 else { return }
-        numberOfPeople -= 1
+        guard _numberOfPeople > 1 else { return }
+        _numberOfPeople -= 1
     }
 
     public func selectQuickTip(_ tip: Double) {

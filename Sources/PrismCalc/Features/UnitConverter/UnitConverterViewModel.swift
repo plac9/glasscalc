@@ -71,11 +71,15 @@ public final class UnitConverterViewModel {
     // MARK: - Computed
 
     public var inputDouble: Double {
-        Double(inputValue) ?? 0
+        let value = Double(inputValue) ?? 0
+        // Guard against overflow
+        return value.isFinite ? value : 0
     }
 
     public var convertedValue: Double {
-        convert(inputDouble, from: fromUnit, to: toUnit)
+        let result = convert(inputDouble, from: fromUnit, to: toUnit)
+        // Guard against overflow
+        return result.isFinite ? result : 0
     }
 
     public var formattedResult: String {

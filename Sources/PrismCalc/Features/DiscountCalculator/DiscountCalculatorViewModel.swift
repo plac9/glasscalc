@@ -8,21 +8,49 @@ public final class DiscountCalculatorViewModel {
 
     // MARK: - Input State
 
-    public var originalPrice: String = ""
-    public var discountPercentage: Double = 20
+    private var _originalPrice: String = ""
+    public var originalPrice: String {
+        get { _originalPrice }
+        set {
+            // Filter to only valid characters
+            let filtered = newValue.filter { $0.isNumber || $0 == "." }
+            // Limit to 10 characters
+            let limited = String(filtered.prefix(10))
+            // Prevent multiple decimals
+            let parts = limited.split(separator: ".", omittingEmptySubsequences: false)
+            if parts.count > 2 {
+                _originalPrice = String(parts[0]) + "." + String(parts[1])
+            } else {
+                _originalPrice = limited
+            }
+        }
+    }
+
+    private var _discountPercentage: Double = 20
+    public var discountPercentage: Double {
+        get { _discountPercentage }
+        set {
+            // Clamp to valid percentage range 0-100
+            _discountPercentage = min(100, max(0, newValue))
+        }
+    }
 
     // MARK: - Computed Results
 
     public var priceValue: Double {
-        Double(originalPrice.replacingOccurrences(of: ",", with: "")) ?? 0
+        let value = Double(originalPrice.replacingOccurrences(of: ",", with: "")) ?? 0
+        // Guard against overflow
+        return value.isFinite ? value : 0
     }
 
     public var discountAmount: Double {
-        priceValue * (discountPercentage / 100)
+        let amount = priceValue * (discountPercentage / 100)
+        return amount.isFinite ? amount : 0
     }
 
     public var finalPrice: Double {
-        priceValue - discountAmount
+        let final = priceValue - discountAmount
+        return final.isFinite ? final : 0
     }
 
     // MARK: - Formatted Output
@@ -50,17 +78,17 @@ public final class DiscountCalculatorViewModel {
     // MARK: - Actions
 
     public func inputDigit(_ digit: String) {
-        guard originalPrice.count < 10 else { return }
+        guard _originalPrice.count < 10 else { return }
 
         if digit == "." {
-            guard !originalPrice.contains(".") else { return }
-            if originalPrice.isEmpty {
-                originalPrice = "0."
+            guard !_originalPrice.contains(".") else { return }
+            if _originalPrice.isEmpty {
+                _originalPrice = "0."
                 return
             }
         }
 
-        originalPrice += digit
+        _originalPrice += digit
     }
 
     public func backspace() {
@@ -69,8 +97,8 @@ public final class DiscountCalculatorViewModel {
     }
 
     public func clear() {
-        originalPrice = ""
-        discountPercentage = 20
+        _originalPrice = ""
+        _discountPercentage = 20
     }
 
     public func selectQuickDiscount(_ discount: Double) {

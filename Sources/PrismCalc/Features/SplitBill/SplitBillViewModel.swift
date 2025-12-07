@@ -8,33 +8,72 @@ public final class SplitBillViewModel {
 
     // MARK: - Input State
 
-    public var totalBill: String = ""
-    public var numberOfPeople: Int = 2
+    private var _totalBill: String = ""
+    public var totalBill: String {
+        get { _totalBill }
+        set {
+            // Filter to only valid characters
+            let filtered = newValue.filter { $0.isNumber || $0 == "." }
+            // Limit to 10 characters
+            let limited = String(filtered.prefix(10))
+            // Prevent multiple decimals
+            let parts = limited.split(separator: ".", omittingEmptySubsequences: false)
+            if parts.count > 2 {
+                _totalBill = String(parts[0]) + "." + String(parts[1])
+            } else {
+                _totalBill = limited
+            }
+        }
+    }
+
+    private var _numberOfPeople: Int = 2
+    public var numberOfPeople: Int {
+        get { _numberOfPeople }
+        set {
+            // Clamp to valid range 1-99
+            _numberOfPeople = min(99, max(1, newValue))
+        }
+    }
+
     public var includeTip: Bool = true
-    public var tipPercentage: Double = 18
+
+    private var _tipPercentage: Double = 18
+    public var tipPercentage: Double {
+        get { _tipPercentage }
+        set {
+            // Clamp to valid percentage range 0-100
+            _tipPercentage = min(100, max(0, newValue))
+        }
+    }
 
     // MARK: - Computed Results
 
     public var billValue: Double {
-        Double(totalBill.replacingOccurrences(of: ",", with: "")) ?? 0
+        let value = Double(totalBill.replacingOccurrences(of: ",", with: "")) ?? 0
+        // Guard against overflow
+        return value.isFinite ? value : 0
     }
 
     public var tipAmount: Double {
-        includeTip ? billValue * (tipPercentage / 100) : 0
+        let amount = includeTip ? billValue * (tipPercentage / 100) : 0
+        return amount.isFinite ? amount : 0
     }
 
     public var grandTotal: Double {
-        billValue + tipAmount
+        let total = billValue + tipAmount
+        return total.isFinite ? total : 0
     }
 
     public var perPersonShare: Double {
         guard numberOfPeople > 0 else { return grandTotal }
-        return grandTotal / Double(numberOfPeople)
+        let share = grandTotal / Double(numberOfPeople)
+        return share.isFinite ? share : 0
     }
 
     public var tipPerPerson: Double {
         guard numberOfPeople > 0 else { return tipAmount }
-        return tipAmount / Double(numberOfPeople)
+        let share = tipAmount / Double(numberOfPeople)
+        return share.isFinite ? share : 0
     }
 
     // MARK: - Formatted Output
@@ -62,39 +101,39 @@ public final class SplitBillViewModel {
     // MARK: - Actions
 
     public func inputDigit(_ digit: String) {
-        guard totalBill.count < 10 else { return }
+        guard _totalBill.count < 10 else { return }
 
         if digit == "." {
-            guard !totalBill.contains(".") else { return }
-            if totalBill.isEmpty {
-                totalBill = "0."
+            guard !_totalBill.contains(".") else { return }
+            if _totalBill.isEmpty {
+                _totalBill = "0."
                 return
             }
         }
 
-        totalBill += digit
+        _totalBill += digit
     }
 
     public func backspace() {
-        guard !totalBill.isEmpty else { return }
-        totalBill.removeLast()
+        guard !_totalBill.isEmpty else { return }
+        _totalBill.removeLast()
     }
 
     public func clear() {
-        totalBill = ""
-        numberOfPeople = 2
+        _totalBill = ""
+        _numberOfPeople = 2
         includeTip = true
-        tipPercentage = 18
+        _tipPercentage = 18
     }
 
     public func incrementPeople() {
-        guard numberOfPeople < 99 else { return }
-        numberOfPeople += 1
+        guard _numberOfPeople < 99 else { return }
+        _numberOfPeople += 1
     }
 
     public func decrementPeople() {
-        guard numberOfPeople > 1 else { return }
-        numberOfPeople -= 1
+        guard _numberOfPeople > 1 else { return }
+        _numberOfPeople -= 1
     }
 
     public func toggleTip() {
