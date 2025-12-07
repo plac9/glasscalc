@@ -55,7 +55,7 @@ struct HistoryTip: Tip {
     }
 
     var message: Text? {
-        Text("Tap History to see your recent calculations and copy results.")
+        Text("Tap History to see your recent calculations. Long press any result to copy it.")
     }
 
     var image: Image? {
@@ -68,6 +68,29 @@ struct HistoryTip: Tip {
 
     var rules: [Rule] {
         #Rule(Self.$hasUsedCalculator) { $0 == true }
+    }
+}
+
+/// Tip for copying results
+struct CopyResultTip: Tip {
+    var title: Text {
+        Text("Copy Your Results")
+    }
+
+    var message: Text? {
+        Text("Long press on any result to copy it to your clipboard.")
+    }
+
+    var image: Image? {
+        Image(systemName: "doc.on.doc")
+    }
+
+    // Show after 5 calculations
+    @Parameter
+    static var calculationCount: Int = 0
+
+    var rules: [Rule] {
+        #Rule(Self.$calculationCount) { $0 >= 5 }
     }
 }
 
@@ -102,6 +125,7 @@ public enum TipKitConfiguration {
     /// Call when a calculation is performed
     public static func recordCalculation() {
         AddWidgetTip.calculationCount += 1
+        CopyResultTip.calculationCount += 1
         HistoryTip.hasUsedCalculator = true
     }
 
