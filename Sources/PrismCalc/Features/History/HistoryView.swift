@@ -110,6 +110,8 @@ public struct HistoryView: View {
                         )
                 }
                 .buttonStyle(.plain)
+                .accessibilityLabel("Clear all history")
+                .accessibilityHint("Permanently deletes all calculation history")
             }
         }
     }
@@ -236,6 +238,9 @@ public struct HistoryView: View {
         }
         // iOS 18 zoom transition source
         .matchedTransitionSource(id: entry.id, in: historyNamespace)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(entry.type.rawValue): \(entry.result)")
+        .accessibilityHint("Double tap to view details, swipe left to delete")
         .onTapGesture {
             selectedEntry = entry
         }

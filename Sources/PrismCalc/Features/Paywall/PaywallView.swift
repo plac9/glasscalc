@@ -29,6 +29,7 @@ public struct PaywallView: View {
                     )
                 )
                 .padding(.bottom, GlassTheme.spacingSmall)
+                .accessibilityHidden(true) // Icon is decorative, text provides context
 
             // Title
             Text(featureName)
@@ -97,6 +98,8 @@ public struct PaywallView: View {
             }
             .buttonStyle(.plain)
             .disabled(storeKit.isLoading)
+            .accessibilityLabel("Upgrade to PrismCalc Pro for \(storeKit.proPrice)")
+            .accessibilityHint("Unlocks all calculators, themes, and unlimited history")
             .padding(.horizontal)
 
             // Restore button
@@ -114,6 +117,8 @@ public struct PaywallView: View {
             }
             .buttonStyle(.plain)
             .disabled(storeKit.isLoading)
+            .accessibilityLabel("Restore previous purchases")
+            .accessibilityHint("Restores Pro features if previously purchased")
 
             Spacer()
         }
