@@ -61,6 +61,7 @@ public struct ContentView: View {
                 CalculatorView()
             }
             .customizationID("tab.calculator")
+            .accessibilityIdentifier("tab-calculator")
 
             // Tip - Pro feature
             Tab("Tip", systemImage: TabIdentifier.tip.icon, value: .tip) {
@@ -69,6 +70,7 @@ public struct ContentView: View {
                 }
             }
             .customizationID("tab.tip")
+            .accessibilityIdentifier("tab-tip")
 
             // Discount - Pro feature
             Tab("Discount", systemImage: TabIdentifier.discount.icon, value: .discount) {
@@ -77,6 +79,7 @@ public struct ContentView: View {
                 }
             }
             .customizationID("tab.discount")
+            .accessibilityIdentifier("tab-discount")
 
             // Split - Pro feature
             Tab("Split", systemImage: TabIdentifier.split.icon, value: .split) {
@@ -85,6 +88,7 @@ public struct ContentView: View {
                 }
             }
             .customizationID("tab.split")
+            .accessibilityIdentifier("tab-split")
 
             // Convert - Pro feature
             Tab("Convert", systemImage: TabIdentifier.convert.icon, value: .convert) {
@@ -93,18 +97,21 @@ public struct ContentView: View {
                 }
             }
             .customizationID("tab.convert")
+            .accessibilityIdentifier("tab-convert")
 
             // History - Free (last 10), Pro (unlimited)
             Tab("History", systemImage: TabIdentifier.history.icon, value: .history) {
                 HistoryView()
             }
             .customizationID("tab.history")
+            .accessibilityIdentifier("tab-history")
 
             // Settings
             Tab("Settings", systemImage: TabIdentifier.settings.icon, value: .settings) {
                 SettingsView()
             }
             .customizationID("tab.settings")
+            .accessibilityIdentifier("tab-settings")
         }
         .tabViewStyle(.sidebarAdaptable)
         .tabViewCustomization($tabCustomization)

@@ -25,7 +25,11 @@ public final class StoreKitManager {
     // MARK: - Computed
 
     public var isPro: Bool {
-        purchasedProductIDs.contains(Self.proProductID)
+        // Check debug flag for UI testing
+        if UserDefaults.standard.bool(forKey: "debug_simulatePro") {
+            return true
+        }
+        return purchasedProductIDs.contains(Self.proProductID)
     }
 
     public var proProduct: Product? {

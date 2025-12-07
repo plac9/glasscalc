@@ -98,6 +98,7 @@ public struct PaywallView: View {
             }
             .buttonStyle(.plain)
             .disabled(storeKit.isLoading)
+            .accessibilityIdentifier("paywall-upgrade-button")
             .accessibilityLabel("Upgrade to PrismCalc Pro for \(storeKit.proPrice)")
             .accessibilityHint("Unlocks all calculators, themes, and unlimited history")
             .padding(.horizontal)
@@ -117,6 +118,7 @@ public struct PaywallView: View {
             }
             .buttonStyle(.plain)
             .disabled(storeKit.isLoading)
+            .accessibilityIdentifier("paywall-restore-button")
             .accessibilityLabel("Restore previous purchases")
             .accessibilityHint("Restores Pro features if previously purchased")
 
