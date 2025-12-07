@@ -3,6 +3,8 @@ import SwiftUI
 /// Tip Calculator with arc slider and split functionality
 public struct TipCalculatorView: View {
     @State private var viewModel = TipCalculatorViewModel()
+    @State private var decrementTrigger = false
+    @State private var incrementTrigger = false
 
     public init() {}
 
@@ -11,9 +13,17 @@ public struct TipCalculatorView: View {
             VStack(spacing: GlassTheme.spacingLarge) {
                 // Bill Amount Input
                 billInputSection
+                    .scrollTransition { content, phase in
+                        content.opacity(phase.isIdentity ? 1 : 0.85)
+                    }
 
                 // Tip Percentage Arc Slider
                 tipSliderSection
+                    .scrollTransition { content, phase in
+                        content
+                            .opacity(phase.isIdentity ? 1 : 0.85)
+                            .scaleEffect(phase.isIdentity ? 1 : 0.97)
+                    }
 
                 // Quick Tip Buttons
                 quickTipSection
@@ -23,6 +33,11 @@ public struct TipCalculatorView: View {
 
                 // Results
                 resultsSection
+                    .scrollTransition { content, phase in
+                        content
+                            .opacity(phase.isIdentity ? 1 : 0.9)
+                            .offset(y: phase.isIdentity ? 0 : phase.value * 8)
+                    }
             }
             .padding()
         }
@@ -123,6 +138,7 @@ public struct TipCalculatorView: View {
 
                 HStack(spacing: GlassTheme.spacingMedium) {
                     Button {
+                        decrementTrigger.toggle()
                         viewModel.decrementPeople()
                     } label: {
                         Image(systemName: "minus.circle.fill")
@@ -132,6 +148,7 @@ public struct TipCalculatorView: View {
                                     ? GlassTheme.primary
                                     : GlassTheme.textTertiary
                             )
+                            .symbolEffect(.bounce.down, value: decrementTrigger)
                     }
                     .buttonStyle(.plain)
                     .disabled(viewModel.numberOfPeople <= 1)
@@ -144,11 +161,13 @@ public struct TipCalculatorView: View {
                         .animation(.easeInOut(duration: 0.15), value: viewModel.numberOfPeople)
 
                     Button {
+                        incrementTrigger.toggle()
                         viewModel.incrementPeople()
                     } label: {
                         Image(systemName: "plus.circle.fill")
                             .font(.title2)
                             .foregroundStyle(GlassTheme.primary)
+                            .symbolEffect(.bounce.up, value: incrementTrigger)
                     }
                     .buttonStyle(.plain)
                 }

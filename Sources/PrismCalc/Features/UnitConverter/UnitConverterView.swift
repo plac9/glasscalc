@@ -5,6 +5,7 @@ public struct UnitConverterView: View {
     @State private var viewModel = UnitConverterViewModel()
     @State private var currencyResult: Double?
     @State private var isConverting: Bool = false
+    @State private var swapTrigger = false
 
     public init() {}
 
@@ -13,15 +14,31 @@ public struct UnitConverterView: View {
             VStack(spacing: GlassTheme.spacingLarge) {
                 // Category Selector
                 categorySelector
+                    .scrollTransition { content, phase in
+                        content.opacity(phase.isIdentity ? 1 : 0.85)
+                    }
 
                 // Input
                 inputSection
+                    .scrollTransition { content, phase in
+                        content.opacity(phase.isIdentity ? 1 : 0.85)
+                    }
 
                 // Unit Selectors with Swap
                 unitSelectors
+                    .scrollTransition { content, phase in
+                        content
+                            .opacity(phase.isIdentity ? 1 : 0.85)
+                            .scaleEffect(phase.isIdentity ? 1 : 0.97)
+                    }
 
                 // Result
                 resultSection
+                    .scrollTransition { content, phase in
+                        content
+                            .opacity(phase.isIdentity ? 1 : 0.9)
+                            .offset(y: phase.isIdentity ? 0 : phase.value * 8)
+                    }
             }
             .padding()
         }
@@ -113,8 +130,9 @@ public struct UnitConverterView: View {
                 units: viewModel.availableUnits
             )
 
-            // Swap Button
+            // Swap Button with SF Symbol 6 rotation animation
             Button {
+                swapTrigger.toggle()
                 withAnimation(GlassTheme.springAnimation) {
                     viewModel.swapUnits()
                     if viewModel.selectedCategory == .currency {
@@ -125,6 +143,7 @@ public struct UnitConverterView: View {
                 Image(systemName: "arrow.left.arrow.right")
                     .font(.title3)
                     .foregroundStyle(GlassTheme.primary)
+                    .symbolEffect(.rotate.byLayer, value: swapTrigger)
                     .frame(width: 44, height: 44)
                     .background(
                         Circle()

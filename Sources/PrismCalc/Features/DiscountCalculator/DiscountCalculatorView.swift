@@ -11,15 +11,28 @@ public struct DiscountCalculatorView: View {
             VStack(spacing: GlassTheme.spacingLarge) {
                 // Original Price Input
                 priceInputSection
+                    .scrollTransition { content, phase in
+                        content.opacity(phase.isIdentity ? 1 : 0.85)
+                    }
 
                 // Discount Percentage Arc Slider
                 discountSliderSection
+                    .scrollTransition { content, phase in
+                        content
+                            .opacity(phase.isIdentity ? 1 : 0.85)
+                            .scaleEffect(phase.isIdentity ? 1 : 0.97)
+                    }
 
                 // Quick Discount Buttons
                 quickDiscountSection
 
                 // Results with visual savings indicator
                 resultsSection
+                    .scrollTransition { content, phase in
+                        content
+                            .opacity(phase.isIdentity ? 1 : 0.9)
+                            .offset(y: phase.isIdentity ? 0 : phase.value * 8)
+                    }
             }
             .padding()
         }
@@ -116,6 +129,7 @@ public struct DiscountCalculatorView: View {
                 HStack {
                     Image(systemName: "tag.fill")
                         .foregroundStyle(GlassTheme.success)
+                        .symbolEffect(.wiggle, value: viewModel.discountAmount)
 
                     Text("You Save \(viewModel.formattedDiscount)")
                         .font(GlassTheme.headlineFont)
@@ -127,6 +141,7 @@ public struct DiscountCalculatorView: View {
                     Capsule()
                         .fill(GlassTheme.success.opacity(0.15))
                 )
+                .sensoryFeedback(.success, trigger: viewModel.discountAmount)
             }
 
             // Price Breakdown

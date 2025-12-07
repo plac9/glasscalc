@@ -18,12 +18,27 @@ public struct SettingsView: View {
             VStack(spacing: GlassTheme.spacingLarge) {
                 // Theme Selection
                 themeSection
+                    .scrollTransition { content, phase in
+                        content
+                            .opacity(phase.isIdentity ? 1 : 0.8)
+                            .scaleEffect(phase.isIdentity ? 1 : 0.98)
+                    }
 
                 // Pro Features
                 proSection
+                    .scrollTransition { content, phase in
+                        content
+                            .opacity(phase.isIdentity ? 1 : 0.8)
+                            .blur(radius: phase.isIdentity ? 0 : 2)
+                    }
 
                 // About
                 aboutSection
+                    .scrollTransition { content, phase in
+                        content
+                            .opacity(phase.isIdentity ? 1 : 0.8)
+                            .scaleEffect(phase.isIdentity ? 1 : 0.98)
+                    }
             }
             .padding()
         }
@@ -36,36 +51,13 @@ public struct SettingsView: View {
             Text(storeKit.errorMessage ?? "An error occurred")
         }
         #if os(iOS)
-        // iOS 18 zoom transition for theme preview
+        // iOS 18 zoom transition for theme preview using dedicated view
         .fullScreenCover(item: $previewTheme) { theme in
             if #available(iOS 18.0, *) {
-                VStack(spacing: GlassTheme.spacingMedium) {
-                    RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusMedium)
-                        .fill(
-                            LinearGradient(
-                                colors: gradientColors(for: theme),
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                        )
-                        .frame(height: 200)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusMedium)
-                                .strokeBorder(.white.opacity(0.2))
-                        )
-
-                    Text(theme.rawValue)
-                        .font(GlassTheme.titleFont)
-                        .foregroundStyle(GlassTheme.text)
-
-                    Button("Apply") {
-                        selectedTheme = theme
-                        GlassTheme.currentTheme = theme
-                        previewTheme = nil
-                    }
-                    .buttonStyle(.borderedProminent)
+                ThemePreviewView(theme: theme) {
+                    selectedTheme = theme
+                    GlassTheme.currentTheme = theme
                 }
-                .padding()
                 .navigationTransition(
                     .zoom(sourceID: theme.id, in: themeNamespace)
                 )

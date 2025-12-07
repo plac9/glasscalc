@@ -6,6 +6,7 @@ import UIKit
 /// Main content view with iOS 18 floating tab bar and animated mesh gradient background
 public struct ContentView: View {
     @State private var selectedTab: TabIdentifier = .calculator
+    @AppStorage("tabCustomization") private var tabCustomization: TabViewCustomization
 
     public init() {}
 
@@ -59,6 +60,7 @@ public struct ContentView: View {
             Tab("Calculator", systemImage: TabIdentifier.calculator.icon, value: .calculator) {
                 CalculatorView()
             }
+            .customizationID("tab.calculator")
 
             // Tip - Pro feature
             Tab("Tip", systemImage: TabIdentifier.tip.icon, value: .tip) {
@@ -66,6 +68,7 @@ public struct ContentView: View {
                     TipCalculatorView()
                 }
             }
+            .customizationID("tab.tip")
 
             // Discount - Pro feature
             Tab("Discount", systemImage: TabIdentifier.discount.icon, value: .discount) {
@@ -73,6 +76,7 @@ public struct ContentView: View {
                     DiscountCalculatorView()
                 }
             }
+            .customizationID("tab.discount")
 
             // Split - Pro feature
             Tab("Split", systemImage: TabIdentifier.split.icon, value: .split) {
@@ -80,6 +84,7 @@ public struct ContentView: View {
                     SplitBillView()
                 }
             }
+            .customizationID("tab.split")
 
             // Convert - Pro feature
             Tab("Convert", systemImage: TabIdentifier.convert.icon, value: .convert) {
@@ -87,6 +92,7 @@ public struct ContentView: View {
                     UnitConverterView()
                 }
             }
+            .customizationID("tab.convert")
 
             // History - Pro feature
             Tab("History", systemImage: TabIdentifier.history.icon, value: .history) {
@@ -94,13 +100,16 @@ public struct ContentView: View {
                     HistoryView()
                 }
             }
+            .customizationID("tab.history")
 
             // Settings
             Tab("Settings", systemImage: TabIdentifier.settings.icon, value: .settings) {
                 SettingsView()
             }
+            .customizationID("tab.settings")
         }
         .tabViewStyle(.sidebarAdaptable)
+        .tabViewCustomization($tabCustomization)
         .tint(GlassTheme.primary)
         .sensoryFeedback(.selection, trigger: selectedTab)
     }

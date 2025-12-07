@@ -3,6 +3,8 @@ import SwiftUI
 /// Split Bill Calculator - divide bills among friends with optional tip
 public struct SplitBillView: View {
     @State private var viewModel = SplitBillViewModel()
+    @State private var decrementTrigger = false
+    @State private var incrementTrigger = false
 
     public init() {}
 
@@ -11,15 +13,28 @@ public struct SplitBillView: View {
             VStack(spacing: GlassTheme.spacingLarge) {
                 // Total Bill Input
                 billInputSection
+                    .scrollTransition { content, phase in
+                        content.opacity(phase.isIdentity ? 1 : 0.85)
+                    }
 
                 // Number of People
                 peopleSection
+                    .scrollTransition { content, phase in
+                        content
+                            .opacity(phase.isIdentity ? 1 : 0.85)
+                            .scaleEffect(phase.isIdentity ? 1 : 0.97)
+                    }
 
                 // Tip Toggle and Slider
                 tipSection
 
                 // Results
                 resultsSection
+                    .scrollTransition { content, phase in
+                        content
+                            .opacity(phase.isIdentity ? 1 : 0.9)
+                            .offset(y: phase.isIdentity ? 0 : phase.value * 8)
+                    }
             }
             .padding()
         }
@@ -63,6 +78,7 @@ public struct SplitBillView: View {
                 HStack(spacing: GlassTheme.spacingXL) {
                     // Decrement
                     Button {
+                        decrementTrigger.toggle()
                         viewModel.decrementPeople()
                     } label: {
                         Image(systemName: "minus")
@@ -72,6 +88,7 @@ public struct SplitBillView: View {
                                     ? GlassTheme.text
                                     : GlassTheme.textTertiary
                             )
+                            .symbolEffect(.bounce.down, value: decrementTrigger)
                             .frame(width: 56, height: 56)
                             .background(
                                 Circle()
@@ -108,11 +125,13 @@ public struct SplitBillView: View {
 
                     // Increment
                     Button {
+                        incrementTrigger.toggle()
                         viewModel.incrementPeople()
                     } label: {
                         Image(systemName: "plus")
                             .font(.title2.weight(.semibold))
                             .foregroundStyle(GlassTheme.text)
+                            .symbolEffect(.bounce.up, value: incrementTrigger)
                             .frame(width: 56, height: 56)
                             .background(
                                 Circle()
