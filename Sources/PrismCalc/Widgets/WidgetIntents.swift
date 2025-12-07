@@ -32,6 +32,7 @@ struct OpenFeatureIntent: AppIntent {
 enum WidgetFeature: String, AppEnum {
     case calculator
     case tipCalculator
+    case discountCalculator
     case billSplit
     case unitConverter
 
@@ -40,6 +41,7 @@ enum WidgetFeature: String, AppEnum {
     static let caseDisplayRepresentations: [WidgetFeature: DisplayRepresentation] = [
         .calculator: DisplayRepresentation(title: "Calculator", image: .init(systemName: "plus.forwardslash.minus")),
         .tipCalculator: DisplayRepresentation(title: "Tip Calculator", image: .init(systemName: "dollarsign.circle")),
+        .discountCalculator: DisplayRepresentation(title: "Discount Calculator", image: .init(systemName: "tag")),
         .billSplit: DisplayRepresentation(title: "Bill Split", image: .init(systemName: "person.2")),
         .unitConverter: DisplayRepresentation(title: "Unit Converter", image: .init(systemName: "arrow.left.arrow.right"))
     ]
@@ -48,6 +50,7 @@ enum WidgetFeature: String, AppEnum {
         switch self {
         case .calculator: return "plus.forwardslash.minus"
         case .tipCalculator: return "dollarsign.circle"
+        case .discountCalculator: return "tag"
         case .billSplit: return "person.2"
         case .unitConverter: return "arrow.left.arrow.right"
         }
@@ -57,6 +60,7 @@ enum WidgetFeature: String, AppEnum {
         switch self {
         case .calculator: return "Calc"
         case .tipCalculator: return "Tip"
+        case .discountCalculator: return "Discount"
         case .billSplit: return "Split"
         case .unitConverter: return "Convert"
         }

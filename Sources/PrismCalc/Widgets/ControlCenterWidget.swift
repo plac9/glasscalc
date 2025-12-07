@@ -68,4 +68,20 @@ struct UnitConverterControlWidget: ControlWidget {
         .description("Quick unit conversion")
     }
 }
+
+/// Control Center button for discount calculator
+@available(iOS 18.0, *)
+struct DiscountControlWidget: ControlWidget {
+    static let kind: String = "DiscountControl"
+
+    var body: some ControlWidgetConfiguration {
+        StaticControlConfiguration(kind: Self.kind) {
+            ControlWidgetButton(action: OpenFeatureIntent(feature: .discountCalculator)) {
+                Label("Discount", systemImage: "tag")
+            }
+        }
+        .displayName("Discount Calculator")
+        .description("Calculate discounts quickly")
+    }
+}
 #endif
