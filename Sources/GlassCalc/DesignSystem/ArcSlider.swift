@@ -39,6 +39,19 @@ public struct ArcSlider: View {
             centerDisplay
         }
         .frame(height: arcRadius + thumbSize + 30)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(label)
+        .accessibilityValue(valueFormatter(value))
+        .accessibilityAdjustableAction { direction in
+            switch direction {
+            case .increment:
+                value = min(value + step, range.upperBound)
+            case .decrement:
+                value = max(value - step, range.lowerBound)
+            @unknown default:
+                break
+            }
+        }
     }
 
     @MainActor

@@ -39,6 +39,17 @@ public struct GlassDisplay: View {
             .frame(maxWidth: .infinity, alignment: .trailing)
             .padding(.vertical, GlassTheme.spacingSmall)
         }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(accessibilityDescription)
+        .accessibilityValue(value)
+    }
+
+    private var accessibilityDescription: String {
+        if expression.isEmpty {
+            return "Calculator display showing \(value)"
+        } else {
+            return "\(expression) equals \(value)"
+        }
     }
 
     private var displayFontSize: CGFloat {

@@ -3,7 +3,9 @@ import SwiftUI
 /// Settings view with theme selection and app info
 public struct SettingsView: View {
     @State private var selectedTheme: GlassTheme.Theme = .aurora
-    @State private var isPro: Bool = false // Simulated for now
+    @State private var showPurchaseError: Bool = false
+
+    private var storeKit: StoreKitManager { StoreKitManager.shared }
 
     public init() {}
 
@@ -23,6 +25,11 @@ public struct SettingsView: View {
         }
         .onAppear {
             selectedTheme = GlassTheme.currentTheme
+        }
+        .alert("Purchase Error", isPresented: $showPurchaseError) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(storeKit.errorMessage ?? "An error occurred")
         }
     }
 
@@ -49,7 +56,7 @@ public struct SettingsView: View {
     @MainActor
     private func themeCard(_ theme: GlassTheme.Theme) -> some View {
         let isSelected = selectedTheme == theme
-        let isLocked = theme.isPro && !isPro
+        let isLocked = theme.isPro && !storeKit.isPro
 
         return Button {
             guard !isLocked else { return }
@@ -143,21 +150,21 @@ public struct SettingsView: View {
                             .font(GlassTheme.headlineFont)
                             .foregroundStyle(GlassTheme.text)
 
-                        Text("Unlock all features")
+                        Text(storeKit.isPro ? "All features unlocked" : "Unlock all features")
                             .font(GlassTheme.captionFont)
                             .foregroundStyle(GlassTheme.textSecondary)
                     }
 
                     Spacer()
 
-                    if isPro {
+                    if storeKit.isPro {
                         Image(systemName: "checkmark.seal.fill")
                             .font(.title)
                             .foregroundStyle(GlassTheme.success)
                     }
                 }
 
-                if !isPro {
+                if !storeKit.isPro {
                     VStack(alignment: .leading, spacing: GlassTheme.spacingXS) {
                         proFeatureRow(icon: "percent", text: "Tip Calculator")
                         proFeatureRow(icon: "tag", text: "Discount Calculator")
@@ -167,28 +174,58 @@ public struct SettingsView: View {
                         proFeatureRow(icon: "clock.arrow.circlepath", text: "Unlimited History")
                     }
 
+                    // Purchase Button
                     Button {
-                        // TODO: StoreKit purchase
-                        isPro = true
+                        Task {
+                            do {
+                                try await storeKit.purchase()
+                            } catch {
+                                showPurchaseError = true
+                            }
+                        }
                     } label: {
-                        Text("Upgrade for $2.99")
-                            .font(GlassTheme.bodyFont)
-                            .fontWeight(.semibold)
-                            .foregroundStyle(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(
-                                Capsule()
-                                    .fill(
-                                        LinearGradient(
-                                            colors: [GlassTheme.primary, GlassTheme.secondary],
-                                            startPoint: .leading,
-                                            endPoint: .trailing
-                                        )
+                        HStack {
+                            if storeKit.isLoading {
+                                ProgressView()
+                                    .tint(.white)
+                            } else {
+                                Text("Upgrade for \(storeKit.proPrice)")
+                            }
+                        }
+                        .font(GlassTheme.bodyFont)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(
+                            Capsule()
+                                .fill(
+                                    LinearGradient(
+                                        colors: [GlassTheme.primary, GlassTheme.secondary],
+                                        startPoint: .leading,
+                                        endPoint: .trailing
                                     )
-                            )
+                                )
+                        )
                     }
                     .buttonStyle(.plain)
+                    .disabled(storeKit.isLoading)
+
+                    // Restore Purchases
+                    Button {
+                        Task {
+                            await storeKit.restorePurchases()
+                            if storeKit.errorMessage != nil && !storeKit.isPro {
+                                showPurchaseError = true
+                            }
+                        }
+                    } label: {
+                        Text("Restore Purchases")
+                            .font(GlassTheme.captionFont)
+                            .foregroundStyle(GlassTheme.primary)
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(storeKit.isLoading)
                 }
             }
         }

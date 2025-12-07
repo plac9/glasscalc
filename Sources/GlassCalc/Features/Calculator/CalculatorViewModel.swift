@@ -80,9 +80,16 @@ public final class CalculatorViewModel {
         guard let operation = pendingOperation else { return }
 
         let result = CalculatorEngine.calculate(pendingValue, operation, displayValue)
-        expression = "\(CalculatorEngine.formatDisplay(pendingValue)) \(operation.rawValue) \(display)"
+        let fullExpression = "\(CalculatorEngine.formatDisplay(pendingValue)) \(operation.rawValue) \(display)"
+        expression = fullExpression
         display = CalculatorEngine.formatDisplay(result)
         currentValue = result
+
+        // Save to history
+        HistoryService.shared.saveCalculation(expression: fullExpression, result: display)
+
+        // Record for TipKit
+        TipKitConfiguration.recordCalculation()
 
         // Reset for next calculation
         pendingOperation = nil

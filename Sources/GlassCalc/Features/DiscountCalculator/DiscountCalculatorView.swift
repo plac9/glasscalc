@@ -175,6 +175,22 @@ public struct DiscountCalculatorView: View {
                         .contentTransition(.numericText())
                         .animation(.easeInOut(duration: 0.15), value: viewModel.finalPrice)
                 }
+
+                // Save Button
+                if viewModel.priceValue > 0 {
+                    Divider()
+                        .background(GlassTheme.textTertiary)
+
+                    Button {
+                        viewModel.saveToHistory()
+                    } label: {
+                        Label("Save to History", systemImage: "clock.arrow.circlepath")
+                            .font(GlassTheme.bodyFont)
+                            .foregroundStyle(GlassTheme.primary)
+                    }
+                    .buttonStyle(.plain)
+                    .sensoryFeedback(.success, trigger: viewModel.priceValue)
+                }
             }
             .padding(GlassTheme.spacingMedium)
             .background(

@@ -16,6 +16,7 @@ public struct ContentView: View {
         case discount = "Discount"
         case split = "Split"
         case convert = "Convert"
+        case history = "History"
         case settings = "Settings"
 
         var icon: String {
@@ -25,6 +26,7 @@ public struct ContentView: View {
             case .discount: return "tag"
             case .split: return "person.2"
             case .convert: return "arrow.left.arrow.right"
+            case .history: return "clock.arrow.circlepath"
             case .settings: return "gearshape"
             }
         }
@@ -32,7 +34,7 @@ public struct ContentView: View {
         var isPro: Bool {
             switch self {
             case .calculator, .settings: return false
-            case .tip, .discount, .split, .convert: return true
+            case .tip, .discount, .split, .convert, .history: return true
             }
         }
     }
@@ -51,29 +53,45 @@ public struct ContentView: View {
                         Label(Tab.calculator.rawValue, systemImage: Tab.calculator.icon)
                     }
 
-                TipCalculatorView()
-                    .tag(Tab.tip)
-                    .tabItem {
-                        Label(Tab.tip.rawValue, systemImage: Tab.tip.icon)
-                    }
+                ProGatedView(featureName: "Tip Calculator", featureIcon: Tab.tip.icon) {
+                    TipCalculatorView()
+                }
+                .tag(Tab.tip)
+                .tabItem {
+                    Label(Tab.tip.rawValue, systemImage: Tab.tip.icon)
+                }
 
-                DiscountCalculatorView()
-                    .tag(Tab.discount)
-                    .tabItem {
-                        Label(Tab.discount.rawValue, systemImage: Tab.discount.icon)
-                    }
+                ProGatedView(featureName: "Discount Calculator", featureIcon: Tab.discount.icon) {
+                    DiscountCalculatorView()
+                }
+                .tag(Tab.discount)
+                .tabItem {
+                    Label(Tab.discount.rawValue, systemImage: Tab.discount.icon)
+                }
 
-                SplitBillView()
-                    .tag(Tab.split)
-                    .tabItem {
-                        Label(Tab.split.rawValue, systemImage: Tab.split.icon)
-                    }
+                ProGatedView(featureName: "Split Bill", featureIcon: Tab.split.icon) {
+                    SplitBillView()
+                }
+                .tag(Tab.split)
+                .tabItem {
+                    Label(Tab.split.rawValue, systemImage: Tab.split.icon)
+                }
 
-                UnitConverterView()
-                    .tag(Tab.convert)
-                    .tabItem {
-                        Label(Tab.convert.rawValue, systemImage: Tab.convert.icon)
-                    }
+                ProGatedView(featureName: "Unit Converter", featureIcon: Tab.convert.icon) {
+                    UnitConverterView()
+                }
+                .tag(Tab.convert)
+                .tabItem {
+                    Label(Tab.convert.rawValue, systemImage: Tab.convert.icon)
+                }
+
+                ProGatedView(featureName: "History", featureIcon: Tab.history.icon) {
+                    HistoryView()
+                }
+                .tag(Tab.history)
+                .tabItem {
+                    Label(Tab.history.rawValue, systemImage: Tab.history.icon)
+                }
 
                 SettingsView()
                     .tag(Tab.settings)
@@ -82,6 +100,7 @@ public struct ContentView: View {
                     }
             }
             .tint(GlassTheme.primary)
+            .sensoryFeedback(.selection, trigger: selectedTab)
         }
         .onAppear {
             #if os(iOS)

@@ -101,6 +101,15 @@ public final class SplitBillViewModel {
         includeTip.toggle()
     }
 
+    public func saveToHistory() {
+        guard billValue > 0 else { return }
+        HistoryService.shared.saveSplit(
+            total: formattedGrandTotal,
+            people: numberOfPeople,
+            perPerson: formattedPerPerson
+        )
+    }
+
     // MARK: - Formatting
 
     private func formatCurrency(_ value: Double) -> String {

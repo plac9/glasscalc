@@ -194,6 +194,20 @@ public struct UnitConverterView: View {
                 Text(formatUnitName(viewModel.toUnit))
                     .font(GlassTheme.headlineFont)
                     .foregroundStyle(GlassTheme.textSecondary)
+
+                // Save Button
+                if viewModel.inputDouble > 0 {
+                    Button {
+                        viewModel.saveToHistory(result: displayResult)
+                    } label: {
+                        Label("Save to History", systemImage: "clock.arrow.circlepath")
+                            .font(GlassTheme.bodyFont)
+                            .foregroundStyle(GlassTheme.primary)
+                    }
+                    .buttonStyle(.plain)
+                    .padding(.top, GlassTheme.spacingSmall)
+                    .sensoryFeedback(.success, trigger: viewModel.inputDouble)
+                }
             }
         }
         .frame(maxWidth: .infinity)

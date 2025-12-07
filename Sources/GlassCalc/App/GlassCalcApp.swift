@@ -1,4 +1,5 @@
 import SwiftUI
+import TipKit
 
 /// GlassCalc App Scene Configuration
 ///
@@ -20,6 +21,9 @@ public enum GlassCalcApp {
     public static var scene: some Scene {
         WindowGroup {
             ContentView()
+                .task {
+                    TipKitConfiguration.configure()
+                }
         }
     }
 }

@@ -29,7 +29,22 @@ public final class UnitConverterViewModel {
     // MARK: - State
 
     public var selectedCategory: Category = .length
-    public var inputValue: String = ""
+    private var _inputValue: String = ""
+    public var inputValue: String {
+        get { _inputValue }
+        set {
+            // Limit to 15 characters, allow only valid decimal input
+            let filtered = newValue.filter { $0.isNumber || $0 == "." || $0 == "-" }
+            let limited = String(filtered.prefix(15))
+            // Prevent multiple decimals
+            let parts = limited.split(separator: ".", omittingEmptySubsequences: false)
+            if parts.count > 2 {
+                _inputValue = String(parts[0]) + "." + String(parts[1])
+            } else {
+                _inputValue = limited
+            }
+        }
+    }
     public var fromUnit: String = ""
     public var toUnit: String = ""
 
@@ -115,6 +130,21 @@ public final class UnitConverterViewModel {
         }
 
         isLoadingCurrencies = false
+    }
+
+    public func saveToHistory(result: String) {
+        guard inputDouble > 0 else { return }
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 4
+        let inputFormatted = formatter.string(from: NSNumber(value: inputDouble)) ?? inputValue
+
+        HistoryService.shared.saveConversion(
+            value: inputFormatted,
+            fromUnit: fromUnit,
+            toUnit: toUnit,
+            result: result
+        )
     }
 
     // MARK: - Private

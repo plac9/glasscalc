@@ -77,6 +77,16 @@ public final class DiscountCalculatorViewModel {
         discountPercentage = discount
     }
 
+    public func saveToHistory() {
+        guard priceValue > 0 else { return }
+        HistoryService.shared.saveDiscount(
+            original: formattedOriginal,
+            discountPercent: Int(discountPercentage),
+            final: formattedFinal,
+            saved: formattedDiscount
+        )
+    }
+
     // MARK: - Formatting
 
     private func formatCurrency(_ value: Double) -> String {

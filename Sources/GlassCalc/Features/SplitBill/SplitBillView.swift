@@ -220,6 +220,22 @@ public struct SplitBillView: View {
                         value: viewModel.formattedGrandTotal,
                         isHighlighted: true
                     )
+
+                    // Save Button
+                    if viewModel.billValue > 0 {
+                        Divider()
+                            .background(GlassTheme.textTertiary)
+
+                        Button {
+                            viewModel.saveToHistory()
+                        } label: {
+                            Label("Save to History", systemImage: "clock.arrow.circlepath")
+                                .font(GlassTheme.bodyFont)
+                                .foregroundStyle(GlassTheme.primary)
+                        }
+                        .buttonStyle(.plain)
+                        .sensoryFeedback(.success, trigger: viewModel.billValue)
+                    }
                 }
             }
         }

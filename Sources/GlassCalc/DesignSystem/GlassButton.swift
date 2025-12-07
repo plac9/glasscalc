@@ -27,6 +27,7 @@ public struct GlassButton: View {
     let label: String
     let style: Style
     let size: CGFloat
+    let accessibilityText: String
     let action: () -> Void
 
     @State private var isPressed = false
@@ -35,12 +36,39 @@ public struct GlassButton: View {
         _ label: String,
         style: Style = .number,
         size: CGFloat = GlassTheme.buttonSize,
+        accessibilityLabel: String? = nil,
         action: @escaping () -> Void
     ) {
         self.label = label
         self.style = style
         self.size = size
+        self.accessibilityText = accessibilityLabel ?? Self.defaultAccessibilityLabel(for: label)
         self.action = action
+    }
+
+    private static func defaultAccessibilityLabel(for label: String) -> String {
+        switch label {
+        case "0": return "Zero"
+        case "1": return "One"
+        case "2": return "Two"
+        case "3": return "Three"
+        case "4": return "Four"
+        case "5": return "Five"
+        case "6": return "Six"
+        case "7": return "Seven"
+        case "8": return "Eight"
+        case "9": return "Nine"
+        case ".": return "Decimal point"
+        case "+": return "Plus"
+        case "-": return "Minus"
+        case "x": return "Multiply"
+        case "/": return "Divide"
+        case "=": return "Equals"
+        case "AC": return "Clear all"
+        case "+/-": return "Toggle positive negative"
+        case "%": return "Percent"
+        default: return label
+        }
     }
 
     public var body: some View {
@@ -78,6 +106,8 @@ public struct GlassButton: View {
                 .scaleEffect(isPressed ? 0.92 : 1.0)
         }
         .buttonStyle(.plain)
+        .accessibilityLabel(accessibilityText)
+        .accessibilityAddTraits(.isButton)
         .sensoryFeedback(.impact(flexibility: .soft), trigger: isPressed)
         .onLongPressGesture(minimumDuration: .infinity, pressing: { pressing in
             withAnimation(GlassTheme.buttonSpring) {
@@ -119,12 +149,14 @@ public struct GlassButton: View {
 
 public struct GlassWideButton: View {
     let label: String
+    let accessibilityText: String
     let action: () -> Void
 
     @State private var isPressed = false
 
-    public init(_ label: String, action: @escaping () -> Void) {
+    public init(_ label: String, accessibilityLabel: String? = nil, action: @escaping () -> Void) {
         self.label = label
+        self.accessibilityText = accessibilityLabel ?? (label == "0" ? "Zero" : label)
         self.action = action
     }
 
@@ -162,6 +194,8 @@ public struct GlassWideButton: View {
                 .scaleEffect(isPressed ? 0.96 : 1.0)
         }
         .buttonStyle(.plain)
+        .accessibilityLabel(accessibilityText)
+        .accessibilityAddTraits(.isButton)
         .sensoryFeedback(.impact(flexibility: .soft), trigger: isPressed)
         .onLongPressGesture(minimumDuration: .infinity, pressing: { pressing in
             withAnimation(GlassTheme.buttonSpring) {

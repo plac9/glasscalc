@@ -1,0 +1,288 @@
+# GlassCalc - Code Maturity Implementation Plan
+
+## Overview
+Complete remaining work for production-ready testing (excluding localization).
+Leverage iOS 18+ cutting-edge features for a modern experience.
+
+---
+
+## 1. Accessibility Labels
+
+### Files to Modify:
+- `Sources/GlassCalc/DesignSystem/GlassButton.swift`
+- `Sources/GlassCalc/DesignSystem/GlassDisplay.swift`
+- `Sources/GlassCalc/DesignSystem/ArcSlider.swift`
+- `Sources/GlassCalc/Features/Calculator/CalculatorView.swift`
+- `Sources/GlassCalc/Features/TipCalculator/TipCalculatorView.swift`
+- `Sources/GlassCalc/Features/DiscountCalculator/DiscountCalculatorView.swift`
+- `Sources/GlassCalc/Features/SplitBill/SplitBillView.swift`
+- `Sources/GlassCalc/Features/UnitConverter/UnitConverterView.swift`
+- `Sources/GlassCalc/Features/History/HistoryView.swift`
+- `Sources/GlassCalc/Features/Paywall/PaywallView.swift`
+
+### Implementation:
+1. **GlassButton** - Add `accessibilityLabel` parameter, apply to all buttons
+2. **GlassDisplay** - Add `accessibilityValue` for current result, `accessibilityLabel` for expression
+3. **ArcSlider** - Add `accessibilityValue` with current percentage, `accessibilityAdjustableAction` for increment/decrement
+4. **Calculator buttons** - Label each: "Seven", "Plus", "Equals", "Clear", etc.
+5. **Pro calculators** - Label inputs, sliders, and result displays
+6. **History** - Label each entry with type and result
+
+---
+
+## 2. Privacy Manifest
+
+### File to Create:
+- `App/PrivacyInfo.xcprivacy`
+
+### Content:
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>NSPrivacyTracking</key>
+    <false/>
+    <key>NSPrivacyTrackingDomains</key>
+    <array/>
+    <key>NSPrivacyCollectedDataTypes</key>
+    <array/>
+    <key>NSPrivacyAccessedAPITypes</key>
+    <array>
+        <dict>
+            <key>NSPrivacyAccessedAPIType</key>
+            <string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+            <key>NSPrivacyAccessedAPITypeReasons</key>
+            <array>
+                <string>CA92.1</string>
+            </array>
+        </dict>
+    </array>
+</dict>
+</plist>
+```
+
+### Update:
+- `project.yml` - Add PrivacyInfo.xcprivacy to app sources
+
+---
+
+## 3. StoreKit Scheme Configuration
+
+### File to Modify:
+- `project.yml`
+
+### Implementation:
+Add scheme configuration with StoreKit testing:
+```yaml
+schemes:
+  GlassCalc:
+    build:
+      targets:
+        GlassCalc: all
+    run:
+      config: Debug
+      storeKitConfiguration: App/Configuration.storekit
+```
+
+---
+
+## 4. Additional Tests
+
+### Files to Create:
+- `Tests/GlassCalcTests/TipCalculatorViewModelTests.swift`
+- `Tests/GlassCalcTests/DiscountCalculatorViewModelTests.swift`
+- `Tests/GlassCalcTests/SplitBillViewModelTests.swift`
+- `Tests/GlassCalcTests/UnitConverterViewModelTests.swift`
+- `Tests/GlassCalcTests/HistoryServiceTests.swift`
+
+### Test Coverage:
+1. **TipCalculatorViewModel**
+   - Calculate tip for various percentages
+   - Split bill among multiple people
+   - Handle zero/negative inputs
+
+2. **DiscountCalculatorViewModel**
+   - Apply percentage discounts
+   - Calculate savings correctly
+   - Handle edge cases (0%, 100%)
+
+3. **SplitBillViewModel**
+   - Even split calculations
+   - Tip distribution
+   - Rounding behavior
+
+4. **UnitConverterViewModel**
+   - Length conversions (all unit pairs)
+   - Weight conversions
+   - Volume conversions
+   - Temperature conversions (including negative)
+
+5. **HistoryService**
+   - Save entries
+   - Fetch entries by type
+   - Delete entries
+   - Widget sync triggers
+
+---
+
+## 5. Input Validation & Edge Cases
+
+### Files to Modify:
+- `Sources/GlassCalc/Features/Calculator/CalculatorViewModel.swift`
+- `Sources/GlassCalc/Features/Calculator/CalculatorEngine.swift`
+- All Pro calculator ViewModels
+
+### Implementation:
+1. **Display length limit** - Cap at 15 digits
+2. **Overflow protection** - Return "Error" for results > Double.max
+3. **Input sanitization** - Prevent multiple decimals, leading zeros
+4. **Pro calculators** - Max bill/price limits, valid percentage ranges
+
+---
+
+---
+
+## 6. Interactive Widgets (iOS 17+)
+
+### Files to Modify:
+- `Sources/GlassCalc/Widgets/GlassCalcWidget.swift`
+
+### Implementation:
+Add `Button` with `AppIntent` for widget interactions:
+- Quick calculation buttons (+, -, ×, ÷)
+- Tap result to open app with that value
+- "New Calculation" button
+
+```swift
+struct CalculateIntent: AppIntent {
+    static var title: LocalizedStringResource = "Calculate"
+    @Parameter(title: "Operation") var operation: String
+
+    func perform() async throws -> some IntentResult {
+        // Perform calculation, update shared data
+        return .result()
+    }
+}
+```
+
+---
+
+## 7. Control Center Widget (iOS 18+)
+
+### Files to Create:
+- `Sources/GlassCalc/Widgets/GlassCalcControlWidget.swift`
+
+### Implementation:
+ControlKit widget for Control Center:
+- Single button to open calculator
+- Shows last result as subtitle
+- Toggleable (Pro feature indicator)
+
+```swift
+struct GlassCalcControl: ControlWidget {
+    var body: some ControlWidgetConfiguration {
+        StaticControlConfiguration(kind: "GlassCalcControl") {
+            ControlWidgetButton(action: OpenCalculatorIntent()) {
+                Label("GlassCalc", systemImage: "equal.square.fill")
+            }
+        }
+        .displayName("GlassCalc")
+    }
+}
+```
+
+---
+
+## 8. App Intents / Siri Shortcuts (iOS 16+)
+
+### Files to Create:
+- `Sources/GlassCalc/Core/Intents/CalculateTipIntent.swift`
+- `Sources/GlassCalc/Core/Intents/ConvertUnitIntent.swift`
+- `Sources/GlassCalc/Core/Intents/GlassCalcShortcuts.swift`
+
+### Siri Phrases:
+- "Calculate 18% tip on $45"
+- "Split $120 between 4 people"
+- "Convert 5 miles to kilometers"
+- "What's 15% off $80"
+
+### Implementation:
+```swift
+struct CalculateTipIntent: AppIntent {
+    static var title: LocalizedStringResource = "Calculate Tip"
+
+    @Parameter(title: "Bill Amount") var billAmount: Double
+    @Parameter(title: "Tip Percentage") var tipPercentage: Int
+
+    func perform() async throws -> some IntentResult & ReturnsValue<String> {
+        let tip = billAmount * Double(tipPercentage) / 100
+        let total = billAmount + tip
+        return .result(value: "Tip: $\(tip.formatted()), Total: $\(total.formatted())")
+    }
+}
+```
+
+---
+
+## 9. TipKit - Feature Discovery (iOS 17+)
+
+### Files to Create:
+- `Sources/GlassCalc/Core/Tips/GlassCalcTips.swift`
+
+### Tips to Show:
+- First launch: "Swipe between calculators"
+- Pro feature: "Unlock all calculators with Pro"
+- History: "Long press to copy result"
+- Widget: "Add widget for quick access"
+
+### Implementation:
+```swift
+struct SwipeCalculatorsTip: Tip {
+    var title: Text { Text("Swipe to Switch") }
+    var message: Text? { Text("Swipe left or right to access different calculators") }
+    var image: Image? { Image(systemName: "hand.draw") }
+}
+```
+
+---
+
+## Execution Order
+
+1. **Privacy Manifest** - Required for App Store
+2. **StoreKit Scheme** - Enables purchase testing
+3. **Input Validation** - Prevents crashes/bugs
+4. **Accessibility** - Comprehensive VoiceOver support
+5. **TipKit** - Onboarding experience
+6. **App Intents** - Siri integration
+7. **Interactive Widgets** - Enhanced widget experience
+8. **Control Center Widget** - iOS 18 flagship feature
+9. **Tests** - Full coverage for confidence
+
+---
+
+## Success Criteria
+
+- [ ] Build succeeds with no warnings
+- [ ] All tests pass
+- [ ] VoiceOver can navigate entire app
+- [ ] StoreKit sandbox purchases work
+- [ ] Privacy manifest validates in Xcode
+- [ ] No crashes on edge case inputs
+- [ ] Siri can execute calculation shortcuts
+- [ ] Interactive widget buttons work
+- [ ] Control Center widget appears and functions
+- [ ] TipKit tips display on first launch
+
+---
+
+## Summary
+
+| Category | Items | iOS Version |
+|----------|-------|-------------|
+| Core Maturity | Privacy, Accessibility, Validation, Tests | iOS 18+ |
+| Modern Features | TipKit, App Intents, Interactive Widgets | iOS 17+ |
+| Cutting Edge | Control Center Widget | iOS 18+ |
+
+**Total New Files:** ~10
+**Total Modified Files:** ~15
