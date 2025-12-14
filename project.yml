@@ -17,6 +17,7 @@ schemes:
       config: Debug
       targets:
         - PrismCalcTests
+        - PrismCalcUITests
 
 targets:
   PrismCalc:
@@ -49,11 +50,15 @@ targets:
     platform: iOS
     sources:
       - WidgetExtension
-      - Sources/PrismCalc/Widgets
-      - path: Sources/PrismCalc/Core/Services/SharedDataService.swift
-        group: Services
-      - path: Sources/PrismCalc/Core/Intents/PrismCalcIntents.swift
-        group: Intents
+      - path: Sources/PrismCalc/Widgets
+      - path: Sources/PrismCalc/Core/Services
+        name: Services
+        includes:
+          - SharedDataService.swift
+      - path: Sources/PrismCalc/Core/Intents
+        name: Intents
+        includes:
+          - PrismCalcIntents.swift
     dependencies:
       - framework: SwiftUI.framework
         implicit: true
@@ -88,3 +93,16 @@ targets:
       SWIFT_VERSION: 6.0
       GENERATE_INFOPLIST_FILE: YES
       PRODUCT_BUNDLE_IDENTIFIER: com.laclairtech.prismcalc.tests
+
+  PrismCalcUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - Tests/PrismCalcUITests
+    dependencies:
+      - target: PrismCalc
+    settings:
+      SWIFT_VERSION: 6.0
+      GENERATE_INFOPLIST_FILE: YES
+      PRODUCT_BUNDLE_IDENTIFIER: com.laclairtech.prismcalc.uitests
+      TEST_TARGET_NAME: PrismCalc

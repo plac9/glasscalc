@@ -63,6 +63,20 @@ public struct ContentView: View {
             .customizationID("tab.calculator")
             .accessibilityIdentifier("tab-calculator")
 
+            // History - Free (last 10), Pro (unlimited)
+            Tab("History", systemImage: TabIdentifier.history.icon, value: .history) {
+                HistoryView()
+            }
+            .customizationID("tab.history")
+            .accessibilityIdentifier("tab-history")
+
+            // Settings
+            Tab("Settings", systemImage: TabIdentifier.settings.icon, value: .settings) {
+                SettingsView()
+            }
+            .customizationID("tab.settings")
+            .accessibilityIdentifier("tab-settings")
+
             // Tip - Pro feature
             Tab("Tip", systemImage: TabIdentifier.tip.icon, value: .tip) {
                 ProGatedView(featureName: "Tip Calculator", featureIcon: TabIdentifier.tip.icon) {
@@ -98,20 +112,6 @@ public struct ContentView: View {
             }
             .customizationID("tab.convert")
             .accessibilityIdentifier("tab-convert")
-
-            // History - Free (last 10), Pro (unlimited)
-            Tab("History", systemImage: TabIdentifier.history.icon, value: .history) {
-                HistoryView()
-            }
-            .customizationID("tab.history")
-            .accessibilityIdentifier("tab-history")
-
-            // Settings
-            Tab("Settings", systemImage: TabIdentifier.settings.icon, value: .settings) {
-                SettingsView()
-            }
-            .customizationID("tab.settings")
-            .accessibilityIdentifier("tab-settings")
         }
         .tabViewStyle(.sidebarAdaptable)
         .tabViewCustomization($tabCustomization)

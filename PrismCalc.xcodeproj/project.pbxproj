@@ -7,86 +7,94 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		03746BC139C528E91F80E82E /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A97A551E59ADE4CE6D7B08 /* PaywallView.swift */; };
-		04961E5E0AA76EC3F8180107 /* HistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E38BB28674809DEDA313BC3 /* HistoryService.swift */; };
-		07D64631D957776F82443532 /* PrismCalcIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8280FB24EE6B135CC22764 /* PrismCalcIntents.swift */; };
-		1175C70C64CD3B1413FB59C3 /* PrismCalcIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8280FB24EE6B135CC22764 /* PrismCalcIntents.swift */; };
-		1240FC1AB93C30EE0E028698 /* StoreKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67949345DD0514F5CAD0890E /* StoreKitManager.swift */; };
-		1541B09BF5D4BB2D1FDF42A5 /* AnimatedMeshBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9633F5A49FBEA13A5D592A5 /* AnimatedMeshBackground.swift */; };
-		1C68696F3D1EA81F43EDC87E /* TipCalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E4337BEB32BA163040E425 /* TipCalculatorView.swift */; };
-		256EF2A503E16C904FA82122 /* GlassTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166E376548BCB9D6251E58F4 /* GlassTheme.swift */; };
-		2ED4602614D08D71AF772098 /* ArcSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4509FB883BDADD494189B540 /* ArcSlider.swift */; };
-		33DBDF8BB7E309831BB1158B /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84354347C4E03339C1BCFDB4 /* Main.swift */; };
-		3BB9F70233D53F6347FBD064 /* MeshGradientConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE7101EA895296013A80A9 /* MeshGradientConfig.swift */; };
-		440F9A13E80D54D3B05C5748 /* CurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19AC441303D0EF8DA02BAF5 /* CurrencyService.swift */; };
-		4416E1B92FA96F74D3CE3504 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C40E340BE469A9823FFF30B /* WidgetKit.framework */; };
-		464FFCC9BA71612D894AB11A /* CalculatorEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24088766C7A637DCAEC1A4A /* CalculatorEngineTests.swift */; };
-		4C5EBC8629C107CED5591807 /* SplitBillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF71E0D10E8AB31B834216B /* SplitBillView.swift */; };
-		521393B55A0D15A58B3467D9 /* WidgetIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9B52F4CF8E3B72FF8F381E /* WidgetIntents.swift */; };
-		53858D8A69A3CB813701C69C /* CalculatorEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CDF7C18E0A08A831AB9E32 /* CalculatorEngine.swift */; };
-		632B0893C23FBA6E1580B08E /* UnitConverterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152DD16CCBD8CC75EBB3CF1 /* UnitConverterView.swift */; };
-		6A6EBAD639BD6670EF8B0ACF /* HistoryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA37A12BA19763A46BD3710E /* HistoryEntry.swift */; };
-		72B4DDAAE35F74FD86819C9F /* SharedDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612A37C071FA0BA011B37F8F /* SharedDataService.swift */; };
-		732A6E968CD5027ADA888B38 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 932E687FF32115C776BD1524 /* SwiftUI.framework */; };
-		732D7782FA37FF91CF7043A7 /* DiscountCalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D7992608E1F5963B90E503 /* DiscountCalculatorView.swift */; };
-		7522AE1FA0411E79B7BF455C /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011FDE3FAE243DB0F7F06F3D /* ViewExtensions.swift */; };
-		75ADB0A92959F93F11BBB0DE /* DiscountCalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A67931C7E2E5EB73C0B3B376 /* DiscountCalculatorViewModel.swift */; };
-		82B84D0CFBCBF330B5C0F3BA /* FeatureViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309433807103E5FFFFB41D27 /* FeatureViewModelTests.swift */; };
-		851B668F704A979EACA4528D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0928A2F10C4A1BC36441EF60 /* ContentView.swift */; };
-		85235890A21DD93D1617FFFF /* SharedDataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE70198C2A48A0BB0B0F25E8 /* SharedDataServiceTests.swift */; };
-		853CBE38EC8CCBA684A8D5F3 /* PrismCalcApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CB4D0753E3072FCA67F542 /* PrismCalcApp.swift */; };
-		85678E2DBAD381FB09293500 /* PrismCalcWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CF4F9A969F47E11D295C9015 /* PrismCalcWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		85F05CFB02ED91E5786D0356 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66CE5B701DF5A9A0367E6BE /* SettingsView.swift */; };
-		98DD0F88297C233B8CB5F42F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A57FC037338358F439ECEF8 /* Assets.xcassets */; };
-		9C0BB51DB91005648F8C089F /* UnitConverterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40CFEFC4EC5549F59BE5325 /* UnitConverterViewModel.swift */; };
-		B45264E99A1B5420A770C5C8 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 58EA6975E45D1849C1AB5BE6 /* PrivacyInfo.xcprivacy */; };
-		B453357D21C312E4953DD47A /* PrismCalcWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC96CD62E404EC80AC7CAF0 /* PrismCalcWidgetBundle.swift */; };
-		C0529C5D7A7FC223BABFD238 /* SplitBillViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C833C98CF2CDDA190C3BEAB /* SplitBillViewModel.swift */; };
-		C537D01A257952F006C36B1C /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89815B8AED1E3744570BF87F /* HistoryView.swift */; };
-		C758A13774711033A2C2CFCA /* GlassCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4194E0993381BD54D743A6D1 /* GlassCard.swift */; };
-		CD0163444F5F78B11D23939A /* PrismCalcWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A30CD5E60738303616B5FE /* PrismCalcWidget.swift */; };
-		E0AC9907CAF600AF20826272 /* PrismCalcTips.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F09CE310B0704D010E271A /* PrismCalcTips.swift */; };
-		7D31794111F9DACEBE577774 /* GlassIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D816FCC4E5278F7F0D10D3C3 /* GlassIconButton.swift */; };
-		5A6045928869A7C32A9AC264 /* HistoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6269597EEE6C929F36CB85 /* HistoryDetailView.swift */; };
-		DD2AD93E5126680E2F015F77 /* ThemePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE327E5BC1C491E4C9D6A3B /* ThemePreviewView.swift */; };
-		E33E2EE79397756A2F2827A1 /* CalculatorViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A08FE4886F94601CEA0C3CD /* CalculatorViewModelTests.swift */; };
-		E982FA44BD84210DCACC5BA2 /* GlassDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67CC6560CD1FCC27CA6702D /* GlassDisplay.swift */; };
-		EB7CEEB8982142663FF108D9 /* ControlCenterWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156A5328877214CEE43E489F /* ControlCenterWidget.swift */; };
-		EB82BA2B8C7E795EFD6B4845 /* ProGatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF398B3848E41E03A8F325E7 /* ProGatedView.swift */; };
-		EE256CEC1C1D2FA80B9D3E66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B88C2B145989CCF729E6C81 /* Assets.xcassets */; };
-		EEB3561F3E0339477391F824 /* CalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFEB1D67682DB6C959FBF44 /* CalculatorViewModel.swift */; };
-		F15386F6B7A23EC9FBEFE00A /* TipCalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CCE2807D00E71D605C9EDF /* TipCalculatorViewModel.swift */; };
-		F1A6EA874B225FAA431A3A88 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CEF784C8D8CB4B0D1F0E30 /* CalculatorView.swift */; };
-		FB2434709291308506F921AD /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 1466F12F1665AB3FCB1BAD0C /* Configuration.storekit */; };
-		FE83990D4AEA031D462A0C40 /* SharedDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612A37C071FA0BA011B37F8F /* SharedDataService.swift */; };
-		FF21AC5921DE37D9985079A8 /* GlassButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C27C5D6BD72F15EA88DE7B /* GlassButton.swift */; };
+		018774231347F8EC7C86FC1E /* ControlCenterWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A68CCC4BE306F885918B33 /* ControlCenterWidget.swift */; };
+		028409B7FB405D21EDB4C921 /* SharedDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71565CF5E5341BE10949329 /* SharedDataService.swift */; };
+		09BAD84539BFABA36D3FC7FA /* ArcSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936046028363571724E74217 /* ArcSlider.swift */; };
+		0A2EC0D051D1973B799A49B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AB837CC33799E95545E4B89 /* Assets.xcassets */; };
+		0FC3FBB4F5AF6185F6991525 /* GlassButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BFC3E377C7A003C333D42B /* GlassButton.swift */; };
+		11FABC4720B59F50561D5F55 /* PrismCalcWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8DED8AEA78DE4D071D75CC /* PrismCalcWidget.swift */; };
+		173C4663F3D51DF98DDCAF54 /* SplitBillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819A14F0A68DA1BE1883F99F /* SplitBillView.swift */; };
+		188E8A45227D63C98B7EDA89 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58FEAE60BC6E1FE1BE0C771 /* Main.swift */; };
+		1A3CA5FE9E98AD35F7716B90 /* TipCalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E69055F05C2DFDD39CBC69 /* TipCalculatorView.swift */; };
+		1B5B8F4F2EAB698F9575DC11 /* GlassCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A27DAAE53A112B615A0673 /* GlassCard.swift */; };
+		20063AF423770BF585391581 /* WidgetIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E0252FF2BA6C5DAAFD0DB2 /* WidgetIntents.swift */; };
+		27AD096E5124E0363C10F3E5 /* GlassDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A25C893566C6F690106CDDF /* GlassDisplay.swift */; };
+		291E45FE85A5ED8E0289B463 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2D0715FF0317C514E6F1951 /* SwiftUI.framework */; };
+		2A78B103BEFCF80EF516457E /* PrismCalcWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C522D5E3668EAAB23D1A070 /* PrismCalcWidgetBundle.swift */; };
+		2D65EB4333436683076960ED /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B7B50423B6D89E4720B631E /* WidgetKit.framework */; };
+		310BB87D04D5A6ECCDEFDE01 /* AnimatedMeshBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A0661C3A9837C68807DCCF /* AnimatedMeshBackground.swift */; };
+		3763CF84B70E24CD9C7504B3 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B816A3B1DB1B25E2793EBE /* PaywallView.swift */; };
+		3C3C33DC1E3872654537128C /* CurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE810125C7AA4B49DD1C406 /* CurrencyService.swift */; };
+		43AF97B6E7D3010CF49AF011 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF804420EFCDF536EE758402 /* Assets.xcassets */; };
+		47069FF46CF36514A8CF4DD2 /* ProGatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A12B447B4864A04D20652CF /* ProGatedView.swift */; };
+		4CD2689C981943E6639333F3 /* PrismCalcIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69813B6E869CB554F7414F40 /* PrismCalcIntents.swift */; };
+		56B0F555DB677FAED067BC17 /* FeatureViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DC50BD1E20F7CD60B7DA70 /* FeatureViewModelTests.swift */; };
+		595B54FCDC996C8FCF38C555 /* GlassTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B9E1DF093FC8DFA5195584 /* GlassTheme.swift */; };
+		5F2C96E12A6D463319525924 /* ThemePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009970927EF00CF27C9619CE /* ThemePreviewView.swift */; };
+		689262E1FC794911F747365A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B074F9AC198B8A2488025590 /* SettingsView.swift */; };
+		704D769752DB6A7E348E62DB /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C4F48E8638FC6BECBD59F5 /* CalculatorView.swift */; };
+		78F21574959188B763480B4D /* PrismCalcIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69813B6E869CB554F7414F40 /* PrismCalcIntents.swift */; };
+		85174233C2D7B20D07855A5F /* CalculatorEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372CB58120B9A90634A2EC54 /* CalculatorEngineTests.swift */; };
+		888BE6A6F170B04DBE7A3313 /* SplitBillViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1FD0ABEE01013B0EDAB877 /* SplitBillViewModel.swift */; };
+		8A1448363ACFF317DBC9A279 /* ScreenshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18838FACCEAD94472FD6DA36 /* ScreenshotTests.swift */; };
+		8DB2B73E2C10B0A1B6AA8E09 /* CalculatorEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A7DCC91BA6A1E97EAF6CB0 /* CalculatorEngine.swift */; };
+		8E77DC9EB8AB5B602B45C8AD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13278145FCCBBBDC5FC3985 /* ContentView.swift */; };
+		94A615BCE19AF31F47766EFB /* UnitConverterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444839D3946D96E3A83271E3 /* UnitConverterViewModel.swift */; };
+		952644DD55515B66A2B4F98E /* CalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97A63E08B14D3F943EAAA4C /* CalculatorViewModel.swift */; };
+		9B861F1B3365BEA7AEF2BCAF /* MeshGradientConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307466B6734F61816EFE045 /* MeshGradientConfig.swift */; };
+		9E7F52DDCC0772597EF0B705 /* SharedDataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11164F17F7B1F297F70A834 /* SharedDataServiceTests.swift */; };
+		AE700F0510731F9023DE38EF /* SharedDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71565CF5E5341BE10949329 /* SharedDataService.swift */; };
+		B0D0583C113A62BD481273B2 /* UnitConverterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDACDAC490A4971A27748771 /* UnitConverterView.swift */; };
+		B3E765B65DAB2BE2364AB7AF /* DiscountCalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF6CDE231F2B566218561B4 /* DiscountCalculatorView.swift */; };
+		B737B278B61BF3C27ECFA560 /* CalculatorViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C014ABC95C8D372EBB1AC7 /* CalculatorViewModelTests.swift */; };
+		B75972CF66C88928334D004E /* HistoryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F670765787CBDE7479E12868 /* HistoryEntry.swift */; };
+		BA6A4805ECCA7D532A3B08E3 /* HistoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14537D61F92159E7708154D3 /* HistoryDetailView.swift */; };
+		C01278E4C5D75A5FD630D501 /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 81CE0250B1CF6AAF0880B921 /* Configuration.storekit */; };
+		CA8AF5F631900A16D9E9B662 /* PrismCalcWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 5EF4A68693D57D301E371A82 /* PrismCalcWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D86C9FC2909427C07D3EA52E /* HistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693A3C61991A360DD9FD744D /* HistoryService.swift */; };
+		DADD21C8A2621A7A0663FF16 /* TipCalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB362B6AFFBCCA93CE6B4B35 /* TipCalculatorViewModel.swift */; };
+		DB26D57ACDEB862FC1FF2277 /* PrismCalcApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F47AA3C4343F1ACD4AC871 /* PrismCalcApp.swift */; };
+		E27A507584F5E904682D5961 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C197E91E245912A5A63A81B /* ViewExtensions.swift */; };
+		E45A90A8A40FAE921E3C81B1 /* StoreKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112208D79CF5E1EC11D5664E /* StoreKitManager.swift */; };
+		E9755B612561BC0E5411D030 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B11B78137158AFA4B728E9 /* HistoryView.swift */; };
+		ED96C2142778F1CD2D234DBC /* GlassIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214A5BC18578DBB7ED248C8E /* GlassIconButton.swift */; };
+		F389F2A3DCE36F8F080724C6 /* DiscountCalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892AD060FDE8B8637A29F117 /* DiscountCalculatorViewModel.swift */; };
+		F8D9ADF694A7E48B2C7B541C /* PrismCalcTips.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD796F479868C33E700B5E /* PrismCalcTips.swift */; };
+		FA1AB9F71214EFA86CCCAD2B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 8A0862606E37D374E2CD09E2 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		925DF8F268EA61F225D68262 /* PBXContainerItemProxy */ = {
+		15058761E41DE981B3FEC598 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 10EC141E2458429C2EAB38BC /* Project object */;
+			containerPortal = 468F91089A26F0C41565C47F /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = F6363C7CDA6FF4F0D9EBDB08;
+			remoteGlobalIDString = 9FD3D6FF66B853A994461E3E;
 			remoteInfo = PrismCalc;
 		};
-		C8E498F22F5A3EBD5CD17919 /* PBXContainerItemProxy */ = {
+		7520855A8C2CB2737BCB6C82 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 10EC141E2458429C2EAB38BC /* Project object */;
+			containerPortal = 468F91089A26F0C41565C47F /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = C5735FE2BF6390BBC033605E;
+			remoteGlobalIDString = 9FD3D6FF66B853A994461E3E;
+			remoteInfo = PrismCalc;
+		};
+		F9B434D027F5E2CDA4E1B884 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 468F91089A26F0C41565C47F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 45CB9BE953693B211F1D9FDF;
 			remoteInfo = PrismCalcWidgetExtension;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		CE14216E1F930BBA4DCE1027 /* Embed Foundation Extensions */ = {
+		8675ED65440F2BA6652CC14E /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				85678E2DBAD381FB09293500 /* PrismCalcWidgetExtension.appex in Embed Foundation Extensions */,
+				CA8AF5F631900A16D9E9B662 /* PrismCalcWidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -94,380 +102,377 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		011FDE3FAE243DB0F7F06F3D /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
-		06CEF784C8D8CB4B0D1F0E30 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
-		0816918B3C8DBC981DC2319D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		08A30CD5E60738303616B5FE /* PrismCalcWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismCalcWidget.swift; sourceTree = "<group>"; };
-		0928A2F10C4A1BC36441EF60 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		0BBEF1EB9EE790545507F192 /* PrismCalc.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PrismCalc.entitlements; sourceTree = "<group>"; };
-		1466F12F1665AB3FCB1BAD0C /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
-		156A5328877214CEE43E489F /* ControlCenterWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlCenterWidget.swift; sourceTree = "<group>"; };
-		166E376548BCB9D6251E58F4 /* GlassTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassTheme.swift; sourceTree = "<group>"; };
-		18CDF7C18E0A08A831AB9E32 /* CalculatorEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorEngine.swift; sourceTree = "<group>"; };
-		2152DD16CCBD8CC75EBB3CF1 /* UnitConverterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConverterView.swift; sourceTree = "<group>"; };
-		2E38BB28674809DEDA313BC3 /* HistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryService.swift; sourceTree = "<group>"; };
-		309433807103E5FFFFB41D27 /* FeatureViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureViewModelTests.swift; sourceTree = "<group>"; };
-		37A97A551E59ADE4CE6D7B08 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
-		38CCE2807D00E71D605C9EDF /* TipCalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipCalculatorViewModel.swift; sourceTree = "<group>"; };
-		3B88C2B145989CCF729E6C81 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3DFEB1D67682DB6C959FBF44 /* CalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewModel.swift; sourceTree = "<group>"; };
-		4194E0993381BD54D743A6D1 /* GlassCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassCard.swift; sourceTree = "<group>"; };
-		4509FB883BDADD494189B540 /* ArcSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcSlider.swift; sourceTree = "<group>"; };
-		4C40E340BE469A9823FFF30B /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WidgetKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4F91D02B2609D044E19497A8 /* PrismCalcWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PrismCalcWidget.entitlements; sourceTree = "<group>"; };
-		53E4337BEB32BA163040E425 /* TipCalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipCalculatorView.swift; sourceTree = "<group>"; };
-		58EA6975E45D1849C1AB5BE6 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		5A57FC037338358F439ECEF8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		5AC96CD62E404EC80AC7CAF0 /* PrismCalcWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismCalcWidgetBundle.swift; sourceTree = "<group>"; };
-		5FFE7101EA895296013A80A9 /* MeshGradientConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshGradientConfig.swift; sourceTree = "<group>"; };
-		6042CD375253D31F9C043C2B /* PrismCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrismCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		612A37C071FA0BA011B37F8F /* SharedDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SharedDataService.swift; path = Sources/PrismCalc/Core/Services/SharedDataService.swift; sourceTree = "<group>"; };
-		67949345DD0514F5CAD0890E /* StoreKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitManager.swift; sourceTree = "<group>"; };
-		6A08FE4886F94601CEA0C3CD /* CalculatorViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewModelTests.swift; sourceTree = "<group>"; };
-		6DF71E0D10E8AB31B834216B /* SplitBillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitBillView.swift; sourceTree = "<group>"; };
-		75C27C5D6BD72F15EA88DE7B /* GlassButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassButton.swift; sourceTree = "<group>"; };
-		7735BB50D4B39217D871E702 /* PrismCalcTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrismCalcTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		84354347C4E03339C1BCFDB4 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
-		89815B8AED1E3744570BF87F /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
-		932E687FF32115C776BD1524 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9C8280FB24EE6B135CC22764 /* PrismCalcIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PrismCalcIntents.swift; path = Sources/PrismCalc/Core/Intents/PrismCalcIntents.swift; sourceTree = "<group>"; };
-		9C833C98CF2CDDA190C3BEAB /* SplitBillViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitBillViewModel.swift; sourceTree = "<group>"; };
-		A67931C7E2E5EB73C0B3B376 /* DiscountCalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountCalculatorViewModel.swift; sourceTree = "<group>"; };
-		AE70198C2A48A0BB0B0F25E8 /* SharedDataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDataServiceTests.swift; sourceTree = "<group>"; };
-		B19AC441303D0EF8DA02BAF5 /* CurrencyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyService.swift; sourceTree = "<group>"; };
-		BF398B3848E41E03A8F325E7 /* ProGatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProGatedView.swift; sourceTree = "<group>"; };
-		C2D7992608E1F5963B90E503 /* DiscountCalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountCalculatorView.swift; sourceTree = "<group>"; };
-		C40CFEFC4EC5549F59BE5325 /* UnitConverterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConverterViewModel.swift; sourceTree = "<group>"; };
-		C9633F5A49FBEA13A5D592A5 /* AnimatedMeshBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedMeshBackground.swift; sourceTree = "<group>"; };
-		CD9B52F4CF8E3B72FF8F381E /* WidgetIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetIntents.swift; sourceTree = "<group>"; };
-		CF4F9A969F47E11D295C9015 /* PrismCalcWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PrismCalcWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		D24088766C7A637DCAEC1A4A /* CalculatorEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorEngineTests.swift; sourceTree = "<group>"; };
-		D4F09CE310B0704D010E271A /* PrismCalcTips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismCalcTips.swift; sourceTree = "<group>"; };
-		D6361ACEB26A1C8B9C4C5A52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		E4CB4D0753E3072FCA67F542 /* PrismCalcApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismCalcApp.swift; sourceTree = "<group>"; };
-		E66CE5B701DF5A9A0367E6BE /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		E67CC6560CD1FCC27CA6702D /* GlassDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassDisplay.swift; sourceTree = "<group>"; };
-		FA37A12BA19763A46BD3710E /* HistoryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryEntry.swift; sourceTree = "<group>"; };
-		D816FCC4E5278F7F0D10D3C3 /* GlassIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassIconButton.swift; sourceTree = "<group>"; };
-		BF6269597EEE6C929F36CB85 /* HistoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailView.swift; sourceTree = "<group>"; };
-		FFE327E5BC1C491E4C9D6A3B /* ThemePreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePreviewView.swift; sourceTree = "<group>"; };
+		009970927EF00CF27C9619CE /* ThemePreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePreviewView.swift; sourceTree = "<group>"; };
+		011A7154BC4B2935F58251A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		0A8DED8AEA78DE4D071D75CC /* PrismCalcWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismCalcWidget.swift; sourceTree = "<group>"; };
+		112208D79CF5E1EC11D5664E /* StoreKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitManager.swift; sourceTree = "<group>"; };
+		14537D61F92159E7708154D3 /* HistoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailView.swift; sourceTree = "<group>"; };
+		17BC2D603C7CEB1FB9D8D4AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		18838FACCEAD94472FD6DA36 /* ScreenshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotTests.swift; sourceTree = "<group>"; };
+		1AE810125C7AA4B49DD1C406 /* CurrencyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyService.swift; sourceTree = "<group>"; };
+		20B816A3B1DB1B25E2793EBE /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
+		214A5BC18578DBB7ED248C8E /* GlassIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassIconButton.swift; sourceTree = "<group>"; };
+		26E69055F05C2DFDD39CBC69 /* TipCalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipCalculatorView.swift; sourceTree = "<group>"; };
+		28B11B78137158AFA4B728E9 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		30A27DAAE53A112B615A0673 /* GlassCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassCard.swift; sourceTree = "<group>"; };
+		30F47AA3C4343F1ACD4AC871 /* PrismCalcApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismCalcApp.swift; sourceTree = "<group>"; };
+		31C4F48E8638FC6BECBD59F5 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
+		32A0AE7938185EBA6C99D705 /* PrismCalcWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PrismCalcWidget.entitlements; sourceTree = "<group>"; };
+		35A0661C3A9837C68807DCCF /* AnimatedMeshBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedMeshBackground.swift; sourceTree = "<group>"; };
+		36E0252FF2BA6C5DAAFD0DB2 /* WidgetIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetIntents.swift; sourceTree = "<group>"; };
+		372CB58120B9A90634A2EC54 /* CalculatorEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorEngineTests.swift; sourceTree = "<group>"; };
+		3A25C893566C6F690106CDDF /* GlassDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassDisplay.swift; sourceTree = "<group>"; };
+		3AB837CC33799E95545E4B89 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3B7B50423B6D89E4720B631E /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WidgetKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		444839D3946D96E3A83271E3 /* UnitConverterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConverterViewModel.swift; sourceTree = "<group>"; };
+		5EF4A68693D57D301E371A82 /* PrismCalcWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PrismCalcWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		66A7DCC91BA6A1E97EAF6CB0 /* CalculatorEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorEngine.swift; sourceTree = "<group>"; };
+		693A3C61991A360DD9FD744D /* HistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryService.swift; sourceTree = "<group>"; };
+		69813B6E869CB554F7414F40 /* PrismCalcIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismCalcIntents.swift; sourceTree = "<group>"; };
+		6C522D5E3668EAAB23D1A070 /* PrismCalcWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismCalcWidgetBundle.swift; sourceTree = "<group>"; };
+		71B9E1DF093FC8DFA5195584 /* GlassTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassTheme.swift; sourceTree = "<group>"; };
+		7307466B6734F61816EFE045 /* MeshGradientConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshGradientConfig.swift; sourceTree = "<group>"; };
+		77BFC3E377C7A003C333D42B /* GlassButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassButton.swift; sourceTree = "<group>"; };
+		819A14F0A68DA1BE1883F99F /* SplitBillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitBillView.swift; sourceTree = "<group>"; };
+		81CE0250B1CF6AAF0880B921 /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
+		892AD060FDE8B8637A29F117 /* DiscountCalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountCalculatorViewModel.swift; sourceTree = "<group>"; };
+		8A0862606E37D374E2CD09E2 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		8A12B447B4864A04D20652CF /* ProGatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProGatedView.swift; sourceTree = "<group>"; };
+		8B945D05266736A7BAB4318C /* PrismCalcUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrismCalcUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C197E91E245912A5A63A81B /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
+		936046028363571724E74217 /* ArcSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcSlider.swift; sourceTree = "<group>"; };
+		98DC50BD1E20F7CD60B7DA70 /* FeatureViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureViewModelTests.swift; sourceTree = "<group>"; };
+		9FF6CDE231F2B566218561B4 /* DiscountCalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountCalculatorView.swift; sourceTree = "<group>"; };
+		A2C014ABC95C8D372EBB1AC7 /* CalculatorViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewModelTests.swift; sourceTree = "<group>"; };
+		A2D0715FF0317C514E6F1951 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA1FD0ABEE01013B0EDAB877 /* SplitBillViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitBillViewModel.swift; sourceTree = "<group>"; };
+		AB362B6AFFBCCA93CE6B4B35 /* TipCalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipCalculatorViewModel.swift; sourceTree = "<group>"; };
+		B074F9AC198B8A2488025590 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B08C9B495C216FA7885D2924 /* PrismCalc.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PrismCalc.entitlements; sourceTree = "<group>"; };
+		B40A206F27D504D1DC20D8D5 /* PrismCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrismCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C11164F17F7B1F297F70A834 /* SharedDataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDataServiceTests.swift; sourceTree = "<group>"; };
+		C13278145FCCBBBDC5FC3985 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		C58FEAE60BC6E1FE1BE0C771 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
+		C7AAD00DAC3A5F836A7D40C6 /* PrismCalcTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrismCalcTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDACDAC490A4971A27748771 /* UnitConverterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConverterView.swift; sourceTree = "<group>"; };
+		D97A63E08B14D3F943EAAA4C /* CalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewModel.swift; sourceTree = "<group>"; };
+		E6A68CCC4BE306F885918B33 /* ControlCenterWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlCenterWidget.swift; sourceTree = "<group>"; };
+		E71565CF5E5341BE10949329 /* SharedDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDataService.swift; sourceTree = "<group>"; };
+		F2DD796F479868C33E700B5E /* PrismCalcTips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismCalcTips.swift; sourceTree = "<group>"; };
+		F670765787CBDE7479E12868 /* HistoryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryEntry.swift; sourceTree = "<group>"; };
+		FF804420EFCDF536EE758402 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		CFD4CAD21EFE3FD4DCC5A420 /* Frameworks */ = {
+		52DA1658F1EBFDDAC1F9D992 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				732A6E968CD5027ADA888B38 /* SwiftUI.framework in Frameworks */,
-				4416E1B92FA96F74D3CE3504 /* WidgetKit.framework in Frameworks */,
+				291E45FE85A5ED8E0289B463 /* SwiftUI.framework in Frameworks */,
+				2D65EB4333436683076960ED /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		07A508ABC4BD7444BFFD803E /* Intents */ = {
+		1308B64BBEF5FFE894464333 /* TipCalculator */ = {
 			isa = PBXGroup;
 			children = (
+				26E69055F05C2DFDD39CBC69 /* TipCalculatorView.swift */,
+				AB362B6AFFBCCA93CE6B4B35 /* TipCalculatorViewModel.swift */,
 			);
-			path = Intents;
+			path = TipCalculator;
 			sourceTree = "<group>";
 		};
-		0B74F98ED3C9DEA471F6C58F /* DiscountCalculator */ = {
+		16880C24A3A7FFFF033E0081 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C2D7992608E1F5963B90E503 /* DiscountCalculatorView.swift */,
-				A67931C7E2E5EB73C0B3B376 /* DiscountCalculatorViewModel.swift */,
+				F670765787CBDE7479E12868 /* HistoryEntry.swift */,
 			);
-			path = DiscountCalculator;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		21E54184E526F50BA3F14D52 /* PrismCalc */ = {
+		1D7E29821BC9F1666468E9F6 = {
 			isa = PBXGroup;
 			children = (
-				FF09123D51E2FB8FC4BBC9DE /* App */,
-				9A95DD9C43455BF6302A9990 /* Core */,
-				8BAEB621A4163068A8456199 /* DesignSystem */,
-				F9892D895E073F57DEE623CD /* Features */,
+				DBC0C206356176590851AD87 /* App */,
+				7476517F4EBE9AB00E77F36D /* PrismCalc */,
+				D46ECEBDB88DF1B3F8AB6461 /* PrismCalcTests */,
+				377FA568060572B2ECF2206D /* PrismCalcUITests */,
+				EEC5BD8AFEC7C9A84BE139E7 /* WidgetExtension */,
+				DC94EF0221ED45E829AB3F9D /* Widgets */,
+				689520496D7070AA17515C08 /* Frameworks */,
+				77F64D687867A93AACA6AB7C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		31AB39BBC4882AE112FE3BF6 /* Calculator */ = {
+			isa = PBXGroup;
+			children = (
+				66A7DCC91BA6A1E97EAF6CB0 /* CalculatorEngine.swift */,
+				31C4F48E8638FC6BECBD59F5 /* CalculatorView.swift */,
+				D97A63E08B14D3F943EAAA4C /* CalculatorViewModel.swift */,
+			);
+			path = Calculator;
+			sourceTree = "<group>";
+		};
+		31D8B323D6F2425A34703065 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				35A0661C3A9837C68807DCCF /* AnimatedMeshBackground.swift */,
+				936046028363571724E74217 /* ArcSlider.swift */,
+				77BFC3E377C7A003C333D42B /* GlassButton.swift */,
+				30A27DAAE53A112B615A0673 /* GlassCard.swift */,
+				3A25C893566C6F690106CDDF /* GlassDisplay.swift */,
+				214A5BC18578DBB7ED248C8E /* GlassIconButton.swift */,
+				71B9E1DF093FC8DFA5195584 /* GlassTheme.swift */,
+				7307466B6734F61816EFE045 /* MeshGradientConfig.swift */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		377FA568060572B2ECF2206D /* PrismCalcUITests */ = {
+			isa = PBXGroup;
+			children = (
+				18838FACCEAD94472FD6DA36 /* ScreenshotTests.swift */,
+			);
+			name = PrismCalcUITests;
+			path = Tests/PrismCalcUITests;
+			sourceTree = "<group>";
+		};
+		3985D0CCD85849D5ABC96852 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				1AE810125C7AA4B49DD1C406 /* CurrencyService.swift */,
+				693A3C61991A360DD9FD744D /* HistoryService.swift */,
+				E71565CF5E5341BE10949329 /* SharedDataService.swift */,
+				112208D79CF5E1EC11D5664E /* StoreKitManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		3EC0CC79077EA4B0AC126779 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C13278145FCCBBBDC5FC3985 /* ContentView.swift */,
+				30F47AA3C4343F1ACD4AC871 /* PrismCalcApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		46D162EF14DBCCC1C28437F1 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				31AB39BBC4882AE112FE3BF6 /* Calculator */,
+				E53CA67D8541EEAF3E4BE250 /* DiscountCalculator */,
+				8DB639BC5F412C88A3567E2A /* History */,
+				C9F5C9A9C2CF0CCE887118F5 /* Paywall */,
+				B046EAD80B636FF22A585E93 /* Settings */,
+				F5E1BA5C047B67B57ED42431 /* SplitBill */,
+				1308B64BBEF5FFE894464333 /* TipCalculator */,
+				4F2DC244309FB7BDC74D72EA /* UnitConverter */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		4F2DC244309FB7BDC74D72EA /* UnitConverter */ = {
+			isa = PBXGroup;
+			children = (
+				CDACDAC490A4971A27748771 /* UnitConverterView.swift */,
+				444839D3946D96E3A83271E3 /* UnitConverterViewModel.swift */,
+			);
+			path = UnitConverter;
+			sourceTree = "<group>";
+		};
+		535B98FC8AD714533551AE68 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8C197E91E245912A5A63A81B /* ViewExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		689520496D7070AA17515C08 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A2D0715FF0317C514E6F1951 /* SwiftUI.framework */,
+				3B7B50423B6D89E4720B631E /* WidgetKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7476517F4EBE9AB00E77F36D /* PrismCalc */ = {
+			isa = PBXGroup;
+			children = (
+				3EC0CC79077EA4B0AC126779 /* App */,
+				C4A14C844E76B17E8224B911 /* Core */,
+				31D8B323D6F2425A34703065 /* DesignSystem */,
+				46D162EF14DBCCC1C28437F1 /* Features */,
 			);
 			name = PrismCalc;
 			path = Sources/PrismCalc;
 			sourceTree = "<group>";
 		};
-		24FBE59F79153ABF302F3CC0 /* Services */ = {
+		77F64D687867A93AACA6AB7C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B19AC441303D0EF8DA02BAF5 /* CurrencyService.swift */,
-				2E38BB28674809DEDA313BC3 /* HistoryService.swift */,
-				67949345DD0514F5CAD0890E /* StoreKitManager.swift */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
-		3ED8953120AFB2DB5709BEFA /* History */ = {
-			isa = PBXGroup;
-			children = (
-				89815B8AED1E3744570BF87F /* HistoryView.swift */,
-				BF6269597EEE6C929F36CB85 /* HistoryDetailView.swift */,
-			);
-			path = History;
-			sourceTree = "<group>";
-		};
-		623F87D8FA68E3A20CA01393 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				FA37A12BA19763A46BD3710E /* HistoryEntry.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		7BD82F4C105E560EB387F61F /* WidgetExtension */ = {
-			isa = PBXGroup;
-			children = (
-				5A57FC037338358F439ECEF8 /* Assets.xcassets */,
-				4F91D02B2609D044E19497A8 /* PrismCalcWidget.entitlements */,
-				5AC96CD62E404EC80AC7CAF0 /* PrismCalcWidgetBundle.swift */,
-				0816918B3C8DBC981DC2319D /* Info.plist */,
-			);
-			path = WidgetExtension;
-			sourceTree = "<group>";
-		};
-		7C1A3815FF2BBF82FA8D43B0 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				6042CD375253D31F9C043C2B /* PrismCalc.app */,
-				7735BB50D4B39217D871E702 /* PrismCalcTests.xctest */,
-				CF4F9A969F47E11D295C9015 /* PrismCalcWidgetExtension.appex */,
+				B40A206F27D504D1DC20D8D5 /* PrismCalc.app */,
+				C7AAD00DAC3A5F836A7D40C6 /* PrismCalcTests.xctest */,
+				8B945D05266736A7BAB4318C /* PrismCalcUITests.xctest */,
+				5EF4A68693D57D301E371A82 /* PrismCalcWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		7D8F82765D7BE90DF290C296 /* Widgets */ = {
+		8DB639BC5F412C88A3567E2A /* History */ = {
 			isa = PBXGroup;
 			children = (
-				156A5328877214CEE43E489F /* ControlCenterWidget.swift */,
-				08A30CD5E60738303616B5FE /* PrismCalcWidget.swift */,
-				CD9B52F4CF8E3B72FF8F381E /* WidgetIntents.swift */,
+				14537D61F92159E7708154D3 /* HistoryDetailView.swift */,
+				28B11B78137158AFA4B728E9 /* HistoryView.swift */,
 			);
-			name = Widgets;
-			path = Sources/PrismCalc/Widgets;
+			path = History;
 			sourceTree = "<group>";
 		};
-		8BAEB621A4163068A8456199 /* DesignSystem */ = {
+		AF929CAEB90DB35B6F96B08A /* Intents */ = {
 			isa = PBXGroup;
 			children = (
-				C9633F5A49FBEA13A5D592A5 /* AnimatedMeshBackground.swift */,
-				4509FB883BDADD494189B540 /* ArcSlider.swift */,
-				75C27C5D6BD72F15EA88DE7B /* GlassButton.swift */,
-				4194E0993381BD54D743A6D1 /* GlassCard.swift */,
-				E67CC6560CD1FCC27CA6702D /* GlassDisplay.swift */,
-				D816FCC4E5278F7F0D10D3C3 /* GlassIconButton.swift */,
-				166E376548BCB9D6251E58F4 /* GlassTheme.swift */,
-				5FFE7101EA895296013A80A9 /* MeshGradientConfig.swift */,
+				69813B6E869CB554F7414F40 /* PrismCalcIntents.swift */,
 			);
-			path = DesignSystem;
+			path = Intents;
 			sourceTree = "<group>";
 		};
-		9A95DD9C43455BF6302A9990 /* Core */ = {
+		B046EAD80B636FF22A585E93 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				C7F5111D7D54BC9B1269E180 /* Extensions */,
-				07A508ABC4BD7444BFFD803E /* Intents */,
-				623F87D8FA68E3A20CA01393 /* Models */,
-				24FBE59F79153ABF302F3CC0 /* Services */,
-				F7837A83366DE8999CC89594 /* Tips */,
+				B074F9AC198B8A2488025590 /* SettingsView.swift */,
+				009970927EF00CF27C9619CE /* ThemePreviewView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		C4A14C844E76B17E8224B911 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				535B98FC8AD714533551AE68 /* Extensions */,
+				AF929CAEB90DB35B6F96B08A /* Intents */,
+				16880C24A3A7FFFF033E0081 /* Models */,
+				3985D0CCD85849D5ABC96852 /* Services */,
+				E433B707FB1D0D05F5A50F33 /* Tips */,
 			);
 			path = Core;
 			sourceTree = "<group>";
 		};
-		9FB3C905249A3472B74725BC /* PrismCalcTests */ = {
+		C9F5C9A9C2CF0CCE887118F5 /* Paywall */ = {
 			isa = PBXGroup;
 			children = (
-				D24088766C7A637DCAEC1A4A /* CalculatorEngineTests.swift */,
-				6A08FE4886F94601CEA0C3CD /* CalculatorViewModelTests.swift */,
-				309433807103E5FFFFB41D27 /* FeatureViewModelTests.swift */,
-				AE70198C2A48A0BB0B0F25E8 /* SharedDataServiceTests.swift */,
+				20B816A3B1DB1B25E2793EBE /* PaywallView.swift */,
+				8A12B447B4864A04D20652CF /* ProGatedView.swift */,
+			);
+			path = Paywall;
+			sourceTree = "<group>";
+		};
+		D46ECEBDB88DF1B3F8AB6461 /* PrismCalcTests */ = {
+			isa = PBXGroup;
+			children = (
+				372CB58120B9A90634A2EC54 /* CalculatorEngineTests.swift */,
+				A2C014ABC95C8D372EBB1AC7 /* CalculatorViewModelTests.swift */,
+				98DC50BD1E20F7CD60B7DA70 /* FeatureViewModelTests.swift */,
+				C11164F17F7B1F297F70A834 /* SharedDataServiceTests.swift */,
 			);
 			name = PrismCalcTests;
 			path = Tests/PrismCalcTests;
 			sourceTree = "<group>";
 		};
-		A3D97E06B5CA5B255A63E9F4 /* SplitBill */ = {
+		DBC0C206356176590851AD87 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				6DF71E0D10E8AB31B834216B /* SplitBillView.swift */,
-				9C833C98CF2CDDA190C3BEAB /* SplitBillViewModel.swift */,
-			);
-			path = SplitBill;
-			sourceTree = "<group>";
-		};
-		B5DC26D0E263A3C41B4E63A8 /* Paywall */ = {
-			isa = PBXGroup;
-			children = (
-				37A97A551E59ADE4CE6D7B08 /* PaywallView.swift */,
-				BF398B3848E41E03A8F325E7 /* ProGatedView.swift */,
-			);
-			path = Paywall;
-			sourceTree = "<group>";
-		};
-		C7F5111D7D54BC9B1269E180 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				011FDE3FAE243DB0F7F06F3D /* ViewExtensions.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		CA216803D14A19FF3392F7DE /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				E66CE5B701DF5A9A0367E6BE /* SettingsView.swift */,
-				FFE327E5BC1C491E4C9D6A3B /* ThemePreviewView.swift */,
-			);
-			path = Settings;
-			sourceTree = "<group>";
-		};
-		CF176A235ED4BBDAE99E48C6 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				932E687FF32115C776BD1524 /* SwiftUI.framework */,
-				4C40E340BE469A9823FFF30B /* WidgetKit.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		E507AF7FBEC3765F8D82727C = {
-			isa = PBXGroup;
-			children = (
-				E79E2164987E91D125D14B40 /* App */,
-				21E54184E526F50BA3F14D52 /* PrismCalc */,
-				9FB3C905249A3472B74725BC /* PrismCalcTests */,
-				F574D4B1B981BC32C934F232 /* Intents */,
-				FB52D89408149CC137D1853D /* Services */,
-				7BD82F4C105E560EB387F61F /* WidgetExtension */,
-				7D8F82765D7BE90DF290C296 /* Widgets */,
-				CF176A235ED4BBDAE99E48C6 /* Frameworks */,
-				7C1A3815FF2BBF82FA8D43B0 /* Products */,
-			);
-			sourceTree = "<group>";
-		};
-		E79E2164987E91D125D14B40 /* App */ = {
-			isa = PBXGroup;
-			children = (
-				3B88C2B145989CCF729E6C81 /* Assets.xcassets */,
-				1466F12F1665AB3FCB1BAD0C /* Configuration.storekit */,
-				0BBEF1EB9EE790545507F192 /* PrismCalc.entitlements */,
-				D6361ACEB26A1C8B9C4C5A52 /* Info.plist */,
-				84354347C4E03339C1BCFDB4 /* Main.swift */,
-				58EA6975E45D1849C1AB5BE6 /* PrivacyInfo.xcprivacy */,
+				3AB837CC33799E95545E4B89 /* Assets.xcassets */,
+				81CE0250B1CF6AAF0880B921 /* Configuration.storekit */,
+				011A7154BC4B2935F58251A9 /* Info.plist */,
+				C58FEAE60BC6E1FE1BE0C771 /* Main.swift */,
+				B08C9B495C216FA7885D2924 /* PrismCalc.entitlements */,
+				8A0862606E37D374E2CD09E2 /* PrivacyInfo.xcprivacy */,
 			);
 			path = App;
 			sourceTree = "<group>";
 		};
-		F574D4B1B981BC32C934F232 /* Intents */ = {
+		DC94EF0221ED45E829AB3F9D /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
-				9C8280FB24EE6B135CC22764 /* PrismCalcIntents.swift */,
+				E6A68CCC4BE306F885918B33 /* ControlCenterWidget.swift */,
+				0A8DED8AEA78DE4D071D75CC /* PrismCalcWidget.swift */,
+				36E0252FF2BA6C5DAAFD0DB2 /* WidgetIntents.swift */,
 			);
-			name = Intents;
+			name = Widgets;
+			path = Sources/PrismCalc/Widgets;
 			sourceTree = "<group>";
 		};
-		F7837A83366DE8999CC89594 /* Tips */ = {
+		E433B707FB1D0D05F5A50F33 /* Tips */ = {
 			isa = PBXGroup;
 			children = (
-				D4F09CE310B0704D010E271A /* PrismCalcTips.swift */,
+				F2DD796F479868C33E700B5E /* PrismCalcTips.swift */,
 			);
 			path = Tips;
 			sourceTree = "<group>";
 		};
-		F9892D895E073F57DEE623CD /* Features */ = {
+		E53CA67D8541EEAF3E4BE250 /* DiscountCalculator */ = {
 			isa = PBXGroup;
 			children = (
-				FE82348A3DE808FD2CBAED46 /* Calculator */,
-				0B74F98ED3C9DEA471F6C58F /* DiscountCalculator */,
-				3ED8953120AFB2DB5709BEFA /* History */,
-				B5DC26D0E263A3C41B4E63A8 /* Paywall */,
-				CA216803D14A19FF3392F7DE /* Settings */,
-				A3D97E06B5CA5B255A63E9F4 /* SplitBill */,
-				FF30EC85DB9FBC9332029B9D /* TipCalculator */,
-				FA67981FDE64026DC6182F37 /* UnitConverter */,
+				9FF6CDE231F2B566218561B4 /* DiscountCalculatorView.swift */,
+				892AD060FDE8B8637A29F117 /* DiscountCalculatorViewModel.swift */,
 			);
-			path = Features;
+			path = DiscountCalculator;
 			sourceTree = "<group>";
 		};
-		FA67981FDE64026DC6182F37 /* UnitConverter */ = {
+		EEC5BD8AFEC7C9A84BE139E7 /* WidgetExtension */ = {
 			isa = PBXGroup;
 			children = (
-				2152DD16CCBD8CC75EBB3CF1 /* UnitConverterView.swift */,
-				C40CFEFC4EC5549F59BE5325 /* UnitConverterViewModel.swift */,
+				FF804420EFCDF536EE758402 /* Assets.xcassets */,
+				17BC2D603C7CEB1FB9D8D4AC /* Info.plist */,
+				32A0AE7938185EBA6C99D705 /* PrismCalcWidget.entitlements */,
+				6C522D5E3668EAAB23D1A070 /* PrismCalcWidgetBundle.swift */,
 			);
-			path = UnitConverter;
+			path = WidgetExtension;
 			sourceTree = "<group>";
 		};
-		FB52D89408149CC137D1853D /* Services */ = {
+		F5E1BA5C047B67B57ED42431 /* SplitBill */ = {
 			isa = PBXGroup;
 			children = (
-				612A37C071FA0BA011B37F8F /* SharedDataService.swift */,
+				819A14F0A68DA1BE1883F99F /* SplitBillView.swift */,
+				AA1FD0ABEE01013B0EDAB877 /* SplitBillViewModel.swift */,
 			);
-			name = Services;
-			sourceTree = "<group>";
-		};
-		FE82348A3DE808FD2CBAED46 /* Calculator */ = {
-			isa = PBXGroup;
-			children = (
-				18CDF7C18E0A08A831AB9E32 /* CalculatorEngine.swift */,
-				06CEF784C8D8CB4B0D1F0E30 /* CalculatorView.swift */,
-				3DFEB1D67682DB6C959FBF44 /* CalculatorViewModel.swift */,
-			);
-			path = Calculator;
-			sourceTree = "<group>";
-		};
-		FF09123D51E2FB8FC4BBC9DE /* App */ = {
-			isa = PBXGroup;
-			children = (
-				0928A2F10C4A1BC36441EF60 /* ContentView.swift */,
-				E4CB4D0753E3072FCA67F542 /* PrismCalcApp.swift */,
-			);
-			path = App;
-			sourceTree = "<group>";
-		};
-		FF30EC85DB9FBC9332029B9D /* TipCalculator */ = {
-			isa = PBXGroup;
-			children = (
-				53E4337BEB32BA163040E425 /* TipCalculatorView.swift */,
-				38CCE2807D00E71D605C9EDF /* TipCalculatorViewModel.swift */,
-			);
-			path = TipCalculator;
+			path = SplitBill;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		59FD33C9B6138F6148308B16 /* PrismCalcTests */ = {
+		40F1E933878B92B29988D02A /* PrismCalcUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8DDA8E0C9BB96DCB399550E6 /* Build configuration list for PBXNativeTarget "PrismCalcTests" */;
+			buildConfigurationList = F46720AD72AB4D69CA0F1B14 /* Build configuration list for PBXNativeTarget "PrismCalcUITests" */;
 			buildPhases = (
-				3D1E20FB7A651A09C2C93528 /* Sources */,
+				8A3E93CDBA5A403E95E30672 /* Sources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				8C5157DD8D14380A48188411 /* PBXTargetDependency */,
+				A22426397F29530D8EF9A92F /* PBXTargetDependency */,
 			);
-			name = PrismCalcTests;
+			name = PrismCalcUITests;
 			packageProductDependencies = (
 			);
-			productName = PrismCalcTests;
-			productReference = 7735BB50D4B39217D871E702 /* PrismCalcTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
+			productName = PrismCalcUITests;
+			productReference = 8B945D05266736A7BAB4318C /* PrismCalcUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		C5735FE2BF6390BBC033605E /* PrismCalcWidgetExtension */ = {
+		45CB9BE953693B211F1D9FDF /* PrismCalcWidgetExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 70909C0119DE779D8D57669D /* Build configuration list for PBXNativeTarget "PrismCalcWidgetExtension" */;
+			buildConfigurationList = 6681BD3D5275424354A8029E /* Build configuration list for PBXNativeTarget "PrismCalcWidgetExtension" */;
 			buildPhases = (
-				BCF5C1F0B1F36DC37397889D /* Sources */,
-				07DA39712BACE8CAD6E5F3E6 /* Resources */,
-				CFD4CAD21EFE3FD4DCC5A420 /* Frameworks */,
+				D30847A27DAB36B5F55B649C /* Sources */,
+				439F323E719372880EBDFDF1 /* Resources */,
+				52DA1658F1EBFDDAC1F9D992 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -477,39 +482,62 @@
 			packageProductDependencies = (
 			);
 			productName = PrismCalcWidgetExtension;
-			productReference = CF4F9A969F47E11D295C9015 /* PrismCalcWidgetExtension.appex */;
+			productReference = 5EF4A68693D57D301E371A82 /* PrismCalcWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		F6363C7CDA6FF4F0D9EBDB08 /* PrismCalc */ = {
+		9FD3D6FF66B853A994461E3E /* PrismCalc */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7F7094FBCC6264165A2C03E4 /* Build configuration list for PBXNativeTarget "PrismCalc" */;
+			buildConfigurationList = 59E13740F0EB5C30814A0610 /* Build configuration list for PBXNativeTarget "PrismCalc" */;
 			buildPhases = (
-				188B7D409A580E114D6C9F2C /* Sources */,
-				A646BEFAADB2CEEEDDA537B4 /* Resources */,
-				CE14216E1F930BBA4DCE1027 /* Embed Foundation Extensions */,
+				6405F8E5778A8CD90960BA5A /* Sources */,
+				D0A1F204A8598E1D375F00CD /* Resources */,
+				8675ED65440F2BA6652CC14E /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				904956082EF732433A5D084C /* PBXTargetDependency */,
+				FD080C169D05815B9E75D2FB /* PBXTargetDependency */,
 			);
 			name = PrismCalc;
 			packageProductDependencies = (
 			);
 			productName = PrismCalc;
-			productReference = 6042CD375253D31F9C043C2B /* PrismCalc.app */;
+			productReference = B40A206F27D504D1DC20D8D5 /* PrismCalc.app */;
 			productType = "com.apple.product-type.application";
+		};
+		AF4DA448EE3E91D2C0E7F29F /* PrismCalcTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 174B13399E488548F8BAD545 /* Build configuration list for PBXNativeTarget "PrismCalcTests" */;
+			buildPhases = (
+				3AA8448975AE291EB9763324 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				05AF0EFDE1288162FE899699 /* PBXTargetDependency */,
+			);
+			name = PrismCalcTests;
+			packageProductDependencies = (
+			);
+			productName = PrismCalcTests;
+			productReference = C7AAD00DAC3A5F836A7D40C6 /* PrismCalcTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		10EC141E2458429C2EAB38BC /* Project object */ = {
+		468F91089A26F0C41565C47F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 2610;
+				TargetAttributes = {
+					40F1E933878B92B29988D02A = {
+						TestTargetID = 9FD3D6FF66B853A994461E3E;
+					};
+				};
 			};
-			buildConfigurationList = 9D56B10159389680DF65BCBD /* Build configuration list for PBXProject "PrismCalc" */;
+			buildConfigurationList = 7A034D15D447A17FA1CA3E7F /* Build configuration list for PBXProject "PrismCalc" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -517,204 +545,138 @@
 				Base,
 				en,
 			);
-			mainGroup = E507AF7FBEC3765F8D82727C;
+			mainGroup = 1D7E29821BC9F1666468E9F6;
 			minimizedProjectReferenceProxies = 1;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F6363C7CDA6FF4F0D9EBDB08 /* PrismCalc */,
-				59FD33C9B6138F6148308B16 /* PrismCalcTests */,
-				C5735FE2BF6390BBC033605E /* PrismCalcWidgetExtension */,
+				9FD3D6FF66B853A994461E3E /* PrismCalc */,
+				AF4DA448EE3E91D2C0E7F29F /* PrismCalcTests */,
+				40F1E933878B92B29988D02A /* PrismCalcUITests */,
+				45CB9BE953693B211F1D9FDF /* PrismCalcWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		07DA39712BACE8CAD6E5F3E6 /* Resources */ = {
+		439F323E719372880EBDFDF1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				98DD0F88297C233B8CB5F42F /* Assets.xcassets in Resources */,
+				43AF97B6E7D3010CF49AF011 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A646BEFAADB2CEEEDDA537B4 /* Resources */ = {
+		D0A1F204A8598E1D375F00CD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE256CEC1C1D2FA80B9D3E66 /* Assets.xcassets in Resources */,
-				FB2434709291308506F921AD /* Configuration.storekit in Resources */,
-				B45264E99A1B5420A770C5C8 /* PrivacyInfo.xcprivacy in Resources */,
+				0A2EC0D051D1973B799A49B9 /* Assets.xcassets in Resources */,
+				C01278E4C5D75A5FD630D501 /* Configuration.storekit in Resources */,
+				FA1AB9F71214EFA86CCCAD2B /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		188B7D409A580E114D6C9F2C /* Sources */ = {
+		3AA8448975AE291EB9763324 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1541B09BF5D4BB2D1FDF42A5 /* AnimatedMeshBackground.swift in Sources */,
-				2ED4602614D08D71AF772098 /* ArcSlider.swift in Sources */,
-				53858D8A69A3CB813701C69C /* CalculatorEngine.swift in Sources */,
-				F1A6EA874B225FAA431A3A88 /* CalculatorView.swift in Sources */,
-				EEB3561F3E0339477391F824 /* CalculatorViewModel.swift in Sources */,
-				851B668F704A979EACA4528D /* ContentView.swift in Sources */,
-				440F9A13E80D54D3B05C5748 /* CurrencyService.swift in Sources */,
-				732D7782FA37FF91CF7043A7 /* DiscountCalculatorView.swift in Sources */,
-				75ADB0A92959F93F11BBB0DE /* DiscountCalculatorViewModel.swift in Sources */,
-				FF21AC5921DE37D9985079A8 /* GlassButton.swift in Sources */,
-				853CBE38EC8CCBA684A8D5F3 /* PrismCalcApp.swift in Sources */,
-				1175C70C64CD3B1413FB59C3 /* PrismCalcIntents.swift in Sources */,
-				E0AC9907CAF600AF20826272 /* PrismCalcTips.swift in Sources */,
-				C758A13774711033A2C2CFCA /* GlassCard.swift in Sources */,
-				E982FA44BD84210DCACC5BA2 /* GlassDisplay.swift in Sources */,
-				7D31794111F9DACEBE577774 /* GlassIconButton.swift in Sources */,
-				256EF2A503E16C904FA82122 /* GlassTheme.swift in Sources */,
-				6A6EBAD639BD6670EF8B0ACF /* HistoryEntry.swift in Sources */,
-				04961E5E0AA76EC3F8180107 /* HistoryService.swift in Sources */,
-				C537D01A257952F006C36B1C /* HistoryView.swift in Sources */,
-				5A6045928869A7C32A9AC264 /* HistoryDetailView.swift in Sources */,
-				33DBDF8BB7E309831BB1158B /* Main.swift in Sources */,
-				3BB9F70233D53F6347FBD064 /* MeshGradientConfig.swift in Sources */,
-				03746BC139C528E91F80E82E /* PaywallView.swift in Sources */,
-				EB82BA2B8C7E795EFD6B4845 /* ProGatedView.swift in Sources */,
-				85F05CFB02ED91E5786D0356 /* SettingsView.swift in Sources */,
-				DD2AD93E5126680E2F015F77 /* ThemePreviewView.swift in Sources */,
-				72B4DDAAE35F74FD86819C9F /* SharedDataService.swift in Sources */,
-				4C5EBC8629C107CED5591807 /* SplitBillView.swift in Sources */,
-				C0529C5D7A7FC223BABFD238 /* SplitBillViewModel.swift in Sources */,
-				1240FC1AB93C30EE0E028698 /* StoreKitManager.swift in Sources */,
-				1C68696F3D1EA81F43EDC87E /* TipCalculatorView.swift in Sources */,
-				F15386F6B7A23EC9FBEFE00A /* TipCalculatorViewModel.swift in Sources */,
-				632B0893C23FBA6E1580B08E /* UnitConverterView.swift in Sources */,
-				9C0BB51DB91005648F8C089F /* UnitConverterViewModel.swift in Sources */,
-				7522AE1FA0411E79B7BF455C /* ViewExtensions.swift in Sources */,
+				85174233C2D7B20D07855A5F /* CalculatorEngineTests.swift in Sources */,
+				B737B278B61BF3C27ECFA560 /* CalculatorViewModelTests.swift in Sources */,
+				56B0F555DB677FAED067BC17 /* FeatureViewModelTests.swift in Sources */,
+				9E7F52DDCC0772597EF0B705 /* SharedDataServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3D1E20FB7A651A09C2C93528 /* Sources */ = {
+		6405F8E5778A8CD90960BA5A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				464FFCC9BA71612D894AB11A /* CalculatorEngineTests.swift in Sources */,
-				E33E2EE79397756A2F2827A1 /* CalculatorViewModelTests.swift in Sources */,
-				82B84D0CFBCBF330B5C0F3BA /* FeatureViewModelTests.swift in Sources */,
-				85235890A21DD93D1617FFFF /* SharedDataServiceTests.swift in Sources */,
+				310BB87D04D5A6ECCDEFDE01 /* AnimatedMeshBackground.swift in Sources */,
+				09BAD84539BFABA36D3FC7FA /* ArcSlider.swift in Sources */,
+				8DB2B73E2C10B0A1B6AA8E09 /* CalculatorEngine.swift in Sources */,
+				704D769752DB6A7E348E62DB /* CalculatorView.swift in Sources */,
+				952644DD55515B66A2B4F98E /* CalculatorViewModel.swift in Sources */,
+				8E77DC9EB8AB5B602B45C8AD /* ContentView.swift in Sources */,
+				3C3C33DC1E3872654537128C /* CurrencyService.swift in Sources */,
+				B3E765B65DAB2BE2364AB7AF /* DiscountCalculatorView.swift in Sources */,
+				F389F2A3DCE36F8F080724C6 /* DiscountCalculatorViewModel.swift in Sources */,
+				0FC3FBB4F5AF6185F6991525 /* GlassButton.swift in Sources */,
+				1B5B8F4F2EAB698F9575DC11 /* GlassCard.swift in Sources */,
+				27AD096E5124E0363C10F3E5 /* GlassDisplay.swift in Sources */,
+				ED96C2142778F1CD2D234DBC /* GlassIconButton.swift in Sources */,
+				595B54FCDC996C8FCF38C555 /* GlassTheme.swift in Sources */,
+				BA6A4805ECCA7D532A3B08E3 /* HistoryDetailView.swift in Sources */,
+				B75972CF66C88928334D004E /* HistoryEntry.swift in Sources */,
+				D86C9FC2909427C07D3EA52E /* HistoryService.swift in Sources */,
+				E9755B612561BC0E5411D030 /* HistoryView.swift in Sources */,
+				188E8A45227D63C98B7EDA89 /* Main.swift in Sources */,
+				9B861F1B3365BEA7AEF2BCAF /* MeshGradientConfig.swift in Sources */,
+				3763CF84B70E24CD9C7504B3 /* PaywallView.swift in Sources */,
+				DB26D57ACDEB862FC1FF2277 /* PrismCalcApp.swift in Sources */,
+				4CD2689C981943E6639333F3 /* PrismCalcIntents.swift in Sources */,
+				F8D9ADF694A7E48B2C7B541C /* PrismCalcTips.swift in Sources */,
+				47069FF46CF36514A8CF4DD2 /* ProGatedView.swift in Sources */,
+				689262E1FC794911F747365A /* SettingsView.swift in Sources */,
+				AE700F0510731F9023DE38EF /* SharedDataService.swift in Sources */,
+				173C4663F3D51DF98DDCAF54 /* SplitBillView.swift in Sources */,
+				888BE6A6F170B04DBE7A3313 /* SplitBillViewModel.swift in Sources */,
+				E45A90A8A40FAE921E3C81B1 /* StoreKitManager.swift in Sources */,
+				5F2C96E12A6D463319525924 /* ThemePreviewView.swift in Sources */,
+				1A3CA5FE9E98AD35F7716B90 /* TipCalculatorView.swift in Sources */,
+				DADD21C8A2621A7A0663FF16 /* TipCalculatorViewModel.swift in Sources */,
+				B0D0583C113A62BD481273B2 /* UnitConverterView.swift in Sources */,
+				94A615BCE19AF31F47766EFB /* UnitConverterViewModel.swift in Sources */,
+				E27A507584F5E904682D5961 /* ViewExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BCF5C1F0B1F36DC37397889D /* Sources */ = {
+		8A3E93CDBA5A403E95E30672 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB7CEEB8982142663FF108D9 /* ControlCenterWidget.swift in Sources */,
-				07D64631D957776F82443532 /* PrismCalcIntents.swift in Sources */,
-				CD0163444F5F78B11D23939A /* PrismCalcWidget.swift in Sources */,
-				B453357D21C312E4953DD47A /* PrismCalcWidgetBundle.swift in Sources */,
-				FE83990D4AEA031D462A0C40 /* SharedDataService.swift in Sources */,
-				521393B55A0D15A58B3467D9 /* WidgetIntents.swift in Sources */,
+				8A1448363ACFF317DBC9A279 /* ScreenshotTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D30847A27DAB36B5F55B649C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				018774231347F8EC7C86FC1E /* ControlCenterWidget.swift in Sources */,
+				78F21574959188B763480B4D /* PrismCalcIntents.swift in Sources */,
+				11FABC4720B59F50561D5F55 /* PrismCalcWidget.swift in Sources */,
+				2A78B103BEFCF80EF516457E /* PrismCalcWidgetBundle.swift in Sources */,
+				028409B7FB405D21EDB4C921 /* SharedDataService.swift in Sources */,
+				20063AF423770BF585391581 /* WidgetIntents.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		8C5157DD8D14380A48188411 /* PBXTargetDependency */ = {
+		05AF0EFDE1288162FE899699 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F6363C7CDA6FF4F0D9EBDB08 /* PrismCalc */;
-			targetProxy = 925DF8F268EA61F225D68262 /* PBXContainerItemProxy */;
+			target = 9FD3D6FF66B853A994461E3E /* PrismCalc */;
+			targetProxy = 7520855A8C2CB2737BCB6C82 /* PBXContainerItemProxy */;
 		};
-		904956082EF732433A5D084C /* PBXTargetDependency */ = {
+		A22426397F29530D8EF9A92F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C5735FE2BF6390BBC033605E /* PrismCalcWidgetExtension */;
-			targetProxy = C8E498F22F5A3EBD5CD17919 /* PBXContainerItemProxy */;
+			target = 9FD3D6FF66B853A994461E3E /* PrismCalc */;
+			targetProxy = 15058761E41DE981B3FEC598 /* PBXContainerItemProxy */;
+		};
+		FD080C169D05815B9E75D2FB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 45CB9BE953693B211F1D9FDF /* PrismCalcWidgetExtension */;
+			targetProxy = F9B434D027F5E2CDA4E1B884 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		054E00B72837061B006C8324 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.laclairtech.prismcalc.tests;
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PrismCalc.app/PrismCalc";
-			};
-			name = Release;
-		};
-		0BDE66465963FEE7CBF3C5DF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.laclairtech.prismcalc.tests;
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PrismCalc.app/PrismCalc";
-			};
-			name = Debug;
-		};
-		472B963E54D44BD053272394 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
-				CODE_SIGN_ENTITLEMENTS = WidgetExtension/PrismCalcWidget.entitlements;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WidgetExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "PrismCalc Widget";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.laclairtech.prismcalc.widget;
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		5548FAF286217D15E1A46977 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
-				CODE_SIGN_ENTITLEMENTS = WidgetExtension/PrismCalcWidget.entitlements;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WidgetExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "PrismCalc Widget";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.laclairtech.prismcalc.widget;
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		74CC15A8C7AADA8FCAC2FFD4 /* Release */ = {
+		033B9F1AE354E37C68A92604 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -724,6 +686,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = App/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PrismCalc;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -735,9 +699,9 @@
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Release;
+			name = Debug;
 		};
-		B3BDB311D474019383064659 /* Debug */ = {
+		17C2F89A6D9E13987C364081 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -803,7 +767,105 @@
 			};
 			name = Debug;
 		};
-		C4BB0DC6797B9B42B9FD97F2 /* Release */ = {
+		2DB56E3B5CC08318544D017C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
+				CODE_SIGN_ENTITLEMENTS = WidgetExtension/PrismCalcWidget.entitlements;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WidgetExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "PrismCalc Widget";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.laclairtech.prismcalc.widget;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6A480E16A8DBFF769432A068 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.laclairtech.prismcalc.uitests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PrismCalc;
+			};
+			name = Debug;
+		};
+		71C3A9F86F1C07B6104BB81F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
+				CODE_SIGN_ENTITLEMENTS = WidgetExtension/PrismCalcWidget.entitlements;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WidgetExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "PrismCalc Widget";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.laclairtech.prismcalc.widget;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		BA583A147EC2E282C12DA0FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.laclairtech.prismcalc.uitests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PrismCalc;
+			};
+			name = Release;
+		};
+		CFCC5C1931FE4E08AD214C48 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.laclairtech.prismcalc.tests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PrismCalc.app/PrismCalc";
+			};
+			name = Release;
+		};
+		DD020A40722608A862CCB759 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -862,7 +924,25 @@
 			};
 			name = Release;
 		};
-		E8BC62508C2095D7C2DFFE30 /* Debug */ = {
+		F30D14895DCF2C35F1D2E8A9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.laclairtech.prismcalc.tests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PrismCalc.app/PrismCalc";
+			};
+			name = Debug;
+		};
+		F5780C46414893DC6788A082 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -872,6 +952,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = App/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PrismCalc;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -883,48 +965,57 @@
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Debug;
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		70909C0119DE779D8D57669D /* Build configuration list for PBXNativeTarget "PrismCalcWidgetExtension" */ = {
+		174B13399E488548F8BAD545 /* Build configuration list for PBXNativeTarget "PrismCalcTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5548FAF286217D15E1A46977 /* Debug */,
-				472B963E54D44BD053272394 /* Release */,
+				F30D14895DCF2C35F1D2E8A9 /* Debug */,
+				CFCC5C1931FE4E08AD214C48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		7F7094FBCC6264165A2C03E4 /* Build configuration list for PBXNativeTarget "PrismCalc" */ = {
+		59E13740F0EB5C30814A0610 /* Build configuration list for PBXNativeTarget "PrismCalc" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E8BC62508C2095D7C2DFFE30 /* Debug */,
-				74CC15A8C7AADA8FCAC2FFD4 /* Release */,
+				033B9F1AE354E37C68A92604 /* Debug */,
+				F5780C46414893DC6788A082 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		8DDA8E0C9BB96DCB399550E6 /* Build configuration list for PBXNativeTarget "PrismCalcTests" */ = {
+		6681BD3D5275424354A8029E /* Build configuration list for PBXNativeTarget "PrismCalcWidgetExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0BDE66465963FEE7CBF3C5DF /* Debug */,
-				054E00B72837061B006C8324 /* Release */,
+				2DB56E3B5CC08318544D017C /* Debug */,
+				71C3A9F86F1C07B6104BB81F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		9D56B10159389680DF65BCBD /* Build configuration list for PBXProject "PrismCalc" */ = {
+		7A034D15D447A17FA1CA3E7F /* Build configuration list for PBXProject "PrismCalc" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B3BDB311D474019383064659 /* Debug */,
-				C4BB0DC6797B9B42B9FD97F2 /* Release */,
+				17C2F89A6D9E13987C364081 /* Debug */,
+				DD020A40722608A862CCB759 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F46720AD72AB4D69CA0F1B14 /* Build configuration list for PBXNativeTarget "PrismCalcUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A480E16A8DBFF769432A068 /* Debug */,
+				BA583A147EC2E282C12DA0FF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 10EC141E2458429C2EAB38BC /* Project object */;
+	rootObject = 468F91089A26F0C41565C47F /* Project object */;
 }

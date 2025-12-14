@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F6363C7CDA6FF4F0D9EBDB08"
+               BlueprintIdentifier = "9FD3D6FF66B853A994461E3E"
                BuildableName = "PrismCalc.app"
                BlueprintName = "PrismCalc"
                ReferencedContainer = "container:PrismCalc.xcodeproj">
@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C5735FE2BF6390BBC033605E"
+               BlueprintIdentifier = "45CB9BE953693B211F1D9FDF"
                BuildableName = "PrismCalcWidgetExtension.appex"
                BlueprintName = "PrismCalcWidgetExtension"
                ReferencedContainer = "container:PrismCalc.xcodeproj">
@@ -44,7 +44,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F6363C7CDA6FF4F0D9EBDB08"
+            BlueprintIdentifier = "9FD3D6FF66B853A994461E3E"
             BuildableName = "PrismCalc.app"
             BlueprintName = "PrismCalc"
             ReferencedContainer = "container:PrismCalc.xcodeproj">
@@ -56,9 +56,19 @@
             parallelizable = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "59FD33C9B6138F6148308B16"
+               BlueprintIdentifier = "AF4DA448EE3E91D2C0E7F29F"
                BuildableName = "PrismCalcTests.xctest"
                BlueprintName = "PrismCalcTests"
+               ReferencedContainer = "container:PrismCalc.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "40F1E933878B92B29988D02A"
+               BuildableName = "PrismCalcUITests.xctest"
+               BlueprintName = "PrismCalcUITests"
                ReferencedContainer = "container:PrismCalc.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -78,7 +88,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F6363C7CDA6FF4F0D9EBDB08"
+            BlueprintIdentifier = "9FD3D6FF66B853A994461E3E"
             BuildableName = "PrismCalc.app"
             BlueprintName = "PrismCalc"
             ReferencedContainer = "container:PrismCalc.xcodeproj">
@@ -98,7 +108,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F6363C7CDA6FF4F0D9EBDB08"
+            BlueprintIdentifier = "9FD3D6FF66B853A994461E3E"
             BuildableName = "PrismCalc.app"
             BlueprintName = "PrismCalc"
             ReferencedContainer = "container:PrismCalc.xcodeproj">
