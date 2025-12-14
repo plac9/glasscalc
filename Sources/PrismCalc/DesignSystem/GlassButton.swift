@@ -30,7 +30,17 @@ public struct GlassButton: View {
     let accessibilityText: String
     let action: () -> Void
 
+    #if os(iOS)
+    /// Shared generator to avoid reallocation on every tap
+    private static let hapticGenerator: UIImpactFeedbackGenerator = {
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.prepare()
+        return generator
+    }()
+    #endif
+
     @State private var isPressed = false
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     public init(
         _ label: String,
@@ -105,10 +115,14 @@ public struct GlassButton: View {
                 .shadow(color: Color.black.opacity(0.1), radius: 8, y: 4)
                 .scaleEffect(isPressed ? 0.92 : 1.0)
         }
-        .buttonStyle(GlassButtonStyle(isPressed: $isPressed))
+        .buttonStyle(GlassButtonStyle(isPressed: $isPressed, reduceMotion: reduceMotion))
         .accessibilityLabel(accessibilityText)
         .accessibilityAddTraits(.isButton)
         .sensoryFeedback(.impact(flexibility: .soft), trigger: isPressed)
+        .contentShape(Rectangle())
+        #if os(iOS)
+        .hoverEffect(.highlight)
+        #endif
     }
 
     private var textColor: Color {
@@ -134,8 +148,9 @@ public struct GlassButton: View {
 
     private func triggerHaptic() {
         #if os(iOS)
-        let generator = UIImpactFeedbackGenerator(style: .light)
+        let generator = Self.hapticGenerator
         generator.impactOccurred()
+        generator.prepare()
         #endif
     }
 }
@@ -145,13 +160,33 @@ public struct GlassButton: View {
 public struct GlassWideButton: View {
     let label: String
     let accessibilityText: String
+    let size: CGFloat
+    let spacing: CGFloat
     let action: () -> Void
 
-    @State private var isPressed = false
+    #if os(iOS)
+    /// Shared generator to avoid reallocation on every tap
+    private static let hapticGenerator: UIImpactFeedbackGenerator = {
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.prepare()
+        return generator
+    }()
+    #endif
 
-    public init(_ label: String, accessibilityLabel: String? = nil, action: @escaping () -> Void) {
+    @State private var isPressed = false
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    public init(
+        _ label: String,
+        size: CGFloat = GlassTheme.buttonSize,
+        spacing: CGFloat = GlassTheme.spacingSmall,
+        accessibilityLabel: String? = nil,
+        action: @escaping () -> Void
+    ) {
         self.label = label
         self.accessibilityText = accessibilityLabel ?? (label == "0" ? "Zero" : label)
+        self.size = size
+        self.spacing = spacing
         self.action = action
     }
 
@@ -161,11 +196,11 @@ public struct GlassWideButton: View {
             action()
         }) {
             Text(label)
-                .font(.system(size: GlassTheme.buttonSize * 0.4, weight: .medium, design: .rounded))
+                .font(.system(size: size * 0.4, weight: .medium, design: .rounded))
                 .foregroundStyle(GlassTheme.text)
                 .frame(
-                    width: GlassTheme.buttonSize * 2 + GlassTheme.spacingSmall,
-                    height: GlassTheme.buttonSize
+                    width: size * 2 + spacing,
+                    height: size
                 )
                 .background(
                     Capsule()
@@ -188,16 +223,21 @@ public struct GlassWideButton: View {
                 .shadow(color: Color.black.opacity(0.1), radius: 8, y: 4)
                 .scaleEffect(isPressed ? 0.96 : 1.0)
         }
-        .buttonStyle(GlassButtonStyle(isPressed: $isPressed))
+        .buttonStyle(GlassButtonStyle(isPressed: $isPressed, reduceMotion: reduceMotion))
         .accessibilityLabel(accessibilityText)
         .accessibilityAddTraits(.isButton)
         .sensoryFeedback(.impact(flexibility: .soft), trigger: isPressed)
+        .contentShape(Rectangle())
+        #if os(iOS)
+        .hoverEffect(.highlight)
+        #endif
     }
 
     private func triggerHaptic() {
         #if os(iOS)
-        let generator = UIImpactFeedbackGenerator(style: .light)
+        let generator = Self.hapticGenerator
         generator.impactOccurred()
+        generator.prepare()
         #endif
     }
 }
@@ -207,12 +247,17 @@ public struct GlassWideButton: View {
 /// Custom button style that responds instantly to touch
 private struct GlassButtonStyle: ButtonStyle {
     @Binding var isPressed: Bool
+    let reduceMotion: Bool
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .onChange(of: configuration.isPressed) { _, newValue in
-                withAnimation(GlassTheme.buttonSpring) {
+                if reduceMotion {
                     isPressed = newValue
+                } else {
+                    withAnimation(GlassTheme.buttonSpring) {
+                        isPressed = newValue
+                    }
                 }
             }
     }
