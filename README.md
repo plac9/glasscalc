@@ -171,6 +171,22 @@ open Package.swift
 
 ---
 
+## Workflow Alignment (AuADHD)
+
+Reference: `docs/AUADHD_IOS_WORKFLOW_PRISMCALC.md`
+
+**Scope**: iOS-first (iPadOS/macOS polishing after iOS ships)
+
+- P0 Define Value: ✅ (glass + trust for money math)
+- P1 Decide Scope: ✅ (single primary layout; Calculator tab anchor)
+- P2 Design System: ✅ (GlassTheme + reusable components)
+- P3 Trust Engine: ✅ (CalculatorEngine + tests)
+- P4 Delight: ✅ (subtle haptics + motion)
+- P5 Prove It: ⏳ (need iOS-only checks: contrast, perf, math regression run)
+- P6 Launch: ⏳ (App Store assets + privacy policy + submission)
+
+---
+
 ## License
 
 MIT License - See LICENSE file for details
