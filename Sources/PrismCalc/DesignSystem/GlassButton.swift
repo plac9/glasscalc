@@ -41,6 +41,7 @@ public struct GlassButton: View {
 
     @State private var isPressed = false
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @ScaledMetric(relativeTo: .title2) private var labelScale: CGFloat = 1.0
 
     public init(
         _ label: String,
@@ -87,8 +88,10 @@ public struct GlassButton: View {
             action()
         }) {
             Text(label)
-                .font(.system(size: size * 0.4, weight: .medium, design: .rounded))
+                .font(.system(size: buttonFontSize, weight: .medium, design: .rounded))
                 .foregroundStyle(textColor)
+                .lineLimit(1)
+                .minimumScaleFactor(0.6)
                 .frame(width: size, height: size)
                 .background(
                     Circle()
@@ -134,6 +137,10 @@ public struct GlassButton: View {
         }
     }
 
+    private var buttonFontSize: CGFloat {
+        size * 0.4 * labelScale
+    }
+
     @MainActor
     private var overlayColor: Color {
         switch style {
@@ -175,6 +182,7 @@ public struct GlassWideButton: View {
 
     @State private var isPressed = false
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @ScaledMetric(relativeTo: .title2) private var labelScale: CGFloat = 1.0
 
     public init(
         _ label: String,
@@ -196,8 +204,10 @@ public struct GlassWideButton: View {
             action()
         }) {
             Text(label)
-                .font(.system(size: size * 0.4, weight: .medium, design: .rounded))
+                .font(.system(size: buttonFontSize, weight: .medium, design: .rounded))
                 .foregroundStyle(GlassTheme.text)
+                .lineLimit(1)
+                .minimumScaleFactor(0.6)
                 .frame(
                     width: size * 2 + spacing,
                     height: size
@@ -239,6 +249,10 @@ public struct GlassWideButton: View {
         generator.impactOccurred()
         generator.prepare()
         #endif
+    }
+
+    private var buttonFontSize: CGFloat {
+        size * 0.4 * labelScale
     }
 }
 
