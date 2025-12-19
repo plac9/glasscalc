@@ -11,6 +11,8 @@ public struct GlassDisplay: View {
     let value: String
     let expression: String
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @ScaledMetric(relativeTo: .largeTitle) private var baseDisplaySize: CGFloat = 64
+    @ScaledMetric(relativeTo: .title3) private var baseExpressionSize: CGFloat = 18
 
     public init(value: String, expression: String = "") {
         self.value = value
@@ -26,7 +28,7 @@ public struct GlassDisplay: View {
             VStack(alignment: .trailing, spacing: isIPad ? GlassTheme.spacingMedium : GlassTheme.spacingXS) {
                 // Expression line (always takes up space, even when empty)
                 Text(expression.isEmpty ? " " : expression)
-                    .font(.system(size: isIPad ? 28 : 18, weight: .regular, design: .rounded))
+                    .font(.system(size: expressionFontSize, weight: .regular, design: .rounded))
                     .monospacedDigit()
                     .foregroundStyle(GlassTheme.textTertiary)
                     .lineLimit(1)
@@ -65,11 +67,16 @@ public struct GlassDisplay: View {
         let baseMultiplier: CGFloat = isIPad ? 1.5 : 1.0
 
         switch value.count {
-        case 0...6: return 64 * baseMultiplier
-        case 7...9: return 52 * baseMultiplier
-        case 10...12: return 44 * baseMultiplier
-        default: return 36 * baseMultiplier
+        case 0...6: return baseDisplaySize * baseMultiplier
+        case 7...9: return baseDisplaySize * 0.8 * baseMultiplier
+        case 10...12: return baseDisplaySize * 0.68 * baseMultiplier
+        default: return baseDisplaySize * 0.56 * baseMultiplier
         }
+    }
+
+    private var expressionFontSize: CGFloat {
+        let baseMultiplier: CGFloat = isIPad ? 1.55 : 1.0
+        return baseExpressionSize * baseMultiplier
     }
 }
 

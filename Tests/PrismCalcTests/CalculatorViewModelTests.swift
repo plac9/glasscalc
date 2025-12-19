@@ -170,6 +170,38 @@ struct CalculatorViewModelTests {
         #expect(viewModel.display == "0.5")
     }
 
+    @Test("Percentage with pending addition uses base value")
+    @MainActor
+    func testPercentageWithAddition() {
+        let viewModel = CalculatorViewModel()
+        viewModel.inputDigit("2")
+        viewModel.inputDigit("0")
+        viewModel.inputDigit("0")
+        viewModel.inputOperation(.add)
+        viewModel.inputDigit("1")
+        viewModel.inputDigit("0")
+        viewModel.percentage()
+        #expect(viewModel.display == "20")
+        viewModel.calculate()
+        #expect(viewModel.display == "220")
+    }
+
+    @Test("Percentage with pending multiplication uses fractional value")
+    @MainActor
+    func testPercentageWithMultiplication() {
+        let viewModel = CalculatorViewModel()
+        viewModel.inputDigit("2")
+        viewModel.inputDigit("0")
+        viewModel.inputDigit("0")
+        viewModel.inputOperation(.multiply)
+        viewModel.inputDigit("1")
+        viewModel.inputDigit("0")
+        viewModel.percentage()
+        #expect(viewModel.display == "0.1")
+        viewModel.calculate()
+        #expect(viewModel.display == "20")
+    }
+
     @Test("Backspace removes last digit")
     @MainActor
     func testBackspace() {
@@ -188,6 +220,19 @@ struct CalculatorViewModelTests {
         viewModel.inputDigit("5")
         viewModel.backspace()
         #expect(viewModel.display == "0")
+    }
+
+    @Test("Entering a digit after Error clears state")
+    @MainActor
+    func testErrorClearsOnNextDigit() async {
+        let viewModel = CalculatorViewModel()
+        viewModel.inputDigit("5")
+        viewModel.inputOperation(.divide)
+        viewModel.inputDigit("0")
+        viewModel.calculate()
+        #expect(viewModel.display == "Error")
+        viewModel.inputDigit("7")
+        #expect(viewModel.display == "7")
     }
 
     // MARK: - Display Formatting

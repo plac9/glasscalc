@@ -38,6 +38,10 @@ public final class CalculatorViewModel {
     // MARK: - Number Input
 
     public func inputDigit(_ digit: String) {
+        if display == "Error" {
+            clear()
+        }
+
         if isNewInput {
             display = digit == "." ? "0." : digit
             isNewInput = false
@@ -116,8 +120,26 @@ public final class CalculatorViewModel {
     }
 
     public func percentage() {
-        let value = CalculatorEngine.percentage(displayValue)
-        display = CalculatorEngine.formatDisplay(value)
+        if let operation = pendingOperation {
+            let base = pendingValue
+            let percentValue = CalculatorEngine.percentage(displayValue)
+            let updatedValue: Double
+
+            switch operation {
+            case .add, .subtract:
+                updatedValue = base * percentValue
+            case .multiply, .divide:
+                updatedValue = percentValue
+            }
+
+            display = CalculatorEngine.formatDisplay(updatedValue)
+            isNewInput = true
+            hasDecimal = display.contains(".")
+        } else {
+            let value = CalculatorEngine.percentage(displayValue)
+            display = CalculatorEngine.formatDisplay(value)
+            hasDecimal = display.contains(".")
+        }
     }
 
     public func backspace() {
