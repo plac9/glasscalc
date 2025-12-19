@@ -8,6 +8,8 @@ public struct HistoryView: View {
     @State private var selectedType: CalculationType?
     @State private var showClearConfirm = false
     @State private var showPaywall = false
+    @ScaledMetric(relativeTo: .caption2) private var timeFontSize: CGFloat = 11
+    @ScaledMetric(relativeTo: .title2) private var emptyIconSize: CGFloat = 48
 
     // iOS 18 zoom transition support
     @Namespace private var historyNamespace
@@ -247,7 +249,7 @@ public struct HistoryView: View {
 
                 // Time
                 Text(entry.relativeDate)
-                    .font(.system(size: 11))
+                    .font(.system(size: timeFontSize))
                     .foregroundStyle(GlassTheme.textTertiary)
             }
         }
@@ -332,7 +334,7 @@ public struct HistoryView: View {
     private var emptyState: some View {
         VStack(spacing: GlassTheme.spacingMedium) {
             Image(systemName: "clock.arrow.circlepath")
-                .font(.system(size: 48))
+                .font(.system(size: emptyIconSize))
                 .foregroundStyle(GlassTheme.textTertiary)
 
             Text("No History Yet")

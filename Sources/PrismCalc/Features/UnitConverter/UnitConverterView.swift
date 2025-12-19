@@ -6,6 +6,9 @@ public struct UnitConverterView: View {
     @State private var currencyResult: Double?
     @State private var isConverting: Bool = false
     @State private var swapTrigger = false
+    @ScaledMetric(relativeTo: .largeTitle) private var inputValueSize: CGFloat = 48
+    @ScaledMetric(relativeTo: .largeTitle) private var resultValueSize: CGFloat = 48
+    @ScaledMetric(relativeTo: .title3) private var swapButtonSize: CGFloat = 44
 
     public init() {}
 
@@ -105,15 +108,18 @@ public struct UnitConverterView: View {
                     .foregroundStyle(GlassTheme.textSecondary)
 
                 TextField("0", text: $viewModel.inputValue)
-                    .font(.system(size: 48, weight: .light, design: .rounded))
+                    .font(.system(size: inputValueSize, weight: .light, design: .rounded))
                     .decimalKeyboard()
                     .foregroundStyle(GlassTheme.text)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
                     .multilineTextAlignment(.trailing)
                     .onChange(of: viewModel.inputValue) {
                         if viewModel.selectedCategory == .currency {
                             Task { await convertCurrency() }
                         }
                     }
+                    .accessibilityLabel("Input value")
             }
         }
     }
@@ -144,7 +150,7 @@ public struct UnitConverterView: View {
                     .font(.title3)
                     .foregroundStyle(GlassTheme.primary)
                     .symbolEffect(.rotate.byLayer, value: swapTrigger)
-                    .frame(width: 44, height: 44)
+                    .frame(width: swapButtonSize, height: swapButtonSize)
                     .background(
                         Circle()
                             .fill(.regularMaterial)
@@ -205,8 +211,10 @@ public struct UnitConverterView: View {
                     .foregroundStyle(GlassTheme.error)
             } else {
                 Text(displayResult)
-                    .font(.system(size: 48, weight: .medium, design: .rounded))
+                    .font(.system(size: resultValueSize, weight: .medium, design: .rounded))
                     .foregroundStyle(GlassTheme.primary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
                     .contentTransition(.numericText())
                     .animation(.easeInOut(duration: 0.15), value: displayResult)
 

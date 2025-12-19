@@ -33,6 +33,7 @@ public struct GlassIconButton: View {
 
     @State private var isPressed = false
     @State private var animationTrigger = false
+    @ScaledMetric(relativeTo: .title3) private var iconScale: CGFloat = 1.0
 
     public init(
         icon: String,
@@ -57,9 +58,9 @@ public struct GlassIconButton: View {
             action()
         }) {
             iconView
-                .font(.system(size: size * 0.45, weight: .medium))
+                .font(.system(size: scaledIconSize, weight: .medium))
                 .foregroundStyle(foregroundColor)
-                .frame(width: size, height: size)
+                .frame(width: scaledSize, height: scaledSize)
                 .background(backgroundView)
                 .shadow(color: Color.black.opacity(0.1), radius: 6, y: 3)
                 .scaleEffect(isPressed ? 0.92 : 1.0)
@@ -153,6 +154,14 @@ public struct GlassIconButton: View {
         generator.impactOccurred()
         #endif
     }
+
+    private var scaledSize: CGFloat {
+        size * iconScale
+    }
+
+    private var scaledIconSize: CGFloat {
+        size * 0.45 * iconScale
+    }
 }
 
 // MARK: - Pill Button with Icon and Text
@@ -167,6 +176,7 @@ public struct GlassPillButton: View {
 
     @State private var animationTrigger = false
     @State private var isPressed = false
+    @ScaledMetric(relativeTo: .subheadline) private var pillIconSize: CGFloat = 16
 
     public init(
         icon: String,
@@ -189,7 +199,7 @@ public struct GlassPillButton: View {
         }) {
             HStack(spacing: GlassTheme.spacingSmall) {
                 iconView
-                    .font(.system(size: 16, weight: .medium))
+                    .font(.system(size: pillIconSize, weight: .medium))
 
                 Text(text)
                     .font(GlassTheme.captionFont)

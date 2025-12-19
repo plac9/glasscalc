@@ -5,6 +5,11 @@ public struct SplitBillView: View {
     @State private var viewModel = SplitBillViewModel()
     @State private var decrementTrigger = false
     @State private var incrementTrigger = false
+    @ScaledMetric(relativeTo: .title2) private var currencySymbolSize: CGFloat = 32
+    @ScaledMetric(relativeTo: .largeTitle) private var inputValueSize: CGFloat = 48
+    @ScaledMetric(relativeTo: .largeTitle) private var peopleCountSize: CGFloat = 56
+    @ScaledMetric(relativeTo: .largeTitle) private var heroValueSize: CGFloat = 56
+    @ScaledMetric(relativeTo: .title2) private var peopleControlSize: CGFloat = 56
 
     public init() {}
 
@@ -52,14 +57,17 @@ public struct SplitBillView: View {
 
                 HStack {
                     Text("$")
-                        .font(.system(size: 32, weight: .light, design: .rounded))
+                        .font(.system(size: currencySymbolSize, weight: .light, design: .rounded))
                         .foregroundStyle(GlassTheme.textSecondary)
 
                     TextField("0.00", text: $viewModel.totalBill)
-                        .font(.system(size: 48, weight: .light, design: .rounded))
+                        .font(.system(size: inputValueSize, weight: .light, design: .rounded))
                         .decimalKeyboard()
                         .foregroundStyle(GlassTheme.text)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.6)
                         .multilineTextAlignment(.trailing)
+                        .accessibilityLabel("Total bill")
                 }
             }
         }
@@ -89,7 +97,7 @@ public struct SplitBillView: View {
                                     : GlassTheme.textTertiary
                             )
                             .symbolEffect(.bounce.down, value: decrementTrigger)
-                            .frame(width: 56, height: 56)
+                            .frame(width: peopleControlSize, height: peopleControlSize)
                             .background(
                                 Circle()
                                     .fill(.thinMaterial)
@@ -113,8 +121,10 @@ public struct SplitBillView: View {
                         }
 
                         Text("\(viewModel.numberOfPeople)")
-                            .font(.system(size: 56, weight: .light, design: .rounded))
+                            .font(.system(size: peopleCountSize, weight: .light, design: .rounded))
                             .foregroundStyle(GlassTheme.text)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.6)
                             .contentTransition(.numericText())
                             .animation(.easeInOut(duration: 0.15), value: viewModel.numberOfPeople)
 
@@ -132,7 +142,7 @@ public struct SplitBillView: View {
                             .font(.title2.weight(.semibold))
                             .foregroundStyle(GlassTheme.text)
                             .symbolEffect(.bounce.up, value: incrementTrigger)
-                            .frame(width: 56, height: 56)
+                            .frame(width: peopleControlSize, height: peopleControlSize)
                             .background(
                                 Circle()
                                     .fill(.thinMaterial)
@@ -162,6 +172,7 @@ public struct SplitBillView: View {
                     Toggle("", isOn: $viewModel.includeTip)
                         .tint(GlassTheme.primary)
                         .labelsHidden()
+                        .accessibilityLabel("Include tip")
                 }
 
                 // Tip Slider (when enabled)
@@ -205,8 +216,10 @@ public struct SplitBillView: View {
                     .foregroundStyle(GlassTheme.textSecondary)
 
                 Text(viewModel.formattedPerPerson)
-                    .font(.system(size: 56, weight: .medium, design: .rounded))
+                    .font(.system(size: heroValueSize, weight: .medium, design: .rounded))
                     .foregroundStyle(GlassTheme.primary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
                     .contentTransition(.numericText())
                     .animation(.easeInOut(duration: 0.15), value: viewModel.perPersonShare)
             }

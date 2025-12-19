@@ -10,6 +10,7 @@ public struct HistoryDetailView: View {
     @Environment(\.dismiss) private var dismiss
 
     @State private var showCopied = false
+    @ScaledMetric(relativeTo: .largeTitle) private var iconSize: CGFloat = 64
 
     public init(entry: HistoryEntry) {
         self.entry = entry
@@ -80,7 +81,7 @@ public struct HistoryDetailView: View {
     @MainActor
     private var iconSection: some View {
         Image(systemName: entry.type.icon)
-            .font(.system(size: 64, weight: .medium))
+            .font(.system(size: iconSize, weight: .medium))
             .foregroundStyle(
                 LinearGradient(
                     colors: [GlassTheme.primary, GlassTheme.secondary],

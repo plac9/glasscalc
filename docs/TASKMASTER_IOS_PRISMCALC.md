@@ -18,6 +18,7 @@ Scope: iOS-first only. iPadOS/macOS polish happens after iOS ships.
 - [ ] Run iPhone Dynamic Type pass (all themes).
 - [ ] Verify VoiceOver labels for calculator keys and display on iPhone.
 - [ ] Adjust glass contrast and text colors if any theme fails readability.
+  - Note: Added Dynamic Type scaling and accessibility labels in iOS views; simulator checklist pending due to `simctl list devices` timeouts.
 
 ### 3) Performance (iOS)
 - [ ] Profile on iPhone: mesh gradient + blur performance (Instruments).

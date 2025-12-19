@@ -5,6 +5,7 @@ public struct PaywallView: View {
     @State private var showPurchaseError = false
     @State private var purchaseSuccess = false
     private var storeKit: StoreKitManager { StoreKitManager.shared }
+    @ScaledMetric(relativeTo: .largeTitle) private var heroIconSize: CGFloat = 64
 
     public let featureName: String
     public let featureIcon: String
@@ -20,7 +21,7 @@ public struct PaywallView: View {
 
             // Feature icon
             Image(systemName: featureIcon)
-                .font(.system(size: 64))
+                .font(.system(size: heroIconSize))
                 .foregroundStyle(
                     LinearGradient(
                         colors: [GlassTheme.primary, GlassTheme.secondary],

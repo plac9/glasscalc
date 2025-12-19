@@ -5,6 +5,8 @@ public struct TipCalculatorView: View {
     @State private var viewModel = TipCalculatorViewModel()
     @State private var decrementTrigger = false
     @State private var incrementTrigger = false
+    @ScaledMetric(relativeTo: .title2) private var currencySymbolSize: CGFloat = 32
+    @ScaledMetric(relativeTo: .largeTitle) private var inputValueSize: CGFloat = 48
 
     public init() {}
 
@@ -55,14 +57,17 @@ public struct TipCalculatorView: View {
 
                 HStack {
                     Text("$")
-                        .font(.system(size: 32, weight: .light, design: .rounded))
+                        .font(.system(size: currencySymbolSize, weight: .light, design: .rounded))
                         .foregroundStyle(GlassTheme.textSecondary)
 
                     TextField("0.00", text: $viewModel.billAmount)
-                        .font(.system(size: 48, weight: .light, design: .rounded))
+                        .font(.system(size: inputValueSize, weight: .light, design: .rounded))
                         .decimalKeyboard()
                         .foregroundStyle(GlassTheme.text)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.6)
                         .multilineTextAlignment(.trailing)
+                        .accessibilityLabel("Bill amount")
                 }
             }
         }

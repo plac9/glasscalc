@@ -4,6 +4,8 @@ import SwiftUI
 public struct SettingsView: View {
     @State private var selectedTheme: GlassTheme.Theme = .aurora
     @State private var showPurchaseError: Bool = false
+    @ScaledMetric(relativeTo: .caption2) private var proBadgeSize: CGFloat = 9
+    @ScaledMetric(relativeTo: .title2) private var aboutIconSize: CGFloat = 48
 
     // iOS 18 zoom transition support for theme preview
     @Namespace private var themeNamespace
@@ -131,7 +133,7 @@ public struct SettingsView: View {
 
                     if theme.isPro {
                         Text("PRO")
-                            .font(.system(size: 9, weight: .bold))
+                            .font(.system(size: proBadgeSize, weight: .bold))
                             .foregroundStyle(.white)
                             .padding(.horizontal, 4)
                             .padding(.vertical, 2)
@@ -289,7 +291,7 @@ public struct SettingsView: View {
         GlassCard(material: .ultraThinMaterial) {
             VStack(spacing: GlassTheme.spacingMedium) {
                 Image(systemName: "equal.square.fill")
-                    .font(.system(size: 48))
+                    .font(.system(size: aboutIconSize))
                     .foregroundStyle(
                         LinearGradient(
                             colors: [GlassTheme.primary, GlassTheme.secondary],
@@ -329,4 +331,3 @@ public struct SettingsView: View {
         SettingsView()
     }
 }
-

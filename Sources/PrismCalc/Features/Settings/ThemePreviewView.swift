@@ -8,6 +8,8 @@ public struct ThemePreviewView: View {
 
     @Environment(\.dismiss) private var dismiss
     @State private var showApplied = false
+    @ScaledMetric(relativeTo: .title2) private var iconSize: CGFloat = 56
+    @ScaledMetric(relativeTo: .caption2) private var proBadgeSize: CGFloat = 12
 
     public init(theme: GlassTheme.Theme, onApply: (() -> Void)? = nil) {
         self.theme = theme
@@ -62,7 +64,7 @@ public struct ThemePreviewView: View {
         VStack(spacing: GlassTheme.spacingMedium) {
             // Theme icon
             Image(systemName: "paintpalette.fill")
-                .font(.system(size: 56, weight: .medium))
+                .font(.system(size: iconSize, weight: .medium))
                 .foregroundStyle(.white)
                 .symbolEffect(.breathe, options: .repeating)
 
@@ -74,7 +76,7 @@ public struct ThemePreviewView: View {
             // Pro badge if applicable
             if theme.isPro {
                 Text("PRO")
-                    .font(.system(size: 12, weight: .bold))
+                    .font(.system(size: proBadgeSize, weight: .bold))
                     .foregroundStyle(.white)
                     .padding(.horizontal, GlassTheme.spacingSmall)
                     .padding(.vertical, GlassTheme.spacingXS)
