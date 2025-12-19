@@ -31,9 +31,7 @@ struct SharedDataServiceTests {
 
     @Test("Default last result is 0")
     func testDefaultLastResult() {
-        // Clear and test default
-        let service = SharedDataService.shared
-        service.clearHistory()
+        let service = makeService()
 
         #expect(service.getLastResult() == "0")
         #expect(service.getLastExpression() == "")
@@ -62,8 +60,7 @@ struct SharedDataServiceTests {
 
     @Test("Empty history returns empty array")
     func testEmptyHistory() {
-        let service = SharedDataService.shared
-        service.clearHistory()
+        let service = makeService()
 
         let history = service.getRecentHistory()
         #expect(history.isEmpty)
