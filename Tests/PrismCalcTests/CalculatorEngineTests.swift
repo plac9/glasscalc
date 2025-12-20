@@ -96,4 +96,71 @@ struct CalculatorEngineTests {
         let result = CalculatorEngine.parseDisplay("123.45")
         #expect(result == 123.45)
     }
+
+    @Test("Parse display invalid returns zero")
+    func testParseDisplayInvalid() {
+        let result = CalculatorEngine.parseDisplay("abc")
+        #expect(result == 0)
+    }
+
+    // MARK: - Edge Cases
+
+    @Test("Zero handling")
+    func testZeroHandling() {
+        #expect(CalculatorEngine.calculate(0, .add, 5) == 5)
+        #expect(CalculatorEngine.calculate(5, .subtract, 5) == 0)
+        #expect(CalculatorEngine.calculate(0, .multiply, 100) == 0)
+        #expect(CalculatorEngine.negate(0) == 0)
+    }
+
+    @Test("Negative numbers")
+    func testNegativeNumbers() {
+        #expect(CalculatorEngine.calculate(-5, .add, 3) == -2)
+        #expect(CalculatorEngine.calculate(-5, .multiply, -3) == 15)
+        #expect(CalculatorEngine.calculate(-10, .divide, 2) == -5)
+    }
+
+    @Test("Decimal precision")
+    func testDecimalPrecision() {
+        let result = CalculatorEngine.calculate(0.1, .add, 0.2)
+        // Due to floating point, check approximate equality
+        #expect(abs(result - 0.3) < 0.0000001)
+    }
+
+    @Test("Format very large numbers uses scientific notation")
+    func testFormatVeryLargeNumbers() {
+        let result = CalculatorEngine.formatDisplay(1e16)
+        #expect(result.contains("E") || result.contains("e"))
+    }
+
+    @Test("Format very small numbers uses scientific notation")
+    func testFormatVerySmallNumbers() {
+        let result = CalculatorEngine.formatDisplay(1e-9)
+        #expect(result.contains("E") || result.contains("e"))
+    }
+
+    @Test("Format negative infinity")
+    func testFormatNegativeInfinity() {
+        let result = CalculatorEngine.formatDisplay(-.infinity)
+        #expect(result == "Error")
+    }
+
+    @Test("Percentage of zero")
+    func testPercentageOfZero() {
+        let result = CalculatorEngine.percentage(0)
+        #expect(result == 0)
+    }
+
+    @Test("Percentage of negative")
+    func testPercentageOfNegative() {
+        let result = CalculatorEngine.percentage(-50)
+        #expect(result == -0.5)
+    }
+
+    @Test("Format large whole number boundary")
+    func testFormatLargeWholeBoundary() {
+        // Just under the scientific notation threshold
+        let result = CalculatorEngine.formatDisplay(999_999_999_999_999)
+        #expect(!result.contains("E") && !result.contains("e"))
+    }
 }

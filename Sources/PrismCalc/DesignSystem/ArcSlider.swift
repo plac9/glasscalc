@@ -12,6 +12,7 @@ public struct ArcSlider: View {
     let valueFormatter: (Double) -> String
 
     @State private var isDragging: Bool = false
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private let arcRadius: CGFloat = 100
     private let trackWidth: CGFloat = 24
@@ -32,11 +33,18 @@ public struct ArcSlider: View {
     }
 
     public var body: some View {
-        ZStack {
-            arcTrack
-            arcFill
-            thumb
-            centerDisplay
+        GeometryReader { geometry in
+            let frameHeight = arcRadius + thumbSize + 30
+            let arcCenter = CGPoint(x: geometry.size.width / 2, y: frameHeight)
+
+            ZStack {
+                arcTrack
+                arcFill
+                thumbView(arcCenter: arcCenter, frameWidth: geometry.size.width)
+                centerDisplay
+            }
+            .frame(width: geometry.size.width, height: frameHeight)
+            .coordinateSpace(name: "arcSlider")
         }
         .frame(height: arcRadius + thumbSize + 30)
         .accessibilityElement(children: .ignore)
@@ -85,7 +93,7 @@ public struct ArcSlider: View {
     }
 
     @MainActor
-    private var thumb: some View {
+    private func thumbView(arcCenter: CGPoint, frameWidth: CGFloat) -> some View {
         let percentage = (value - range.lowerBound) / (range.upperBound - range.lowerBound)
         let angle = 180 - (180 * percentage)
         let radians = angle * .pi / 180
@@ -102,11 +110,11 @@ public struct ArcSlider: View {
             .shadow(color: GlassTheme.primary.opacity(0.4), radius: 10, y: 4)
             .offset(x: x, y: y)
             .scaleEffect(isDragging ? 1.1 : 1.0)
-            .animation(GlassTheme.buttonSpring, value: isDragging)
+            .animation(reduceMotion ? nil : GlassTheme.buttonSpring, value: isDragging)
             .gesture(
-                DragGesture()
+                DragGesture(coordinateSpace: .named("arcSlider"))
                     .onChanged { gesture in
-                        handleDrag(gesture)
+                        handleDrag(gesture, arcCenter: arcCenter, frameWidth: frameWidth)
                     }
                     .onEnded { _ in
                         isDragging = false
@@ -124,8 +132,8 @@ public struct ArcSlider: View {
             Text(valueFormatter(value))
                 .font(.system(.title, design: .rounded, weight: .bold))
                 .foregroundStyle(GlassTheme.primary)
-                .contentTransition(.numericText())
-                .animation(.easeInOut(duration: 0.1), value: value)
+                .contentTransition(reduceMotion ? .identity : .numericText())
+                .animation(reduceMotion ? nil : .easeInOut(duration: 0.1), value: value)
         }
         .padding(GlassTheme.spacingSmall)
         .background(.thinMaterial)
@@ -133,28 +141,38 @@ public struct ArcSlider: View {
         .offset(y: 20)
     }
 
-    private func handleDrag(_ gesture: DragGesture.Value) {
+    private func handleDrag(_ gesture: DragGesture.Value, arcCenter: CGPoint, frameWidth: CGFloat) {
         isDragging = true
 
-        let center = CGPoint(x: 0, y: 0)
+        // With named coordinate space, gesture.location is directly in the arc's frame
+        // The arc center is at (frameWidth/2, frameHeight) where frameHeight = arcRadius + thumbSize + 30
+        let touchPoint = gesture.location
+
+        // Calculate vector from arc center to touch point
         let vector = CGPoint(
-            x: gesture.location.x - center.x,
-            y: gesture.location.y - center.y
+            x: touchPoint.x - arcCenter.x,
+            y: touchPoint.y - arcCenter.y
         )
 
-        var angle = atan2(vector.y, vector.x) * 180 / .pi
-        angle = 180 - angle
+        // Calculate angle from the arc center
+        // atan2 gives angle from positive X axis, we need to convert for our arc (180° is left, 0° is right)
+        var angle = atan2(-vector.y, vector.x) * 180 / .pi
         angle = max(0, min(180, angle))
 
-        let percentage = angle / 180
-        let rawValue = range.lowerBound + (percentage * (range.upperBound - range.lowerBound))
+        // Convert angle to percentage (180° = 0%, 0° = 100%)
+        let newPercentage = (180 - angle) / 180
+        let rawValue = range.lowerBound + (newPercentage * (range.upperBound - range.lowerBound))
         let steppedValue = (rawValue / step).rounded() * step
         let clampedValue = min(max(steppedValue, range.lowerBound), range.upperBound)
 
         if clampedValue != value {
             triggerHaptic()
-            withAnimation(.interactiveSpring(response: 0.2, dampingFraction: 0.8)) {
+            if reduceMotion {
                 value = clampedValue
+            } else {
+                withAnimation(.interactiveSpring(response: 0.2, dampingFraction: 0.8)) {
+                    value = clampedValue
+                }
             }
         }
     }

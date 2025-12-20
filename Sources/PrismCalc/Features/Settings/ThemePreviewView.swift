@@ -7,6 +7,7 @@ public struct ThemePreviewView: View {
     let onApply: (() -> Void)?
 
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var showApplied = false
     @ScaledMetric(relativeTo: .title2) private var iconSize: CGFloat = 56
     @ScaledMetric(relativeTo: .caption2) private var proBadgeSize: CGFloat = 12
@@ -63,10 +64,9 @@ public struct ThemePreviewView: View {
     private var themeInfoSection: some View {
         VStack(spacing: GlassTheme.spacingMedium) {
             // Theme icon
-            Image(systemName: "paintpalette.fill")
+            themeIconView
                 .font(.system(size: iconSize, weight: .medium))
                 .foregroundStyle(.white)
-                .symbolEffect(.breathe, options: .repeating)
 
             // Theme name
             Text(theme.rawValue)
@@ -85,6 +85,18 @@ public struct ThemePreviewView: View {
                             .fill(.white.opacity(0.2))
                     )
             }
+        }
+    }
+
+    // MARK: - Theme Icon (Reduce Motion Support)
+
+    @MainActor @ViewBuilder
+    private var themeIconView: some View {
+        if reduceMotion {
+            Image(systemName: "paintpalette.fill")
+        } else {
+            Image(systemName: "paintpalette.fill")
+                .symbolEffect(.breathe, options: .repeating)
         }
     }
 
@@ -158,13 +170,21 @@ public struct ThemePreviewView: View {
     }
 
     private func showAppliedFeedback() {
-        withAnimation(GlassTheme.springAnimation) {
+        if reduceMotion {
             showApplied = true
+        } else {
+            withAnimation(GlassTheme.springAnimation) {
+                showApplied = true
+            }
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            withAnimation(GlassTheme.springAnimation) {
+            if reduceMotion {
                 showApplied = false
+            } else {
+                withAnimation(GlassTheme.springAnimation) {
+                    showApplied = false
+                }
             }
             // Dismiss after showing feedback
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {

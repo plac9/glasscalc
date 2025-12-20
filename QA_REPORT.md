@@ -1,9 +1,21 @@
 # PrismCalc - Comprehensive QA Report
 
-**Version**: 1.0.0 (Build 1)
+**Version**: 1.0.0 (Build 2)
 **Test Date**: 2025-12-07
 **Tester**: Automated Code Review + Build Tests
 **Status**: ✅ READY FOR TESTFLIGHT
+
+---
+
+## iOS-Only Verification Update (2025-12-19)
+
+- `swift test` passed (100 tests).
+- Static audit: Dynamic Type scaling and accessibility labels present in core views; manual iPhone pass still pending.
+- iPhone Dynamic Type + VoiceOver review: pending manual pass.
+- Screenshot UI tests: `xcodebuild test -only-testing:PrismCalcUITests/ScreenshotTests` passed on iPhone 17 simulator.
+- Screenshot exports: `screenshots/automated/2025-12-19-iphone-17/` (10 PNGs).
+- Accessibility smoke: simulator content size set to accessibility XXXL + Increase Contrast, app launched successfully.
+- Performance: Time Profiler trace captured on iPhone 17 simulator (`/tmp/PrismCalc-TimeProfiler.trace`); device profiling still required.
 
 ---
 

@@ -9,7 +9,9 @@ public struct HistoryView: View {
     @State private var showClearConfirm = false
     @State private var showPaywall = false
     @ScaledMetric(relativeTo: .caption2) private var timeFontSize: CGFloat = 11
+    @ScaledMetric(relativeTo: .caption2) private var noteIconSize: CGFloat = 10
     @ScaledMetric(relativeTo: .title2) private var emptyIconSize: CGFloat = 48
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     // iOS 18 zoom transition support
     @Namespace private var historyNamespace
@@ -30,9 +32,13 @@ public struct HistoryView: View {
                     // Header with filter and clear
                     headerSection
 
-                    // Widget tip
-                    TipView(addWidgetTip)
-                        .tipBackground(Color.clear)
+                    // Widget tip with action handler
+                    TipView(addWidgetTip) { action in
+                        if action.id == "dismiss" {
+                            addWidgetTip.invalidate(reason: .actionPerformed)
+                        }
+                    }
+                    .tipBackground(Color.clear)
 
                     // Filter chips
                     filterSection
@@ -54,12 +60,17 @@ public struct HistoryView: View {
                 isPresented: $showClearConfirm,
                 titleVisibility: .visible
             ) {
-                Button("Clear All", role: .destructive) {
+                Button("Clear Unlocked", role: .destructive) {
                     clearHistory()
                 }
                 Button("Cancel", role: .cancel) {}
             } message: {
-                Text("This will permanently delete all calculation history.")
+                let lockedCount = entries.filter { $0.isLocked }.count
+                if lockedCount > 0 {
+                    Text("This will delete all unlocked history. \(lockedCount) locked \(lockedCount == 1 ? "entry" : "entries") will be preserved.")
+                } else {
+                    Text("This will permanently delete all calculation history.")
+                }
             }
             // iOS 18 zoom navigation destination
             .navigationDestination(item: $selectedEntry) { entry in
@@ -145,8 +156,8 @@ public struct HistoryView: View {
                 filterChip(label: "All", icon: "list.bullet", isSelected: selectedType == nil) {
                     selectedType = nil
                 }
-                .scrollTransition(.interactive) { content, phase in
-                    content.opacity(phase.isIdentity ? 1 : 0.6)
+                .scrollTransition(.interactive) { [reduceMotionNow = reduceMotion] content, phase in
+                    content.opacity(reduceMotionNow || phase.isIdentity ? 1 : 0.6)
                 }
 
                 // Type filters
@@ -158,8 +169,8 @@ public struct HistoryView: View {
                     ) {
                         selectedType = type
                     }
-                    .scrollTransition(.interactive) { content, phase in
-                        content.opacity(phase.isIdentity ? 1 : 0.6)
+                    .scrollTransition(.interactive) { [reduceMotionNow = reduceMotion] content, phase in
+                        content.opacity(reduceMotionNow || phase.isIdentity ? 1 : 0.6)
                     }
                 }
             }
@@ -204,11 +215,11 @@ public struct HistoryView: View {
         LazyVStack(spacing: GlassTheme.spacingSmall) {
             ForEach(filteredEntries) { entry in
                 historyCard(entry)
-                    .scrollTransition { content, phase in
+                    .scrollTransition { [reduceMotionNow = reduceMotion] content, phase in
                         content
-                            .opacity(phase.isIdentity ? 1 : 0.7)
-                            .scaleEffect(phase.isIdentity ? 1 : 0.95)
-                            .offset(y: phase.isIdentity ? 0 : phase.value * 15)
+                            .opacity(reduceMotionNow || phase.isIdentity ? 1 : 0.7)
+                            .scaleEffect(reduceMotionNow || phase.isIdentity ? 1 : 0.95)
+                            .offset(y: reduceMotionNow || phase.isIdentity ? 0 : phase.value * 15)
                     }
             }
 
@@ -243,28 +254,61 @@ public struct HistoryView: View {
                         .font(GlassTheme.captionFont)
                         .foregroundStyle(GlassTheme.textSecondary)
                         .lineLimit(1)
+
+                    // Show note if present
+                    if let note = entry.note, !note.isEmpty {
+                        HStack(spacing: 4) {
+                            Image(systemName: "note.text")
+                                .font(.system(size: noteIconSize))
+                            Text(note)
+                                .lineLimit(1)
+                        }
+                        .font(.system(size: timeFontSize))
+                        .foregroundStyle(GlassTheme.primary.opacity(0.8))
+                    }
                 }
 
                 Spacer()
 
-                // Time
-                Text(entry.relativeDate)
-                    .font(.system(size: timeFontSize))
-                    .foregroundStyle(GlassTheme.textTertiary)
+                // Time and lock indicator
+                VStack(alignment: .trailing, spacing: 4) {
+                    Text(entry.relativeDate)
+                        .font(.system(size: timeFontSize))
+                        .foregroundStyle(GlassTheme.textTertiary)
+
+                    if entry.isLocked {
+                        Image(systemName: "lock.fill")
+                            .font(.system(size: noteIconSize))
+                            .foregroundStyle(GlassTheme.primary)
+                    }
+                }
             }
         }
-        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-            Button(role: .destructive) {
-                deleteEntry(entry)
-            } label: {
-                Label("Delete", systemImage: "trash")
+        .swipeActions(edge: .trailing, allowsFullSwipe: !entry.isLocked) {
+            if !entry.isLocked {
+                Button(role: .destructive) {
+                    deleteEntry(entry)
+                } label: {
+                    Label("Delete", systemImage: "trash")
+                }
             }
+        }
+        .swipeActions(edge: .leading, allowsFullSwipe: true) {
+            Button {
+                toggleLock(entry)
+            } label: {
+                Label(
+                    entry.isLocked ? "Unlock" : "Lock",
+                    systemImage: entry.isLocked ? "lock.open.fill" : "lock.fill"
+                )
+            }
+            .tint(entry.isLocked ? GlassTheme.warning : GlassTheme.primary)
         }
         // iOS 18 zoom transition source
         .matchedTransitionSource(id: entry.id, in: historyNamespace)
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(entry.type.rawValue): \(entry.result)")
-        .accessibilityHint("Double tap to view details, swipe left to delete")
+        .accessibilityLabel("\(entry.type.rawValue): \(entry.result)\(entry.isLocked ? ", locked" : "")\(entry.note.map { ", note: \($0)" } ?? "")")
+        .accessibilityHint("Double tap to view details, swipe left to delete\(entry.isLocked ? " (locked)" : ""), swipe right to \(entry.isLocked ? "unlock" : "lock")")
         .onTapGesture {
             selectedEntry = entry
         }
@@ -357,15 +401,43 @@ public struct HistoryView: View {
 
     private func deleteEntry(_ entry: HistoryEntry) {
         HistoryService.shared.delete(entry)
-        withAnimation {
+        let reduceMotionSnapshot = reduceMotion
+        if reduceMotionSnapshot {
             entries.removeAll { $0.id == entry.id }
+        } else {
+            withAnimation {
+                entries.removeAll { $0.id == entry.id }
+            }
         }
     }
 
     private func clearHistory() {
-        HistoryService.shared.clearAll()
-        withAnimation {
-            entries.removeAll()
+        // Only clear unlocked entries
+        let unlockedEntries = entries.filter { !$0.isLocked }
+        for entry in unlockedEntries {
+            HistoryService.shared.delete(entry)
+        }
+        let reduceMotionSnapshot = reduceMotion
+        if reduceMotionSnapshot {
+            entries.removeAll { !$0.isLocked }
+        } else {
+            withAnimation {
+                entries.removeAll { !$0.isLocked }
+            }
+        }
+    }
+
+    private func toggleLock(_ entry: HistoryEntry) {
+        entry.isLocked.toggle()
+        HistoryService.shared.save(entry)
+        let reduceMotionSnapshot = reduceMotion
+        if reduceMotionSnapshot {
+            // Force refresh to update UI
+            loadHistory()
+        } else {
+            withAnimation {
+                loadHistory()
+            }
         }
     }
 }
@@ -384,3 +456,4 @@ public struct HistoryView: View {
         HistoryView()
     }
 }
+

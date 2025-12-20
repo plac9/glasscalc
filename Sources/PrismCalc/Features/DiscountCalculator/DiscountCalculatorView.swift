@@ -5,24 +5,28 @@ public struct DiscountCalculatorView: View {
     @State private var viewModel = DiscountCalculatorViewModel()
     @ScaledMetric(relativeTo: .title2) private var currencySymbolSize: CGFloat = 32
     @ScaledMetric(relativeTo: .largeTitle) private var inputValueSize: CGFloat = 48
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @FocusState private var isInputFocused: Bool
 
     public init() {}
 
     public var body: some View {
+        let reduce = reduceMotion
+
         ScrollView {
             VStack(spacing: GlassTheme.spacingLarge) {
                 // Original Price Input
                 priceInputSection
-                    .scrollTransition { content, phase in
-                        content.opacity(phase.isIdentity ? 1 : 0.85)
+                    .scrollTransition(.animated, axis: .vertical) { content, phase in
+                        return content.opacity(reduce || phase.isIdentity ? 1 : 0.85)
                     }
 
                 // Discount Percentage Arc Slider
                 discountSliderSection
-                    .scrollTransition { content, phase in
-                        content
-                            .opacity(phase.isIdentity ? 1 : 0.85)
-                            .scaleEffect(phase.isIdentity ? 1 : 0.97)
+                    .scrollTransition(.animated, axis: .vertical) { content, phase in
+                        return content
+                            .opacity(reduce || phase.isIdentity ? 1 : 0.85)
+                            .scaleEffect(reduce || phase.isIdentity ? 1 : 0.97)
                     }
 
                 // Quick Discount Buttons
@@ -30,13 +34,23 @@ public struct DiscountCalculatorView: View {
 
                 // Results with visual savings indicator
                 resultsSection
-                    .scrollTransition { content, phase in
-                        content
-                            .opacity(phase.isIdentity ? 1 : 0.9)
-                            .offset(y: phase.isIdentity ? 0 : phase.value * 8)
+                    .scrollTransition(.animated, axis: .vertical) { content, phase in
+                        return content
+                            .opacity(reduce || phase.isIdentity ? 1 : 0.9)
+                            .offset(y: reduce || phase.isIdentity ? 0 : phase.value * 8)
                     }
             }
             .padding()
+        }
+        .scrollDismissesKeyboard(.interactively)
+        .toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                Spacer()
+                Button("Done") {
+                    isInputFocused = false
+                }
+                .foregroundStyle(GlassTheme.primary)
+            }
         }
     }
 
@@ -62,6 +76,7 @@ public struct DiscountCalculatorView: View {
                         .lineLimit(1)
                         .minimumScaleFactor(0.6)
                         .multilineTextAlignment(.trailing)
+                        .focused($isInputFocused)
                         .accessibilityLabel("Original price")
                 }
             }
@@ -89,10 +104,15 @@ public struct DiscountCalculatorView: View {
     @MainActor
     private var quickDiscountSection: some View {
         HStack(spacing: GlassTheme.spacingSmall) {
+            let reduceMotionSnapshot = reduceMotion
             ForEach(viewModel.quickDiscounts, id: \.self) { discount in
                 Button {
-                    withAnimation(GlassTheme.springAnimation) {
+                    if reduceMotionSnapshot {
                         viewModel.selectQuickDiscount(discount)
+                    } else {
+                        withAnimation(GlassTheme.springAnimation) {
+                            viewModel.selectQuickDiscount(discount)
+                        }
                     }
                 } label: {
                     Text("\(Int(discount))%")
@@ -120,6 +140,8 @@ public struct DiscountCalculatorView: View {
                 }
                 .buttonStyle(.plain)
                 .sensoryFeedback(.selection, trigger: viewModel.discountPercentage)
+                .accessibilityLabel("\(Int(discount)) percent discount")
+                .accessibilityHint(viewModel.discountPercentage == discount ? "Currently selected" : "Double tap to select")
             }
         }
     }
@@ -129,12 +151,13 @@ public struct DiscountCalculatorView: View {
     @MainActor
     private var resultsSection: some View {
         VStack(spacing: GlassTheme.spacingMedium) {
+            let reduceMotionSnapshot = reduceMotion
+
             // Savings Badge
             if viewModel.discountAmount > 0 {
                 HStack {
-                    Image(systemName: "tag.fill")
+                    savingsTagIcon
                         .foregroundStyle(GlassTheme.success)
-                        .symbolEffect(.wiggle, value: viewModel.discountAmount)
 
                     Text("You Save \(viewModel.formattedDiscount)")
                         .font(GlassTheme.headlineFont)
@@ -192,8 +215,8 @@ public struct DiscountCalculatorView: View {
                     Text(viewModel.formattedFinal)
                         .font(.system(.title, design: .rounded, weight: .bold))
                         .foregroundStyle(GlassTheme.primary)
-                        .contentTransition(.numericText())
-                        .animation(.easeInOut(duration: 0.15), value: viewModel.finalPrice)
+                        .contentTransition(reduceMotionSnapshot ? .identity : .numericText())
+                        .animation(reduceMotionSnapshot ? nil : .easeInOut(duration: 0.15), value: viewModel.finalPrice)
                 }
 
                 // Save Button
@@ -210,6 +233,8 @@ public struct DiscountCalculatorView: View {
                     }
                     .buttonStyle(.plain)
                     .sensoryFeedback(.success, trigger: viewModel.priceValue)
+                    .accessibilityLabel("Save to history")
+                    .accessibilityHint("Saves this discount calculation to your history")
                 }
             }
             .padding(GlassTheme.spacingMedium)
@@ -234,6 +259,18 @@ public struct DiscountCalculatorView: View {
             .shadow(color: Color.black.opacity(0.1), radius: 15, y: 8)
         }
     }
+
+    // MARK: - Savings Tag Icon (Reduce Motion Support)
+
+    @MainActor @ViewBuilder
+    private var savingsTagIcon: some View {
+        if reduceMotion {
+            Image(systemName: "tag.fill")
+        } else {
+            Image(systemName: "tag.fill")
+                .symbolEffect(.wiggle, value: viewModel.discountAmount)
+        }
+    }
 }
 
 // MARK: - Preview
@@ -250,3 +287,4 @@ public struct DiscountCalculatorView: View {
         DiscountCalculatorView()
     }
 }
+

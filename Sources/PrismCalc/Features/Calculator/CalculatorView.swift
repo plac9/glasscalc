@@ -1,9 +1,15 @@
 import SwiftUI
+#if os(iOS)
+import UIKit
+#endif
 
 /// Main calculator view with full glassmorphism UI
 public struct CalculatorView: View {
     @State private var viewModel = CalculatorViewModel()
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @ScaledMetric(relativeTo: .title3) private var backspaceIconSize: CGFloat = 20
+    @AppStorage("zeroOnRight") private var zeroOnRight: Bool = false
 
     public init() {}
 
@@ -16,10 +22,34 @@ public struct CalculatorView: View {
 
             VStack(spacing: 0) {
                 // Display - proportionally sized for iPad
-                GlassDisplay(
-                    value: viewModel.display,
-                    expression: viewModel.expression
-                )
+                ZStack(alignment: .bottomTrailing) {
+                    GlassDisplay(
+                        value: viewModel.display,
+                        expression: viewModel.expression
+                    )
+
+                    // Backspace button - visible when there's input to delete
+                    if viewModel.display != "0" && viewModel.display != "Error" {
+                        Button {
+                            triggerLightHaptic()
+                            viewModel.backspace()
+                        } label: {
+                            Image(systemName: "delete.backward")
+                                .font(.system(size: backspaceIconSize * (isIPad ? 1.2 : 1.0), weight: .medium))
+                                .foregroundStyle(GlassTheme.textSecondary)
+                                .frame(width: 44, height: 44)
+                                .contentShape(Rectangle())
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityLabel("Delete")
+                        .accessibilityHint("Removes the last digit")
+                        .accessibilityIdentifier("calculator-button-backspace")
+                        .padding(.trailing, GlassTheme.spacingSmall)
+                        .padding(.bottom, GlassTheme.spacingXS)
+                        .transition(.opacity.combined(with: .scale(scale: 0.8)))
+                    }
+                }
+                .animation(reduceMotion ? nil : .easeInOut(duration: 0.15), value: viewModel.display != "0")
                 .frame(height: layoutMetrics.displayHeight)
                 .padding(.horizontal, horizontalPadding)
                 .padding(.top, layoutMetrics.topPadding)
@@ -138,19 +168,36 @@ public struct CalculatorView: View {
                         }
                     }
 
-                    // Row 5: 0 (wide), ., =
+                    // Row 5: 0 (wide), ., = — respects zeroOnRight preference
                     HStack(spacing: spacing) {
-                        wideCalculatorButton(
-                            "0",
-                            layoutMetrics: layoutMetrics,
-                            spacing: spacing,
-                            id: "calculator-button-0"
-                        ) {
-                            viewModel.inputDigit("0")
-                        }
+                        if zeroOnRight {
+                            // Alternative layout: ., 0 (wide), =
+                            calculatorButton(".", id: "calculator-button-decimal", layoutMetrics: layoutMetrics) {
+                                viewModel.inputDigit(".")
+                            }
 
-                        calculatorButton(".", id: "calculator-button-decimal", layoutMetrics: layoutMetrics) {
-                            viewModel.inputDigit(".")
+                            wideCalculatorButton(
+                                "0",
+                                layoutMetrics: layoutMetrics,
+                                spacing: spacing,
+                                id: "calculator-button-0"
+                            ) {
+                                viewModel.inputDigit("0")
+                            }
+                        } else {
+                            // Standard layout: 0 (wide), ., =
+                            wideCalculatorButton(
+                                "0",
+                                layoutMetrics: layoutMetrics,
+                                spacing: spacing,
+                                id: "calculator-button-0"
+                            ) {
+                                viewModel.inputDigit("0")
+                            }
+
+                            calculatorButton(".", id: "calculator-button-decimal", layoutMetrics: layoutMetrics) {
+                                viewModel.inputDigit(".")
+                            }
                         }
 
                         calculatorButton(
@@ -209,16 +256,33 @@ public struct CalculatorView: View {
         // Calculate total button grid height (5 rows + 4 gaps)
         let buttonGridHeight = (buttonSize * 5) + (spacing * 4)
 
-        // Calculate available height for display
+        // Calculate available height for display with sensible constraints
         let totalReserved = topPadding + bottomPadding + buttonGridHeight + GlassTheme.spacingMedium
-        let availableDisplayHeight = max(size.height - totalReserved, isIPad ? 200 : 120)
+        let rawDisplayHeight = size.height - totalReserved
+
+        // Constrain display height: min for readability, allow generous max for large results
+        // Larger display reduces black space and shows calculations prominently
+        let minDisplayHeight: CGFloat = isIPad ? 200 : 120
+        let maxDisplayHeight: CGFloat = isIPad ? size.height * 0.40 : size.height * 0.38
+        let displayHeight = min(max(rawDisplayHeight, minDisplayHeight), maxDisplayHeight)
+
+        // Recalculate top padding to center content when display is constrained
+        let unusedSpace = rawDisplayHeight - displayHeight
+        let adjustedTopPadding = topPadding + (unusedSpace > 0 ? unusedSpace * 0.4 : 0)
 
         return LayoutMetrics(
-            displayHeight: availableDisplayHeight,
+            displayHeight: displayHeight,
             buttonSize: buttonSize,
-            topPadding: topPadding,
+            topPadding: adjustedTopPadding,
             displayBottomPadding: GlassTheme.spacingMedium
         )
+    }
+
+    private func triggerLightHaptic() {
+        #if os(iOS)
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
+        #endif
     }
 }
 

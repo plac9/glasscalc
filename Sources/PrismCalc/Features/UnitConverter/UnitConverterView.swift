@@ -9,41 +9,54 @@ public struct UnitConverterView: View {
     @ScaledMetric(relativeTo: .largeTitle) private var inputValueSize: CGFloat = 48
     @ScaledMetric(relativeTo: .largeTitle) private var resultValueSize: CGFloat = 48
     @ScaledMetric(relativeTo: .title3) private var swapButtonSize: CGFloat = 44
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @FocusState private var isInputFocused: Bool
 
     public init() {}
 
     public var body: some View {
+        let reduce = reduceMotion
         ScrollView {
             VStack(spacing: GlassTheme.spacingLarge) {
                 // Category Selector
                 categorySelector
                     .scrollTransition { content, phase in
-                        content.opacity(phase.isIdentity ? 1 : 0.85)
+                        content.opacity(reduce || phase.isIdentity ? 1 : 0.85)
                     }
 
                 // Input
                 inputSection
                     .scrollTransition { content, phase in
-                        content.opacity(phase.isIdentity ? 1 : 0.85)
+                        content.opacity(reduce || phase.isIdentity ? 1 : 0.85)
                     }
 
                 // Unit Selectors with Swap
                 unitSelectors
                     .scrollTransition { content, phase in
                         content
-                            .opacity(phase.isIdentity ? 1 : 0.85)
-                            .scaleEffect(phase.isIdentity ? 1 : 0.97)
+                            .opacity(reduce || phase.isIdentity ? 1 : 0.85)
+                            .scaleEffect(reduce || phase.isIdentity ? 1 : 0.97)
                     }
 
                 // Result
                 resultSection
                     .scrollTransition { content, phase in
                         content
-                            .opacity(phase.isIdentity ? 1 : 0.9)
-                            .offset(y: phase.isIdentity ? 0 : phase.value * 8)
+                            .opacity(reduce || phase.isIdentity ? 1 : 0.9)
+                            .offset(y: reduce || phase.isIdentity ? 0 : phase.value * 8)
                     }
             }
             .padding()
+        }
+        .scrollDismissesKeyboard(.interactively)
+        .toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                Spacer()
+                Button("Done") {
+                    isInputFocused = false
+                }
+                .foregroundStyle(GlassTheme.primary)
+            }
         }
         .task {
             if viewModel.selectedCategory == .currency {
@@ -57,11 +70,17 @@ public struct UnitConverterView: View {
     @MainActor
     private var categorySelector: some View {
         HStack(spacing: GlassTheme.spacingSmall) {
+            let reduceMotionSnapshot = reduceMotion
             ForEach(UnitConverterViewModel.Category.allCases) { category in
                 Button {
-                    withAnimation(GlassTheme.springAnimation) {
+                    if reduceMotionSnapshot {
                         viewModel.selectCategory(category)
                         currencyResult = nil
+                    } else {
+                        withAnimation(GlassTheme.springAnimation) {
+                            viewModel.selectCategory(category)
+                            currencyResult = nil
+                        }
                     }
                 } label: {
                     VStack(spacing: GlassTheme.spacingXS) {
@@ -92,6 +111,8 @@ public struct UnitConverterView: View {
                     )
                 }
                 .buttonStyle(.plain)
+                .accessibilityLabel("\(category.rawValue) converter")
+                .accessibilityHint(viewModel.selectedCategory == category ? "Currently selected" : "Double tap to select")
             }
         }
         .sensoryFeedback(.selection, trigger: viewModel.selectedCategory)
@@ -114,6 +135,7 @@ public struct UnitConverterView: View {
                     .lineLimit(1)
                     .minimumScaleFactor(0.6)
                     .multilineTextAlignment(.trailing)
+                    .focused($isInputFocused)
                     .onChange(of: viewModel.inputValue) {
                         if viewModel.selectedCategory == .currency {
                             Task { await convertCurrency() }
@@ -136,20 +158,27 @@ public struct UnitConverterView: View {
                 units: viewModel.availableUnits
             )
 
+            let reduceMotionSnapshot = reduceMotion
             // Swap Button with SF Symbol 6 rotation animation
             Button {
                 swapTrigger.toggle()
-                withAnimation(GlassTheme.springAnimation) {
+                if reduceMotionSnapshot {
                     viewModel.swapUnits()
                     if viewModel.selectedCategory == .currency {
                         Task { await convertCurrency() }
                     }
+                } else {
+                    withAnimation(GlassTheme.springAnimation) {
+                        viewModel.swapUnits()
+                        if viewModel.selectedCategory == .currency {
+                            Task { await convertCurrency() }
+                        }
+                    }
                 }
             } label: {
-                Image(systemName: "arrow.left.arrow.right")
+                swapButtonIcon
                     .font(.title3)
                     .foregroundStyle(GlassTheme.primary)
-                    .symbolEffect(.rotate.byLayer, value: swapTrigger)
                     .frame(width: swapButtonSize, height: swapButtonSize)
                     .background(
                         Circle()
@@ -157,6 +186,8 @@ public struct UnitConverterView: View {
                     )
             }
             .buttonStyle(.plain)
+            .accessibilityLabel("Swap units")
+            .accessibilityHint("Swaps the from and to units")
 
             // To Unit
             unitPicker(
@@ -197,11 +228,24 @@ public struct UnitConverterView: View {
         }
     }
 
+    // MARK: - Swap Button Icon
+
+    @MainActor @ViewBuilder
+    private var swapButtonIcon: some View {
+        if reduceMotion {
+            Image(systemName: "arrow.left.arrow.right")
+        } else {
+            Image(systemName: "arrow.left.arrow.right")
+                .symbolEffect(.rotate.byLayer, value: swapTrigger)
+        }
+    }
+
     // MARK: - Result
 
     @MainActor
     private var resultSection: some View {
         VStack(spacing: GlassTheme.spacingSmall) {
+            let reduceMotionSnapshot = reduceMotion
             if viewModel.isLoadingCurrencies || isConverting {
                 ProgressView()
                     .tint(GlassTheme.primary)
@@ -215,12 +259,23 @@ public struct UnitConverterView: View {
                     .foregroundStyle(GlassTheme.primary)
                     .lineLimit(1)
                     .minimumScaleFactor(0.6)
-                    .contentTransition(.numericText())
-                    .animation(.easeInOut(duration: 0.15), value: displayResult)
+                    .contentTransition(reduceMotionSnapshot ? .identity : .numericText())
+                    .animation(reduceMotionSnapshot ? nil : .easeInOut(duration: 0.15), value: displayResult)
 
                 Text(formatUnitName(viewModel.toUnit))
                     .font(GlassTheme.headlineFont)
                     .foregroundStyle(GlassTheme.textSecondary)
+
+                // Currency rate disclaimer
+                if viewModel.selectedCategory == .currency {
+                    HStack(spacing: GlassTheme.spacingXS) {
+                        Image(systemName: "info.circle")
+                        Text("Rates may be delayed. For reference only.")
+                    }
+                    .font(.system(size: 11))
+                    .foregroundStyle(GlassTheme.textTertiary)
+                    .padding(.top, GlassTheme.spacingXS)
+                }
 
                 // Save Button
                 if viewModel.inputDouble > 0 {
@@ -234,6 +289,8 @@ public struct UnitConverterView: View {
                     .buttonStyle(.plain)
                     .padding(.top, GlassTheme.spacingSmall)
                     .sensoryFeedback(.success, trigger: viewModel.inputDouble)
+                    .accessibilityLabel("Save to history")
+                    .accessibilityHint("Saves this conversion to your history")
                 }
             }
         }

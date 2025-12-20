@@ -57,7 +57,9 @@ public struct GlassButton: View {
         self.action = action
     }
 
-    private static func defaultAccessibilityLabel(for label: String) -> String {
+    /// Returns default VoiceOver-friendly label for calculator button text.
+    /// Internal for testability via @testable import.
+    static func defaultAccessibilityLabel(for label: String) -> String {
         switch label {
         case "0": return "Zero"
         case "1": return "One"

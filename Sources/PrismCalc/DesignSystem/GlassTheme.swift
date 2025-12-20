@@ -212,6 +212,21 @@ public struct GlassTheme: Sendable {
         .spring(response: 0.2, dampingFraction: 0.6)
     }
 
+    /// Conditional spring animation that respects reduce motion preference
+    public static func conditionalSpring(_ reduceMotion: Bool) -> Animation? {
+        reduceMotion ? nil : springAnimation
+    }
+
+    /// Conditional button spring animation that respects reduce motion preference
+    public static func conditionalButtonSpring(_ reduceMotion: Bool) -> Animation? {
+        reduceMotion ? nil : buttonSpring
+    }
+
+    /// Conditional quick animation that respects reduce motion preference
+    public static func conditionalQuickAnimation(_ reduceMotion: Bool) -> Animation? {
+        reduceMotion ? nil : .easeInOut(duration: animationQuick)
+    }
+
     // MARK: - MeshGradient (iOS 18+)
 
     /// Get the mesh gradient configuration for the current theme

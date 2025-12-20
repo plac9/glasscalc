@@ -1,0 +1,152 @@
+import SwiftUI
+
+/// Theme picker view for drill-in navigation from Settings
+public struct ThemePickerView: View {
+    @Binding var selectedTheme: GlassTheme.Theme
+    @Environment(\.dismiss) private var dismiss
+    @ScaledMetric(relativeTo: .caption2) private var proBadgeSize: CGFloat = 9
+
+    // iOS 18 zoom transition support for theme preview
+    @Namespace private var themeNamespace
+    @State private var previewTheme: GlassTheme.Theme?
+
+    private var storeKit: StoreKitManager { StoreKitManager.shared }
+
+    public init(selectedTheme: Binding<GlassTheme.Theme>) {
+        self._selectedTheme = selectedTheme
+    }
+
+    public var body: some View {
+        ScrollView {
+            LazyVGrid(columns: [
+                GridItem(.flexible()),
+                GridItem(.flexible())
+            ], spacing: GlassTheme.spacingSmall) {
+                ForEach(GlassTheme.Theme.allCases) { theme in
+                    themeCard(theme)
+                }
+            }
+            .padding()
+        }
+        .navigationTitle("Theme")
+        #if os(iOS)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbarBackground(.ultraThinMaterial, for: .navigationBar)
+        .fullScreenCover(item: $previewTheme) { theme in
+            if #available(iOS 18.0, *) {
+                ThemePreviewView(theme: theme) {
+                    selectedTheme = theme
+                    GlassTheme.currentTheme = theme
+                }
+                .navigationTransition(
+                    .zoom(sourceID: theme.id, in: themeNamespace)
+                )
+            }
+        }
+        #endif
+    }
+
+    @MainActor
+    private func themeCard(_ theme: GlassTheme.Theme) -> some View {
+        let isSelected = selectedTheme == theme
+        let isLocked = theme.isPro && !storeKit.isPro
+
+        return Button {
+            guard !isLocked else { return }
+            withAnimation(GlassTheme.springAnimation) {
+                selectedTheme = theme
+                GlassTheme.currentTheme = theme
+            }
+        } label: {
+            VStack(spacing: GlassTheme.spacingSmall) {
+                // Theme Preview
+                RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusSmall)
+                    .fill(
+                        LinearGradient(
+                            colors: gradientColors(for: theme),
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .frame(height: 80)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusSmall)
+                            .fill(.ultraThinMaterial)
+                            .padding(12)
+                    )
+                    .overlay(
+                        Group {
+                            if isLocked {
+                                Image(systemName: "lock.fill")
+                                    .font(.title3)
+                                    .foregroundStyle(.white)
+                            } else if isSelected {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .font(.title2)
+                                    .foregroundStyle(.white)
+                            }
+                        }
+                    )
+
+                // Theme Name
+                HStack {
+                    Text(theme.rawValue)
+                        .font(GlassTheme.captionFont)
+                        .foregroundStyle(GlassTheme.text)
+
+                    if theme.isPro && !storeKit.isPro {
+                        Text("PRO")
+                            .font(.system(size: proBadgeSize, weight: .bold))
+                            .foregroundStyle(.white)
+                            .padding(.horizontal, 4)
+                            .padding(.vertical, 2)
+                            .background(
+                                Capsule()
+                                    .fill(GlassTheme.primary)
+                            )
+                    }
+                }
+            }
+            .padding(GlassTheme.spacingSmall)
+            .background(
+                RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusMedium)
+                    .fill(.thinMaterial)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusMedium)
+                            .stroke(
+                                isSelected ? GlassTheme.primary : Color.clear,
+                                lineWidth: 2
+                            )
+                    )
+            )
+            .opacity(isLocked ? 0.6 : 1)
+        }
+        .buttonStyle(.plain)
+        .sensoryFeedback(.selection, trigger: selectedTheme)
+        .matchedTransitionSource(id: theme.id, in: themeNamespace)
+        .onLongPressGesture(minimumDuration: 0.5) {
+            previewTheme = theme
+        }
+        .accessibilityLabel("\(theme.rawValue) theme\(isSelected ? ", selected" : "")\(isLocked ? ", locked, requires Pro" : "")")
+        .accessibilityHint(isLocked ? "Upgrade to Pro to use this theme" : "Double tap to select")
+    }
+
+    private func gradientColors(for theme: GlassTheme.Theme) -> [Color] {
+        switch theme {
+        case .aurora: return GlassTheme.auroraGradient
+        case .calmingBlues: return GlassTheme.calmingBluesGradient
+        case .forestEarth: return GlassTheme.forestEarthGradient
+        case .softTranquil: return GlassTheme.softTranquilGradient
+        case .blueGreenHarmony: return GlassTheme.blueGreenGradient
+        case .midnight: return GlassTheme.midnightGradient
+        }
+    }
+}
+
+// MARK: - Preview
+
+#Preview {
+    NavigationStack {
+        ThemePickerView(selectedTheme: .constant(.aurora))
+    }
+}

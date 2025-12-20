@@ -25,6 +25,7 @@
 		310BB87D04D5A6ECCDEFDE01 /* AnimatedMeshBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A0661C3A9837C68807DCCF /* AnimatedMeshBackground.swift */; };
 		3763CF84B70E24CD9C7504B3 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B816A3B1DB1B25E2793EBE /* PaywallView.swift */; };
 		3C3C33DC1E3872654537128C /* CurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE810125C7AA4B49DD1C406 /* CurrencyService.swift */; };
+		41C6946A6A6F688A3269A54D /* ThemePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C228C0D8343BBC4BC4AD26A9 /* ThemePickerView.swift */; };
 		43AF97B6E7D3010CF49AF011 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF804420EFCDF536EE758402 /* Assets.xcassets */; };
 		47069FF46CF36514A8CF4DD2 /* ProGatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A12B447B4864A04D20652CF /* ProGatedView.swift */; };
 		4CD2689C981943E6639333F3 /* PrismCalcIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69813B6E869CB554F7414F40 /* PrismCalcIntents.swift */; };
@@ -33,6 +34,7 @@
 		5F2C96E12A6D463319525924 /* ThemePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009970927EF00CF27C9619CE /* ThemePreviewView.swift */; };
 		689262E1FC794911F747365A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B074F9AC198B8A2488025590 /* SettingsView.swift */; };
 		704D769752DB6A7E348E62DB /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C4F48E8638FC6BECBD59F5 /* CalculatorView.swift */; };
+		784D54FD75879BED23763AA7 /* ThemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B8FAA34DEE532FFBA6E335 /* ThemeTests.swift */; };
 		78F21574959188B763480B4D /* PrismCalcIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69813B6E869CB554F7414F40 /* PrismCalcIntents.swift */; };
 		85174233C2D7B20D07855A5F /* CalculatorEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372CB58120B9A90634A2EC54 /* CalculatorEngineTests.swift */; };
 		888BE6A6F170B04DBE7A3313 /* SplitBillViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1FD0ABEE01013B0EDAB877 /* SplitBillViewModel.swift */; };
@@ -46,19 +48,23 @@
 		AE700F0510731F9023DE38EF /* SharedDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71565CF5E5341BE10949329 /* SharedDataService.swift */; };
 		B0D0583C113A62BD481273B2 /* UnitConverterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDACDAC490A4971A27748771 /* UnitConverterView.swift */; };
 		B3E765B65DAB2BE2364AB7AF /* DiscountCalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF6CDE231F2B566218561B4 /* DiscountCalculatorView.swift */; };
+		B70AD0318FAFC0445FD03AD9 /* AccessibilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3E07E5C047C4C117751D25 /* AccessibilityTests.swift */; };
 		B737B278B61BF3C27ECFA560 /* CalculatorViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C014ABC95C8D372EBB1AC7 /* CalculatorViewModelTests.swift */; };
 		B75972CF66C88928334D004E /* HistoryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F670765787CBDE7479E12868 /* HistoryEntry.swift */; };
 		BA6A4805ECCA7D532A3B08E3 /* HistoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14537D61F92159E7708154D3 /* HistoryDetailView.swift */; };
 		C01278E4C5D75A5FD630D501 /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 81CE0250B1CF6AAF0880B921 /* Configuration.storekit */; };
+		C746DE45CB839E3D1164EA95 /* CustomizationFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B656073700EE2B78061BE369 /* CustomizationFlowTests.swift */; };
 		CA8AF5F631900A16D9E9B662 /* PrismCalcWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 5EF4A68693D57D301E371A82 /* PrismCalcWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D86C9FC2909427C07D3EA52E /* HistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693A3C61991A360DD9FD744D /* HistoryService.swift */; };
 		DADD21C8A2621A7A0663FF16 /* TipCalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB362B6AFFBCCA93CE6B4B35 /* TipCalculatorViewModel.swift */; };
 		DB26D57ACDEB862FC1FF2277 /* PrismCalcApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F47AA3C4343F1ACD4AC871 /* PrismCalcApp.swift */; };
+		DC05C4EF649B91FA0ACA6796 /* WidgetSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3896905D3F8152A111D0AC1C /* WidgetSettingsView.swift */; };
 		E27A507584F5E904682D5961 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C197E91E245912A5A63A81B /* ViewExtensions.swift */; };
 		E45A90A8A40FAE921E3C81B1 /* StoreKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112208D79CF5E1EC11D5664E /* StoreKitManager.swift */; };
 		E9755B612561BC0E5411D030 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B11B78137158AFA4B728E9 /* HistoryView.swift */; };
 		ED96C2142778F1CD2D234DBC /* GlassIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214A5BC18578DBB7ED248C8E /* GlassIconButton.swift */; };
 		F389F2A3DCE36F8F080724C6 /* DiscountCalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892AD060FDE8B8637A29F117 /* DiscountCalculatorViewModel.swift */; };
+		F5C7110D2BC737E849C5E506 /* PersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26509E15A54254B49C270A72 /* PersistenceTests.swift */; };
 		F8D9ADF694A7E48B2C7B541C /* PrismCalcTips.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD796F479868C33E700B5E /* PrismCalcTips.swift */; };
 		FA1AB9F71214EFA86CCCAD2B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 8A0862606E37D374E2CD09E2 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
@@ -112,6 +118,7 @@
 		1AE810125C7AA4B49DD1C406 /* CurrencyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyService.swift; sourceTree = "<group>"; };
 		20B816A3B1DB1B25E2793EBE /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
 		214A5BC18578DBB7ED248C8E /* GlassIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassIconButton.swift; sourceTree = "<group>"; };
+		26509E15A54254B49C270A72 /* PersistenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceTests.swift; sourceTree = "<group>"; };
 		26E69055F05C2DFDD39CBC69 /* TipCalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipCalculatorView.swift; sourceTree = "<group>"; };
 		28B11B78137158AFA4B728E9 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		30A27DAAE53A112B615A0673 /* GlassCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassCard.swift; sourceTree = "<group>"; };
@@ -121,6 +128,7 @@
 		35A0661C3A9837C68807DCCF /* AnimatedMeshBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedMeshBackground.swift; sourceTree = "<group>"; };
 		36E0252FF2BA6C5DAAFD0DB2 /* WidgetIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetIntents.swift; sourceTree = "<group>"; };
 		372CB58120B9A90634A2EC54 /* CalculatorEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorEngineTests.swift; sourceTree = "<group>"; };
+		3896905D3F8152A111D0AC1C /* WidgetSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetSettingsView.swift; sourceTree = "<group>"; };
 		3A25C893566C6F690106CDDF /* GlassDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassDisplay.swift; sourceTree = "<group>"; };
 		3AB837CC33799E95545E4B89 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3B7B50423B6D89E4720B631E /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WidgetKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,6 +150,7 @@
 		8C197E91E245912A5A63A81B /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		936046028363571724E74217 /* ArcSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcSlider.swift; sourceTree = "<group>"; };
 		98DC50BD1E20F7CD60B7DA70 /* FeatureViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureViewModelTests.swift; sourceTree = "<group>"; };
+		99B8FAA34DEE532FFBA6E335 /* ThemeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeTests.swift; sourceTree = "<group>"; };
 		9FF6CDE231F2B566218561B4 /* DiscountCalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountCalculatorView.swift; sourceTree = "<group>"; };
 		A2C014ABC95C8D372EBB1AC7 /* CalculatorViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewModelTests.swift; sourceTree = "<group>"; };
 		A2D0715FF0317C514E6F1951 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,8 +159,11 @@
 		B074F9AC198B8A2488025590 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B08C9B495C216FA7885D2924 /* PrismCalc.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PrismCalc.entitlements; sourceTree = "<group>"; };
 		B40A206F27D504D1DC20D8D5 /* PrismCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrismCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B656073700EE2B78061BE369 /* CustomizationFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizationFlowTests.swift; sourceTree = "<group>"; };
+		BB3E07E5C047C4C117751D25 /* AccessibilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityTests.swift; sourceTree = "<group>"; };
 		C11164F17F7B1F297F70A834 /* SharedDataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDataServiceTests.swift; sourceTree = "<group>"; };
 		C13278145FCCBBBDC5FC3985 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		C228C0D8343BBC4BC4AD26A9 /* ThemePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePickerView.swift; sourceTree = "<group>"; };
 		C58FEAE60BC6E1FE1BE0C771 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		C7AAD00DAC3A5F836A7D40C6 /* PrismCalcTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrismCalcTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDACDAC490A4971A27748771 /* UnitConverterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConverterView.swift; sourceTree = "<group>"; };
@@ -235,6 +247,7 @@
 		377FA568060572B2ECF2206D /* PrismCalcUITests */ = {
 			isa = PBXGroup;
 			children = (
+				B656073700EE2B78061BE369 /* CustomizationFlowTests.swift */,
 				18838FACCEAD94472FD6DA36 /* ScreenshotTests.swift */,
 			);
 			name = PrismCalcUITests;
@@ -346,7 +359,9 @@
 			isa = PBXGroup;
 			children = (
 				B074F9AC198B8A2488025590 /* SettingsView.swift */,
+				C228C0D8343BBC4BC4AD26A9 /* ThemePickerView.swift */,
 				009970927EF00CF27C9619CE /* ThemePreviewView.swift */,
+				3896905D3F8152A111D0AC1C /* WidgetSettingsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -375,10 +390,13 @@
 		D46ECEBDB88DF1B3F8AB6461 /* PrismCalcTests */ = {
 			isa = PBXGroup;
 			children = (
+				BB3E07E5C047C4C117751D25 /* AccessibilityTests.swift */,
 				372CB58120B9A90634A2EC54 /* CalculatorEngineTests.swift */,
 				A2C014ABC95C8D372EBB1AC7 /* CalculatorViewModelTests.swift */,
 				98DC50BD1E20F7CD60B7DA70 /* FeatureViewModelTests.swift */,
+				26509E15A54254B49C270A72 /* PersistenceTests.swift */,
 				C11164F17F7B1F297F70A834 /* SharedDataServiceTests.swift */,
+				99B8FAA34DEE532FFBA6E335 /* ThemeTests.swift */,
 			);
 			name = PrismCalcTests;
 			path = Tests/PrismCalcTests;
@@ -530,7 +548,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 2610;
+				LastUpgradeCheck = 2620;
 				TargetAttributes = {
 					40F1E933878B92B29988D02A = {
 						TestTargetID = 9FD3D6FF66B853A994461E3E;
@@ -584,10 +602,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B70AD0318FAFC0445FD03AD9 /* AccessibilityTests.swift in Sources */,
 				85174233C2D7B20D07855A5F /* CalculatorEngineTests.swift in Sources */,
 				B737B278B61BF3C27ECFA560 /* CalculatorViewModelTests.swift in Sources */,
 				56B0F555DB677FAED067BC17 /* FeatureViewModelTests.swift in Sources */,
+				F5C7110D2BC737E849C5E506 /* PersistenceTests.swift in Sources */,
 				9E7F52DDCC0772597EF0B705 /* SharedDataServiceTests.swift in Sources */,
+				784D54FD75879BED23763AA7 /* ThemeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -625,12 +646,14 @@
 				173C4663F3D51DF98DDCAF54 /* SplitBillView.swift in Sources */,
 				888BE6A6F170B04DBE7A3313 /* SplitBillViewModel.swift in Sources */,
 				E45A90A8A40FAE921E3C81B1 /* StoreKitManager.swift in Sources */,
+				41C6946A6A6F688A3269A54D /* ThemePickerView.swift in Sources */,
 				5F2C96E12A6D463319525924 /* ThemePreviewView.swift in Sources */,
 				1A3CA5FE9E98AD35F7716B90 /* TipCalculatorView.swift in Sources */,
 				DADD21C8A2621A7A0663FF16 /* TipCalculatorViewModel.swift in Sources */,
 				B0D0583C113A62BD481273B2 /* UnitConverterView.swift in Sources */,
 				94A615BCE19AF31F47766EFB /* UnitConverterViewModel.swift in Sources */,
 				E27A507584F5E904682D5961 /* ViewExtensions.swift in Sources */,
+				DC05C4EF649B91FA0ACA6796 /* WidgetSettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -638,6 +661,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C746DE45CB839E3D1164EA95 /* CustomizationFlowTests.swift in Sources */,
 				8A1448363ACFF317DBC9A279 /* ScreenshotTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -684,10 +708,10 @@
 				CODE_SIGN_ENTITLEMENTS = App/PrismCalc.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N8A5T2PZY9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PrismCalc;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -773,6 +797,7 @@
 				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
 				CODE_SIGN_ENTITLEMENTS = WidgetExtension/PrismCalcWidget.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N8A5T2PZY9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WidgetExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "PrismCalc Widget";
@@ -953,7 +978,6 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PrismCalc;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

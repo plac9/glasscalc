@@ -34,6 +34,7 @@ public struct GlassIconButton: View {
     @State private var isPressed = false
     @State private var animationTrigger = false
     @ScaledMetric(relativeTo: .title3) private var iconScale: CGFloat = 1.0
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     public init(
         icon: String,
@@ -70,33 +71,42 @@ public struct GlassIconButton: View {
         .accessibilityAddTraits(.isButton)
         .sensoryFeedback(.impact(flexibility: .soft), trigger: animationTrigger)
         .onLongPressGesture(minimumDuration: .infinity, pressing: { pressing in
-            withAnimation(GlassTheme.buttonSpring) {
+            if reduceMotion {
                 isPressed = pressing
+            } else {
+                withAnimation(GlassTheme.buttonSpring) {
+                    isPressed = pressing
+                }
             }
         }, perform: {})
     }
 
-    /// Icon with SF Symbol animation effects
+    /// Icon with SF Symbol animation effects (respects reduce motion)
     @ViewBuilder
     private var iconView: some View {
-        switch symbolAnimation {
-        case .bounce:
+        // When reduce motion is enabled, skip all symbol effects
+        if reduceMotion {
             Image(systemName: icon)
-                .symbolEffect(.bounce, value: animationTrigger)
-        case .wiggle:
-            Image(systemName: icon)
-                .symbolEffect(.wiggle, value: animationTrigger)
-        case .breathe:
-            Image(systemName: icon)
-                .symbolEffect(.breathe, value: animationTrigger)
-        case .rotate:
-            Image(systemName: icon)
-                .symbolEffect(.rotate, value: animationTrigger)
-        case .pulse:
-            Image(systemName: icon)
-                .symbolEffect(.pulse, value: animationTrigger)
-        case .none:
-            Image(systemName: icon)
+        } else {
+            switch symbolAnimation {
+            case .bounce:
+                Image(systemName: icon)
+                    .symbolEffect(.bounce, value: animationTrigger)
+            case .wiggle:
+                Image(systemName: icon)
+                    .symbolEffect(.wiggle, value: animationTrigger)
+            case .breathe:
+                Image(systemName: icon)
+                    .symbolEffect(.breathe, value: animationTrigger)
+            case .rotate:
+                Image(systemName: icon)
+                    .symbolEffect(.rotate, value: animationTrigger)
+            case .pulse:
+                Image(systemName: icon)
+                    .symbolEffect(.pulse, value: animationTrigger)
+            case .none:
+                Image(systemName: icon)
+            }
         }
     }
 
@@ -177,6 +187,7 @@ public struct GlassPillButton: View {
     @State private var animationTrigger = false
     @State private var isPressed = false
     @ScaledMetric(relativeTo: .subheadline) private var pillIconSize: CGFloat = 16
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     public init(
         icon: String,
@@ -231,32 +242,42 @@ public struct GlassPillButton: View {
         .buttonStyle(.plain)
         .sensoryFeedback(.impact(flexibility: .soft), trigger: animationTrigger)
         .onLongPressGesture(minimumDuration: .infinity, pressing: { pressing in
-            withAnimation(GlassTheme.buttonSpring) {
+            if reduceMotion {
                 isPressed = pressing
+            } else {
+                withAnimation(GlassTheme.buttonSpring) {
+                    isPressed = pressing
+                }
             }
         }, perform: {})
     }
 
+    /// Icon with SF Symbol animation effects (respects reduce motion)
     @ViewBuilder
     private var iconView: some View {
-        switch symbolAnimation {
-        case .bounce:
+        // When reduce motion is enabled, skip all symbol effects
+        if reduceMotion {
             Image(systemName: icon)
-                .symbolEffect(.bounce, value: animationTrigger)
-        case .wiggle:
-            Image(systemName: icon)
-                .symbolEffect(.wiggle, value: animationTrigger)
-        case .breathe:
-            Image(systemName: icon)
-                .symbolEffect(.breathe, value: animationTrigger)
-        case .rotate:
-            Image(systemName: icon)
-                .symbolEffect(.rotate, value: animationTrigger)
-        case .pulse:
-            Image(systemName: icon)
-                .symbolEffect(.pulse, value: animationTrigger)
-        case .none:
-            Image(systemName: icon)
+        } else {
+            switch symbolAnimation {
+            case .bounce:
+                Image(systemName: icon)
+                    .symbolEffect(.bounce, value: animationTrigger)
+            case .wiggle:
+                Image(systemName: icon)
+                    .symbolEffect(.wiggle, value: animationTrigger)
+            case .breathe:
+                Image(systemName: icon)
+                    .symbolEffect(.breathe, value: animationTrigger)
+            case .rotate:
+                Image(systemName: icon)
+                    .symbolEffect(.rotate, value: animationTrigger)
+            case .pulse:
+                Image(systemName: icon)
+                    .symbolEffect(.pulse, value: animationTrigger)
+            case .none:
+                Image(systemName: icon)
+            }
         }
     }
 

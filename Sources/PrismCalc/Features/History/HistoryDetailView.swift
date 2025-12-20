@@ -8,6 +8,7 @@ import UIKit
 public struct HistoryDetailView: View {
     let entry: HistoryEntry
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     @State private var showCopied = false
     @ScaledMetric(relativeTo: .largeTitle) private var iconSize: CGFloat = 64
@@ -80,7 +81,7 @@ public struct HistoryDetailView: View {
 
     @MainActor
     private var iconSection: some View {
-        Image(systemName: entry.type.icon)
+        typeIconView
             .font(.system(size: iconSize, weight: .medium))
             .foregroundStyle(
                 LinearGradient(
@@ -89,8 +90,17 @@ public struct HistoryDetailView: View {
                     endPoint: .bottomTrailing
                 )
             )
-            .symbolEffect(.bounce, options: .nonRepeating)
             .padding(.top, GlassTheme.spacingLarge)
+    }
+
+    @MainActor @ViewBuilder
+    private var typeIconView: some View {
+        if reduceMotion {
+            Image(systemName: entry.type.icon)
+        } else {
+            Image(systemName: entry.type.icon)
+                .symbolEffect(.bounce, options: .nonRepeating)
+        }
     }
 
     // MARK: - Result Section
@@ -127,21 +137,32 @@ public struct HistoryDetailView: View {
                     detailRow(label: "Expression", value: expression)
                 }
 
+                if let note = entry.note, !note.isEmpty {
+                    detailRow(label: "Note", value: note, icon: "note.text")
+                }
+
                 detailRow(label: "Date", value: entry.formattedDate)
             }
         }
     }
 
     @MainActor
-    private func detailRow(label: String, value: String) -> some View {
+    private func detailRow(label: String, value: String, icon: String? = nil) -> some View {
         VStack(alignment: .leading, spacing: GlassTheme.spacingXS) {
-            Text(label)
-                .font(GlassTheme.captionFont)
-                .foregroundStyle(GlassTheme.textTertiary)
+            HStack(spacing: GlassTheme.spacingXS) {
+                if let icon {
+                    Image(systemName: icon)
+                        .font(GlassTheme.captionFont)
+                        .foregroundStyle(GlassTheme.primary)
+                }
+                Text(label)
+                    .font(GlassTheme.captionFont)
+                    .foregroundStyle(GlassTheme.textTertiary)
+            }
 
             Text(value)
                 .font(GlassTheme.bodyFont)
-                .foregroundStyle(GlassTheme.text)
+                .foregroundStyle(icon != nil ? GlassTheme.primary : GlassTheme.text)
         }
     }
 
@@ -191,28 +212,42 @@ public struct HistoryDetailView: View {
 
     private func copyToClipboard() {
         #if os(iOS)
-        let text = "\(entry.result)\n\(entry.details)"
+        var text = "\(entry.result)\n\(entry.details)"
+        if let note = entry.note, !note.isEmpty {
+            text += "\nNote: \(note)"
+        }
         UIPasteboard.general.string = text
         #endif
 
-        withAnimation(GlassTheme.springAnimation) {
+        if reduceMotion {
             showCopied = true
+        } else {
+            withAnimation(GlassTheme.springAnimation) {
+                showCopied = true
+            }
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            withAnimation(GlassTheme.springAnimation) {
+            if reduceMotion {
                 showCopied = false
+            } else {
+                withAnimation(GlassTheme.springAnimation) {
+                    showCopied = false
+                }
             }
         }
     }
 
     private func shareResult() {
         #if os(iOS)
-        let text = """
+        var text = """
         \(entry.type.rawValue): \(entry.result)
         \(entry.details)
-        — Shared from PrismCalc
         """
+        if let note = entry.note, !note.isEmpty {
+            text += "\nNote: \(note)"
+        }
+        text += "\n— Shared from PrismCalc"
 
         let activityVC = UIActivityViewController(
             activityItems: [text],

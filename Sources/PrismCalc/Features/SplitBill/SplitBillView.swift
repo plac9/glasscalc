@@ -10,24 +10,27 @@ public struct SplitBillView: View {
     @ScaledMetric(relativeTo: .largeTitle) private var peopleCountSize: CGFloat = 56
     @ScaledMetric(relativeTo: .largeTitle) private var heroValueSize: CGFloat = 56
     @ScaledMetric(relativeTo: .title2) private var peopleControlSize: CGFloat = 56
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @FocusState private var isInputFocused: Bool
 
     public init() {}
 
     public var body: some View {
+        let reduce = reduceMotion
         ScrollView {
             VStack(spacing: GlassTheme.spacingLarge) {
                 // Total Bill Input
                 billInputSection
                     .scrollTransition { content, phase in
-                        content.opacity(phase.isIdentity ? 1 : 0.85)
+                        content.opacity(reduce || phase.isIdentity ? 1 : 0.85)
                     }
 
                 // Number of People
                 peopleSection
                     .scrollTransition { content, phase in
                         content
-                            .opacity(phase.isIdentity ? 1 : 0.85)
-                            .scaleEffect(phase.isIdentity ? 1 : 0.97)
+                            .opacity(reduce || phase.isIdentity ? 1 : 0.85)
+                            .scaleEffect(reduce || phase.isIdentity ? 1 : 0.97)
                     }
 
                 // Tip Toggle and Slider
@@ -37,11 +40,21 @@ public struct SplitBillView: View {
                 resultsSection
                     .scrollTransition { content, phase in
                         content
-                            .opacity(phase.isIdentity ? 1 : 0.9)
-                            .offset(y: phase.isIdentity ? 0 : phase.value * 8)
+                            .opacity(reduce || phase.isIdentity ? 1 : 0.9)
+                            .offset(y: reduce || phase.isIdentity ? 0 : phase.value * 8)
                     }
             }
             .padding()
+        }
+        .scrollDismissesKeyboard(.interactively)
+        .toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                Spacer()
+                Button("Done") {
+                    isInputFocused = false
+                }
+                .foregroundStyle(GlassTheme.primary)
+            }
         }
     }
 
@@ -67,6 +80,7 @@ public struct SplitBillView: View {
                         .lineLimit(1)
                         .minimumScaleFactor(0.6)
                         .multilineTextAlignment(.trailing)
+                        .focused($isInputFocused)
                         .accessibilityLabel("Total bill")
                 }
             }
@@ -89,14 +103,13 @@ public struct SplitBillView: View {
                         decrementTrigger.toggle()
                         viewModel.decrementPeople()
                     } label: {
-                        Image(systemName: "minus")
+                        decrementButtonIcon
                             .font(.title2.weight(.semibold))
                             .foregroundStyle(
                                 viewModel.numberOfPeople > 1
                                     ? GlassTheme.text
                                     : GlassTheme.textTertiary
                             )
-                            .symbolEffect(.bounce.down, value: decrementTrigger)
                             .frame(width: peopleControlSize, height: peopleControlSize)
                             .background(
                                 Circle()
@@ -105,6 +118,8 @@ public struct SplitBillView: View {
                     }
                     .buttonStyle(.plain)
                     .disabled(viewModel.numberOfPeople <= 1)
+                    .accessibilityLabel("Decrease people")
+                    .accessibilityHint("Decreases the number of people to split between")
 
                     // People Count with Icons
                     VStack(spacing: GlassTheme.spacingXS) {
@@ -125,8 +140,8 @@ public struct SplitBillView: View {
                             .foregroundStyle(GlassTheme.text)
                             .lineLimit(1)
                             .minimumScaleFactor(0.6)
-                            .contentTransition(.numericText())
-                            .animation(.easeInOut(duration: 0.15), value: viewModel.numberOfPeople)
+                            .contentTransition(reduceMotion ? .identity : .numericText())
+                            .animation(reduceMotion ? nil : .easeInOut(duration: 0.15), value: viewModel.numberOfPeople)
 
                         Text(viewModel.numberOfPeople == 1 ? "person" : "people")
                             .font(GlassTheme.captionFont)
@@ -138,10 +153,9 @@ public struct SplitBillView: View {
                         incrementTrigger.toggle()
                         viewModel.incrementPeople()
                     } label: {
-                        Image(systemName: "plus")
+                        incrementButtonIcon
                             .font(.title2.weight(.semibold))
                             .foregroundStyle(GlassTheme.text)
-                            .symbolEffect(.bounce.up, value: incrementTrigger)
                             .frame(width: peopleControlSize, height: peopleControlSize)
                             .background(
                                 Circle()
@@ -149,6 +163,8 @@ public struct SplitBillView: View {
                             )
                     }
                     .buttonStyle(.plain)
+                    .accessibilityLabel("Increase people")
+                    .accessibilityHint("Increases the number of people to split between")
                 }
                 .sensoryFeedback(.selection, trigger: viewModel.numberOfPeople)
             }
@@ -200,7 +216,7 @@ public struct SplitBillView: View {
                     .transition(.opacity.combined(with: .move(edge: .top)))
                 }
             }
-            .animation(GlassTheme.springAnimation, value: viewModel.includeTip)
+            .animation(reduceMotion ? nil : GlassTheme.springAnimation, value: viewModel.includeTip)
         }
     }
 
@@ -220,8 +236,8 @@ public struct SplitBillView: View {
                     .foregroundStyle(GlassTheme.primary)
                     .lineLimit(1)
                     .minimumScaleFactor(0.6)
-                    .contentTransition(.numericText())
-                    .animation(.easeInOut(duration: 0.15), value: viewModel.perPersonShare)
+                    .contentTransition(reduceMotion ? .identity : .numericText())
+                    .animation(reduceMotion ? nil : .easeInOut(duration: 0.15), value: viewModel.perPersonShare)
             }
             .frame(maxWidth: .infinity)
             .padding(GlassTheme.spacingLarge)
@@ -267,9 +283,33 @@ public struct SplitBillView: View {
                         }
                         .buttonStyle(.plain)
                         .sensoryFeedback(.success, trigger: viewModel.billValue)
+                        .accessibilityLabel("Save to history")
+                        .accessibilityHint("Saves this split bill calculation to your history")
                     }
                 }
             }
+        }
+    }
+
+    // MARK: - Button Icons (Reduce Motion Support)
+
+    @MainActor @ViewBuilder
+    private var decrementButtonIcon: some View {
+        if reduceMotion {
+            Image(systemName: "minus")
+        } else {
+            Image(systemName: "minus")
+                .symbolEffect(.bounce.down, value: decrementTrigger)
+        }
+    }
+
+    @MainActor @ViewBuilder
+    private var incrementButtonIcon: some View {
+        if reduceMotion {
+            Image(systemName: "plus")
+        } else {
+            Image(systemName: "plus")
+                .symbolEffect(.bounce.up, value: incrementTrigger)
         }
     }
 
@@ -303,3 +343,4 @@ public struct SplitBillView: View {
         SplitBillView()
     }
 }
+

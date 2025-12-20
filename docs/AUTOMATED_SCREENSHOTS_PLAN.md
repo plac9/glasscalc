@@ -22,7 +22,8 @@ Automatically capture all 10 App Store screenshots without manual intervention u
 │  ├─ SCREENSHOT_MODE: Disables animations    │
 │  ├─ SIMULATE_PRO: Unlocks Pro features      │
 │  ├─ PRESET_THEME: Sets specific theme       │
-│  └─ POPULATE_DATA: Adds sample history      │
+│  ├─ POPULATE_DATA: Adds sample history      │
+│  └─ SELECT_TAB: Opens a tab on launch        │
 └─────────────────────────────────────────────┘
               ↓ controls ↓
 ┌─────────────────────────────────────────────┐
@@ -46,9 +47,9 @@ Automatically capture all 10 App Store screenshots without manual intervention u
 
 ### Phase 2: App Modifications
 - [ ] Add accessibility identifiers to all UI elements
-- [ ] Implement launch argument handling
-- [ ] Create test data population system
-- [ ] Add screenshot mode optimizations
+- [x] Implement launch argument handling
+- [x] Create test data population system
+- [x] Add screenshot mode optimizations
 
 ### Phase 3: Test Implementation
 - [ ] Write navigation helpers
@@ -57,10 +58,10 @@ Automatically capture all 10 App Store screenshots without manual intervention u
 - [ ] Handle theme switching
 
 ### Phase 4: Execution
-- [ ] Run tests for iPhone 6.7"
+- [x] Run tests for iPhone 17 simulator (iOS 26.2)
 - [ ] Run tests for iPad 12.9"
-- [ ] Post-process and rename screenshots
-- [ ] Verify all 10 screenshots captured
+- [x] Post-process and rename screenshots (exported from xcresult)
+- [x] Verify all 10 screenshots captured (see `screenshots/automated/2025-12-19-iphone-17/`)
 
 ---
 
@@ -128,7 +129,12 @@ if let themeArg = ProcessInfo.processInfo.arguments.first(where: { $0.hasPrefix(
 
 if ProcessInfo.processInfo.arguments.contains("POPULATE_DATA") {
     // Add sample history entries
-    HistoryService.shared.addSampleData()
+    populateSampleData()
+}
+
+if let tabArg = ProcessInfo.processInfo.arguments.first(where: { $0.hasPrefix("SELECT_TAB:") }) {
+    let tabName = tabArg.replacingOccurrences(of: "SELECT_TAB:", with: "")
+    UserDefaults.standard.set(tabName, forKey: "debug_selectedTab")
 }
 ```
 

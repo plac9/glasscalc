@@ -11,6 +11,7 @@ public struct GlassDisplay: View {
     let value: String
     let expression: String
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @ScaledMetric(relativeTo: .largeTitle) private var baseDisplaySize: CGFloat = 64
     @ScaledMetric(relativeTo: .title3) private var baseExpressionSize: CGFloat = 18
 
@@ -26,14 +27,21 @@ public struct GlassDisplay: View {
     public var body: some View {
         GlassCard(material: .ultraThinMaterial, cornerRadius: GlassTheme.cornerRadiusLarge) {
             VStack(alignment: .trailing, spacing: isIPad ? GlassTheme.spacingMedium : GlassTheme.spacingXS) {
-                // Expression line (always takes up space, even when empty)
-                Text(expression.isEmpty ? " " : expression)
-                    .font(.system(size: expressionFontSize, weight: .regular, design: .rounded))
-                    .monospacedDigit()
-                    .foregroundStyle(GlassTheme.textTertiary)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.75)
-                    .opacity(expression.isEmpty ? 0 : 1)
+                // Expression breadcrumb - expanded to show full calculation
+                // Uses horizontal scroll for very long expressions
+                ScrollView(.horizontal, showsIndicators: false) {
+                    Text(expression.isEmpty ? " " : expression)
+                        .font(.system(size: expressionFontSize, weight: .medium, design: .rounded))
+                        .monospacedDigit()
+                        .foregroundStyle(GlassTheme.textSecondary)
+                        .lineLimit(2)
+                        .multilineTextAlignment(.trailing)
+                        .fixedSize(horizontal: true, vertical: false)
+                }
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .frame(minHeight: expressionFontSize * 1.2)
+                .opacity(expression.isEmpty ? 0 : 1)
+                .defaultScrollAnchor(.trailing)
 
                 // Main value
                 Text(value)
@@ -42,13 +50,13 @@ public struct GlassDisplay: View {
                     .foregroundStyle(GlassTheme.text)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
-                    .contentTransition(.numericText())
-                    .animation(.easeInOut(duration: GlassTheme.animationQuick), value: value)
+                    .contentTransition(reduceMotion ? .identity : .numericText())
+                    .animation(reduceMotion ? nil : .easeInOut(duration: GlassTheme.animationQuick), value: value)
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
             .padding(.vertical, isIPad ? GlassTheme.spacingLarge : GlassTheme.spacingSmall)
             .padding(.horizontal, isIPad ? GlassTheme.spacingMedium : GlassTheme.spacingSmall)
-            .animation(.easeInOut(duration: GlassTheme.animationQuick), value: expression.isEmpty)
+            .animation(reduceMotion ? nil : .easeInOut(duration: GlassTheme.animationQuick), value: expression.isEmpty)
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel(accessibilityDescription)
@@ -93,8 +101,9 @@ public struct GlassDisplay: View {
 
         VStack(spacing: 20) {
             GlassDisplay(value: "0")
-            GlassDisplay(value: "123.45", expression: "100 + 23.45")
-            GlassDisplay(value: "1,234,567,890", expression: "Long number")
+            GlassDisplay(value: "123.45", expression: "100 + 23.45 =")
+            GlassDisplay(value: "1,234,567,890", expression: "1,000,000 + 234,567,890 =")
+            GlassDisplay(value: "115", expression: "100 + 15% =")
         }
         .padding()
     }

@@ -22,11 +22,18 @@ public final class HistoryEntry {
     /// Optional: original expression for basic calculator
     public var expression: String?
 
+    /// Optional: user-added note for context
+    public var note: String?
+
+    /// Whether entry is locked (protected from deletion)
+    public var isLocked: Bool = false
+
     public init(
         calculationType: CalculationType,
         result: String,
         details: String,
-        expression: String? = nil
+        expression: String? = nil,
+        note: String? = nil
     ) {
         self.id = UUID()
         self.calculationType = calculationType.rawValue
@@ -34,6 +41,7 @@ public final class HistoryEntry {
         self.details = details
         self.timestamp = Date()
         self.expression = expression
+        self.note = note
     }
 
     // MARK: - Computed

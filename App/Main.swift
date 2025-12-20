@@ -4,8 +4,6 @@ import SwiftUI
 @main
 struct PrismCalcMainApp: App {
     var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
+        PrismCalcApp.scene
     }
 }

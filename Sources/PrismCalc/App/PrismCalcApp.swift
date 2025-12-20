@@ -17,18 +17,26 @@ import TipKit
 /// ```
 @MainActor
 public enum PrismCalcApp {
+    private static var didHandleLaunchArguments = false
+
     /// The main app scene
     public static var scene: some Scene {
         WindowGroup {
+            let _ = handleLaunchArgumentsIfNeeded()
             ContentView()
                 .task {
                     TipKitConfiguration.configure()
-                    handleLaunchArguments()
                 }
         }
     }
 
     /// Handle launch arguments for UI testing
+    private static func handleLaunchArgumentsIfNeeded() {
+        guard !didHandleLaunchArguments else { return }
+        didHandleLaunchArguments = true
+        handleLaunchArguments()
+    }
+
     private static func handleLaunchArguments() {
         let arguments = ProcessInfo.processInfo.arguments
 
@@ -55,6 +63,11 @@ public enum PrismCalcApp {
             if let theme = GlassTheme.Theme(rawValue: themeName) {
                 GlassTheme.currentTheme = theme
             }
+        }
+
+        if let tabArg = arguments.first(where: { $0.hasPrefix("SELECT_TAB:") }) {
+            let tabName = tabArg.replacingOccurrences(of: "SELECT_TAB:", with: "")
+            UserDefaults.standard.set(tabName, forKey: "debug_selectedTab")
         }
 
         // Populate sample data

@@ -1,11 +1,30 @@
 import SwiftUI
 
-/// Settings view with theme selection and app info
+/// Settings view with organized sections for appearance, customization, and pro features
 public struct SettingsView: View {
-    @State private var selectedTheme: GlassTheme.Theme = .aurora
+    @AppStorage("selectedTheme") private var selectedThemeName: String = GlassTheme.Theme.aurora.rawValue
     @State private var showPurchaseError: Bool = false
+    @State private var showThemePicker: Bool = false
     @ScaledMetric(relativeTo: .caption2) private var proBadgeSize: CGFloat = 9
     @ScaledMetric(relativeTo: .title2) private var aboutIconSize: CGFloat = 48
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @AppStorage("zeroOnRight") private var zeroOnRight: Bool = false
+
+    /// Current theme derived from stored name
+    private var selectedTheme: GlassTheme.Theme {
+        GlassTheme.Theme(rawValue: selectedThemeName) ?? .aurora
+    }
+
+    /// Binding for theme picker that syncs both storage and static property
+    private var selectedThemeBinding: Binding<GlassTheme.Theme> {
+        Binding(
+            get: { selectedTheme },
+            set: { newTheme in
+                selectedThemeName = newTheme.rawValue
+                GlassTheme.currentTheme = newTheme
+            }
+        )
+    }
 
     // iOS 18 zoom transition support for theme preview
     @Namespace private var themeNamespace
@@ -16,36 +35,57 @@ public struct SettingsView: View {
     public init() {}
 
     public var body: some View {
-        ScrollView {
-            VStack(spacing: GlassTheme.spacingLarge) {
-                // Theme Selection
-                themeSection
-                    .scrollTransition { content, phase in
-                        content
-                            .opacity(phase.isIdentity ? 1 : 0.8)
-                            .scaleEffect(phase.isIdentity ? 1 : 0.98)
+        let reduce = reduceMotion
+        NavigationStack {
+            ScrollView {
+                VStack(spacing: GlassTheme.spacingLarge) {
+                    // Appearance Section
+                    appearanceSection
+                        .scrollTransition { content, phase in
+                            content
+                                .opacity(reduce || phase.isIdentity ? 1 : 0.8)
+                                .scaleEffect(reduce || phase.isIdentity ? 1 : 0.98)
+                        }
+
+                    // Customization Section (placeholders for M3)
+                    customizationSection
+                        .scrollTransition { content, phase in
+                            content
+                                .opacity(reduce || phase.isIdentity ? 1 : 0.8)
+                                .scaleEffect(reduce || phase.isIdentity ? 1 : 0.98)
+                        }
+
+                    // Pro Features (near bottom)
+                    if !storeKit.isPro {
+                        proSection
+                            .scrollTransition { content, phase in
+                                content
+                                    .opacity(reduce || phase.isIdentity ? 1 : 0.8)
+                                    .blur(radius: reduce || phase.isIdentity ? 0 : 2)
+                            }
                     }
 
-                // Pro Features
-                proSection
-                    .scrollTransition { content, phase in
-                        content
-                            .opacity(phase.isIdentity ? 1 : 0.8)
-                            .blur(radius: phase.isIdentity ? 0 : 2)
-                    }
-
-                // About
-                aboutSection
-                    .scrollTransition { content, phase in
-                        content
-                            .opacity(phase.isIdentity ? 1 : 0.8)
-                            .scaleEffect(phase.isIdentity ? 1 : 0.98)
-                    }
+                    // About (at bottom)
+                    aboutSection
+                        .scrollTransition { content, phase in
+                            content
+                                .opacity(reduce || phase.isIdentity ? 1 : 0.8)
+                                .scaleEffect(reduce || phase.isIdentity ? 1 : 0.98)
+                        }
+                }
+                .padding()
             }
-            .padding()
+            .navigationTitle("Settings")
+            #if os(iOS)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(.ultraThinMaterial, for: .navigationBar)
+            #endif
         }
         .onAppear {
-            selectedTheme = GlassTheme.currentTheme
+            // Sync stored theme on appear (in case it was changed externally)
+            if selectedThemeName != GlassTheme.currentTheme.rawValue {
+                selectedThemeName = GlassTheme.currentTheme.rawValue
+            }
         }
         .alert("Purchase Error", isPresented: $showPurchaseError) {
             Button("OK", role: .cancel) {}
@@ -57,8 +97,7 @@ public struct SettingsView: View {
         .fullScreenCover(item: $previewTheme) { theme in
             if #available(iOS 18.0, *) {
                 ThemePreviewView(theme: theme) {
-                    selectedTheme = theme
-                    GlassTheme.currentTheme = theme
+                    selectedThemeBinding.wrappedValue = theme
                 }
                 .navigationTransition(
                     .zoom(sourceID: theme.id, in: themeNamespace)
@@ -68,103 +107,225 @@ public struct SettingsView: View {
         #endif
     }
 
-    // MARK: - Theme Section
+    // MARK: - Appearance Section
 
     @MainActor
-    private var themeSection: some View {
-        VStack(alignment: .leading, spacing: GlassTheme.spacingMedium) {
-            Text("Theme")
-                .font(GlassTheme.headlineFont)
-                .foregroundStyle(GlassTheme.text)
+    private var appearanceSection: some View {
+        VStack(alignment: .leading, spacing: GlassTheme.spacingSmall) {
+            Text("Appearance")
+                .font(GlassTheme.captionFont)
+                .foregroundStyle(GlassTheme.textSecondary)
+                .textCase(.uppercase)
+                .padding(.leading, GlassTheme.spacingSmall)
 
-            LazyVGrid(columns: [
-                GridItem(.flexible()),
-                GridItem(.flexible())
-            ], spacing: GlassTheme.spacingSmall) {
-                ForEach(GlassTheme.Theme.allCases) { theme in
-                    themeCard(theme)
+            GlassCard(material: .thinMaterial, padding: 0) {
+                VStack(spacing: 0) {
+                    // Theme picker - drill-in navigation
+                    NavigationLink {
+                        ThemePickerView(selectedTheme: selectedThemeBinding)
+                    } label: {
+                        HStack {
+                            Image(systemName: "paintpalette")
+                                .foregroundStyle(GlassTheme.primary)
+                                .frame(width: 28)
+
+                            Text("Theme")
+                                .font(GlassTheme.bodyFont)
+                                .foregroundStyle(GlassTheme.text)
+
+                            Spacer()
+
+                            // Current theme preview
+                            RoundedRectangle(cornerRadius: 4)
+                                .fill(
+                                    LinearGradient(
+                                        colors: gradientColors(for: selectedTheme),
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    )
+                                )
+                                .frame(width: 24, height: 24)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 4)
+                                        .stroke(GlassTheme.text.opacity(0.2), lineWidth: 1)
+                                )
+
+                            Text(selectedTheme.rawValue)
+                                .font(GlassTheme.captionFont)
+                                .foregroundStyle(GlassTheme.textSecondary)
+
+                            Image(systemName: "chevron.right")
+                                .font(.caption)
+                                .foregroundStyle(GlassTheme.textTertiary)
+                        }
+                        .padding(GlassTheme.spacingMedium)
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("Theme, currently \(selectedTheme.rawValue)")
+                    .accessibilityHint("Double tap to change theme")
+
+                    Divider()
+                        .background(GlassTheme.text.opacity(0.1))
+
+                    // App Icon (placeholder for future)
+                    HStack {
+                        Image(systemName: "app.badge")
+                            .foregroundStyle(GlassTheme.primary)
+                            .frame(width: 28)
+
+                        Text("App Icon")
+                            .font(GlassTheme.bodyFont)
+                            .foregroundStyle(GlassTheme.text)
+
+                        Spacer()
+
+                        if !storeKit.isPro {
+                            Text("PRO")
+                                .font(.system(size: proBadgeSize, weight: .bold))
+                                .foregroundStyle(.white)
+                                .padding(.horizontal, 4)
+                                .padding(.vertical, 2)
+                                .background(Capsule().fill(GlassTheme.primary))
+                        }
+
+                        Text("Default")
+                            .font(GlassTheme.captionFont)
+                            .foregroundStyle(GlassTheme.textSecondary)
+
+                        Image(systemName: "chevron.right")
+                            .font(.caption)
+                            .foregroundStyle(GlassTheme.textTertiary)
+                    }
+                    .padding(GlassTheme.spacingMedium)
+                    .opacity(0.5) // Disabled for now
+                    .accessibilityLabel("App Icon, coming soon")
+                    .accessibilityHint("This feature is not yet available")
                 }
             }
         }
     }
 
+    // MARK: - Customization Section
+
     @MainActor
-    private func themeCard(_ theme: GlassTheme.Theme) -> some View {
-        let isSelected = selectedTheme == theme
-        let isLocked = theme.isPro && !storeKit.isPro
+    private var customizationSection: some View {
+        VStack(alignment: .leading, spacing: GlassTheme.spacingSmall) {
+            Text("Customization")
+                .font(GlassTheme.captionFont)
+                .foregroundStyle(GlassTheme.textSecondary)
+                .textCase(.uppercase)
+                .padding(.leading, GlassTheme.spacingSmall)
 
-        return Button {
-            guard !isLocked else { return }
-            withAnimation(GlassTheme.springAnimation) {
-                selectedTheme = theme
-                GlassTheme.currentTheme = theme
-            }
-        } label: {
-            VStack(spacing: GlassTheme.spacingSmall) {
-                // Theme Preview
-                RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusSmall)
-                    .fill(
-                        LinearGradient(
-                            colors: gradientColors(for: theme),
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
-                    .frame(height: 60)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusSmall)
-                            .fill(.ultraThinMaterial)
-                            .padding(8)
-                    )
-                    .overlay(
-                        Group {
-                            if isLocked {
-                                Image(systemName: "lock.fill")
-                                    .foregroundStyle(.white)
-                            }
+            GlassCard(material: .thinMaterial, padding: 0) {
+                VStack(spacing: 0) {
+                    // Keypad Layout - 0 position toggle (M3-T2)
+                    HStack {
+                        Image(systemName: "number.square")
+                            .foregroundStyle(GlassTheme.primary)
+                            .frame(width: 28)
+
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Zero on Right")
+                                .font(GlassTheme.bodyFont)
+                                .foregroundStyle(GlassTheme.text)
+
+                            Text("Swap 0 and decimal positions")
+                                .font(GlassTheme.captionFont)
+                                .foregroundStyle(GlassTheme.textTertiary)
                         }
-                    )
 
-                // Theme Name
-                HStack {
-                    Text(theme.rawValue)
-                        .font(GlassTheme.captionFont)
-                        .foregroundStyle(GlassTheme.text)
+                        Spacer()
 
-                    if theme.isPro {
-                        Text("PRO")
-                            .font(.system(size: proBadgeSize, weight: .bold))
-                            .foregroundStyle(.white)
-                            .padding(.horizontal, 4)
-                            .padding(.vertical, 2)
-                            .background(
-                                Capsule()
-                                    .fill(GlassTheme.primary)
-                            )
+                        Toggle("", isOn: $zeroOnRight)
+                            .tint(GlassTheme.primary)
+                            .labelsHidden()
                     }
+                    .padding(GlassTheme.spacingMedium)
+                    .sensoryFeedback(.selection, trigger: zeroOnRight)
+                    .accessibilityLabel("Zero on right")
+                    .accessibilityHint("When enabled, the zero button appears on the right side of the keypad")
+
+                    Divider()
+                        .background(GlassTheme.text.opacity(0.1))
+
+                    // Tab Order - Reset option (M3-T1)
+                    Button {
+                        resetTabOrder()
+                    } label: {
+                        HStack {
+                            Image(systemName: "square.grid.2x2")
+                                .foregroundStyle(GlassTheme.primary)
+                                .frame(width: 28)
+
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text("Reset Tab Order")
+                                    .font(GlassTheme.bodyFont)
+                                    .foregroundStyle(GlassTheme.text)
+
+                                Text("Long-press tabs on iPad to reorder")
+                                    .font(GlassTheme.captionFont)
+                                    .foregroundStyle(GlassTheme.textTertiary)
+                            }
+
+                            Spacer()
+
+                            Image(systemName: "arrow.counterclockwise")
+                                .font(.caption)
+                                .foregroundStyle(GlassTheme.textSecondary)
+                        }
+                        .padding(GlassTheme.spacingMedium)
+                    }
+                    .buttonStyle(.plain)
+                    .sensoryFeedback(.selection, trigger: false)
+                    .accessibilityLabel("Reset tab order")
+                    .accessibilityHint("Restores tabs to their default order")
+
+                    Divider()
+                        .background(GlassTheme.text.opacity(0.1))
+
+                    // Widget Settings (M3-T3)
+                    NavigationLink {
+                        WidgetSettingsView()
+                    } label: {
+                        HStack {
+                            Image(systemName: "widget.small")
+                                .foregroundStyle(GlassTheme.primary)
+                                .frame(width: 28)
+
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text("Widgets")
+                                    .font(GlassTheme.bodyFont)
+                                    .foregroundStyle(GlassTheme.text)
+
+                                Text("Add widgets to Home Screen")
+                                    .font(GlassTheme.captionFont)
+                                    .foregroundStyle(GlassTheme.textTertiary)
+                            }
+
+                            Spacer()
+
+                            Image(systemName: "chevron.right")
+                                .font(.caption)
+                                .foregroundStyle(GlassTheme.textTertiary)
+                        }
+                        .padding(GlassTheme.spacingMedium)
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("Widgets")
+                    .accessibilityHint("View available widgets and how to add them")
                 }
             }
-            .padding(GlassTheme.spacingSmall)
-            .background(
-                RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusMedium)
-                    .fill(.thinMaterial)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusMedium)
-                            .stroke(
-                                isSelected ? GlassTheme.primary : Color.clear,
-                                lineWidth: 2
-                            )
-                    )
-            )
-            .opacity(isLocked ? 0.6 : 1)
         }
-        .buttonStyle(.plain)
-        .sensoryFeedback(.selection, trigger: selectedTheme)
-        // iOS 18 zoom transition source - long press for preview
-        .matchedTransitionSource(id: theme.id, in: themeNamespace)
-        .onLongPressGesture(minimumDuration: 0.5) {
-            previewTheme = theme
-        }
+    }
+
+    private func resetTabOrder() {
+        // Clear the tab customization from UserDefaults to reset to default order
+        UserDefaults.standard.removeObject(forKey: "tabCustomization")
+        // Provide haptic feedback
+        #if os(iOS)
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
+        #endif
     }
 
     private func gradientColors(for theme: GlassTheme.Theme) -> [Color] {
@@ -250,6 +411,8 @@ public struct SettingsView: View {
                     }
                     .buttonStyle(.plain)
                     .disabled(storeKit.isLoading)
+                    .accessibilityLabel("Upgrade to Pro for \(storeKit.proPrice)")
+                    .accessibilityHint("Unlocks all Pro features including tip calculator, discount calculator, and more")
 
                     // Restore Purchases
                     Button {
@@ -266,6 +429,8 @@ public struct SettingsView: View {
                     }
                     .buttonStyle(.plain)
                     .disabled(storeKit.isLoading)
+                    .accessibilityLabel("Restore purchases")
+                    .accessibilityHint("Restores previously purchased Pro features")
                 }
             }
         }
@@ -331,3 +496,4 @@ public struct SettingsView: View {
         SettingsView()
     }
 }
+

@@ -23,18 +23,22 @@ struct ProFeatureTip: Tip {
 
 // MARK: - Widget Tips
 
-/// Tip to encourage adding the widget
+/// Tip to encourage adding the widget with clear instructions
 struct AddWidgetTip: Tip {
     var title: Text {
-        Text("Quick Access Widget")
+        Text("Add Quick Access Widget")
     }
 
     var message: Text? {
-        Text("Add PrismCalc to your Home Screen for instant calculations.")
+        Text("Long-press your Home Screen, tap the + button, then search \"prismCalc\" to add a calculator widget.")
     }
 
     var image: Image? {
-        Image(systemName: "square.grid.2x2")
+        Image(systemName: "plus.app")
+    }
+
+    var actions: [Action] {
+        Action(id: "dismiss", title: "Got It")
     }
 
     // Show after 3 calculations

@@ -1,6 +1,7 @@
 import XCTest
 
 /// Automated screenshot capture for App Store submission
+@MainActor
 final class ScreenshotTests: XCTestCase {
 
     var app: XCUIApplication!
@@ -26,74 +27,141 @@ final class ScreenshotTests: XCTestCase {
         captureProTierScreenshots()
     }
 
+    /// M5-T3: Capture calculator screenshot for all 6 themes to establish baseline
+    func testCaptureAllThemes() throws {
+        let themes = ["Aurora", "CalmingBlues", "ForestEarth", "SoftTranquil", "BlueGreenHarmony", "Midnight"]
+
+        for theme in themes {
+            captureScreenshotOnTab(
+                name: "Theme_\(theme)_Calculator",
+                tab: "Calculator",
+                pro: true,
+                theme: theme,
+                populateData: true
+            ) {
+                self.tapCalculatorButtons(["4", "2"])
+            }
+
+            captureScreenshotOnTab(
+                name: "Theme_\(theme)_Tip",
+                tab: "Tip",
+                pro: true,
+                theme: theme,
+                populateData: true
+            )
+        }
+    }
+
     // MARK: - Free Tier Screenshots
 
     private func captureFreeTierScreenshots() {
-        setupApp(pro: false, theme: "Aurora", populateData: true)
-
         // 1. Calculator - Hero shot
-        sleep(2)
-        tapCalculatorButtons(["1", "2", "3", "4", "decimal", "5", "6"])
-        sleep(1)
-        captureScreenshot("01_Calculator_Free")
+        captureScreenshotOnTab(
+            name: "01_Calculator_Free",
+            tab: "Calculator",
+            pro: false,
+            theme: "Aurora",
+            populateData: true
+        ) {
+            self.tapCalculatorButtons(["1", "2", "3", "4", "decimal", "5", "6"])
+        }
 
         // 2. History - Free tier (10 items + upgrade banner)
-        tapTab("History")
-        sleep(1)
-        captureScreenshot("02_History_Free")
+        captureScreenshotOnTab(
+            name: "02_History_Free",
+            tab: "History",
+            pro: false,
+            theme: "Aurora",
+            populateData: true
+        )
 
         // 3. Paywall - Tip Calculator
-        tapTab("Tip")
-        sleep(1)
-        captureScreenshot("03_Paywall_Tip")
+        captureScreenshotOnTab(
+            name: "03_Paywall_Tip",
+            tab: "Tip",
+            pro: false,
+            theme: "Aurora",
+            populateData: false
+        )
 
         // 4. Settings - Themes (Aurora unlocked, others locked)
-        tapTab("Settings")
-        sleep(1)
-        captureScreenshot("04_Themes_Free")
+        captureScreenshotOnTab(
+            name: "04_Themes_Free",
+            tab: "Settings",
+            pro: false,
+            theme: "Aurora",
+            populateData: false
+        )
     }
 
     // MARK: - Pro Tier Screenshots
 
     private func captureProTierScreenshots() {
-        setupApp(pro: true, theme: "Aurora", populateData: true)
-
         // 5. Tip Calculator - PRO
-        tapTab("Tip")
-        sleep(1)
-        captureScreenshot("05_Tip_Calculator_Pro")
+        captureScreenshotOnTab(
+            name: "05_Tip_Calculator_Pro",
+            tab: "Tip",
+            pro: true,
+            theme: "Aurora",
+            populateData: true
+        )
 
         // 6. Discount Calculator - PRO
-        tapTab("Discount")
-        sleep(1)
-        captureScreenshot("06_Discount_Calculator_Pro")
+        captureScreenshotOnTab(
+            name: "06_Discount_Calculator_Pro",
+            tab: "Discount",
+            pro: true,
+            theme: "Aurora",
+            populateData: true
+        )
 
         // 7. Split Bill - PRO
-        tapTab("Split")
-        sleep(1)
-        captureScreenshot("07_Split_Bill_Pro")
+        captureScreenshotOnTab(
+            name: "07_Split_Bill_Pro",
+            tab: "Split",
+            pro: true,
+            theme: "Aurora",
+            populateData: true
+        )
 
         // 8. Unit Converter - PRO
-        tapTab("Convert")
-        sleep(1)
-        captureScreenshot("08_Unit_Converter_Pro")
+        captureScreenshotOnTab(
+            name: "08_Unit_Converter_Pro",
+            tab: "Convert",
+            pro: true,
+            theme: "Aurora",
+            populateData: true
+        )
 
         // 9. History - PRO (unlimited)
-        tapTab("History")
-        sleep(1)
-        captureScreenshot("09_History_Pro")
+        captureScreenshotOnTab(
+            name: "09_History_Pro",
+            tab: "History",
+            pro: true,
+            theme: "Aurora",
+            populateData: true
+        )
 
         // 10. Calculator with result
-        tapTab("Calculator")
-        sleep(1)
-        tapCalculatorButtons(["9", "9", "9", "decimal", "9", "9"])
-        sleep(1)
-        captureScreenshot("10_Calculator_Result_Pro")
+        captureScreenshotOnTab(
+            name: "10_Calculator_Result_Pro",
+            tab: "Calculator",
+            pro: true,
+            theme: "Aurora",
+            populateData: true
+        ) {
+            self.tapCalculatorButtons(["9", "9", "9", "decimal", "9", "9"])
+        }
     }
 
     // MARK: - Helper Methods
 
-    private func setupApp(pro: Bool, theme: String, populateData: Bool = false) {
+    private func setupApp(
+        pro: Bool,
+        theme: String,
+        populateData: Bool = false,
+        selectedTab: String? = nil
+    ) {
         app.terminate()
         app.launchArguments = [
             "SCREENSHOT_MODE",
@@ -113,101 +181,26 @@ final class ScreenshotTests: XCTestCase {
             app.launchArguments.append("POPULATE_DATA")
         }
 
+        if let selectedTab {
+            app.launchArguments.append("SELECT_TAB:\(selectedTab)")
+        }
+
         app.launch()
         sleep(2) // Wait for app to fully load
     }
-
-    private func tapTab(_ identifier: String) {
-        // iOS tab bar with "More" menu - try multiple query strategies
-        let tabIdentifier = "tab-\(identifier.lowercased())"
-
-        // Strategy 1: Direct button query with accessibility identifier
-        let tab = app.buttons[tabIdentifier]
-        if tab.waitForExistence(timeout: 2) {
-            tab.tap()
-            sleep(1)
-            return
-        }
-
-        // Strategy 2: TabBar buttons by label
-        let tabByLabel = app.tabBars.buttons[identifier]
-        if tabByLabel.waitForExistence(timeout: 2) {
-            tabByLabel.tap()
-            sleep(1)
-            return
-        }
-
-        // Strategy 3: Any button with matching label (direct)
-        let anyButton = app.buttons[identifier]
-        if anyButton.waitForExistence(timeout: 2) {
-            anyButton.tap()
-            sleep(1)
-            return
-        }
-
-        // Strategy 4: Check if tab is in "More" menu
-        // First check if we're already in More menu (table exists)
-        if app.tables.firstMatch.exists {
-            // Already in More menu, just look for the item
-            let moreItem = app.tables.cells.containing(.staticText, identifier: identifier).firstMatch
-            if moreItem.waitForExistence(timeout: 2) {
-                moreItem.tap()
-                sleep(1)
-                return
-            }
-
-            // Try any cell with matching text
-            let tableCells = app.tables.cells.allElementsBoundByIndex
-            for cell in tableCells {
-                if cell.staticTexts[identifier].exists {
-                    cell.tap()
-                    sleep(1)
-                    return
-                }
-            }
-
-            // Not found, go back and fail
-            let backButton = app.navigationBars.buttons.firstMatch
-            if backButton.exists {
-                backButton.tap()
-                sleep(1)
-            }
-        } else {
-            // Not in More menu yet, try to open it
-            // Use tab bar button specifically to avoid back button
-            let moreButton = app.tabBars.buttons["More"]
-            if moreButton.exists {
-                moreButton.tap()
-                sleep(1)
-
-                // Try finding by cell
-                let moreItem = app.tables.cells.containing(.staticText, identifier: identifier).firstMatch
-                if moreItem.waitForExistence(timeout: 2) {
-                    moreItem.tap()
-                    sleep(1)
-                    return
-                }
-
-                // Try any cell with matching text
-                let tableCells = app.tables.cells.allElementsBoundByIndex
-                for cell in tableCells {
-                    if cell.staticTexts[identifier].exists {
-                        cell.tap()
-                        sleep(1)
-                        return
-                    }
-                }
-
-                // Go back if not found
-                let backButton = app.navigationBars.buttons.firstMatch
-                if backButton.exists {
-                    backButton.tap()
-                    sleep(1)
-                }
-            }
-        }
-
-        XCTFail("Tab '\(identifier)' not found after trying all strategies including More menu")
+    private func captureScreenshotOnTab(
+        name: String,
+        tab: String,
+        pro: Bool,
+        theme: String,
+        populateData: Bool,
+        afterLaunch: (() -> Void)? = nil
+    ) {
+        setupApp(pro: pro, theme: theme, populateData: populateData, selectedTab: tab)
+        sleep(1)
+        afterLaunch?()
+        sleep(1)
+        captureScreenshot(name)
     }
 
     private func tapCalculatorButtons(_ buttons: [String]) {

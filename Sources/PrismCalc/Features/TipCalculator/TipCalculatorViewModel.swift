@@ -142,14 +142,15 @@ public final class TipCalculatorViewModel {
         tipPercentage = tip
     }
 
-    public func saveToHistory() {
+    public func saveToHistory(note: String? = nil) {
         guard billValue > 0 else { return }
         HistoryService.shared.saveTip(
             bill: formatCurrency(billValue),
             tipPercent: Int(tipPercentage),
             total: formattedTotal,
             perPerson: numberOfPeople > 1 ? formattedPerPerson : nil,
-            people: numberOfPeople
+            people: numberOfPeople,
+            note: note
         )
     }
 

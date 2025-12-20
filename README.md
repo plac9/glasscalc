@@ -15,6 +15,8 @@ Part of the LaClair Tech suite - Beautiful, functional tools with stunning UI de
 
 PrismCalc is a beautifully designed calculator app featuring full glassmorphism effects, leveraging iOS 18's Liquid Glass design language. Primary focus on spectacular UI while providing practical real-world calculation tools.
 
+**Mission**: PrismCalc is for everyday iPhone users who want a gorgeous, trustworthy calculator for money math without clutter.
+
 **Design Philosophy**:
 - **UI First**: Stunning glassmorphism with layered materials
 - **Practical Tools**: Tips, discounts, splits, conversions

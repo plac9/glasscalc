@@ -85,7 +85,7 @@ public final class HistoryService {
     }
 
     /// Save a tip calculation
-    public func saveTip(bill: String, tipPercent: Int, total: String, perPerson: String?, people: Int) {
+    public func saveTip(bill: String, tipPercent: Int, total: String, perPerson: String?, people: Int, note: String? = nil) {
         var details = "\(bill) + \(tipPercent)% tip"
         if let perPerson, people > 1 {
             details += " ÷ \(people) = \(perPerson)/person"
@@ -93,40 +93,44 @@ public final class HistoryService {
         let entry = HistoryEntry(
             calculationType: .tip,
             result: total,
-            details: details
+            details: details,
+            note: note?.isEmpty == true ? nil : note
         )
         save(entry)
     }
 
     /// Save a discount calculation
-    public func saveDiscount(original: String, discountPercent: Int, final: String, saved: String) {
+    public func saveDiscount(original: String, discountPercent: Int, final: String, saved: String, note: String? = nil) {
         let details = "\(original) - \(discountPercent)% = \(final) (saved \(saved))"
         let entry = HistoryEntry(
             calculationType: .discount,
             result: final,
-            details: details
+            details: details,
+            note: note?.isEmpty == true ? nil : note
         )
         save(entry)
     }
 
     /// Save a split bill calculation
-    public func saveSplit(total: String, people: Int, perPerson: String) {
+    public func saveSplit(total: String, people: Int, perPerson: String, note: String? = nil) {
         let details = "\(total) ÷ \(people) people"
         let entry = HistoryEntry(
             calculationType: .split,
             result: perPerson,
-            details: details
+            details: details,
+            note: note?.isEmpty == true ? nil : note
         )
         save(entry)
     }
 
     /// Save a unit conversion
-    public func saveConversion(value: String, fromUnit: String, toUnit: String, result: String) {
+    public func saveConversion(value: String, fromUnit: String, toUnit: String, result: String, note: String? = nil) {
         let details = "\(value) \(fromUnit) → \(toUnit)"
         let entry = HistoryEntry(
             calculationType: .convert,
             result: result,
-            details: details
+            details: details,
+            note: note?.isEmpty == true ? nil : note
         )
         save(entry)
     }

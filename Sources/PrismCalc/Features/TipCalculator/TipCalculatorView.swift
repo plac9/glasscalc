@@ -5,26 +5,31 @@ public struct TipCalculatorView: View {
     @State private var viewModel = TipCalculatorViewModel()
     @State private var decrementTrigger = false
     @State private var incrementTrigger = false
+    @State private var noteText: String = ""
     @ScaledMetric(relativeTo: .title2) private var currencySymbolSize: CGFloat = 32
     @ScaledMetric(relativeTo: .largeTitle) private var inputValueSize: CGFloat = 48
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @FocusState private var isInputFocused: Bool
 
     public init() {}
 
     public var body: some View {
+        let reduce = reduceMotion
+
         ScrollView {
             VStack(spacing: GlassTheme.spacingLarge) {
                 // Bill Amount Input
                 billInputSection
                     .scrollTransition { content, phase in
-                        content.opacity(phase.isIdentity ? 1 : 0.85)
+                        content.opacity(reduce || phase.isIdentity ? 1 : 0.85)
                     }
 
                 // Tip Percentage Arc Slider
                 tipSliderSection
                     .scrollTransition { content, phase in
                         content
-                            .opacity(phase.isIdentity ? 1 : 0.85)
-                            .scaleEffect(phase.isIdentity ? 1 : 0.97)
+                            .opacity(reduce || phase.isIdentity ? 1 : 0.85)
+                            .scaleEffect(reduce || phase.isIdentity ? 1 : 0.97)
                     }
 
                 // Quick Tip Buttons
@@ -37,11 +42,21 @@ public struct TipCalculatorView: View {
                 resultsSection
                     .scrollTransition { content, phase in
                         content
-                            .opacity(phase.isIdentity ? 1 : 0.9)
-                            .offset(y: phase.isIdentity ? 0 : phase.value * 8)
+                            .opacity(reduce || phase.isIdentity ? 1 : 0.9)
+                            .offset(y: reduce || phase.isIdentity ? 0 : phase.value * 8)
                     }
             }
             .padding()
+        }
+        .scrollDismissesKeyboard(.interactively)
+        .toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                Spacer()
+                Button("Done") {
+                    isInputFocused = false
+                }
+                .foregroundStyle(GlassTheme.primary)
+            }
         }
     }
 
@@ -67,6 +82,7 @@ public struct TipCalculatorView: View {
                         .lineLimit(1)
                         .minimumScaleFactor(0.6)
                         .multilineTextAlignment(.trailing)
+                        .focused($isInputFocused)
                         .accessibilityLabel("Bill amount")
                 }
             }
@@ -94,10 +110,15 @@ public struct TipCalculatorView: View {
     @MainActor
     private var quickTipSection: some View {
         HStack(spacing: GlassTheme.spacingSmall) {
+            let reduceMotionSnapshot = reduceMotion
             ForEach(viewModel.quickTips, id: \.self) { tip in
                 Button {
-                    withAnimation(GlassTheme.springAnimation) {
+                    if reduceMotionSnapshot {
                         viewModel.selectQuickTip(tip)
+                    } else {
+                        withAnimation(GlassTheme.springAnimation) {
+                            viewModel.selectQuickTip(tip)
+                        }
                     }
                 } label: {
                     Text("\(Int(tip))%")
@@ -125,6 +146,8 @@ public struct TipCalculatorView: View {
                 }
                 .buttonStyle(.plain)
                 .sensoryFeedback(.selection, trigger: viewModel.tipPercentage)
+                .accessibilityLabel("\(Int(tip)) percent tip")
+                .accessibilityHint(viewModel.tipPercentage == tip ? "Currently selected" : "Double tap to select")
             }
         }
     }
@@ -142,39 +165,43 @@ public struct TipCalculatorView: View {
                 Spacer()
 
                 HStack(spacing: GlassTheme.spacingMedium) {
+                    let reduceMotionSnapshot = reduceMotion
+
                     Button {
                         decrementTrigger.toggle()
                         viewModel.decrementPeople()
                     } label: {
-                        Image(systemName: "minus.circle.fill")
+                        decrementButtonIcon
                             .font(.title2)
                             .foregroundStyle(
                                 viewModel.numberOfPeople > 1
                                     ? GlassTheme.primary
                                     : GlassTheme.textTertiary
                             )
-                            .symbolEffect(.bounce.down, value: decrementTrigger)
                     }
                     .buttonStyle(.plain)
                     .disabled(viewModel.numberOfPeople <= 1)
+                    .accessibilityLabel("Decrease people")
+                    .accessibilityHint("Decreases the number of people to split between")
 
                     Text("\(viewModel.numberOfPeople)")
                         .font(.system(.title2, design: .rounded, weight: .semibold))
                         .foregroundStyle(GlassTheme.text)
                         .frame(minWidth: 40)
-                        .contentTransition(.numericText())
-                        .animation(.easeInOut(duration: 0.15), value: viewModel.numberOfPeople)
+                        .contentTransition(reduceMotionSnapshot ? .identity : .numericText())
+                        .animation(reduceMotionSnapshot ? nil : .easeInOut(duration: 0.15), value: viewModel.numberOfPeople)
 
                     Button {
                         incrementTrigger.toggle()
                         viewModel.incrementPeople()
                     } label: {
-                        Image(systemName: "plus.circle.fill")
+                        incrementButtonIcon
                             .font(.title2)
                             .foregroundStyle(GlassTheme.primary)
-                            .symbolEffect(.bounce.up, value: incrementTrigger)
                     }
                     .buttonStyle(.plain)
+                    .accessibilityLabel("Increase people")
+                    .accessibilityHint("Increases the number of people to split between")
                 }
                 .sensoryFeedback(.selection, trigger: viewModel.numberOfPeople)
             }
@@ -218,8 +245,23 @@ public struct TipCalculatorView: View {
                 Divider()
                     .background(GlassTheme.textTertiary)
 
+                // Optional note input
+                HStack(spacing: GlassTheme.spacingSmall) {
+                    Image(systemName: "note.text")
+                        .foregroundStyle(GlassTheme.textTertiary)
+
+                    TextField("Add a note (optional)", text: $noteText)
+                        .font(GlassTheme.captionFont)
+                        .foregroundStyle(GlassTheme.text)
+                        .textFieldStyle(.plain)
+                        .accessibilityLabel("Note")
+                        .accessibilityHint("Optional note to save with this calculation")
+                }
+                .padding(.vertical, GlassTheme.spacingXS)
+
                 Button {
-                    viewModel.saveToHistory()
+                    viewModel.saveToHistory(note: noteText.isEmpty ? nil : noteText)
+                    noteText = "" // Clear after save
                 } label: {
                     Label("Save to History", systemImage: "clock.arrow.circlepath")
                         .font(GlassTheme.bodyFont)
@@ -227,6 +269,8 @@ public struct TipCalculatorView: View {
                 }
                 .buttonStyle(.plain)
                 .sensoryFeedback(.success, trigger: viewModel.billValue)
+                .accessibilityLabel("Save to history")
+                .accessibilityHint("Saves this tip calculation to your history")
             }
         }
         .padding(GlassTheme.spacingMedium)
@@ -251,8 +295,32 @@ public struct TipCalculatorView: View {
         .shadow(color: Color.black.opacity(0.1), radius: 15, y: 8)
     }
 
-    @MainActor
+    // MARK: - Button Icons (Reduce Motion Support)
+
+    @MainActor @ViewBuilder
+    private var decrementButtonIcon: some View {
+        if reduceMotion {
+            Image(systemName: "minus.circle.fill")
+        } else {
+            Image(systemName: "minus.circle.fill")
+                .symbolEffect(.bounce.down, value: decrementTrigger)
+        }
+    }
+
+    @MainActor @ViewBuilder
+    private var incrementButtonIcon: some View {
+        if reduceMotion {
+            Image(systemName: "plus.circle.fill")
+        } else {
+            Image(systemName: "plus.circle.fill")
+                .symbolEffect(.bounce.up, value: incrementTrigger)
+        }
+    }
+
+    @MainActor @ViewBuilder
     private func resultRow(label: String, value: String, isHighlighted: Bool = false) -> some View {
+        let reduceMotionSnapshot = reduceMotion
+
         HStack {
             Text(label)
                 .font(GlassTheme.bodyFont)
@@ -263,8 +331,8 @@ public struct TipCalculatorView: View {
             Text(value)
                 .font(isHighlighted ? GlassTheme.titleFont : GlassTheme.headlineFont)
                 .foregroundStyle(isHighlighted ? GlassTheme.primary : GlassTheme.text)
-                .contentTransition(.numericText())
-                .animation(.easeInOut(duration: 0.15), value: value)
+                .contentTransition(reduceMotionSnapshot ? .identity : .numericText())
+                .animation(reduceMotionSnapshot ? nil : .easeInOut(duration: 0.15), value: value)
         }
     }
 }
@@ -283,3 +351,4 @@ public struct TipCalculatorView: View {
         TipCalculatorView()
     }
 }
+
