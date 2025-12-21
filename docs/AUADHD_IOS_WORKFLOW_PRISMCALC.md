@@ -33,7 +33,7 @@ Output
 - Supporting features (v1):
   - Glass-first UI with one-tap clarity
   - Tip / discount / split tools (Pro)
-  - History tape (last 10 free, unlimited Pro)
+  - History tape (Pro only)
 
 Checkpoint
 - "PrismCalc is for everyday iPhone users who want a gorgeous, trustworthy calculator for money math without clutter."
@@ -45,7 +45,7 @@ Real world
 
 Candidate modes (pick v1 + later)
 - Basic (v1 default)
-- History tape (v1, free + Pro upgrade)
+- History tape (v1 Pro)
 - Tip / discount / split / convert (v1 Pro)
 - Scientific (later)
 - Programmer (later)

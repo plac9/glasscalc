@@ -43,11 +43,11 @@ Spectacular glassmorphic calculator for iOS with freemium model. Core calculator
 - [x] Dynamic Type scaling (iOS views)
 - [x] Accessibility labels for VoiceOver
 - [x] Screenshot UI tests passing
-- [x] Automated screenshots captured (10 PNGs)
+- [x] Automated screenshots captured (iPhone 17, 17 Pro, 17 Pro Max, 16e)
 - [x] Reduce Motion support (all 14 files)
 - [x] Keyboard dismiss with Done button (4 input views)
 - [x] History entry lock/unlock via swipe
-- [x] Currency rate disclaimer notice
+- [x] History gated behind Pro paywall
 - [x] Tab order reorganized (Calc → Tip → Split → Discount → Convert → History → Settings)
 - [x] Theme changes trigger instant refresh
 
@@ -55,7 +55,7 @@ Spectacular glassmorphic calculator for iOS with freemium model. Core calculator
 - [ ] Manual iPhone Dynamic Type pass
 - [ ] Manual VoiceOver verification
 - [ ] Device performance profiling (Instruments)
-- [ ] Screenshot review/crop for App Store
+- [ ] Screenshot review/crop for App Store (latest device sets)
 - [ ] Privacy policy URL live
 - [ ] App Store metadata completion
 - [ ] TestFlight beta submission
@@ -68,10 +68,13 @@ Spectacular glassmorphic calculator for iOS with freemium model. Core calculator
 ### Recent Changes
 - **2025-12-20**: Completed all TASKMASTER M1-M5 milestones (142 tests)
 - **2025-12-20**: Tab order: Calc → Tip → Split → Discount → Convert → History → Settings
-- **2025-12-20**: Currency rate disclaimer in UnitConverterView
+- **2025-12-20**: Removed currency conversion from Unit Converter
 - **2025-12-20**: Keyboard Done button + scroll dismiss for all input views
 - **2025-12-20**: History lock/unlock with swipe left/right actions
+- **2025-12-20**: History is Pro-only (paywall gated)
 - **2025-12-20**: Theme instant refresh via @AppStorage + .id() force rebuild
+- **2025-12-20**: Screenshot runner now targets latest xcresult, exact simulator match, and customizable output/prefix
+- **2025-12-20**: New screenshot sets captured (iPhone 17, 17 Pro, 17 Pro Max, 16e)
 - **2025-12-20**: Reduce Motion support across 14 view files
 - **2025-12-19**: Automated screenshots captured on iPhone 17 simulator
 - **2025-12-19**: UI tests updated with SELECT_TAB launch arg
@@ -93,7 +96,7 @@ Spectacular glassmorphic calculator for iOS with freemium model. Core calculator
 - **Taskmaster**: `docs/TASKMASTER_IOS_PRISMCALC.md`
 
 ### Screenshots
-- **Automated**: `screenshots/automated/2025-12-19-iphone-17/`
+- **Automated**: `screenshots/iphone-17/`, `screenshots/iphone-17-pro/`, `screenshots/iphone-17-pro-max/`, `screenshots/iphone-16e/`
 - **App Store**: `docs/appstore/screenshots.md`
 
 ## Development Workflow

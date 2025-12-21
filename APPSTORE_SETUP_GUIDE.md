@@ -105,7 +105,7 @@ In App Store Connect → Your App → In-App Purchases:
 
 **Review Information**:
 - Upload a screenshot (use any of the 10 we generated)
-- Review notes: "Pro tier unlocks all calculator types (tip, discount, split bill, unit converter), all theme options, and unlimited history"
+- Review notes: "Pro tier unlocks all calculator types (tip, discount, split bill, unit converter), all theme options, and history with lock/unlock entries"
 - Save
 
 **Status**: Save but don't submit for review yet
@@ -161,7 +161,6 @@ PrismCalc brings a spectacular glassmorphic design to your everyday calculations
 
 ✨ FREE FEATURES
 • Stunning glassmorphic design
-• Basic calculator with history (last 10 calculations)
 • Aurora theme included
 • iOS 18 optimized with smooth animations
 
@@ -172,7 +171,8 @@ CALCULATORS
 • Tip Calculator with bill splitting
 • Discount Calculator with savings display
 • Split Bill Calculator for groups
-• Unit Converter (length, weight, temperature, volume)
+• Unit Converter (length, weight, temperature)
+• History with lock/unlock entries
 
 THEMES
 • 10+ beautiful glassmorphic themes
@@ -180,7 +180,7 @@ THEMES
 • Dynamic mesh backgrounds
 
 FEATURES
-• Unlimited calculation history
+• History with lock/unlock entries
 • Siri Shortcuts support
 • Home Screen widgets
 • Control Center widget
@@ -221,13 +221,13 @@ calculator,tip,split,bill,discount,converter,glass,theme,widget,siri
 PrismCalc is a premium calculator app with a freemium model:
 
 FREE TIER:
-- Basic calculator with last 10 history items
+- Basic calculator
 - Aurora theme
 
 PRO TIER ($2.99 one-time purchase):
 - All calculator types (tip, discount, split, converter)
 - All themes
-- Unlimited history
+- History with lock/unlock entries
 
 To test Pro features without purchase:
 1. The IAP product "PrismCalc Pro" should be approved alongside the app

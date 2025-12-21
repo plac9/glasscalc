@@ -127,7 +127,6 @@ Key services:
 - `HistoryService.shared` - Calculation history (SwiftData)
 - `StoreKitManager.shared` - In-app purchases
 - `SharedDataService.shared` - Widget data sharing
-- `CurrencyService.shared` - Exchange rates (Frankfurter API)
 
 ### Design System Components
 
@@ -324,7 +323,7 @@ Features gated behind Pro purchase (`com.laclairtech.prismcalc.pro`):
 - Discount Calculator
 - Split Bill
 - Unit Converter
-- Unlimited history (free: 10 entries)
+- History with lock/unlock entries (Pro only)
 - Premium themes (5)
 - All widget styles
 - Alternate app icons

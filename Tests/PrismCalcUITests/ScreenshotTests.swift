@@ -66,7 +66,7 @@ final class ScreenshotTests: XCTestCase {
             self.tapCalculatorButtons(["1", "2", "3", "4", "decimal", "5", "6"])
         }
 
-        // 2. History - Free tier (10 items + upgrade banner)
+        // 2. History - Free tier paywall (Pro-only)
         captureScreenshotOnTab(
             name: "02_History_Free",
             tab: "History",
@@ -133,7 +133,7 @@ final class ScreenshotTests: XCTestCase {
             populateData: true
         )
 
-        // 9. History - PRO (unlimited)
+        // 9. History - PRO
         captureScreenshotOnTab(
             name: "09_History_Pro",
             tab: "History",

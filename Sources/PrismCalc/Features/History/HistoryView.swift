@@ -7,7 +7,6 @@ public struct HistoryView: View {
     @State private var entries: [HistoryEntry] = []
     @State private var selectedType: CalculationType?
     @State private var showClearConfirm = false
-    @State private var showPaywall = false
     @ScaledMetric(relativeTo: .caption2) private var timeFontSize: CGFloat = 11
     @ScaledMetric(relativeTo: .caption2) private var noteIconSize: CGFloat = 10
     @ScaledMetric(relativeTo: .title2) private var emptyIconSize: CGFloat = 48
@@ -20,71 +19,72 @@ public struct HistoryView: View {
     private let addWidgetTip = AddWidgetTip()
     private var storeKit: StoreKitManager { StoreKitManager.shared }
 
-    // Free tier limit
-    private let freeLimit = 10
-
     public init() {}
 
     public var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: GlassTheme.spacingMedium) {
-                    // Header with filter and clear
-                    headerSection
+            if storeKit.isPro {
+                ScrollView {
+                    VStack(spacing: GlassTheme.spacingMedium) {
+                        // Header with filter and clear
+                        headerSection
 
-                    // Widget tip with action handler
-                    TipView(addWidgetTip) { action in
-                        if action.id == "dismiss" {
-                            addWidgetTip.invalidate(reason: .actionPerformed)
+                        // Widget tip with action handler
+                        TipView(addWidgetTip) { action in
+                            if action.id == "dismiss" {
+                                addWidgetTip.invalidate(reason: .actionPerformed)
+                            }
+                        }
+                        .tipBackground(Color.clear)
+
+                        // Filter chips
+                        filterSection
+
+                        // History entries
+                        if filteredEntries.isEmpty {
+                            emptyState
+                        } else {
+                            entriesList
                         }
                     }
-                    .tipBackground(Color.clear)
-
-                    // Filter chips
-                    filterSection
-
-                    // History entries
-                    if filteredEntries.isEmpty {
-                        emptyState
+                    .padding()
+                }
+                .onAppear {
+                    loadHistory()
+                }
+                .confirmationDialog(
+                    "Clear History",
+                    isPresented: $showClearConfirm,
+                    titleVisibility: .visible
+                ) {
+                    Button("Clear Unlocked", role: .destructive) {
+                        clearHistory()
+                    }
+                    Button("Cancel", role: .cancel) {}
+                } message: {
+                    let lockedCount = entries.filter { $0.isLocked }.count
+                    if lockedCount > 0 {
+                        Text("This will delete all unlocked history. \(lockedCount) locked \(lockedCount == 1 ? "entry" : "entries") will be preserved.")
                     } else {
-                        entriesList
+                        Text("This will permanently delete all calculation history.")
                     }
                 }
-                .padding()
-            }
-            .onAppear {
-                loadHistory()
-            }
-            .confirmationDialog(
-                "Clear History",
-                isPresented: $showClearConfirm,
-                titleVisibility: .visible
-            ) {
-                Button("Clear Unlocked", role: .destructive) {
-                    clearHistory()
+                // iOS 18 zoom navigation destination
+                .navigationDestination(item: $selectedEntry) { entry in
+                    if #available(iOS 18.0, *) {
+                        #if os(iOS)
+                        HistoryDetailView(entry: entry)
+                            .navigationTransition(.zoom(sourceID: entry.id, in: historyNamespace))
+                        #else
+                        HistoryDetailView(entry: entry)
+                        #endif
+                    } else {
+                        // Fallback for iOS 17 (shouldn't be needed as app requires iOS 18+)
+                        Text("Detail view requires iOS 18+")
+                    }
                 }
-                Button("Cancel", role: .cancel) {}
-            } message: {
-                let lockedCount = entries.filter { $0.isLocked }.count
-                if lockedCount > 0 {
-                    Text("This will delete all unlocked history. \(lockedCount) locked \(lockedCount == 1 ? "entry" : "entries") will be preserved.")
-                } else {
-                    Text("This will permanently delete all calculation history.")
-                }
-            }
-            // iOS 18 zoom navigation destination
-            .navigationDestination(item: $selectedEntry) { entry in
-                if #available(iOS 18.0, *) {
-                    #if os(iOS)
-                    HistoryDetailView(entry: entry)
-                        .navigationTransition(.zoom(sourceID: entry.id, in: historyNamespace))
-                    #else
-                    HistoryDetailView(entry: entry)
-                    #endif
-                } else {
-                    // Fallback for iOS 17 (shouldn't be needed as app requires iOS 18+)
-                    Text("Detail view requires iOS 18+")
-                }
+            } else {
+                PaywallView(featureName: "History", featureIcon: "clock.arrow.circlepath")
             }
         }
     }
@@ -98,16 +98,7 @@ public struct HistoryView: View {
         } else {
             filtered = entries
         }
-
-        // Limit to 10 most recent for free users
-        if !storeKit.isPro {
-            return Array(filtered.prefix(freeLimit))
-        }
         return filtered
-    }
-
-    private var hasMoreThanFree: Bool {
-        entries.count > freeLimit && !storeKit.isPro
     }
 
     // MARK: - Header
@@ -222,11 +213,6 @@ public struct HistoryView: View {
                             .offset(y: reduceMotionNow || phase.isIdentity ? 0 : phase.value * 15)
                     }
             }
-
-            // Upgrade banner for free users with more than 10 items
-            if hasMoreThanFree {
-                upgradePromoBanner
-            }
         }
     }
 
@@ -314,64 +300,6 @@ public struct HistoryView: View {
         }
     }
 
-    // MARK: - Upgrade Banner
-
-    @MainActor
-    private var upgradePromoBanner: some View {
-        GlassCard(material: .thinMaterial) {
-            VStack(spacing: GlassTheme.spacingMedium) {
-                HStack {
-                    Image(systemName: "lock.fill")
-                        .font(.title2)
-                        .foregroundStyle(
-                            LinearGradient(
-                                colors: [GlassTheme.primary, GlassTheme.secondary],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                        )
-
-                    VStack(alignment: .leading, spacing: GlassTheme.spacingXS) {
-                        Text("You have \(entries.count - freeLimit) more calculations")
-                            .font(GlassTheme.headlineFont)
-                            .foregroundStyle(GlassTheme.text)
-
-                        Text("Upgrade to Pro for unlimited history")
-                            .font(GlassTheme.captionFont)
-                            .foregroundStyle(GlassTheme.textSecondary)
-                    }
-
-                    Spacer()
-                }
-
-                Button {
-                    showPaywall = true
-                } label: {
-                    Text("Upgrade to Pro")
-                        .font(GlassTheme.headlineFont)
-                        .fontWeight(.semibold)
-                        .foregroundStyle(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, GlassTheme.spacingSmall)
-                        .background(
-                            Capsule()
-                                .fill(
-                                    LinearGradient(
-                                        colors: [GlassTheme.primary, GlassTheme.secondary],
-                                        startPoint: .leading,
-                                        endPoint: .trailing
-                                    )
-                                )
-                        )
-                }
-                .buttonStyle(.plain)
-            }
-        }
-        .sheet(isPresented: $showPaywall) {
-            PaywallView(featureName: "Unlimited History", featureIcon: "clock.arrow.circlepath")
-        }
-    }
-
     // MARK: - Empty State
 
     @MainActor
@@ -429,7 +357,7 @@ public struct HistoryView: View {
 
     private func toggleLock(_ entry: HistoryEntry) {
         entry.isLocked.toggle()
-        HistoryService.shared.save(entry)
+        HistoryService.shared.update(entry)
         let reduceMotionSnapshot = reduceMotion
         if reduceMotionSnapshot {
             // Force refresh to update UI
@@ -456,4 +384,3 @@ public struct HistoryView: View {
         HistoryView()
     }
 }
-

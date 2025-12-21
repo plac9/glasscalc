@@ -22,7 +22,6 @@ The app is currently running in the iPhone 17 Pro Max simulator.
 
 #### Free Access (Should Work):
 - ✅ Basic Calculator
-- ✅ History (last 10 items only)
 - ✅ Aurora theme
 - ✅ Settings
 
@@ -31,6 +30,7 @@ The app is currently running in the iPhone 17 Pro Max simulator.
 - ❌ Discount Calculator → Tap to see paywall
 - ❌ Split Bill → Tap to see paywall
 - ❌ Unit Converter → Tap to see paywall
+- ❌ History → Tap to see paywall
 - ❌ Premium Themes → Locked in Settings
 
 ### 3. **Test Purchase Flow**
@@ -92,7 +92,7 @@ The app is currently running in the iPhone 17 Pro Max simulator.
 | Feature | Status |
 |---------|--------|
 | Calculator | Full access |
-| History | Last 10 items + upgrade banner |
+| History | Paywall (Pro-only) |
 | Themes | Aurora only (others locked) |
 | Pro Tools | Paywalled |
 
@@ -100,7 +100,7 @@ The app is currently running in the iPhone 17 Pro Max simulator.
 | Feature | Status |
 |---------|--------|
 | Calculator | Full access |
-| History | Unlimited |
+| History | Full access (lock/unlock entries) |
 | Themes | All 6 unlocked |
 | Tip Calculator | Full access |
 | Discount Calculator | Full access |
@@ -150,7 +150,7 @@ The app is currently running in the iPhone 17 Pro Max simulator.
 - [ ] Restore purchases works
 - [ ] Loading states show during purchase
 - [ ] Error messages display properly
-- [ ] History upgrade banner appears (free tier)
+- [ ] History paywall appears for free tier
 - [ ] Theme locks work correctly
 
 ---

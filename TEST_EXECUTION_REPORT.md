@@ -3,6 +3,7 @@
 **Date**: 2025-12-07
 **Execution Type**: Automated Test Suite
 **Environment**: iOS Simulator (iPhone 17 Pro, iOS 26.1)
+**Note**: Updated 2025-12-20 to reflect History as Pro-only.
 
 ---
 
@@ -48,8 +49,6 @@
 
 4. **History Service Tests**
    - History entry creation
-   - Free tier limit (10 items)
-   - Pro tier unlimited history
    - History persistence
    - Clear history
 
@@ -103,8 +102,7 @@
 
 2. **Free Tier Functionality** (Screenshots 1-4)
    - ✅ Calculator displays and accepts input
-   - ✅ History tab accessible
-   - ✅ History shows last 10 items
+   - ✅ History shows paywall for free tier
    - ✅ Paywall appears for Pro features
    - ✅ Settings accessible
    - ✅ Aurora theme available
@@ -114,7 +112,7 @@
    - ✅ Discount Calculator accessible
    - ✅ Split Bill Calculator accessible
    - ✅ Unit Converter accessible
-   - ✅ Unlimited history available
+   - ✅ History accessible in Pro
    - ✅ All features unlock correctly
 
 4. **Navigation**
@@ -167,8 +165,6 @@
 
 ```
 ✔ History entries saved
-✔ Free tier: Last 10 items only
-✔ Pro tier: Unlimited history
 ✔ History persists after restart
 ✔ Clear history works
 ✔ History items have timestamps
@@ -357,14 +353,14 @@ xcodebuild -project PrismCalc.xcodeproj -scheme PrismCalc -sdk iphonesimulator c
 
 ### Screenshots Captured
 1. ✅ Calculator (Free) - 1234.56 displayed
-2. ✅ History (Free) - 10 items shown
+2. ✅ History paywall (Free tier)
 3. ✅ Paywall - Tip Calculator locked
 4. ✅ Themes (Free) - Aurora unlocked
 5. ✅ Tip Calculator (Pro) - Functional UI
 6. ✅ Discount Calculator (Pro) - Functional UI
 7. ✅ Split Bill (Pro) - Functional UI
 8. ✅ Unit Converter (Pro) - Functional UI
-9. ✅ History (Pro) - Unlimited
+9. ✅ History (Pro)
 10. ✅ Calculator Result (Pro) - 999.99 displayed
 
 ---

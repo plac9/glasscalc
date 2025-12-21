@@ -1,10 +1,8 @@
 import SwiftUI
 
-/// Unit Converter with length, weight, temperature, and currency
+/// Unit Converter with length, weight, and temperature
 public struct UnitConverterView: View {
     @State private var viewModel = UnitConverterViewModel()
-    @State private var currencyResult: Double?
-    @State private var isConverting: Bool = false
     @State private var swapTrigger = false
     @ScaledMetric(relativeTo: .largeTitle) private var inputValueSize: CGFloat = 48
     @ScaledMetric(relativeTo: .largeTitle) private var resultValueSize: CGFloat = 48
@@ -58,11 +56,6 @@ public struct UnitConverterView: View {
                 .foregroundStyle(GlassTheme.primary)
             }
         }
-        .task {
-            if viewModel.selectedCategory == .currency {
-                await viewModel.loadCurrencies()
-            }
-        }
     }
 
     // MARK: - Category Selector
@@ -75,11 +68,9 @@ public struct UnitConverterView: View {
                 Button {
                     if reduceMotionSnapshot {
                         viewModel.selectCategory(category)
-                        currencyResult = nil
                     } else {
                         withAnimation(GlassTheme.springAnimation) {
                             viewModel.selectCategory(category)
-                            currencyResult = nil
                         }
                     }
                 } label: {
@@ -136,11 +127,6 @@ public struct UnitConverterView: View {
                     .minimumScaleFactor(0.6)
                     .multilineTextAlignment(.trailing)
                     .focused($isInputFocused)
-                    .onChange(of: viewModel.inputValue) {
-                        if viewModel.selectedCategory == .currency {
-                            Task { await convertCurrency() }
-                        }
-                    }
                     .accessibilityLabel("Input value")
             }
         }
@@ -164,15 +150,9 @@ public struct UnitConverterView: View {
                 swapTrigger.toggle()
                 if reduceMotionSnapshot {
                     viewModel.swapUnits()
-                    if viewModel.selectedCategory == .currency {
-                        Task { await convertCurrency() }
-                    }
                 } else {
                     withAnimation(GlassTheme.springAnimation) {
                         viewModel.swapUnits()
-                        if viewModel.selectedCategory == .currency {
-                            Task { await convertCurrency() }
-                        }
                     }
                 }
             } label: {
@@ -195,16 +175,6 @@ public struct UnitConverterView: View {
                 selection: $viewModel.toUnit,
                 units: viewModel.availableUnits
             )
-        }
-        .onChange(of: viewModel.fromUnit) {
-            if viewModel.selectedCategory == .currency {
-                Task { await convertCurrency() }
-            }
-        }
-        .onChange(of: viewModel.toUnit) {
-            if viewModel.selectedCategory == .currency {
-                Task { await convertCurrency() }
-            }
         }
     }
 
@@ -246,52 +216,32 @@ public struct UnitConverterView: View {
     private var resultSection: some View {
         VStack(spacing: GlassTheme.spacingSmall) {
             let reduceMotionSnapshot = reduceMotion
-            if viewModel.isLoadingCurrencies || isConverting {
-                ProgressView()
-                    .tint(GlassTheme.primary)
-            } else if let error = viewModel.currencyError {
-                Text(error)
-                    .font(GlassTheme.captionFont)
-                    .foregroundStyle(GlassTheme.error)
-            } else {
-                Text(displayResult)
-                    .font(.system(size: resultValueSize, weight: .medium, design: .rounded))
-                    .foregroundStyle(GlassTheme.primary)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.6)
-                    .contentTransition(reduceMotionSnapshot ? .identity : .numericText())
-                    .animation(reduceMotionSnapshot ? nil : .easeInOut(duration: 0.15), value: displayResult)
+            Text(displayResult)
+                .font(.system(size: resultValueSize, weight: .medium, design: .rounded))
+                .foregroundStyle(GlassTheme.primary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.6)
+                .contentTransition(reduceMotionSnapshot ? .identity : .numericText())
+                .animation(reduceMotionSnapshot ? nil : .easeInOut(duration: 0.15), value: displayResult)
 
-                Text(formatUnitName(viewModel.toUnit))
-                    .font(GlassTheme.headlineFont)
-                    .foregroundStyle(GlassTheme.textSecondary)
+            Text(formatUnitName(viewModel.toUnit))
+                .font(GlassTheme.headlineFont)
+                .foregroundStyle(GlassTheme.textSecondary)
 
-                // Currency rate disclaimer
-                if viewModel.selectedCategory == .currency {
-                    HStack(spacing: GlassTheme.spacingXS) {
-                        Image(systemName: "info.circle")
-                        Text("Rates may be delayed. For reference only.")
-                    }
-                    .font(.system(size: 11))
-                    .foregroundStyle(GlassTheme.textTertiary)
-                    .padding(.top, GlassTheme.spacingXS)
+            // Save Button
+            if viewModel.inputDouble > 0 {
+                Button {
+                    viewModel.saveToHistory(result: displayResult)
+                } label: {
+                    Label("Save to History", systemImage: "clock.arrow.circlepath")
+                        .font(GlassTheme.bodyFont)
+                        .foregroundStyle(GlassTheme.primary)
                 }
-
-                // Save Button
-                if viewModel.inputDouble > 0 {
-                    Button {
-                        viewModel.saveToHistory(result: displayResult)
-                    } label: {
-                        Label("Save to History", systemImage: "clock.arrow.circlepath")
-                            .font(GlassTheme.bodyFont)
-                            .foregroundStyle(GlassTheme.primary)
-                    }
-                    .buttonStyle(.plain)
-                    .padding(.top, GlassTheme.spacingSmall)
-                    .sensoryFeedback(.success, trigger: viewModel.inputDouble)
-                    .accessibilityLabel("Save to history")
-                    .accessibilityHint("Saves this conversion to your history")
-                }
+                .buttonStyle(.plain)
+                .padding(.top, GlassTheme.spacingSmall)
+                .sensoryFeedback(.success, trigger: viewModel.inputDouble)
+                .accessibilityLabel("Save to history")
+                .accessibilityHint("Saves this conversion to your history")
             }
         }
         .frame(maxWidth: .infinity)
@@ -308,49 +258,13 @@ public struct UnitConverterView: View {
     }
 
     private var displayResult: String {
-        if viewModel.selectedCategory == .currency {
-            let value = currencyResult ?? 0
-            let formatter = NumberFormatter()
-            formatter.numberStyle = .decimal
-            formatter.maximumFractionDigits = 2
-            formatter.minimumFractionDigits = 2
-            return formatter.string(from: NSNumber(value: value)) ?? "0.00"
-        }
         return viewModel.formattedResult
     }
 
     // MARK: - Helpers
 
     private func formatUnitName(_ unit: String) -> String {
-        if viewModel.selectedCategory == .currency {
-            if let currency = viewModel.currencies.first(where: { $0.code == unit }) {
-                return "\(currency.flag) \(currency.code)"
-            }
-            return unit
-        }
         return unit.capitalized
-    }
-
-    private func convertCurrency() async {
-        guard viewModel.selectedCategory == .currency,
-              viewModel.inputDouble > 0 else {
-            currencyResult = 0
-            return
-        }
-
-        isConverting = true
-
-        do {
-            currencyResult = try await CurrencyService.shared.convert(
-                amount: viewModel.inputDouble,
-                from: viewModel.fromUnit,
-                to: viewModel.toUnit
-            )
-        } catch {
-            viewModel.currencyError = error.localizedDescription
-        }
-
-        isConverting = false
     }
 }
 

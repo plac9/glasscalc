@@ -72,14 +72,14 @@ Automatically capture all 10 App Store screenshots without manual intervention u
 | # | Screen | Theme | State | Description |
 |---|--------|-------|-------|-------------|
 | 1 | Calculator | Aurora | Free | Hero shot with calculation |
-| 2 | History | Aurora | Free | Showing 10 items + upgrade banner |
+| 2 | History | Aurora | Free | History paywall (Pro-only) |
 | 3 | Paywall | Aurora | Free | Tip calculator gated |
 | 4 | Settings | Aurora | Free | Themes (Aurora unlocked, others locked) |
 | 5 | Tip | Blue-Green | Pro | Tip calculator with 20% on $50 |
 | 6 | Discount | Forest Earth | Pro | 25% off $100 |
 | 7 | Split | Calming Blues | Pro | $100 split 4 ways |
 | 8 | Convert | Soft Tranquil | Pro | 10 miles → 16.09 km |
-| 9 | History | Midnight | Pro | Unlimited history |
+| 9 | History | Midnight | Pro | History with lock/unlock entries |
 | 10 | Calculator | Aurora | Pro | Final calculation shown |
 
 ---
@@ -105,7 +105,6 @@ Automatically capture all 10 App Store screenshots without manual intervention u
 
 // Action buttons
 .accessibilityIdentifier("paywall-upgrade-button")
-.accessibilityIdentifier("history-upgrade-button")
 ```
 
 ### 2. Launch Arguments

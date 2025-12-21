@@ -87,7 +87,6 @@
 
 ### 3.1 Free Tier Features
 - [ ] Basic calculator accessible
-- [ ] History shows last 10 items
 - [ ] Aurora theme unlocked by default
 - [ ] Settings accessible
 - [ ] Free features work without purchase
@@ -97,6 +96,7 @@
 - [ ] Discount Calculator shows paywall
 - [ ] Split Bill shows paywall
 - [ ] Unit Converter shows paywall
+- [ ] History shows paywall
 - [ ] Additional themes locked (except Aurora)
 
 ### 3.3 Paywall UI
@@ -159,27 +159,20 @@
 
 ## 5. History & Data Persistence
 
-### 5.1 History (Free Tier)
+### 5.1 History (Pro Only)
 - [ ] Calculations saved to history
-- [ ] Only last 10 items shown
-- [ ] Oldest items removed when limit reached
+- [ ] History accessible after Pro purchase
 - [ ] History displays calculation type
 - [ ] History displays result
 - [ ] History displays timestamp
 
-### 5.2 History (Pro Tier)
-- [ ] Unlimited history after Pro purchase
-- [ ] All calculations saved
-- [ ] No 10-item limit
-- [ ] "Upgrade for unlimited" banner removed
-
-### 5.3 History Actions
+### 5.2 History Actions
 - [ ] Tap history item to load result
 - [ ] Swipe to delete works
 - [ ] Clear all history works
 - [ ] Confirmation dialog for clear all
 
-### 5.4 Data Persistence
+### 5.3 Data Persistence
 - [ ] History persists after app restart
 - [ ] Pro purchase state persists
 - [ ] Theme selection persists
@@ -235,9 +228,12 @@ Test each theme displays correctly:
 
 ### 7.2 Tab Order
 - [ ] Calculator tab first
-- [ ] History tab second
-- [ ] Settings tab third
-- [ ] Pro tabs: Tip, Discount, Split, Convert
+- [ ] Tip tab second
+- [ ] Split tab third
+- [ ] Discount tab fourth
+- [ ] Convert tab fifth
+- [ ] History tab sixth
+- [ ] Settings tab seventh
 - [ ] More menu contains overflow tabs (if >5 tabs)
 
 ### 7.3 Navigation

@@ -49,9 +49,9 @@
 **Content**: Settings page showing theme grid
 **Caption**: "6 Stunning Themes"
 
-### 7. Calculation History
+### 7. Calculation History (Pro)
 **Theme**: Midnight
-**Content**: History view with multiple entries
+**Content**: History view with multiple entries (Pro unlocked)
 **Caption**: "Track Your Calculations"
 
 ### 8. Widgets

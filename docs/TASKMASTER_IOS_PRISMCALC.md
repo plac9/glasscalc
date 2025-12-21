@@ -393,5 +393,5 @@ python3 ~/dev/.standards/send-status-email.py \
 - iOS behavior target: immediate-execution calculator, Apple-style percent
 - Haptics are excellent - preserve current implementation
 - Glass visuals must remain readable at high Dynamic Type
-- Converter framed as money-adjacent (currency anchored) to stay on mission
+- Converter framed as everyday practical conversions to stay on mission
 - v1 non-goals: scientific, programmer, graphing, full keypad rearrangement

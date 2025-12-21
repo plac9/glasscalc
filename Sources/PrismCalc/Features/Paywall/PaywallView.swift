@@ -56,7 +56,7 @@ public struct PaywallView: View {
                         benefitRow(icon: "person.2", text: "Split Bill")
                         benefitRow(icon: "arrow.left.arrow.right", text: "Unit Converter")
                         benefitRow(icon: "paintpalette", text: "All 6 Premium Themes")
-                        benefitRow(icon: "clock.arrow.circlepath", text: "Unlimited History")
+                        benefitRow(icon: "clock.arrow.circlepath", text: "History with lock/unlock entries")
                     }
                 }
             }
@@ -101,7 +101,7 @@ public struct PaywallView: View {
             .disabled(storeKit.isLoading)
             .accessibilityIdentifier("paywall-upgrade-button")
             .accessibilityLabel("Upgrade to PrismCalc Pro for \(storeKit.proPrice)")
-            .accessibilityHint("Unlocks all calculators, themes, and unlimited history")
+            .accessibilityHint("Unlocks all calculators, themes, and history with lock/unlock entries")
             .padding(.horizontal)
 
             // Restore button

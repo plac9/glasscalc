@@ -199,7 +199,7 @@
 1. [ ] Scroll to "Review Information"
 2. [ ] Click "Choose File" for screenshot
 3. [ ] Upload: `screenshots/iphone67_05.png` (Tip Calculator Pro screenshot)
-4. [ ] Fill in **Review Notes**: `Pro tier unlocks all calculator types (tip, discount, split bill, unit converter), all theme options, and unlimited history`
+4. [ ] Fill in **Review Notes**: `Pro tier unlocks all calculator types (tip, discount, split bill, unit converter), all theme options, and history with lock/unlock entries`
 5. [ ] Click "Save" (at top)
 
 **Status**: Leave as "Ready to Submit" but DON'T submit yet
@@ -307,7 +307,6 @@ PrismCalc brings a spectacular glassmorphic design to your everyday calculations
 
 ✨ FREE FEATURES
 • Stunning glassmorphic design
-• Basic calculator with history (last 10 calculations)
 • Aurora theme included
 • iOS 18 optimized with smooth animations
 
@@ -318,7 +317,8 @@ CALCULATORS
 • Tip Calculator with bill splitting
 • Discount Calculator with savings display
 • Split Bill Calculator for groups
-• Unit Converter (length, weight, temperature, volume)
+• Unit Converter (length, weight, temperature)
+• History with lock/unlock entries
 
 THEMES
 • 10+ beautiful glassmorphic themes
@@ -326,7 +326,7 @@ THEMES
 • Dynamic mesh backgrounds
 
 FEATURES
-• Unlimited calculation history
+• History with lock/unlock entries
 • Siri Shortcuts support
 • Home Screen widgets
 • Control Center widget
@@ -426,13 +426,13 @@ Experience the most beautiful calculator on iOS. Stunning glassmorphic design me
 PrismCalc is a premium calculator app with a freemium model:
 
 FREE TIER:
-- Basic calculator with last 10 history items
+- Basic calculator
 - Aurora theme
 
 PRO TIER ($2.99 one-time purchase):
 - All calculator types (tip, discount, split, converter)
 - All themes
-- Unlimited history
+- History with lock/unlock entries
 
 To test Pro features without purchase:
 1. The IAP product "PrismCalc Pro" should be approved alongside the app
@@ -543,7 +543,7 @@ No special configuration needed. The app works immediately after installation.
 **Instructions**:
 1. [ ] Open PrismCalc from TestFlight
 2. [ ] Test Calculator: Enter some calculations
-3. [ ] Test History: View calculation history (should show last 10)
+3. [ ] Test History: Verify paywall appears for free tier
 4. [ ] Test Theme: Go to Settings, verify Aurora theme unlocked
 5. [ ] Test Paywall: Tap "Tip" tab, verify paywall shows
 6. [ ] Test Widget: Add widget to home screen
@@ -576,7 +576,7 @@ No special configuration needed. The app works immediately after installation.
    - [ ] Split Bill accessible
    - [ ] Unit Converter accessible
    - [ ] All themes unlocked in Settings
-   - [ ] Unlimited history (no 10-item limit)
+  - [ ] History accessible with lock/unlock entries
 
 **Verification**: Purchase completes successfully, all Pro features work
 

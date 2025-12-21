@@ -9,7 +9,7 @@ Scope: Purpose definition + alignment to current implementation
 
 ## Purpose Definition
 
-- Primary purpose: trusted daily money math (tips, discounts, splits, conversions) delivered through premium glass visuals.
+- Primary purpose: trusted daily money math (tips, discounts, splits, and practical conversions) delivered through premium glass visuals.
 - Secondary purpose: feel-good, Apple-native polish that makes routine calculations feel delightful, not utilitarian.
 - Non-goals (v1): scientific, programmer, graphing, or heavy workflow features that add clutter.
 
@@ -18,11 +18,11 @@ Scope: Purpose definition + alignment to current implementation
 Strong alignment
 - UI promise: glass-first design system with themed mesh gradients and glass components.
 - Trust: CalculatorEngine + 100 tests provide correctness safeguards.
-- Money math tools: tip, discount, split, history; currency conversion supports real-world spending.
+- Money math tools: tip, discount, split, history; practical conversions support everyday use.
 - Delight: haptics + motion with reduce-motion respect.
 
 Partial alignment
-- Unit converter broadens scope beyond "money math"; it still supports the promise if positioned as "everyday practical conversions" and anchored by currency.
+- Unit converter broadens scope beyond "money math"; it still supports the promise when positioned as "everyday practical conversions."
 - App Store assets and messaging still needed to reflect the mission clearly.
 
 Gap alignment
@@ -39,6 +39,6 @@ Gap alignment
 ## Recommendations (Mission-Forward)
 
 1. Add the mission statement to README and App Store metadata so users see the purpose in one line.
-2. Frame unit conversion as a practical money-adjacent feature (currency + common measurements).
+2. Frame unit conversion as a practical everyday feature (common measurements).
 3. Complete iOS-only accessibility/performance checks to confirm the "trustworthy" claim.
 4. Keep future modes (scientific/programmer) explicitly out of v1 scope unless they reinforce the mission.
