@@ -74,6 +74,7 @@ public final class StoreKitManager {
 
         isLoading = true
         errorMessage = nil
+        defer { isLoading = false }
 
         do {
             let result = try await product.purchase()
@@ -97,8 +98,6 @@ public final class StoreKitManager {
             errorMessage = "Purchase failed: \(error.localizedDescription)"
             throw error
         }
-
-        isLoading = false
     }
 
     // MARK: - Restore Purchases

@@ -318,14 +318,14 @@ private func listenForTransactions() async {
 **Screenshot Files**:
 ```
 screenshots/iphone67_01.png - Calculator (Free)
-screenshots/iphone67_02.png - History (Free, 10 items)
+screenshots/iphone67_02.png - History paywall (Free)
 screenshots/iphone67_03.png - Paywall for Tip Calculator
 screenshots/iphone67_04.png - Themes (Free tier)
 screenshots/iphone67_05.png - Tip Calculator (Pro)
 screenshots/iphone67_06.png - Discount Calculator (Pro)
 screenshots/iphone67_07.png - Split Bill (Pro)
 screenshots/iphone67_08.png - Unit Converter (Pro)
-screenshots/iphone67_09.png - History (Pro, unlimited)
+screenshots/iphone67_09.png - History (Pro)
 screenshots/iphone67_10.png - Calculator with result (Pro)
 ```
 
@@ -430,7 +430,7 @@ While code review passed, the following should be tested manually on a real devi
 2. [ ] Restore purchases with sandbox account
 3. [ ] All calculator operations (especially division by zero)
 4. [ ] All Pro features unlock after purchase
-5. [ ] History limit (10 items free, unlimited pro)
+5. [ ] History requires Pro (paywall appears for free tier)
 6. [ ] Widget displays correct data
 7. [ ] App doesn't crash on launch
 

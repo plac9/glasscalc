@@ -43,8 +43,8 @@ public struct ContentView: View {
 
         var isPro: Bool {
             switch self {
-            case .calculator, .settings, .history: return false
-            case .tip, .discount, .split, .convert: return true
+            case .calculator, .settings: return false
+            case .history, .tip, .discount, .split, .convert: return true
             }
         }
     }
@@ -128,7 +128,9 @@ public struct ContentView: View {
 
             // History - reference view
             Tab("History", systemImage: TabIdentifier.history.icon, value: .history) {
-                HistoryView()
+                ProGatedView(featureName: "History", featureIcon: TabIdentifier.history.icon) {
+                    HistoryView()
+                }
             }
             .customizationID("tab.history")
             .accessibilityIdentifier("tab-history")

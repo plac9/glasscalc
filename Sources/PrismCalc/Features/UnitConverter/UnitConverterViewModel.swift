@@ -12,7 +12,6 @@ public final class UnitConverterViewModel {
         case length = "Length"
         case weight = "Weight"
         case temperature = "Temperature"
-        case currency = "Currency"
 
         public var id: String { rawValue }
 
@@ -21,7 +20,6 @@ public final class UnitConverterViewModel {
             case .length: return "ruler"
             case .weight: return "scalemass"
             case .temperature: return "thermometer.medium"
-            case .currency: return "dollarsign.circle"
             }
         }
     }
@@ -48,11 +46,6 @@ public final class UnitConverterViewModel {
     public var fromUnit: String = ""
     public var toUnit: String = ""
 
-    // Currency-specific
-    public var currencies: [Currency] = []
-    public var isLoadingCurrencies: Bool = false
-    public var currencyError: String?
-
     // MARK: - Units by Category
 
     public var availableUnits: [String] {
@@ -63,8 +56,6 @@ public final class UnitConverterViewModel {
             return ["kilograms", "pounds", "ounces", "grams", "stones"]
         case .temperature:
             return ["celsius", "fahrenheit", "kelvin"]
-        case .currency:
-            return currencies.map { $0.code }
         }
     }
 
@@ -83,14 +74,6 @@ public final class UnitConverterViewModel {
     }
 
     public var formattedResult: String {
-        if selectedCategory == .currency {
-            let formatter = NumberFormatter()
-            formatter.numberStyle = .currency
-            formatter.currencyCode = toUnit
-            formatter.maximumFractionDigits = 2
-            return formatter.string(from: NSNumber(value: convertedValue)) ?? "0.00"
-        }
-
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 4
@@ -109,31 +92,12 @@ public final class UnitConverterViewModel {
     public func selectCategory(_ category: Category) {
         selectedCategory = category
         setDefaultUnits()
-
-        if category == .currency && currencies.isEmpty {
-            Task { await loadCurrencies() }
-        }
     }
 
     public func swapUnits() {
         let temp = fromUnit
         fromUnit = toUnit
         toUnit = temp
-    }
-
-    public func loadCurrencies() async {
-        isLoadingCurrencies = true
-        currencyError = nil
-
-        do {
-            currencies = try await CurrencyService.shared.availableCurrencies()
-            if fromUnit.isEmpty { fromUnit = "USD" }
-            if toUnit.isEmpty { toUnit = "EUR" }
-        } catch {
-            currencyError = error.localizedDescription
-        }
-
-        isLoadingCurrencies = false
     }
 
     public func saveToHistory(result: String) {
@@ -164,9 +128,6 @@ public final class UnitConverterViewModel {
         case .temperature:
             fromUnit = "celsius"
             toUnit = "fahrenheit"
-        case .currency:
-            fromUnit = "USD"
-            toUnit = "EUR"
         }
     }
 
@@ -180,9 +141,6 @@ public final class UnitConverterViewModel {
             return convertWeight(value, from: from, to: to)
         case .temperature:
             return convertTemperature(value, from: from, to: to)
-        case .currency:
-            // Currency conversion happens async, return placeholder
-            return value
         }
     }
 

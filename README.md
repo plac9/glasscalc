@@ -30,7 +30,6 @@ PrismCalc is a beautifully designed calculator app featuring full glassmorphism 
 
 ### Free Tier
 - Basic calculator with glass UI
-- History (last 10 calculations)
 - 1 theme (Aurora)
 - Basic widget
 
@@ -38,8 +37,8 @@ PrismCalc is a beautifully designed calculator app featuring full glassmorphism 
 - **Tip Calculator** - Bill + tip % with arc slider + split
 - **Discount Calculator** - Original price, % off, savings shown
 - **Split Bill** - Divide bills among friends
-- **Unit Converter** - Length, weight, temp, currency (live rates)
-- Unlimited history with iCloud sync
+- **Unit Converter** - Length, weight, temperature
+- History with lock/unlock entries
 - 6 premium themes
 - All widget styles
 - Alternate app icons
@@ -90,7 +89,6 @@ PrismCalc is a beautifully designed calculator app featuring full glassmorphism 
 - **Bundle IDs**: App `com.laclairtech.prismcalc`, Widget `com.laclairtech.prismcalc.widget`
 - **App Group**: `group.com.laclairtech.prismcalc`
 - **Package Manager**: Swift Package Manager
-- **Currency API**: Frankfurter (free, ECB data)
 
 ### Project Structure
 ```
@@ -154,7 +152,7 @@ open Package.swift
 - [x] Tip calculator with arc slider
 - [x] Discount calculator
 - [x] Split bill feature
-- [x] Unit converter + currency API
+- [x] Unit converter (length, weight, temperature)
 
 ### Phase 3: Polish ✅
 - [x] All 6 themes with MeshGradient backgrounds

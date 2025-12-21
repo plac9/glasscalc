@@ -372,7 +372,7 @@ public struct SettingsView: View {
                         proFeatureRow(icon: "person.2", text: "Split Bill")
                         proFeatureRow(icon: "arrow.left.arrow.right", text: "Unit Converter")
                         proFeatureRow(icon: "paintpalette", text: "All 6 Themes")
-                        proFeatureRow(icon: "clock.arrow.circlepath", text: "Unlimited History")
+                        proFeatureRow(icon: "clock.arrow.circlepath", text: "History with lock/unlock entries")
                     }
 
                     // Purchase Button
@@ -496,4 +496,3 @@ public struct SettingsView: View {
         SettingsView()
     }
 }
-

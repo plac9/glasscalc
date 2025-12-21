@@ -24,7 +24,6 @@
 		2D65EB4333436683076960ED /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B7B50423B6D89E4720B631E /* WidgetKit.framework */; };
 		310BB87D04D5A6ECCDEFDE01 /* AnimatedMeshBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A0661C3A9837C68807DCCF /* AnimatedMeshBackground.swift */; };
 		3763CF84B70E24CD9C7504B3 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B816A3B1DB1B25E2793EBE /* PaywallView.swift */; };
-		3C3C33DC1E3872654537128C /* CurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE810125C7AA4B49DD1C406 /* CurrencyService.swift */; };
 		41C6946A6A6F688A3269A54D /* ThemePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C228C0D8343BBC4BC4AD26A9 /* ThemePickerView.swift */; };
 		43AF97B6E7D3010CF49AF011 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF804420EFCDF536EE758402 /* Assets.xcassets */; };
 		47069FF46CF36514A8CF4DD2 /* ProGatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A12B447B4864A04D20652CF /* ProGatedView.swift */; };
@@ -115,7 +114,6 @@
 		14537D61F92159E7708154D3 /* HistoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailView.swift; sourceTree = "<group>"; };
 		17BC2D603C7CEB1FB9D8D4AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		18838FACCEAD94472FD6DA36 /* ScreenshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotTests.swift; sourceTree = "<group>"; };
-		1AE810125C7AA4B49DD1C406 /* CurrencyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyService.swift; sourceTree = "<group>"; };
 		20B816A3B1DB1B25E2793EBE /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
 		214A5BC18578DBB7ED248C8E /* GlassIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassIconButton.swift; sourceTree = "<group>"; };
 		26509E15A54254B49C270A72 /* PersistenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceTests.swift; sourceTree = "<group>"; };
@@ -257,7 +255,6 @@
 		3985D0CCD85849D5ABC96852 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				1AE810125C7AA4B49DD1C406 /* CurrencyService.swift */,
 				693A3C61991A360DD9FD744D /* HistoryService.swift */,
 				E71565CF5E5341BE10949329 /* SharedDataService.swift */,
 				112208D79CF5E1EC11D5664E /* StoreKitManager.swift */,
@@ -622,7 +619,6 @@
 				704D769752DB6A7E348E62DB /* CalculatorView.swift in Sources */,
 				952644DD55515B66A2B4F98E /* CalculatorViewModel.swift in Sources */,
 				8E77DC9EB8AB5B602B45C8AD /* ContentView.swift in Sources */,
-				3C3C33DC1E3872654537128C /* CurrencyService.swift in Sources */,
 				B3E765B65DAB2BE2364AB7AF /* DiscountCalculatorView.swift in Sources */,
 				F389F2A3DCE36F8F080724C6 /* DiscountCalculatorViewModel.swift in Sources */,
 				0FC3FBB4F5AF6185F6991525 /* GlassButton.swift in Sources */,

@@ -214,14 +214,13 @@ PrismCalc is a calculator app with freemium model:
 
 FREE TIER:
 - Basic calculator
-- Last 10 history items
 - Aurora theme
 
 PRO TIER ($2.99):
 - Tip calculator with bill splitting
 - Discount calculator
 - Unit converter
-- Unlimited history
+- History with lock/unlock entries
 - All 6 themes
 
 TESTING IAP:
@@ -399,7 +398,7 @@ You mentioned having AI assistants connected to Xcode. Here's how to work with t
 Working on PrismCalc iOS app submission.
 Bundle ID: com.laclairtech.prismcalc
 IAP Product: com.laclairtech.prismcalc.pro ($2.99)
-Freemium model: Free calculator + 10 history | Pro: all tools + unlimited
+Freemium model: Free calculator | Pro: all tools + history with lock/unlock entries
 ```
 
 **Useful Prompts**:

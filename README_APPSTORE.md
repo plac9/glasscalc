@@ -3,7 +3,7 @@
 ## 🎉 What's Complete
 
 ### ✅ Code & Build
-- [x] All features implemented (Calculator, History, Tip, Discount, Split, Converter)
+- [x] All features implemented (Calculator, History (Pro), Tip, Discount, Split, Converter)
 - [x] Freemium model with IAP (Free tier + Pro $2.99)
 - [x] iOS 18 features (floating tab bar, zoom transitions, mesh gradients)
 - [x] Widget Extension with shared data
@@ -152,14 +152,14 @@ Submit for Apple review - **ONLY when you're 100% confident**
 
 ### Screenshots
 - **`screenshots/iphone67_01.png`** - Calculator (Free)
-- **`screenshots/iphone67_02.png`** - History (Free, 10 items)
+- **`screenshots/iphone67_02.png`** - History paywall (Free tier)
 - **`screenshots/iphone67_03.png`** - Paywall for Tip Calculator
 - **`screenshots/iphone67_04.png`** - Themes (Free tier)
 - **`screenshots/iphone67_05.png`** - Tip Calculator (Pro)
 - **`screenshots/iphone67_06.png`** - Discount Calculator (Pro)
 - **`screenshots/iphone67_07.png`** - Split Bill (Pro)
 - **`screenshots/iphone67_08.png`** - Unit Converter (Pro)
-- **`screenshots/iphone67_09.png`** - History (Pro, unlimited)
+- **`screenshots/iphone67_09.png`** - History (Pro)
 - **`screenshots/iphone67_10.png`** - Calculator with result (Pro)
 
 ### Documentation

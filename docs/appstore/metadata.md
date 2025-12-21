@@ -22,8 +22,11 @@ PrismCalc is a beautifully designed calculator that combines powerful everyday t
 **CORE CALCULATOR**
 • Clean, intuitive interface for basic arithmetic
 • Large, easy-to-tap glass buttons with haptic feedback
-• Calculation history with quick copy
 • Percentage and sign toggle functions
+
+**HISTORY (Pro)**
+• Save and review past calculations
+• Lock important entries for quick reference
 
 **TIP CALCULATOR (Pro)**
 • Calculate tips from 0-100% with an elegant arc slider
@@ -102,7 +105,7 @@ PrismCalc does not collect any data. All calculations are performed locally on y
 - No tracking
 - No analytics
 - No user accounts
-- No network requests (except optional currency rates in future)
+- No network requests
 - Calculation history stored only on device
 
 ---
@@ -114,6 +117,7 @@ PrismCalc does not collect any data. All calculations are performed locally on y
 - Bill Split
 - Discount Calculator
 - Unit Converter
+- History with lock/unlock entries
 - All 6 premium themes
 - All widget styles
 

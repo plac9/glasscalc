@@ -37,8 +37,23 @@ public final class HistoryService {
     public func save(_ entry: HistoryEntry) {
         guard let context else { return }
         context.insert(entry)
-        try? context.save()
-        syncToWidget(entry: entry)
+        do {
+            try context.save()
+            syncToWidget(entry: entry)
+        } catch {
+            print("Failed to save history entry: \(error)")
+        }
+    }
+
+    /// Persist updates to an existing history entry
+    public func update(_ entry: HistoryEntry) {
+        guard let context else { return }
+        do {
+            try context.save()
+            syncToWidget(entry: entry)
+        } catch {
+            print("Failed to update history entry: \(error)")
+        }
     }
 
     /// Sync latest entry to widget
@@ -63,14 +78,7 @@ public final class HistoryService {
     }
 
     private func iconForType(_ type: String) -> String {
-        switch type {
-        case "basic": return "plus.forwardslash.minus"
-        case "tip": return "dollarsign.circle"
-        case "discount": return "tag"
-        case "split": return "person.2"
-        case "convert": return "arrow.left.arrow.right"
-        default: return "equal.square"
-        }
+        (CalculationType(rawValue: type) ?? .basic).icon
     }
 
     /// Save a basic calculation
@@ -162,7 +170,11 @@ public final class HistoryService {
     public func delete(_ entry: HistoryEntry) {
         guard let context else { return }
         context.delete(entry)
-        try? context.save()
+        do {
+            try context.save()
+        } catch {
+            print("Failed to delete history entry: \(error)")
+        }
     }
 
     /// Clear all history
@@ -173,7 +185,11 @@ public final class HistoryService {
         for entry in entries {
             context.delete(entry)
         }
-        try? context.save()
+        do {
+            try context.save()
+        } catch {
+            print("Failed to clear history: \(error)")
+        }
     }
 
     /// Get the model container for SwiftUI environment
