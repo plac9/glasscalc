@@ -218,18 +218,17 @@
 }
 
 .hero__title {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #FFFFFF;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .hero__subtitle {
   font-size: 1.25rem;
-  font-weight: 500;
+  font-weight: 600;
   margin: var(--spacing-lg) 0;
   max-width: 500px;
-  color: var(--color-text-secondary);
+  color: #FFFFFF;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 .hero__cta {
