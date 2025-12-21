@@ -1,5 +1,4 @@
 import SwiftUI
-import WidgetKit
 
 /// Widget management view showing available widgets with previews and add instructions
 public struct WidgetSettingsView: View {
@@ -103,7 +102,7 @@ public struct WidgetSettingsView: View {
                     description: "Quick result and feature shortcuts",
                     icon: "square"
                 ) {
-                    AdaptiveWidgetPreview(family: .systemSmall)
+                    WidgetSizePreview(size: .small)
                 }
 
                 // Medium widget preview
@@ -112,7 +111,7 @@ public struct WidgetSettingsView: View {
                     description: "Latest result with quick action grid",
                     icon: "rectangle"
                 ) {
-                    AdaptiveWidgetPreview(family: .systemMedium)
+                    WidgetSizePreview(size: .medium)
                 }
 
                 // Large widget preview
@@ -121,7 +120,7 @@ public struct WidgetSettingsView: View {
                     description: "Full result, actions, and history",
                     icon: "square.fill"
                 ) {
-                    AdaptiveWidgetPreview(family: .systemLarge)
+                    WidgetSizePreview(size: .large)
                 }
             }
         }
@@ -200,39 +199,25 @@ public struct WidgetSettingsView: View {
     }
 }
 
-private struct AdaptiveWidgetPreview: View {
-    let family: WidgetFamily
+private struct WidgetSizePreview: View {
+    enum Size {
+        case small, medium, large
+
+        var height: CGFloat {
+            switch self {
+            case .small: return 150
+            case .medium: return 150
+            case .large: return 300
+            }
+        }
+    }
+
+    let size: Size
 
     var body: some View {
-        AdaptivePrismCalcWidgetView(entry: sampleEntry)
+        WidgetPreviewView(entry: .sample)
             .frame(maxWidth: .infinity)
-            .frame(height: heightForFamily(family))
-            .background(
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(.thinMaterial)
-            )
-    }
-
-    private var sampleEntry: PrismCalcEntry {
-        PrismCalcEntry(
-            date: Date(),
-            lastResult: "42",
-            lastExpression: "6 × 7",
-            recentHistory: [
-                .init(type: "Calc", result: "42", details: "6 × 7", icon: "plus.forwardslash.minus"),
-                .init(type: "Tip", result: "$23.60", details: "$20 + 18%", icon: "dollarsign.circle"),
-                .init(type: "Split", result: "$15", details: "$60 ÷ 4", icon: "person.2")
-            ]
-        )
-    }
-
-    private func heightForFamily(_ family: WidgetFamily) -> CGFloat {
-        switch family {
-        case .systemSmall: return 150
-        case .systemMedium: return 150
-        case .systemLarge: return 300
-        default: return 150
-        }
+            .frame(height: size.height)
     }
 }
 

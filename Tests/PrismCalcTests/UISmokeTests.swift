@@ -1,6 +1,5 @@
 import Testing
 import SwiftUI
-import WidgetKit
 @testable import PrismCalc
 
 @Suite("UI smoke tests")
@@ -47,18 +46,4 @@ struct UISmokeTests {
         let view = WidgetSettingsView()
         _ = view.body
     }
-
-    // Control Center widgets (iOS 18+ only)
-    #if os(iOS)
-    @available(iOS 18.0, *)
-    @Test("Control Center widgets types compile")
-    func testControlCenterWidgets() throws {
-        // Ensure types exist and can be constructed
-        _ = PrismCalcControlWidget.kind
-        _ = TipCalculatorControlWidget.kind
-        _ = BillSplitControlWidget.kind
-        _ = UnitConverterControlWidget.kind
-        _ = DiscountControlWidget.kind
-    }
-    #endif
 }

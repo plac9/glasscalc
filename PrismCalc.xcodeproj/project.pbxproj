@@ -41,6 +41,7 @@
 		704D769752DB6A7E348E62DB /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C4F48E8638FC6BECBD59F5 /* CalculatorView.swift */; };
 		784D54FD75879BED23763AA7 /* ThemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B8FAA34DEE532FFBA6E335 /* ThemeTests.swift */; };
 		78F21574959188B763480B4D /* PrismCalcIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69813B6E869CB554F7414F40 /* PrismCalcIntents.swift */; };
+		7B7D9CB51D554E0BFF005AAD /* WidgetPreviewTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FE4E297C14978BAA7DC488 /* WidgetPreviewTypes.swift */; };
 		85174233C2D7B20D07855A5F /* CalculatorEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372CB58120B9A90634A2EC54 /* CalculatorEngineTests.swift */; };
 		888BE6A6F170B04DBE7A3313 /* SplitBillViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1FD0ABEE01013B0EDAB877 /* SplitBillViewModel.swift */; };
 		8A1448363ACFF317DBC9A279 /* ScreenshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18838FACCEAD94472FD6DA36 /* ScreenshotTests.swift */; };
@@ -143,6 +144,7 @@
 		4032A2D0EDDA0230E4EAD7AF /* SplitResultsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitResultsSection.swift; sourceTree = "<group>"; };
 		444839D3946D96E3A83271E3 /* UnitConverterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConverterViewModel.swift; sourceTree = "<group>"; };
 		5349DC43F236B5AFC9EDD51C /* GlassWideButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassWideButton.swift; sourceTree = "<group>"; };
+		53FE4E297C14978BAA7DC488 /* WidgetPreviewTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetPreviewTypes.swift; sourceTree = "<group>"; };
 		58B781A93DE476DC3D1ABE03 /* ContentViewTabsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewTabsTests.swift; sourceTree = "<group>"; };
 		5EF4A68693D57D301E371A82 /* PrismCalcWidgetExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = PrismCalcWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		66A7DCC91BA6A1E97EAF6CB0 /* CalculatorEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorEngine.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				F670765787CBDE7479E12868 /* HistoryEntry.swift */,
+				53FE4E297C14978BAA7DC488 /* WidgetPreviewTypes.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -692,6 +695,7 @@
 				B0D0583C113A62BD481273B2 /* UnitConverterView.swift in Sources */,
 				94A615BCE19AF31F47766EFB /* UnitConverterViewModel.swift in Sources */,
 				E27A507584F5E904682D5961 /* ViewExtensions.swift in Sources */,
+				7B7D9CB51D554E0BFF005AAD /* WidgetPreviewTypes.swift in Sources */,
 				DC05C4EF649B91FA0ACA6796 /* WidgetSettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
