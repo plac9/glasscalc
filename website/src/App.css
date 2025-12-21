@@ -145,7 +145,7 @@
 
 .hero__badge {
   padding: var(--spacing-xs) var(--spacing-md);
-  background: rgba(123, 104, 238, 0.1);
+  background: rgba(0, 206, 200, 0.1);
   border-radius: var(--radius-sm);
   font-size: 0.875rem;
   font-weight: 500;

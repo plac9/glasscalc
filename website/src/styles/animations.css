@@ -50,12 +50,12 @@
   inset: 0;
   background: radial-gradient(
     ellipse at 30% 20%,
-    rgba(123, 104, 238, 0.3) 0%,
+    rgba(0, 206, 200, 0.3) 0%,
     transparent 50%
   ),
   radial-gradient(
     ellipse at 70% 80%,
-    rgba(0, 206, 209, 0.2) 0%,
+    rgba(32, 178, 170, 0.25) 0%,
     transparent 50%
   );
   animation: meshGradientSubtle 15s ease-in-out infinite;
@@ -158,10 +158,10 @@
 /* Pulse for CTAs */
 @keyframes pulse {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(123, 104, 238, 0.4);
+    box-shadow: 0 0 0 0 rgba(0, 206, 200, 0.4);
   }
   50% {
-    box-shadow: 0 0 0 15px rgba(123, 104, 238, 0);
+    box-shadow: 0 0 0 15px rgba(0, 206, 200, 0);
   }
 }
 

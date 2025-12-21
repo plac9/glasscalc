@@ -3,15 +3,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Aurora Theme (Default) */
-  --color-primary: #7B68EE;
-  --color-secondary: #00CED1;
+  /* Blue-Green Harmony Theme (Default) */
+  --color-primary: #00CEC8;
+  --color-secondary: #20B2AA;
 
   /* Semantic Colors */
   --color-bg: #fafafa;
-  --color-bg-dark: #0a0e1a;
+  --color-bg-dark: #0a1a1a;
   --color-bg-card: rgba(255, 255, 255, 0.7);
-  --color-bg-card-dark: rgba(26, 33, 48, 0.7);
+  --color-bg-card-dark: rgba(20, 40, 40, 0.7);
 
   --color-text: #1A1A1A;
   --color-text-secondary: rgba(26, 26, 26, 0.7);
@@ -52,19 +52,19 @@
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
-  --shadow-glow: 0 0 20px rgba(123, 104, 238, 0.3);
+  --shadow-glow: 0 0 20px rgba(0, 206, 200, 0.3);
 
   /* Glass Effects */
   --glass-blur: blur(12px);
   --glass-border: rgba(255, 255, 255, 0.3);
 
-  /* Mesh Gradient Colors (Aurora) */
-  --gradient-1: rgb(64, 89, 191);
-  --gradient-2: rgb(115, 89, 204);
-  --gradient-3: rgb(51, 64, 140);
-  --gradient-4: rgb(102, 76, 178);
-  --gradient-5: rgb(127, 71, 166);
-  --gradient-6: rgb(46, 97, 140);
+  /* Mesh Gradient Colors (Blue-Green Harmony) */
+  --gradient-1: rgb(0, 128, 128);
+  --gradient-2: rgb(32, 178, 170);
+  --gradient-3: rgb(0, 139, 139);
+  --gradient-4: rgb(64, 224, 208);
+  --gradient-5: rgb(0, 206, 209);
+  --gradient-6: rgb(72, 209, 204);
 }
 
 /* Dark Mode */
