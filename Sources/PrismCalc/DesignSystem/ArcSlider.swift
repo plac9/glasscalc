@@ -18,6 +18,12 @@ public struct ArcSlider: View {
     private let trackWidth: CGFloat = 24
     private let thumbSize: CGFloat = 44
 
+    /// Normalized percentage (0...1) clamped to prevent arc overflow
+    private var normalizedPercentage: Double {
+        let raw = (value - range.lowerBound) / (range.upperBound - range.lowerBound)
+        return min(1.0, max(0.0, raw))
+    }
+
     public init(
         value: Binding<Double>,
         range: ClosedRange<Double>,
@@ -74,8 +80,8 @@ public struct ArcSlider: View {
 
     @MainActor
     private var arcFill: some View {
-        let percentage = (value - range.lowerBound) / (range.upperBound - range.lowerBound)
-        let endAngle = 180 - (180 * percentage)
+        // Use clamped percentage to prevent arc from drawing past the semicircle
+        let endAngle = 180 - (180 * normalizedPercentage)
 
         return ArcShape(
             startAngle: .degrees(180),
@@ -94,8 +100,8 @@ public struct ArcSlider: View {
 
     @MainActor
     private func thumbView(arcCenter: CGPoint, frameWidth: CGFloat) -> some View {
-        let percentage = (value - range.lowerBound) / (range.upperBound - range.lowerBound)
-        let angle = 180 - (180 * percentage)
+        // Use clamped percentage to keep thumb on the semicircle
+        let angle = 180 - (180 * normalizedPercentage)
         let radians = angle * .pi / 180
         let x = arcRadius * cos(radians)
         let y = -arcRadius * sin(radians)
