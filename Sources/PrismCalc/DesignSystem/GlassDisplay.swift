@@ -12,8 +12,11 @@ public struct GlassDisplay: View {
     let expression: String
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @ScaledMetric(relativeTo: .largeTitle) private var baseDisplaySize: CGFloat = 64
-    @ScaledMetric(relativeTo: .title3) private var baseExpressionSize: CGFloat = 18
+
+    // Calculator display uses fixed sizes - should not scale with Dynamic Type
+    // to ensure numbers always fit properly on screen
+    private let baseDisplaySize: CGFloat = 64
+    private let baseExpressionSize: CGFloat = 18
 
     public init(value: String, expression: String = "") {
         self.value = value
