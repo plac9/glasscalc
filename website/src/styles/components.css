@@ -133,6 +133,7 @@
 .feature-card__description {
   font-size: 0.95rem;
   line-height: 1.6;
+  color: var(--color-text-secondary);
 }
 
 /* Pro Badge */
@@ -211,9 +212,9 @@
 .screenshot-item {
   flex: 0 0 auto;
   scroll-snap-align: center;
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   transition: transform var(--spring-standard);
 }
 
@@ -225,6 +226,16 @@
   height: 500px;
   width: auto;
   object-fit: cover;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+}
+
+.screenshot-caption {
+  margin-top: var(--spacing-md);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text);
+  text-align: center;
 }
 
 /* Theme Showcase */
@@ -296,6 +307,8 @@
   max-width: 600px;
   margin: 0 auto;
   font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
 }
 
 /* Grid Layouts */

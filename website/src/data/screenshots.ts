@@ -4,43 +4,44 @@ import type { Screenshot } from '../types';
 
 export const screenshots: Screenshot[] = [
   {
-    id: 'blue-green',
+    id: 'calculator',
     src: '/screenshots/01_BlueGreen_Calculator.png',
-    alt: 'PrismCalc with Blue-Green Harmony theme',
-    caption: 'Blue-Green Theme',
+    alt: 'PrismCalc calculator with Blue-Green theme',
+    caption: 'Calculator',
     theme: 'Blue-Green Harmony',
-  },
-  {
-    id: 'forest-earth',
-    src: '/screenshots/02_ForestEarth_Calculator.png',
-    alt: 'PrismCalc with Forest Earth theme',
-    caption: 'Forest Earth Theme',
-    theme: 'Forest Earth',
-  },
-  {
-    id: 'calming-blues',
-    src: '/screenshots/03_CalmingBlues_Calculator.png',
-    alt: 'PrismCalc with Calming Blues theme',
-    caption: 'Calming Blues Theme',
-    theme: 'Calming Blues',
-  },
-  {
-    id: 'midnight',
-    src: '/screenshots/04_Midnight_Calculator.png',
-    alt: 'PrismCalc with Midnight theme',
-    caption: 'Midnight Theme',
-    theme: 'Midnight',
   },
   {
     id: 'tip',
     src: '/screenshots/05_Tip_Calculator_Pro.png',
     alt: 'Tip calculator with arc slider',
     caption: 'Tip Calculator',
+    theme: 'Pro Feature',
   },
   {
     id: 'split',
     src: '/screenshots/07_Split_Bill_Pro.png',
     alt: 'Split bill calculator for group expenses',
     caption: 'Split Bill',
+    theme: 'Pro Feature',
+  },
+  {
+    id: 'discount',
+    src: '/screenshots/06_Discount_Calculator_Pro.png',
+    alt: 'Discount calculator showing savings',
+    caption: 'Discount Calculator',
+    theme: 'Pro Feature',
+  },
+  {
+    id: 'converter',
+    src: '/screenshots/08_Unit_Converter_Pro.png',
+    alt: 'Unit converter for length, weight, temperature',
+    caption: 'Unit Converter',
+    theme: 'Pro Feature',
+  },
+  {
+    id: 'themes',
+    src: '/screenshots/04_Themes_Free.png',
+    alt: 'Theme selection screen showing all 6 themes',
+    caption: 'Theme Selection',
   },
 ];

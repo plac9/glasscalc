@@ -226,8 +226,10 @@
 
 .hero__subtitle {
   font-size: 1.25rem;
+  font-weight: 500;
   margin: var(--spacing-lg) 0;
   max-width: 500px;
+  color: var(--color-text-secondary);
 }
 
 .hero__cta {

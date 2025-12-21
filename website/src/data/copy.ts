@@ -34,7 +34,7 @@ export const copy = {
   meta: {
     title: 'PrismCalc - The beautiful way to calculate',
     description:
-      'Beautiful glassmorphic calculator for iPhone, iPad, and Mac. Tip splitting, discounts, unit conversion, and 6 stunning themes.',
+      'Beautiful glassmorphic calculator for iPhone. Tip splitting, discounts, unit conversion, and 6 stunning themes.',
     keywords:
       'calculator, tip calculator, glassmorphism, iOS app, iPhone calculator, split bill, unit converter, discount calculator',
     url: 'https://prismcalc.app',
