@@ -8,26 +8,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- CLAUDE.md project context file
-- .ai/ directory with SESSION_CONTEXT.md, ARCHITECTURE.md, CHANGELOG.md, HANDOFF.md
-- Automated screenshot capture (10 PNGs on iPhone 17 simulator)
-- Automated screenshot sets for iPhone 17, 17 Pro, 17 Pro Max, and 16e
-- Screenshot runner arguments for simulator/output/prefix
-- Mission statement audit documentation
+- **Marketing website** at prismcalc.app (Vite 7 + React 19 + TypeScript)
+  - Glassmorphism UI matching iOS app design
+  - Animated mesh gradients, dark mode support
+  - Full SEO optimization with Open Graph meta tags
+  - Smart App Banner for iOS users
+- Deployed to Cloudflare Pages with custom domain and SSL
+- WidgetPreviewTypes shared model for screenshot automation
+- 9 App Store screenshots with clean naming format
 
 ### Changed
-- Updated QA_REPORT.md with iOS-only verification notes
-- Screenshot tests now accept SELECT_TAB launch argument
-- History is Pro-only and paywall copy updated
-- Screenshot runner now selects latest xcresult and exact simulator name matches
+- SwiftLint refactoring: extracted 8 components, eliminated ALL source warnings
+- Consolidated widget fixes, reorganized tests
+- Screenshot naming now uses clean format without UUIDs
 
 ### Removed
 - Currency conversion from Unit Converter and CurrencyService
+- Old UUID-based screenshot files
 
 ### Fixed
 - StoreKit loading state reset on completion paths
 - History update path for lock/unlock entries
-- Screenshot extraction/rename pipeline for consistent iphone67_*.png output
+- ArcSlider percentage clamping to prevent bottom-half overflow
 
 ## [1.0.0] - 2025-12-07
 
