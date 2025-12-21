@@ -5,11 +5,12 @@ public struct SplitBillView: View {
     @State private var viewModel = SplitBillViewModel()
     @State private var decrementTrigger = false
     @State private var incrementTrigger = false
-    @ScaledMetric(relativeTo: .title2) private var currencySymbolSize: CGFloat = 32
-    @ScaledMetric(relativeTo: .largeTitle) private var inputValueSize: CGFloat = 48
-    @ScaledMetric(relativeTo: .largeTitle) private var peopleCountSize: CGFloat = 56
-    @ScaledMetric(relativeTo: .largeTitle) private var heroValueSize: CGFloat = 56
-    @ScaledMetric(relativeTo: .title2) private var peopleControlSize: CGFloat = 56
+    // Fixed sizes for calculator displays - should not scale with Dynamic Type
+    private let currencySymbolSize: CGFloat = 32
+    private let inputValueSize: CGFloat = 48
+    private let peopleCountSize: CGFloat = 56
+    private let heroValueSize: CGFloat = 56
+    private let peopleControlSize: CGFloat = 56
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @FocusState private var isInputFocused: Bool
 

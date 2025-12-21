@@ -4,9 +4,10 @@ import SwiftUI
 public struct UnitConverterView: View {
     @State private var viewModel = UnitConverterViewModel()
     @State private var swapTrigger = false
-    @ScaledMetric(relativeTo: .largeTitle) private var inputValueSize: CGFloat = 48
-    @ScaledMetric(relativeTo: .largeTitle) private var resultValueSize: CGFloat = 48
-    @ScaledMetric(relativeTo: .title3) private var swapButtonSize: CGFloat = 44
+    // Fixed sizes for calculator displays - should not scale with Dynamic Type
+    private let inputValueSize: CGFloat = 48
+    private let resultValueSize: CGFloat = 48
+    private let swapButtonSize: CGFloat = 44
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @FocusState private var isInputFocused: Bool
 

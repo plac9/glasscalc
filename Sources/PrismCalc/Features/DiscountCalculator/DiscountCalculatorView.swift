@@ -3,8 +3,9 @@ import SwiftUI
 /// Discount Calculator showing original price, discount %, and savings
 public struct DiscountCalculatorView: View {
     @State private var viewModel = DiscountCalculatorViewModel()
-    @ScaledMetric(relativeTo: .title2) private var currencySymbolSize: CGFloat = 32
-    @ScaledMetric(relativeTo: .largeTitle) private var inputValueSize: CGFloat = 48
+    // Fixed sizes for calculator displays - should not scale with Dynamic Type
+    private let currencySymbolSize: CGFloat = 32
+    private let inputValueSize: CGFloat = 48
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @FocusState private var isInputFocused: Bool
 

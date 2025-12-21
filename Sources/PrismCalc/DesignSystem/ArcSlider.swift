@@ -126,11 +126,11 @@ public struct ArcSlider: View {
     private var centerDisplay: some View {
         VStack(spacing: GlassTheme.spacingXS) {
             Text(label)
-                .font(GlassTheme.captionFont)
+                .font(.system(size: 12, weight: .medium, design: .rounded))
                 .foregroundStyle(GlassTheme.textSecondary)
 
             Text(valueFormatter(value))
-                .font(.system(.title, design: .rounded, weight: .bold))
+                .font(.system(size: 28, weight: .bold, design: .rounded))
                 .foregroundStyle(GlassTheme.primary)
                 .contentTransition(reduceMotion ? .identity : .numericText())
                 .animation(reduceMotion ? nil : .easeInOut(duration: 0.1), value: value)

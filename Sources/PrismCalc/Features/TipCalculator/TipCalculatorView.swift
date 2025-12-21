@@ -6,8 +6,9 @@ public struct TipCalculatorView: View {
     @State private var decrementTrigger = false
     @State private var incrementTrigger = false
     @State private var noteText: String = ""
-    @ScaledMetric(relativeTo: .title2) private var currencySymbolSize: CGFloat = 32
-    @ScaledMetric(relativeTo: .largeTitle) private var inputValueSize: CGFloat = 48
+    // Fixed sizes for calculator displays - should not scale with Dynamic Type
+    private let currencySymbolSize: CGFloat = 32
+    private let inputValueSize: CGFloat = 48
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @FocusState private var isInputFocused: Bool
 
