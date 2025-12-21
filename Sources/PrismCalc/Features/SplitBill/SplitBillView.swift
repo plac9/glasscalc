@@ -9,7 +9,6 @@ public struct SplitBillView: View {
     private let currencySymbolSize: CGFloat = 32
     private let inputValueSize: CGFloat = 48
     private let peopleCountSize: CGFloat = 56
-    private let heroValueSize: CGFloat = 56
     private let peopleControlSize: CGFloat = 56
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @FocusState private var isInputFocused: Bool
@@ -38,7 +37,7 @@ public struct SplitBillView: View {
                 tipSection
 
                 // Results
-                resultsSection
+                SplitResultsSection(viewModel: viewModel)
                     .scrollTransition { content, phase in
                         content
                             .opacity(reduce || phase.isIdentity ? 1 : 0.9)
@@ -221,77 +220,6 @@ public struct SplitBillView: View {
         }
     }
 
-    // MARK: - Results
-
-    @MainActor
-    private var resultsSection: some View {
-        VStack(spacing: GlassTheme.spacingMedium) {
-            // Per Person (Hero)
-            VStack(spacing: GlassTheme.spacingXS) {
-                Text("Each Person Pays")
-                    .font(GlassTheme.captionFont)
-                    .foregroundStyle(GlassTheme.textSecondary)
-
-                Text(viewModel.formattedPerPerson)
-                    .font(.system(size: heroValueSize, weight: .medium, design: .rounded))
-                    .foregroundStyle(GlassTheme.primary)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.6)
-                    .contentTransition(reduceMotion ? .identity : .numericText())
-                    .animation(reduceMotion ? nil : .easeInOut(duration: 0.15), value: viewModel.perPersonShare)
-            }
-            .frame(maxWidth: .infinity)
-            .padding(GlassTheme.spacingLarge)
-            .background(
-                RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusXL)
-                    .fill(.regularMaterial)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusXL)
-                            .stroke(GlassTheme.primary.opacity(0.3), lineWidth: 2)
-                    )
-            )
-            .shadow(color: GlassTheme.primary.opacity(0.2), radius: 20, y: 10)
-
-            // Breakdown
-            GlassCard {
-                VStack(spacing: GlassTheme.spacingSmall) {
-                    breakdownRow(label: "Bill", value: viewModel.formattedBill)
-
-                    if viewModel.includeTip {
-                        breakdownRow(label: "Tip (\(Int(viewModel.tipPercentage))%)", value: viewModel.formattedTip)
-                    }
-
-                    Divider()
-                        .background(GlassTheme.textTertiary)
-
-                    breakdownRow(
-                        label: "Grand Total",
-                        value: viewModel.formattedGrandTotal,
-                        isHighlighted: true
-                    )
-
-                    // Save Button
-                    if viewModel.billValue > 0 {
-                        Divider()
-                            .background(GlassTheme.textTertiary)
-
-                        Button {
-                            viewModel.saveToHistory()
-                        } label: {
-                            Label("Save to History", systemImage: "clock.arrow.circlepath")
-                                .font(GlassTheme.bodyFont)
-                                .foregroundStyle(GlassTheme.primary)
-                        }
-                        .buttonStyle(.plain)
-                        .sensoryFeedback(.success, trigger: viewModel.billValue)
-                        .accessibilityLabel("Save to history")
-                        .accessibilityHint("Saves this split bill calculation to your history")
-                    }
-                }
-            }
-        }
-    }
-
     // MARK: - Button Icons (Reduce Motion Support)
 
     @MainActor @ViewBuilder
@@ -314,20 +242,6 @@ public struct SplitBillView: View {
         }
     }
 
-    @MainActor
-    private func breakdownRow(label: String, value: String, isHighlighted: Bool = false) -> some View {
-        HStack {
-            Text(label)
-                .font(GlassTheme.bodyFont)
-                .foregroundStyle(GlassTheme.textSecondary)
-
-            Spacer()
-
-            Text(value)
-                .font(isHighlighted ? GlassTheme.headlineFont : GlassTheme.bodyFont)
-                .foregroundStyle(isHighlighted ? GlassTheme.text : GlassTheme.textSecondary)
-        }
-    }
 }
 
 // MARK: - Preview
@@ -344,4 +258,3 @@ public struct SplitBillView: View {
         SplitBillView()
     }
 }
-

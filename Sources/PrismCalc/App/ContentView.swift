@@ -17,7 +17,15 @@ public struct ContentView: View {
         GlassTheme.Theme(rawValue: selectedThemeName) ?? .aurora
     }
 
-    public init() {}
+    public init() {
+        // Make TabView background transparent to show mesh gradient
+        #if os(iOS)
+        let appearance = UITabBarAppearance()
+        appearance.configureWithTransparentBackground()
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
+        #endif
+    }
 
     /// Tab identifiers for navigation
     public enum TabIdentifier: String, CaseIterable, Hashable {
@@ -50,23 +58,16 @@ public struct ContentView: View {
     }
 
     public var body: some View {
-        ZStack {
-            // Animated mesh gradient background (iOS 18+)
-            ThemedMeshBackground()
-                .ignoresSafeArea()
-
-            // iOS 18 Tab-based navigation with floating tab bar
-            tabContent
-        }
-        // Force full re-render when theme changes by using theme as view identity
-        .id(currentTheme)
-        .onAppear {
-            applyDebugSelectedTabIfNeeded()
-            syncTheme()
-        }
-        .onChange(of: selectedThemeName) { _, _ in
-            syncTheme()
-        }
+        tabContent
+            // Force full re-render when theme changes by using theme as view identity
+            .id(currentTheme)
+            .onAppear {
+                applyDebugSelectedTabIfNeeded()
+                syncTheme()
+            }
+            .onChange(of: selectedThemeName) { _, _ in
+                syncTheme()
+            }
     }
 
     /// Sync the static GlassTheme.currentTheme with stored value
@@ -82,7 +83,9 @@ public struct ContentView: View {
         TabView(selection: $selectedTab) {
             // Calculator - primary feature (locked, cannot be moved or hidden)
             Tab("Calculator", systemImage: TabIdentifier.calculator.icon, value: .calculator) {
-                CalculatorView()
+                ThemedContent {
+                    CalculatorView()
+                }
             }
             .customizationID("tab.calculator")
             #if os(iOS)
@@ -92,8 +95,10 @@ public struct ContentView: View {
 
             // Tip - Pro feature (most common after basic calc)
             Tab("Tip", systemImage: TabIdentifier.tip.icon, value: .tip) {
-                ProGatedView(featureName: "Tip Calculator", featureIcon: TabIdentifier.tip.icon) {
-                    TipCalculatorView()
+                ThemedContent {
+                    ProGatedView(featureName: "Tip Calculator", featureIcon: TabIdentifier.tip.icon) {
+                        TipCalculatorView()
+                    }
                 }
             }
             .customizationID("tab.tip")
@@ -101,8 +106,10 @@ public struct ContentView: View {
 
             // Split - Pro feature (common dining scenario)
             Tab("Split", systemImage: TabIdentifier.split.icon, value: .split) {
-                ProGatedView(featureName: "Split Bill", featureIcon: TabIdentifier.split.icon) {
-                    SplitBillView()
+                ThemedContent {
+                    ProGatedView(featureName: "Split Bill", featureIcon: TabIdentifier.split.icon) {
+                        SplitBillView()
+                    }
                 }
             }
             .customizationID("tab.split")
@@ -110,8 +117,10 @@ public struct ContentView: View {
 
             // Discount - Pro feature
             Tab("Discount", systemImage: TabIdentifier.discount.icon, value: .discount) {
-                ProGatedView(featureName: "Discount Calculator", featureIcon: TabIdentifier.discount.icon) {
-                    DiscountCalculatorView()
+                ThemedContent {
+                    ProGatedView(featureName: "Discount Calculator", featureIcon: TabIdentifier.discount.icon) {
+                        DiscountCalculatorView()
+                    }
                 }
             }
             .customizationID("tab.discount")
@@ -119,8 +128,10 @@ public struct ContentView: View {
 
             // Convert - Pro feature
             Tab("Convert", systemImage: TabIdentifier.convert.icon, value: .convert) {
-                ProGatedView(featureName: "Unit Converter", featureIcon: TabIdentifier.convert.icon) {
-                    UnitConverterView()
+                ThemedContent {
+                    ProGatedView(featureName: "Unit Converter", featureIcon: TabIdentifier.convert.icon) {
+                        UnitConverterView()
+                    }
                 }
             }
             .customizationID("tab.convert")
@@ -128,8 +139,10 @@ public struct ContentView: View {
 
             // History - reference view
             Tab("History", systemImage: TabIdentifier.history.icon, value: .history) {
-                ProGatedView(featureName: "History", featureIcon: TabIdentifier.history.icon) {
-                    HistoryView()
+                ThemedContent {
+                    ProGatedView(featureName: "History", featureIcon: TabIdentifier.history.icon) {
+                        HistoryView()
+                    }
                 }
             }
             .customizationID("tab.history")
@@ -137,13 +150,18 @@ public struct ContentView: View {
 
             // Settings - least frequently accessed
             Tab("Settings", systemImage: TabIdentifier.settings.icon, value: .settings) {
-                SettingsView()
+                ThemedContent {
+                    SettingsView()
+                }
             }
             .customizationID("tab.settings")
             .accessibilityIdentifier("tab-settings")
         }
         .tabViewStyle(.sidebarAdaptable)
         .tabViewCustomization($tabCustomization)
+        #if os(iOS)
+        .toolbarBackgroundVisibility(.hidden, for: .tabBar)
+        #endif
         .tint(GlassTheme.primary)
         .sensoryFeedback(.selection, trigger: selectedTab)
     }
@@ -157,6 +175,21 @@ public struct ContentView: View {
             selectedTab = tab
         }
         UserDefaults.standard.removeObject(forKey: Self.debugSelectedTabKey)
+    }
+}
+
+// MARK: - Themed Content Wrapper
+
+/// Wraps content with the themed mesh gradient background
+struct ThemedContent<Content: View>: View {
+    @ViewBuilder let content: () -> Content
+
+    var body: some View {
+        ZStack {
+            ThemedMeshBackground()
+                .ignoresSafeArea()
+            content()
+        }
     }
 }
 

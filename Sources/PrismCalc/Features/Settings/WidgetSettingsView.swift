@@ -3,7 +3,6 @@ import SwiftUI
 /// Widget management view showing available widgets with previews and add instructions
 public struct WidgetSettingsView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @ScaledMetric(relativeTo: .body) private var widgetPreviewScale: CGFloat = 1.0
 
     public init() {}
 
@@ -34,6 +33,8 @@ public struct WidgetSettingsView: View {
             }
             .padding()
         }
+        .scrollContentBackground(.hidden)
+        .background(.clear)
         .navigationTitle("Widgets")
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
@@ -99,25 +100,28 @@ public struct WidgetSettingsView: View {
                 widgetPreviewCard(
                     size: "Small",
                     description: "Quick result and feature shortcuts",
-                    icon: "square",
-                    previewContent: smallWidgetPreview
-                )
+                    icon: "square"
+                ) {
+                    SmallWidgetPreviewContent()
+                }
 
                 // Medium widget preview
                 widgetPreviewCard(
                     size: "Medium",
                     description: "Latest result with quick action grid",
-                    icon: "rectangle",
-                    previewContent: mediumWidgetPreview
-                )
+                    icon: "rectangle"
+                ) {
+                    MediumWidgetPreviewContent()
+                }
 
                 // Large widget preview
                 widgetPreviewCard(
                     size: "Large",
                     description: "Full result, actions, and history",
-                    icon: "square.fill",
-                    previewContent: largeWidgetPreview
-                )
+                    icon: "square.fill"
+                ) {
+                    LargeWidgetPreviewContent()
+                }
             }
         }
     }
@@ -161,147 +165,6 @@ public struct WidgetSettingsView: View {
                     )
             }
         }
-    }
-
-    // MARK: - Widget Preview Content
-
-    @MainActor @ViewBuilder
-    private func smallWidgetPreview() -> some View {
-        VStack(alignment: .leading, spacing: 4) {
-            HStack {
-                Image(systemName: "equal.square.fill")
-                    .font(.caption)
-                    .foregroundStyle(.blue.gradient)
-                Text("PrismCalc")
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
-            }
-
-            Text("42")
-                .font(.system(size: 20, weight: .medium, design: .rounded))
-
-            Text("6 × 7")
-                .font(.caption2)
-                .foregroundStyle(.secondary)
-
-            HStack(spacing: 4) {
-                Circle()
-                    .fill(.blue.opacity(0.15))
-                    .frame(width: 18, height: 18)
-                    .overlay(
-                        Image(systemName: "dollarsign.circle")
-                            .font(.system(size: 10))
-                            .foregroundStyle(.blue)
-                    )
-                Circle()
-                    .fill(.blue.opacity(0.15))
-                    .frame(width: 18, height: 18)
-                    .overlay(
-                        Image(systemName: "person.2")
-                            .font(.system(size: 10))
-                            .foregroundStyle(.blue)
-                    )
-            }
-        }
-        .frame(height: 100 * widgetPreviewScale)
-    }
-
-    @MainActor @ViewBuilder
-    private func mediumWidgetPreview() -> some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 2) {
-                HStack {
-                    Image(systemName: "equal.square.fill")
-                        .font(.caption2)
-                        .foregroundStyle(.blue.gradient)
-                    Text("Latest")
-                        .font(.caption2)
-                        .foregroundStyle(.secondary)
-                }
-                Text("$23.60")
-                    .font(.system(size: 16, weight: .medium, design: .rounded))
-                Text("$20 + 18% tip")
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
-            }
-
-            Divider()
-
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 4) {
-                ForEach(["plus.forwardslash.minus", "dollarsign.circle", "person.2", "arrow.left.arrow.right"], id: \.self) { icon in
-                    RoundedRectangle(cornerRadius: 4)
-                        .fill(.blue.opacity(0.1))
-                        .frame(height: 28)
-                        .overlay(
-                            Image(systemName: icon)
-                                .font(.caption2)
-                                .foregroundStyle(.blue)
-                        )
-                }
-            }
-            .frame(maxWidth: .infinity)
-        }
-        .frame(height: 80 * widgetPreviewScale)
-    }
-
-    @MainActor @ViewBuilder
-    private func largeWidgetPreview() -> some View {
-        VStack(alignment: .leading, spacing: 6) {
-            HStack {
-                Image(systemName: "equal.square.fill")
-                    .font(.caption)
-                    .foregroundStyle(.blue.gradient)
-                Text("PrismCalc")
-                    .font(.caption)
-                    .fontWeight(.medium)
-                Spacer()
-            }
-
-            Text("$23.60")
-                .font(.system(size: 18, weight: .medium, design: .rounded))
-            Text("$20 + 18% tip")
-                .font(.caption2)
-                .foregroundStyle(.secondary)
-
-            HStack(spacing: 4) {
-                ForEach(["plus.forwardslash.minus", "dollarsign.circle", "person.2", "arrow.left.arrow.right"], id: \.self) { icon in
-                    RoundedRectangle(cornerRadius: 6)
-                        .fill(.blue.opacity(0.1))
-                        .frame(height: 30)
-                        .overlay(
-                            Image(systemName: icon)
-                                .font(.caption)
-                                .foregroundStyle(.blue)
-                        )
-                }
-            }
-
-            Divider()
-
-            Text("Recent History")
-                .font(.caption2)
-                .foregroundStyle(.secondary)
-
-            HStack(spacing: 6) {
-                Circle()
-                    .fill(.blue.opacity(0.1))
-                    .frame(width: 16, height: 16)
-                    .overlay(
-                        Image(systemName: "plus.forwardslash.minus")
-                            .font(.system(size: 8))
-                            .foregroundStyle(.blue)
-                    )
-                VStack(alignment: .leading, spacing: 0) {
-                    Text("42")
-                        .font(.caption2)
-                        .fontWeight(.medium)
-                    Text("6 × 7")
-                        .font(.system(size: 8))
-                        .foregroundStyle(.secondary)
-                }
-            }
-        }
-        .frame(height: 160 * widgetPreviewScale)
     }
 
     // MARK: - Tips Section

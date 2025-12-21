@@ -1,14 +1,9 @@
 import SwiftUI
-#if os(iOS)
-import UIKit
-#endif
 
 /// Main calculator view with full glassmorphism UI
 public struct CalculatorView: View {
     @State private var viewModel = CalculatorViewModel()
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @ScaledMetric(relativeTo: .title3) private var backspaceIconSize: CGFloat = 20
     @AppStorage("zeroOnRight") private var zeroOnRight: Bool = false
 
     public init() {}
@@ -22,34 +17,10 @@ public struct CalculatorView: View {
 
             VStack(spacing: 0) {
                 // Display - proportionally sized for iPad
-                ZStack(alignment: .bottomTrailing) {
-                    GlassDisplay(
-                        value: viewModel.display,
-                        expression: viewModel.expression
-                    )
-
-                    // Backspace button - visible when there's input to delete
-                    if viewModel.display != "0" && viewModel.display != "Error" {
-                        Button {
-                            triggerLightHaptic()
-                            viewModel.backspace()
-                        } label: {
-                            Image(systemName: "delete.backward")
-                                .font(.system(size: backspaceIconSize * (isIPad ? 1.2 : 1.0), weight: .medium))
-                                .foregroundStyle(GlassTheme.textSecondary)
-                                .frame(width: 44, height: 44)
-                                .contentShape(Rectangle())
-                        }
-                        .buttonStyle(.plain)
-                        .accessibilityLabel("Delete")
-                        .accessibilityHint("Removes the last digit")
-                        .accessibilityIdentifier("calculator-button-backspace")
-                        .padding(.trailing, GlassTheme.spacingSmall)
-                        .padding(.bottom, GlassTheme.spacingXS)
-                        .transition(.opacity.combined(with: .scale(scale: 0.8)))
-                    }
-                }
-                .animation(reduceMotion ? nil : .easeInOut(duration: 0.15), value: viewModel.display != "0")
+                GlassDisplay(
+                    value: viewModel.display,
+                    expression: viewModel.expression
+                )
                 .frame(height: layoutMetrics.displayHeight)
                 .padding(.horizontal, horizontalPadding)
                 .padding(.top, layoutMetrics.topPadding)
@@ -168,30 +139,20 @@ public struct CalculatorView: View {
                         }
                     }
 
-                    // Row 5: 0 (wide), ., = — respects zeroOnRight preference
+                    // Row 5: 0, ., ⌫, = — respects zeroOnRight preference
                     HStack(spacing: spacing) {
                         if zeroOnRight {
-                            // Alternative layout: ., 0 (wide), =
+                            // Alternative layout: ., 0, ⌫, =
                             calculatorButton(".", id: "calculator-button-decimal", layoutMetrics: layoutMetrics) {
                                 viewModel.inputDigit(".")
                             }
 
-                            wideCalculatorButton(
-                                "0",
-                                layoutMetrics: layoutMetrics,
-                                spacing: spacing,
-                                id: "calculator-button-0"
-                            ) {
+                            calculatorButton("0", id: "calculator-button-0", layoutMetrics: layoutMetrics) {
                                 viewModel.inputDigit("0")
                             }
                         } else {
-                            // Standard layout: 0 (wide), ., =
-                            wideCalculatorButton(
-                                "0",
-                                layoutMetrics: layoutMetrics,
-                                spacing: spacing,
-                                id: "calculator-button-0"
-                            ) {
+                            // Standard layout: 0, ., ⌫, =
+                            calculatorButton("0", id: "calculator-button-0", layoutMetrics: layoutMetrics) {
                                 viewModel.inputDigit("0")
                             }
 
@@ -199,6 +160,9 @@ public struct CalculatorView: View {
                                 viewModel.inputDigit(".")
                             }
                         }
+
+                        // Delete/backspace button
+                        deleteButton(layoutMetrics: layoutMetrics)
 
                         calculatorButton(
                             "=",
@@ -229,15 +193,17 @@ public struct CalculatorView: View {
     }
 
     @ViewBuilder
-    private func wideCalculatorButton(
-        _ title: String,
-        layoutMetrics: LayoutMetrics,
-        spacing: CGFloat,
-        id: String,
-        action: @escaping () -> Void
-    ) -> some View {
-        GlassWideButton(title, size: layoutMetrics.buttonSize, spacing: spacing, action: action)
-            .accessibilityIdentifier(id)
+    private func deleteButton(layoutMetrics: LayoutMetrics) -> some View {
+        GlassSymbolButton(
+            systemName: "delete.backward",
+            style: .special,
+            size: layoutMetrics.buttonSize,
+            accessibilityLabel: "Delete"
+        ) {
+            viewModel.backspace()
+        }
+        .accessibilityHint("Removes the last digit")
+        .accessibilityIdentifier("calculator-button-delete")
     }
 
     private func calculateLayout(for size: CGSize, isIPad: Bool) -> LayoutMetrics {
@@ -276,13 +242,6 @@ public struct CalculatorView: View {
             topPadding: adjustedTopPadding,
             displayBottomPadding: GlassTheme.spacingMedium
         )
-    }
-
-    private func triggerLightHaptic() {
-        #if os(iOS)
-        let generator = UIImpactFeedbackGenerator(style: .light)
-        generator.impactOccurred()
-        #endif
     }
 }
 

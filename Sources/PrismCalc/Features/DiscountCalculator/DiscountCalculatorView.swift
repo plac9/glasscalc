@@ -142,7 +142,9 @@ public struct DiscountCalculatorView: View {
                 .buttonStyle(.plain)
                 .sensoryFeedback(.selection, trigger: viewModel.discountPercentage)
                 .accessibilityLabel("\(Int(discount)) percent discount")
-                .accessibilityHint(viewModel.discountPercentage == discount ? "Currently selected" : "Double tap to select")
+                .accessibilityHint(
+                    viewModel.discountPercentage == discount ? "Currently selected" : "Double tap to select"
+                )
             }
         }
     }
@@ -288,4 +290,3 @@ public struct DiscountCalculatorView: View {
         DiscountCalculatorView()
     }
 }
-

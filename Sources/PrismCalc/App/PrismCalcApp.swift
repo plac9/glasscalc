@@ -22,10 +22,12 @@ public enum PrismCalcApp {
     /// The main app scene
     public static var scene: some Scene {
         WindowGroup {
-            let _ = handleLaunchArgumentsIfNeeded()
             ContentView()
                 .task {
                     TipKitConfiguration.configure()
+                }
+                .onAppear {
+                    handleLaunchArgumentsIfNeeded()
                 }
         }
     }
@@ -90,7 +92,7 @@ public enum PrismCalcApp {
             HistoryEntry(calculationType: .tip, result: "$12.00", details: "20% tip on $60.00"),
             HistoryEntry(calculationType: .basic, result: "999.99", details: "900 + 99.99"),
             HistoryEntry(calculationType: .tip, result: "$7.50", details: "15% tip on $50.00"),
-            HistoryEntry(calculationType: .discount, result: "$80.00", details: "20% off $100.00"),
+            HistoryEntry(calculationType: .discount, result: "$80.00", details: "20% off $100.00")
         ]
 
         for entry in sampleEntries {

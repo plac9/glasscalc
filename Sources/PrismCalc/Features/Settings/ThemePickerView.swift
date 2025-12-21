@@ -28,6 +28,8 @@ public struct ThemePickerView: View {
             }
             .padding()
         }
+        .scrollContentBackground(.hidden)
+        .background(.clear)
         .navigationTitle("Theme")
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
@@ -59,66 +61,11 @@ public struct ThemePickerView: View {
             }
         } label: {
             VStack(spacing: GlassTheme.spacingSmall) {
-                // Theme Preview
-                RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusSmall)
-                    .fill(
-                        LinearGradient(
-                            colors: gradientColors(for: theme),
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
-                    .frame(height: 80)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusSmall)
-                            .fill(.ultraThinMaterial)
-                            .padding(12)
-                    )
-                    .overlay(
-                        Group {
-                            if isLocked {
-                                Image(systemName: "lock.fill")
-                                    .font(.title3)
-                                    .foregroundStyle(.white)
-                            } else if isSelected {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .font(.title2)
-                                    .foregroundStyle(.white)
-                            }
-                        }
-                    )
-
-                // Theme Name
-                HStack {
-                    Text(theme.rawValue)
-                        .font(GlassTheme.captionFont)
-                        .foregroundStyle(GlassTheme.text)
-
-                    if theme.isPro && !storeKit.isPro {
-                        Text("PRO")
-                            .font(.system(size: proBadgeSize, weight: .bold))
-                            .foregroundStyle(.white)
-                            .padding(.horizontal, 4)
-                            .padding(.vertical, 2)
-                            .background(
-                                Capsule()
-                                    .fill(GlassTheme.primary)
-                            )
-                    }
-                }
+                themePreview(for: theme, isSelected: isSelected, isLocked: isLocked)
+                themeNameLabel(theme)
             }
             .padding(GlassTheme.spacingSmall)
-            .background(
-                RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusMedium)
-                    .fill(.thinMaterial)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusMedium)
-                            .stroke(
-                                isSelected ? GlassTheme.primary : Color.clear,
-                                lineWidth: 2
-                            )
-                    )
-            )
+            .background(cardBackground(isSelected: isSelected))
             .opacity(isLocked ? 0.6 : 1)
         }
         .buttonStyle(.plain)
@@ -127,8 +74,83 @@ public struct ThemePickerView: View {
         .onLongPressGesture(minimumDuration: 0.5) {
             previewTheme = theme
         }
-        .accessibilityLabel("\(theme.rawValue) theme\(isSelected ? ", selected" : "")\(isLocked ? ", locked, requires Pro" : "")")
+        .accessibilityLabel(themeAccessibilityLabel(theme, isSelected: isSelected, isLocked: isLocked))
         .accessibilityHint(isLocked ? "Upgrade to Pro to use this theme" : "Double tap to select")
+    }
+
+    // MARK: - Theme Card Subviews
+
+    @MainActor @ViewBuilder
+    private func themePreview(
+        for theme: GlassTheme.Theme,
+        isSelected: Bool,
+        isLocked: Bool
+    ) -> some View {
+        RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusSmall)
+            .fill(
+                LinearGradient(
+                    colors: gradientColors(for: theme),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            )
+            .frame(height: 80)
+            .overlay(
+                RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusSmall)
+                    .fill(.ultraThinMaterial)
+                    .padding(12)
+            )
+            .overlay(themeStatusIcon(isSelected: isSelected, isLocked: isLocked))
+    }
+
+    @ViewBuilder
+    private func themeStatusIcon(isSelected: Bool, isLocked: Bool) -> some View {
+        if isLocked {
+            Image(systemName: "lock.fill")
+                .font(.title3)
+                .foregroundStyle(.white)
+        } else if isSelected {
+            Image(systemName: "checkmark.circle.fill")
+                .font(.title2)
+                .foregroundStyle(.white)
+        }
+    }
+
+    @MainActor
+    private func themeNameLabel(_ theme: GlassTheme.Theme) -> some View {
+        HStack {
+            Text(theme.rawValue)
+                .font(GlassTheme.captionFont)
+                .foregroundStyle(GlassTheme.text)
+
+            if theme.isPro && !storeKit.isPro {
+                Text("PRO")
+                    .font(.system(size: proBadgeSize, weight: .bold))
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 4)
+                    .padding(.vertical, 2)
+                    .background(Capsule().fill(GlassTheme.primary))
+            }
+        }
+    }
+
+    private func cardBackground(isSelected: Bool) -> some View {
+        RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusMedium)
+            .fill(.thinMaterial)
+            .overlay(
+                RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusMedium)
+                    .stroke(isSelected ? GlassTheme.primary : Color.clear, lineWidth: 2)
+            )
+    }
+
+    private func themeAccessibilityLabel(
+        _ theme: GlassTheme.Theme,
+        isSelected: Bool,
+        isLocked: Bool
+    ) -> String {
+        "\(theme.rawValue) theme" +
+        "\(isSelected ? ", selected" : "")" +
+        "\(isLocked ? ", locked, requires Pro" : "")"
     }
 
     private func gradientColors(for theme: GlassTheme.Theme) -> [Color] {

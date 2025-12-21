@@ -40,7 +40,7 @@ public struct TipCalculatorView: View {
                 splitSection
 
                 // Results
-                resultsSection
+                TipResultsSection(viewModel: viewModel, noteText: $noteText)
                     .scrollTransition { content, phase in
                         content
                             .opacity(reduce || phase.isIdentity ? 1 : 0.9)
@@ -190,7 +190,10 @@ public struct TipCalculatorView: View {
                         .foregroundStyle(GlassTheme.text)
                         .frame(minWidth: 40)
                         .contentTransition(reduceMotionSnapshot ? .identity : .numericText())
-                        .animation(reduceMotionSnapshot ? nil : .easeInOut(duration: 0.15), value: viewModel.numberOfPeople)
+                        .animation(
+                            reduceMotionSnapshot ? nil : .easeInOut(duration: 0.15),
+                            value: viewModel.numberOfPeople
+                        )
 
                     Button {
                         incrementTrigger.toggle()
@@ -207,93 +210,6 @@ public struct TipCalculatorView: View {
                 .sensoryFeedback(.selection, trigger: viewModel.numberOfPeople)
             }
         }
-    }
-
-    // MARK: - Results
-
-    @MainActor
-    private var resultsSection: some View {
-        VStack(spacing: GlassTheme.spacingSmall) {
-            // Tip Amount
-            resultRow(label: "Tip", value: viewModel.formattedTip)
-
-            // Total
-            resultRow(
-                label: "Total",
-                value: viewModel.formattedTotal,
-                isHighlighted: true
-            )
-
-            // Per Person (if splitting)
-            if viewModel.numberOfPeople > 1 {
-                Divider()
-                    .background(GlassTheme.textTertiary)
-
-                resultRow(
-                    label: "Per Person",
-                    value: viewModel.formattedPerPerson,
-                    isHighlighted: true
-                )
-
-                resultRow(
-                    label: "Tip Per Person",
-                    value: viewModel.formattedTipPerPerson
-                )
-            }
-
-            // Save Button
-            if viewModel.billValue > 0 {
-                Divider()
-                    .background(GlassTheme.textTertiary)
-
-                // Optional note input
-                HStack(spacing: GlassTheme.spacingSmall) {
-                    Image(systemName: "note.text")
-                        .foregroundStyle(GlassTheme.textTertiary)
-
-                    TextField("Add a note (optional)", text: $noteText)
-                        .font(GlassTheme.captionFont)
-                        .foregroundStyle(GlassTheme.text)
-                        .textFieldStyle(.plain)
-                        .accessibilityLabel("Note")
-                        .accessibilityHint("Optional note to save with this calculation")
-                }
-                .padding(.vertical, GlassTheme.spacingXS)
-
-                Button {
-                    viewModel.saveToHistory(note: noteText.isEmpty ? nil : noteText)
-                    noteText = "" // Clear after save
-                } label: {
-                    Label("Save to History", systemImage: "clock.arrow.circlepath")
-                        .font(GlassTheme.bodyFont)
-                        .foregroundStyle(GlassTheme.primary)
-                }
-                .buttonStyle(.plain)
-                .sensoryFeedback(.success, trigger: viewModel.billValue)
-                .accessibilityLabel("Save to history")
-                .accessibilityHint("Saves this tip calculation to your history")
-            }
-        }
-        .padding(GlassTheme.spacingMedium)
-        .background(
-            RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusLarge)
-                .fill(.regularMaterial)
-                .overlay(
-                    RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusLarge)
-                        .stroke(
-                            LinearGradient(
-                                colors: [
-                                    Color.white.opacity(0.4),
-                                    Color.white.opacity(0.1)
-                                ],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            ),
-                            lineWidth: 1
-                        )
-                )
-        )
-        .shadow(color: Color.black.opacity(0.1), radius: 15, y: 8)
     }
 
     // MARK: - Button Icons (Reduce Motion Support)
@@ -318,24 +234,6 @@ public struct TipCalculatorView: View {
         }
     }
 
-    @MainActor @ViewBuilder
-    private func resultRow(label: String, value: String, isHighlighted: Bool = false) -> some View {
-        let reduceMotionSnapshot = reduceMotion
-
-        HStack {
-            Text(label)
-                .font(GlassTheme.bodyFont)
-                .foregroundStyle(GlassTheme.textSecondary)
-
-            Spacer()
-
-            Text(value)
-                .font(isHighlighted ? GlassTheme.titleFont : GlassTheme.headlineFont)
-                .foregroundStyle(isHighlighted ? GlassTheme.primary : GlassTheme.text)
-                .contentTransition(reduceMotionSnapshot ? .identity : .numericText())
-                .animation(reduceMotionSnapshot ? nil : .easeInOut(duration: 0.15), value: value)
-        }
-    }
 }
 
 // MARK: - Preview
@@ -352,4 +250,3 @@ public struct TipCalculatorView: View {
         TipCalculatorView()
     }
 }
-

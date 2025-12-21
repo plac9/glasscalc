@@ -20,7 +20,9 @@ public struct ArcSlider: View {
 
     /// Normalized percentage (0...1) clamped to prevent arc overflow
     private var normalizedPercentage: Double {
-        let raw = (value - range.lowerBound) / (range.upperBound - range.lowerBound)
+        let rangeSpan = range.upperBound - range.lowerBound
+        guard rangeSpan > 0 else { return 0 }
+        let raw = (value - range.lowerBound) / rangeSpan
         return min(1.0, max(0.0, raw))
     }
 
@@ -80,22 +82,18 @@ public struct ArcSlider: View {
 
     @MainActor
     private var arcFill: some View {
-        // Use clamped percentage to prevent arc from drawing past the semicircle
-        let endAngle = 180 - (180 * normalizedPercentage)
-
-        return ArcShape(
-            startAngle: .degrees(180),
-            endAngle: .degrees(endAngle),
-            radius: arcRadius
-        )
-        .stroke(
-            LinearGradient(
-                colors: [GlassTheme.primary, GlassTheme.secondary],
-                startPoint: .leading,
-                endPoint: .trailing
-            ),
-            lineWidth: trackWidth
-        )
+        // Use trim() to draw partial arc - this ensures correct direction regardless of percentage
+        // trim(from: 0, to: 1) = full semicircle, trim(from: 0, to: 0.5) = half of semicircle
+        ArcShape(startAngle: .degrees(180), endAngle: .degrees(0), radius: arcRadius)
+            .trim(from: 0, to: normalizedPercentage)
+            .stroke(
+                LinearGradient(
+                    colors: [GlassTheme.primary, GlassTheme.secondary],
+                    startPoint: .leading,
+                    endPoint: .trailing
+                ),
+                lineWidth: trackWidth
+            )
     }
 
     @MainActor
@@ -103,8 +101,8 @@ public struct ArcSlider: View {
         // Use clamped percentage to keep thumb on the semicircle
         let angle = 180 - (180 * normalizedPercentage)
         let radians = angle * .pi / 180
-        let x = arcRadius * cos(radians)
-        let y = -arcRadius * sin(radians)
+        let thumbX = arcRadius * cos(radians)
+        let thumbY = -arcRadius * sin(radians)
 
         return Circle()
             .fill(.regularMaterial)
@@ -114,7 +112,7 @@ public struct ArcSlider: View {
             }
             .frame(width: thumbSize, height: thumbSize)
             .shadow(color: GlassTheme.primary.opacity(0.4), radius: 10, y: 4)
-            .offset(x: x, y: y)
+            .offset(x: thumbX, y: thumbY)
             .scaleEffect(isDragging ? 1.1 : 1.0)
             .animation(reduceMotion ? nil : GlassTheme.buttonSpring, value: isDragging)
             .gesture(
@@ -150,8 +148,6 @@ public struct ArcSlider: View {
     private func handleDrag(_ gesture: DragGesture.Value, arcCenter: CGPoint, frameWidth: CGFloat) {
         isDragging = true
 
-        // With named coordinate space, gesture.location is directly in the arc's frame
-        // The arc center is at (frameWidth/2, frameHeight) where frameHeight = arcRadius + thumbSize + 30
         let touchPoint = gesture.location
 
         // Calculate vector from arc center to touch point
@@ -161,9 +157,18 @@ public struct ArcSlider: View {
         )
 
         // Calculate angle from the arc center
-        // atan2 gives angle from positive X axis, we need to convert for our arc (180° is left, 0° is right)
+        // atan2 gives angle from positive X axis
         var angle = atan2(-vector.y, vector.x) * 180 / .pi
-        angle = max(0, min(180, angle))
+
+        // Handle touches below the arc (vector.y > 0 means below center in screen coords)
+        // Clamp to nearest edge: left side (180°/0%) or right side (0°/100%)
+        if vector.y > 0 {
+            // Below the arc - snap to nearest edge
+            angle = vector.x < 0 ? 180 : 0
+        } else {
+            // Above the arc - clamp to valid range
+            angle = max(0, min(180, angle))
+        }
 
         // Convert angle to percentage (180° = 0%, 0° = 100%)
         let newPercentage = (180 - angle) / 180
@@ -171,12 +176,15 @@ public struct ArcSlider: View {
         let steppedValue = (rawValue / step).rounded() * step
         let clampedValue = min(max(steppedValue, range.lowerBound), range.upperBound)
 
-        if clampedValue != value {
+        // Only update if value changed by at least half a step (reduces jitter)
+        let minChange = step * 0.5
+        if abs(clampedValue - value) >= minChange {
             triggerHaptic()
             if reduceMotion {
                 value = clampedValue
             } else {
-                withAnimation(.interactiveSpring(response: 0.2, dampingFraction: 0.8)) {
+                // Slower, smoother animation for less jumpy feel
+                withAnimation(.easeOut(duration: 0.15)) {
                     value = clampedValue
                 }
             }

@@ -16,9 +16,17 @@ public struct AnimatedMeshBackground: View {
     /// Environment for accessibility preferences
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
+    /// Environment for color scheme to enable adaptive colors
+    @Environment(\.colorScheme) private var colorScheme
+
     public init(config: MeshGradientConfig, animated: Bool = true) {
         self.config = config
         self.animated = animated
+    }
+
+    /// Get colors based on current color scheme
+    private var currentColors: [Color] {
+        colorScheme == .dark ? config.darkColors : config.lightColors
     }
 
     public var body: some View {
@@ -39,7 +47,7 @@ public struct AnimatedMeshBackground: View {
                 width: config.width,
                 height: config.height,
                 points: points,
-                colors: config.colors,
+                colors: currentColors,
                 smoothsColors: true
             )
         }
@@ -54,7 +62,7 @@ public struct AnimatedMeshBackground: View {
             width: config.width,
             height: config.height,
             points: config.basePoints,
-            colors: config.colors,
+            colors: currentColors,
             smoothsColors: true
         )
     }

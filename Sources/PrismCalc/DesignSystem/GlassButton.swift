@@ -60,35 +60,23 @@ public struct GlassButton: View {
     /// Returns default VoiceOver-friendly label for calculator button text.
     /// Internal for testability via @testable import.
     static func defaultAccessibilityLabel(for label: String) -> String {
-        switch label {
-        case "0": return "Zero"
-        case "1": return "One"
-        case "2": return "Two"
-        case "3": return "Three"
-        case "4": return "Four"
-        case "5": return "Five"
-        case "6": return "Six"
-        case "7": return "Seven"
-        case "8": return "Eight"
-        case "9": return "Nine"
-        case ".": return "Decimal point"
-        case "+": return "Plus"
-        case "-": return "Minus"
-        case "x": return "Multiply"
-        case "/": return "Divide"
-        case "=": return "Equals"
-        case "AC": return "Clear all"
-        case "+/-": return "Toggle positive negative"
-        case "%": return "Percent"
-        default: return label
-        }
+        accessibilityLabels[label] ?? label
     }
 
+    /// Dictionary mapping button labels to VoiceOver-friendly descriptions
+    private static let accessibilityLabels: [String: String] = [
+        "0": "Zero", "1": "One", "2": "Two", "3": "Three", "4": "Four",
+        "5": "Five", "6": "Six", "7": "Seven", "8": "Eight", "9": "Nine",
+        ".": "Decimal point", "+": "Plus", "-": "Minus", "x": "Multiply",
+        "/": "Divide", "=": "Equals", "AC": "Clear all",
+        "+/-": "Toggle positive negative", "%": "Percent"
+    ]
+
     public var body: some View {
-        Button(action: {
+        Button {
             triggerHaptic()
             action()
-        }) {
+        } label: {
             Text(label)
                 .font(.system(size: buttonFontSize, weight: .medium, design: .rounded))
                 .foregroundStyle(textColor)
@@ -164,17 +152,17 @@ public struct GlassButton: View {
     }
 }
 
-// MARK: - Wide Button (for zero)
+// MARK: - Symbol Button (for icons like backspace)
 
-public struct GlassWideButton: View {
-    let label: String
-    let accessibilityText: String
+/// Glassmorphic button with SF Symbol icon - matches GlassButton style
+public struct GlassSymbolButton: View {
+    let systemName: String
+    let style: GlassButton.Style
     let size: CGFloat
-    let spacing: CGFloat
+    let accessibilityText: String
     let action: () -> Void
 
     #if os(iOS)
-    /// Shared generator to avoid reallocation on every tap
     private static let hapticGenerator: UIImpactFeedbackGenerator = {
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.prepare()
@@ -184,41 +172,40 @@ public struct GlassWideButton: View {
 
     @State private var isPressed = false
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @ScaledMetric(relativeTo: .title2) private var labelScale: CGFloat = 1.0
+    @ScaledMetric(relativeTo: .title2) private var iconScale: CGFloat = 1.0
 
     public init(
-        _ label: String,
+        systemName: String,
+        style: GlassButton.Style = .special,
         size: CGFloat = GlassTheme.buttonSize,
-        spacing: CGFloat = GlassTheme.spacingSmall,
-        accessibilityLabel: String? = nil,
+        accessibilityLabel: String,
         action: @escaping () -> Void
     ) {
-        self.label = label
-        self.accessibilityText = accessibilityLabel ?? (label == "0" ? "Zero" : label)
+        self.systemName = systemName
+        self.style = style
         self.size = size
-        self.spacing = spacing
+        self.accessibilityText = accessibilityLabel
         self.action = action
     }
 
     public var body: some View {
-        Button(action: {
+        Button {
             triggerHaptic()
             action()
-        }) {
-            Text(label)
-                .font(.system(size: buttonFontSize, weight: .medium, design: .rounded))
-                .foregroundStyle(GlassTheme.text)
-                .lineLimit(1)
-                .minimumScaleFactor(0.6)
-                .frame(
-                    width: size * 2 + spacing,
-                    height: size
-                )
+        } label: {
+            Image(systemName: systemName)
+                .font(.system(size: iconFontSize, weight: .medium))
+                .foregroundStyle(textColor)
+                .frame(width: size, height: size)
                 .background(
-                    Capsule()
-                        .fill(.thinMaterial)
+                    Circle()
+                        .fill(style.material)
                         .overlay(
-                            Capsule()
+                            Circle()
+                                .fill(overlayColor)
+                        )
+                        .overlay(
+                            Circle()
                                 .stroke(
                                     LinearGradient(
                                         colors: [
@@ -233,7 +220,7 @@ public struct GlassWideButton: View {
                         )
                 )
                 .shadow(color: Color.black.opacity(0.1), radius: 8, y: 4)
-                .scaleEffect(isPressed ? 0.96 : 1.0)
+                .scaleEffect(isPressed ? 0.92 : 1.0)
         }
         .buttonStyle(GlassButtonStyle(isPressed: $isPressed, reduceMotion: reduceMotion))
         .accessibilityLabel(accessibilityText)
@@ -245,16 +232,37 @@ public struct GlassWideButton: View {
         #endif
     }
 
+    private var textColor: Color {
+        switch style {
+        case .equals:
+            return .white
+        default:
+            return GlassTheme.text
+        }
+    }
+
+    private var iconFontSize: CGFloat {
+        size * 0.35 * iconScale
+    }
+
+    @MainActor
+    private var overlayColor: Color {
+        switch style {
+        case .equals:
+            return GlassTheme.primary.opacity(0.8)
+        case .operation:
+            return GlassTheme.secondary.opacity(0.2)
+        default:
+            return .clear
+        }
+    }
+
     private func triggerHaptic() {
         #if os(iOS)
         let generator = Self.hapticGenerator
         generator.impactOccurred()
         generator.prepare()
         #endif
-    }
-
-    private var buttonFontSize: CGFloat {
-        size * 0.4 * labelScale
     }
 }
 
@@ -303,7 +311,10 @@ private struct GlassButtonStyle: ButtonStyle {
                 GlassButton("%", style: .special) {}
                 GlassButton("=", style: .equals) {}
             }
-            GlassWideButton("0") {}
+            HStack(spacing: 12) {
+                GlassButton("0", style: .number) {}
+                GlassButton(".", style: .number) {}
+            }
         }
         .padding()
     }

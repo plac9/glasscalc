@@ -39,11 +39,26 @@ enum WidgetFeature: String, AppEnum {
     static let typeDisplayRepresentation: TypeDisplayRepresentation = "Feature"
 
     static let caseDisplayRepresentations: [WidgetFeature: DisplayRepresentation] = [
-        .calculator: DisplayRepresentation(title: "Calculator", image: .init(systemName: "plus.forwardslash.minus")),
-        .tipCalculator: DisplayRepresentation(title: "Tip Calculator", image: .init(systemName: "dollarsign.circle")),
-        .discountCalculator: DisplayRepresentation(title: "Discount Calculator", image: .init(systemName: "tag")),
-        .billSplit: DisplayRepresentation(title: "Bill Split", image: .init(systemName: "person.2")),
-        .unitConverter: DisplayRepresentation(title: "Unit Converter", image: .init(systemName: "arrow.left.arrow.right"))
+        .calculator: DisplayRepresentation(
+            title: "Calculator",
+            image: .init(systemName: "plus.forwardslash.minus")
+        ),
+        .tipCalculator: DisplayRepresentation(
+            title: "Tip Calculator",
+            image: .init(systemName: "dollarsign.circle")
+        ),
+        .discountCalculator: DisplayRepresentation(
+            title: "Discount Calculator",
+            image: .init(systemName: "tag")
+        ),
+        .billSplit: DisplayRepresentation(
+            title: "Bill Split",
+            image: .init(systemName: "person.2")
+        ),
+        .unitConverter: DisplayRepresentation(
+            title: "Unit Converter",
+            image: .init(systemName: "arrow.left.arrow.right")
+        )
     ]
 
     var icon: String {

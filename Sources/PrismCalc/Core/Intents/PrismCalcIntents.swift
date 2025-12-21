@@ -154,7 +154,7 @@ struct ConvertUnitsIntent: AppIntent {
     }
 
     func perform() async throws -> some IntentResult & ReturnsValue<String> & ProvidesDialog {
-        let result = convert(value, from: fromUnit, to: toUnit)
+        let result = convert(value, from: fromUnit, target: toUnit)
 
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -169,9 +169,9 @@ struct ConvertUnitsIntent: AppIntent {
         )
     }
 
-    private func convert(_ value: Double, from: UnitType, to: UnitType) -> Double {
+    private func convert(_ value: Double, from: UnitType, target: UnitType) -> Double {
         // Handle same-unit case
-        guard from != to else { return value }
+        guard from != target else { return value }
 
         // Length conversions (via meters)
         let toMeters: [UnitType: Double] = [
@@ -179,30 +179,30 @@ struct ConvertUnitsIntent: AppIntent {
             .centimeters: 0.01, .kilometers: 1000, .miles: 1609.34, .yards: 0.9144
         ]
 
-        if let fromFactor = toMeters[from], let toFactor = toMeters[to] {
+        if let fromFactor = toMeters[from], let toFactor = toMeters[target] {
             return (value * fromFactor) / toFactor
         }
 
         // Weight conversions (via kilograms)
-        let toKg: [UnitType: Double] = [
+        let toKilograms: [UnitType: Double] = [
             .kilograms: 1, .pounds: 0.453592, .ounces: 0.0283495,
             .grams: 0.001, .stones: 6.35029
         ]
 
-        if let fromFactor = toKg[from], let toFactor = toKg[to] {
+        if let fromFactor = toKilograms[from], let toFactor = toKilograms[target] {
             return (value * fromFactor) / toFactor
         }
 
         // Temperature conversions
         let tempUnits: [UnitType] = [.celsius, .fahrenheit, .kelvin]
-        if tempUnits.contains(from) && tempUnits.contains(to) {
-            return convertTemperature(value, from: from, to: to)
+        if tempUnits.contains(from) && tempUnits.contains(target) {
+            return convertTemperature(value, from: from, target: target)
         }
 
         return value
     }
 
-    private func convertTemperature(_ value: Double, from: UnitType, to: UnitType) -> Double {
+    private func convertTemperature(_ value: Double, from: UnitType, target: UnitType) -> Double {
         // Convert to Celsius first
         var celsius: Double
         switch from {
@@ -213,7 +213,7 @@ struct ConvertUnitsIntent: AppIntent {
         }
 
         // Convert from Celsius to target
-        switch to {
+        switch target {
         case .celsius: return celsius
         case .fahrenheit: return celsius * 9 / 5 + 32
         case .kelvin: return celsius + 273.15

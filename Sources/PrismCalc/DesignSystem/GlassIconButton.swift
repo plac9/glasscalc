@@ -53,11 +53,11 @@ public struct GlassIconButton: View {
     }
 
     public var body: some View {
-        Button(action: {
+        Button {
             animationTrigger.toggle()
             triggerHaptic()
             action()
-        }) {
+        } label: {
             iconView
                 .font(.system(size: scaledIconSize, weight: .medium))
                 .foregroundStyle(foregroundColor)
@@ -204,10 +204,10 @@ public struct GlassPillButton: View {
     }
 
     public var body: some View {
-        Button(action: {
+        Button {
             animationTrigger.toggle()
             action()
-        }) {
+        } label: {
             HStack(spacing: GlassTheme.spacingSmall) {
                 iconView
                     .font(.system(size: pillIconSize, weight: .medium))

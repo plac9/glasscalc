@@ -31,82 +31,117 @@ public struct GlassTheme: Sendable {
     /// Current active theme (will be user-configurable)
     @MainActor public static var currentTheme: Theme = .aurora
 
-    // MARK: - Aurora Theme (Default)
+    // MARK: - Aurora Theme (Default - Strongest)
 
-    public static let auroraPrimary = Color(hex: "7B68EE")      // Medium slate blue
-    public static let auroraSecondary = Color(hex: "00CED1")    // Dark turquoise
-    public static let auroraTertiary = Color(hex: "FF69B4")     // Hot pink accent
+    public static let auroraPrimary = Color(
+        light: Color(hex: "5B48CE"),  // Deeper purple for light mode
+        dark: Color(hex: "7B68EE")    // Medium slate blue
+    )
+    public static let auroraSecondary = Color(
+        light: Color(hex: "0098A0"),  // Deeper teal for light mode
+        dark: Color(hex: "00CED1")    // Dark turquoise
+    )
 
     public static var auroraGradient: [Color] {
         [
-            Color.blue.opacity(0.4),
-            Color.purple.opacity(0.3),
-            Color.cyan.opacity(0.3)
+            Color(light: Color(red: 0.25, green: 0.35, blue: 0.75), dark: Color(red: 0.15, green: 0.30, blue: 0.85)),
+            Color(light: Color(red: 0.45, green: 0.35, blue: 0.80), dark: Color(red: 0.48, green: 0.41, blue: 0.93)),
+            Color(light: Color(red: 0.20, green: 0.25, blue: 0.55), dark: Color(red: 0.10, green: 0.15, blue: 0.45))
         ]
     }
 
     // MARK: - Calming Blues Theme
 
-    public static let calmingBluesPrimary = Color(hex: "83BCD4")
-    public static let calmingBluesSecondary = Color(hex: "A4D1E0")
+    public static let calmingBluesPrimary = Color(
+        light: Color(hex: "3080A0"),  // Deeper ocean blue
+        dark: Color(hex: "4DA8C8")
+    )
+    public static let calmingBluesSecondary = Color(
+        light: Color(hex: "2870A0"),
+        dark: Color(hex: "3898B8")
+    )
 
     public static var calmingBluesGradient: [Color] {
         [
-            Color(hex: "83BCD4").opacity(0.4),
-            Color(hex: "A4D1E0").opacity(0.3),
-            Color(hex: "B1DEE0").opacity(0.3)
+            Color(light: Color(red: 0.20, green: 0.50, blue: 0.65), dark: Color(red: 0.08, green: 0.40, blue: 0.55)),
+            Color(light: Color(red: 0.28, green: 0.58, blue: 0.72), dark: Color(red: 0.15, green: 0.55, blue: 0.68)),
+            Color(light: Color(red: 0.18, green: 0.45, blue: 0.60), dark: Color(red: 0.05, green: 0.30, blue: 0.45))
         ]
     }
 
     // MARK: - Forest Earth Theme
 
-    public static let forestEarthPrimary = Color(hex: "4E785E")
-    public static let forestEarthSecondary = Color(hex: "2A4B44")
+    public static let forestEarthPrimary = Color(
+        light: Color(hex: "2E6040"),  // Deeper forest green
+        dark: Color(hex: "4E785E")
+    )
+    public static let forestEarthSecondary = Color(
+        light: Color(hex: "1A3B2C"),
+        dark: Color(hex: "2A4B44")
+    )
 
     public static var forestEarthGradient: [Color] {
         [
-            Color(hex: "4E785E").opacity(0.4),
-            Color(hex: "2A4B44").opacity(0.3),
-            Color(hex: "4C5C65").opacity(0.3)
+            Color(light: Color(red: 0.18, green: 0.45, blue: 0.30), dark: Color(red: 0.08, green: 0.35, blue: 0.22)),
+            Color(light: Color(red: 0.25, green: 0.52, blue: 0.38), dark: Color(red: 0.15, green: 0.45, blue: 0.30)),
+            Color(light: Color(red: 0.15, green: 0.38, blue: 0.25), dark: Color(red: 0.05, green: 0.25, blue: 0.15))
         ]
     }
 
-    // MARK: - Soft Tranquil Theme
+    // MARK: - Soft Tranquil Theme (now Warm Amber/Coral)
 
-    public static let softTranquilPrimary = Color(hex: "C5E3F6")
-    public static let softTranquilSecondary = Color(hex: "D4F1F4")
+    public static let softTranquilPrimary = Color(
+        light: Color(hex: "D07050"),  // Warm coral
+        dark: Color(hex: "C88060")
+    )
+    public static let softTranquilSecondary = Color(
+        light: Color(hex: "B86048"),
+        dark: Color(hex: "A87058")
+    )
 
     public static var softTranquilGradient: [Color] {
         [
-            Color(hex: "C5E3F6").opacity(0.5),
-            Color(hex: "D4F1F4").opacity(0.4),
-            Color(hex: "E8F8F5").opacity(0.4)
+            Color(light: Color(red: 0.85, green: 0.60, blue: 0.45), dark: Color(red: 0.60, green: 0.35, blue: 0.25)),
+            Color(light: Color(red: 0.78, green: 0.52, blue: 0.52), dark: Color(red: 0.52, green: 0.28, blue: 0.32)),
+            Color(light: Color(red: 0.70, green: 0.50, blue: 0.48), dark: Color(red: 0.42, green: 0.22, blue: 0.25))
         ]
     }
 
     // MARK: - Blue-Green Harmony Theme
 
-    public static let blueGreenPrimary = Color(hex: "00CEC8")
-    public static let blueGreenSecondary = Color(hex: "2E8B57")
+    public static let blueGreenPrimary = Color(
+        light: Color(hex: "008888"),  // Deeper teal
+        dark: Color(hex: "00B0A8")
+    )
+    public static let blueGreenSecondary = Color(
+        light: Color(hex: "007070"),
+        dark: Color(hex: "009890")
+    )
 
     public static var blueGreenGradient: [Color] {
         [
-            Color(hex: "00CEC8").opacity(0.4),
-            Color(hex: "2E8B57").opacity(0.3),
-            Color(hex: "20B2AA").opacity(0.3)
+            Color(light: Color(red: 0.0, green: 0.60, blue: 0.65), dark: Color(red: 0.0, green: 0.55, blue: 0.60)),
+            Color(light: Color(red: 0.08, green: 0.52, blue: 0.58), dark: Color(red: 0.0, green: 0.45, blue: 0.52)),
+            Color(light: Color(red: 0.0, green: 0.50, blue: 0.55), dark: Color(red: 0.0, green: 0.35, blue: 0.42))
         ]
     }
 
     // MARK: - Midnight Theme
 
-    public static let midnightPrimary = Color(hex: "6366F1")    // Indigo
-    public static let midnightSecondary = Color(hex: "8B5CF6")  // Violet
+    public static let midnightPrimary = Color(
+        light: Color(hex: "5558D0"),  // Lighter indigo for light mode
+        dark: Color(hex: "6366F1")    // Indigo
+    )
+    public static let midnightSecondary = Color(
+        light: Color(hex: "7B5CE0"),
+        dark: Color(hex: "8B5CF6")    // Violet
+    )
 
     public static var midnightGradient: [Color] {
         [
-            Color(hex: "1E1B4B").opacity(0.9),
-            Color(hex: "312E81").opacity(0.7),
-            Color(hex: "3730A3").opacity(0.5)
+            Color(light: Color(red: 0.35, green: 0.32, blue: 0.55), dark: Color(red: 0.08, green: 0.06, blue: 0.22)),
+            Color(light: Color(red: 0.42, green: 0.38, blue: 0.68), dark: Color(red: 0.18, green: 0.15, blue: 0.45)),
+            Color(light: Color(red: 0.32, green: 0.30, blue: 0.52), dark: Color(red: 0.06, green: 0.05, blue: 0.18))
         ]
     }
 
@@ -266,23 +301,23 @@ extension Color {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var int: UInt64 = 0
         Scanner(string: hex).scanHexInt64(&int)
-        let a, r, g, b: UInt64
+        let alpha, red, green, blue: UInt64
         switch hex.count {
         case 3: // RGB (12-bit)
-            (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
+            (alpha, red, green, blue) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
         case 6: // RGB (24-bit)
-            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
+            (alpha, red, green, blue) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
         case 8: // ARGB (32-bit)
-            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
+            (alpha, red, green, blue) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
         default:
-            (a, r, g, b) = (255, 0, 0, 0)
+            (alpha, red, green, blue) = (255, 0, 0, 0)
         }
         self.init(
             .sRGB,
-            red: Double(r) / 255,
-            green: Double(g) / 255,
-            blue: Double(b) / 255,
-            opacity: Double(a) / 255
+            red: Double(red) / 255,
+            green: Double(green) / 255,
+            blue: Double(blue) / 255,
+            opacity: Double(alpha) / 255
         )
     }
 

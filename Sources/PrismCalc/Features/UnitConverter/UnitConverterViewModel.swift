@@ -68,7 +68,7 @@ public final class UnitConverterViewModel {
     }
 
     public var convertedValue: Double {
-        let result = convert(inputDouble, from: fromUnit, to: toUnit)
+        let result = convert(inputDouble, from: fromUnit, target: toUnit)
         // Guard against overflow
         return result.isFinite ? result : 0
     }
@@ -131,22 +131,22 @@ public final class UnitConverterViewModel {
         }
     }
 
-    private func convert(_ value: Double, from: String, to: String) -> Double {
-        guard from != to else { return value }
+    private func convert(_ value: Double, from: String, target: String) -> Double {
+        guard from != target else { return value }
 
         switch selectedCategory {
         case .length:
-            return convertLength(value, from: from, to: to)
+            return convertLength(value, from: from, target: target)
         case .weight:
-            return convertWeight(value, from: from, to: to)
+            return convertWeight(value, from: from, target: target)
         case .temperature:
-            return convertTemperature(value, from: from, to: to)
+            return convertTemperature(value, from: from, target: target)
         }
     }
 
     // MARK: - Conversion Functions
 
-    private func convertLength(_ value: Double, from: String, to: String) -> Double {
+    private func convertLength(_ value: Double, from: String, target: String) -> Double {
         // Convert to meters first, then to target
         let toMeters: [String: Double] = [
             "meters": 1,
@@ -159,15 +159,15 @@ public final class UnitConverterViewModel {
         ]
 
         guard let fromFactor = toMeters[from],
-              let toFactor = toMeters[to] else { return value }
+              let toFactor = toMeters[target] else { return value }
 
         let meters = value * fromFactor
         return meters / toFactor
     }
 
-    private func convertWeight(_ value: Double, from: String, to: String) -> Double {
+    private func convertWeight(_ value: Double, from: String, target: String) -> Double {
         // Convert to kilograms first
-        let toKg: [String: Double] = [
+        let toKilograms: [String: Double] = [
             "kilograms": 1,
             "pounds": 0.453592,
             "ounces": 0.0283495,
@@ -175,14 +175,14 @@ public final class UnitConverterViewModel {
             "stones": 6.35029
         ]
 
-        guard let fromFactor = toKg[from],
-              let toFactor = toKg[to] else { return value }
+        guard let fromFactor = toKilograms[from],
+              let toFactor = toKilograms[target] else { return value }
 
-        let kg = value * fromFactor
-        return kg / toFactor
+        let kilograms = value * fromFactor
+        return kilograms / toFactor
     }
 
-    private func convertTemperature(_ value: Double, from: String, to: String) -> Double {
+    private func convertTemperature(_ value: Double, from: String, target: String) -> Double {
         // Convert to Celsius first
         var celsius: Double
 
@@ -198,7 +198,7 @@ public final class UnitConverterViewModel {
         }
 
         // Convert from Celsius to target
-        switch to {
+        switch target {
         case "celsius":
             return celsius
         case "fahrenheit":

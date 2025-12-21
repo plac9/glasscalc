@@ -93,7 +93,14 @@ public final class HistoryService {
     }
 
     /// Save a tip calculation
-    public func saveTip(bill: String, tipPercent: Int, total: String, perPerson: String?, people: Int, note: String? = nil) {
+    public func saveTip(
+        bill: String,
+        tipPercent: Int,
+        total: String,
+        perPerson: String?,
+        people: Int,
+        note: String? = nil
+    ) {
         var details = "\(bill) + \(tipPercent)% tip"
         if let perPerson, people > 1 {
             details += " ÷ \(people) = \(perPerson)/person"
@@ -108,7 +115,13 @@ public final class HistoryService {
     }
 
     /// Save a discount calculation
-    public func saveDiscount(original: String, discountPercent: Int, final: String, saved: String, note: String? = nil) {
+    public func saveDiscount(
+        original: String,
+        discountPercent: Int,
+        final: String,
+        saved: String,
+        note: String? = nil
+    ) {
         let details = "\(original) - \(discountPercent)% = \(final) (saved \(saved))"
         let entry = HistoryEntry(
             calculationType: .discount,

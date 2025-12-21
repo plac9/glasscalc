@@ -7,8 +7,6 @@ public struct HistoryView: View {
     @State private var entries: [HistoryEntry] = []
     @State private var selectedType: CalculationType?
     @State private var showClearConfirm = false
-    @ScaledMetric(relativeTo: .caption2) private var timeFontSize: CGFloat = 11
-    @ScaledMetric(relativeTo: .caption2) private var noteIconSize: CGFloat = 10
     @ScaledMetric(relativeTo: .title2) private var emptyIconSize: CGFloat = 48
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
@@ -64,7 +62,10 @@ public struct HistoryView: View {
                 } message: {
                     let lockedCount = entries.filter { $0.isLocked }.count
                     if lockedCount > 0 {
-                        Text("This will delete all unlocked history. \(lockedCount) locked \(lockedCount == 1 ? "entry" : "entries") will be preserved.")
+                        Text("""
+                            This will delete all unlocked history. \
+                            \(lockedCount) locked \(lockedCount == 1 ? "entry" : "entries") will be preserved.
+                            """)
                     } else {
                         Text("This will permanently delete all calculation history.")
                     }
@@ -205,98 +206,20 @@ public struct HistoryView: View {
     private var entriesList: some View {
         LazyVStack(spacing: GlassTheme.spacingSmall) {
             ForEach(filteredEntries) { entry in
-                historyCard(entry)
-                    .scrollTransition { [reduceMotionNow = reduceMotion] content, phase in
-                        content
-                            .opacity(reduceMotionNow || phase.isIdentity ? 1 : 0.7)
-                            .scaleEffect(reduceMotionNow || phase.isIdentity ? 1 : 0.95)
-                            .offset(y: reduceMotionNow || phase.isIdentity ? 0 : phase.value * 15)
-                    }
-            }
-        }
-    }
-
-    @MainActor
-    private func historyCard(_ entry: HistoryEntry) -> some View {
-        GlassCard(material: .ultraThinMaterial, padding: GlassTheme.spacingSmall) {
-            HStack(spacing: GlassTheme.spacingSmall) {
-                // Type icon
-                Image(systemName: entry.type.icon)
-                    .font(.title3)
-                    .foregroundStyle(GlassTheme.primary)
-                    .frame(width: 40, height: 40)
-                    .background(
-                        Circle()
-                            .fill(GlassTheme.primary.opacity(0.15))
-                    )
-
-                // Details
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(entry.result)
-                        .font(GlassTheme.headlineFont)
-                        .foregroundStyle(GlassTheme.text)
-
-                    Text(entry.details)
-                        .font(GlassTheme.captionFont)
-                        .foregroundStyle(GlassTheme.textSecondary)
-                        .lineLimit(1)
-
-                    // Show note if present
-                    if let note = entry.note, !note.isEmpty {
-                        HStack(spacing: 4) {
-                            Image(systemName: "note.text")
-                                .font(.system(size: noteIconSize))
-                            Text(note)
-                                .lineLimit(1)
-                        }
-                        .font(.system(size: timeFontSize))
-                        .foregroundStyle(GlassTheme.primary.opacity(0.8))
-                    }
-                }
-
-                Spacer()
-
-                // Time and lock indicator
-                VStack(alignment: .trailing, spacing: 4) {
-                    Text(entry.relativeDate)
-                        .font(.system(size: timeFontSize))
-                        .foregroundStyle(GlassTheme.textTertiary)
-
-                    if entry.isLocked {
-                        Image(systemName: "lock.fill")
-                            .font(.system(size: noteIconSize))
-                            .foregroundStyle(GlassTheme.primary)
-                    }
-                }
-            }
-        }
-        .swipeActions(edge: .trailing, allowsFullSwipe: !entry.isLocked) {
-            if !entry.isLocked {
-                Button(role: .destructive) {
-                    deleteEntry(entry)
-                } label: {
-                    Label("Delete", systemImage: "trash")
-                }
-            }
-        }
-        .swipeActions(edge: .leading, allowsFullSwipe: true) {
-            Button {
-                toggleLock(entry)
-            } label: {
-                Label(
-                    entry.isLocked ? "Unlock" : "Lock",
-                    systemImage: entry.isLocked ? "lock.open.fill" : "lock.fill"
+                HistoryCardView(
+                    entry: entry,
+                    namespace: historyNamespace,
+                    onDelete: deleteEntry,
+                    onToggleLock: toggleLock,
+                    onSelect: { selectedEntry = $0 }
                 )
+                .scrollTransition { [reduceMotionNow = reduceMotion] content, phase in
+                    content
+                        .opacity(reduceMotionNow || phase.isIdentity ? 1 : 0.7)
+                        .scaleEffect(reduceMotionNow || phase.isIdentity ? 1 : 0.95)
+                        .offset(y: reduceMotionNow || phase.isIdentity ? 0 : phase.value * 15)
+                }
             }
-            .tint(entry.isLocked ? GlassTheme.warning : GlassTheme.primary)
-        }
-        // iOS 18 zoom transition source
-        .matchedTransitionSource(id: entry.id, in: historyNamespace)
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(entry.type.rawValue): \(entry.result)\(entry.isLocked ? ", locked" : "")\(entry.note.map { ", note: \($0)" } ?? "")")
-        .accessibilityHint("Double tap to view details, swipe left to delete\(entry.isLocked ? " (locked)" : ""), swipe right to \(entry.isLocked ? "unlock" : "lock")")
-        .onTapGesture {
-            selectedEntry = entry
         }
     }
 

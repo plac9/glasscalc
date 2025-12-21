@@ -104,7 +104,9 @@ public struct UnitConverterView: View {
                 }
                 .buttonStyle(.plain)
                 .accessibilityLabel("\(category.rawValue) converter")
-                .accessibilityHint(viewModel.selectedCategory == category ? "Currently selected" : "Double tap to select")
+                .accessibilityHint(
+                    viewModel.selectedCategory == category ? "Currently selected" : "Double tap to select"
+                )
             }
         }
         .sensoryFeedback(.selection, trigger: viewModel.selectedCategory)

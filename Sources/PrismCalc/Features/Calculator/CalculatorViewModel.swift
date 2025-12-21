@@ -55,7 +55,7 @@ public final class CalculatorViewModel {
                 hasDecimal = true
             }
 
-            display = display + digit
+            display += digit
         }
 
         // Format with commas for whole numbers being typed
