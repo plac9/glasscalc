@@ -14,8 +14,8 @@
   --color-bg-card-dark: rgba(20, 40, 40, 0.7);
 
   --color-text: #1A1A1A;
-  --color-text-secondary: rgba(26, 26, 26, 0.7);
-  --color-text-tertiary: rgba(26, 26, 26, 0.5);
+  --color-text-secondary: rgba(26, 26, 26, 0.85);
+  --color-text-tertiary: rgba(26, 26, 26, 0.7);
 
   /* Functional */
   --color-success: #10B981;
@@ -56,7 +56,7 @@
 
   /* Glass Effects */
   --glass-blur: blur(12px);
-  --glass-border: rgba(255, 255, 255, 0.3);
+  --glass-border: rgba(0, 0, 0, 0.08);
 
   /* Mesh Gradient Colors (Blue-Green Harmony) */
   --gradient-1: rgb(0, 128, 128);
@@ -71,11 +71,11 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --color-bg: #0a0e1a;
-    --color-bg-card: rgba(26, 33, 48, 0.7);
+    --color-bg-card: rgba(26, 33, 48, 0.8);
     --color-text: #F8F9FA;
-    --color-text-secondary: rgba(248, 249, 250, 0.7);
-    --color-text-tertiary: rgba(248, 249, 250, 0.5);
-    --glass-border: rgba(255, 255, 255, 0.15);
+    --color-text-secondary: rgba(248, 249, 250, 0.85);
+    --color-text-tertiary: rgba(248, 249, 250, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.2);
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
     --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
     --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);

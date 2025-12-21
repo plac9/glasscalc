@@ -31,6 +31,7 @@ export interface Screenshot {
   src: string;
   alt: string;
   caption?: string;
+  theme?: string;
 }
 
 export interface NavItem {

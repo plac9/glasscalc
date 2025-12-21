@@ -1,10 +1,8 @@
 import { useState } from 'react';
-import { GlassButton } from '../ui/GlassButton';
 import { copy } from '../../data/copy';
 
 const navItems = [
   { id: 'features', label: 'Features', href: '#features' },
-  { id: 'screenshots', label: 'Screenshots', href: '#screenshots' },
   { id: 'faq', label: 'FAQ', href: '#faq' },
   { id: 'about', label: 'About', href: '#about' },
 ];
@@ -13,45 +11,68 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="header">
-      <div className="container header__container">
-        <a href="/" className="header__logo">
-          <span className="header__logo-icon">◇</span>
-          <span className="header__logo-text">PrismCalc</span>
+    <header className="header-floating">
+      <nav className="header-pill">
+        {/* Logo */}
+        <a href="/" className="header-pill__logo">
+          <span className="header-pill__icon">◇</span>
+          <span className="header-pill__name">PrismCalc</span>
         </a>
 
-        <nav className={`header__nav ${isMenuOpen ? 'header__nav--open' : ''}`}>
+        {/* Desktop Nav */}
+        <div className="header-pill__nav">
           {navItems.map((item) => (
             <a
               key={item.id}
               href={item.href}
-              className="header__nav-link"
+              className="header-pill__link"
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+
+        {/* Download Button */}
+        <a
+          href={copy.appStore.url}
+          className="header-pill__cta"
+        >
+          Download
+        </a>
+
+        {/* Mobile Menu Toggle */}
+        <button
+          className="header-pill__toggle"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Toggle menu"
+          aria-expanded={isMenuOpen}
+        >
+          {isMenuOpen ? '✕' : '☰'}
+        </button>
+      </nav>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="header-mobile">
+          {navItems.map((item) => (
+            <a
+              key={item.id}
+              href={item.href}
+              className="header-mobile__link"
               onClick={() => setIsMenuOpen(false)}
             >
               {item.label}
             </a>
           ))}
-        </nav>
-
-        <div className="header__actions">
-          <GlassButton
-            variant="primary"
-            size="default"
+          <a
             href={copy.appStore.url}
+            className="header-mobile__cta"
+            onClick={() => setIsMenuOpen(false)}
           >
-            Download
-          </GlassButton>
-
-          <button
-            className="header__menu-toggle"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-            aria-expanded={isMenuOpen}
-          >
-            <span className="header__menu-icon">{isMenuOpen ? '✕' : '☰'}</span>
-          </button>
+            Download on App Store
+          </a>
         </div>
-      </div>
+      )}
     </header>
   );
 }
