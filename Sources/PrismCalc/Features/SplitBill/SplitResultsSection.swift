@@ -3,6 +3,10 @@ import SwiftUI
 /// Results display section for split bill calculator
 struct SplitResultsSection: View {
     let viewModel: SplitBillViewModel
+
+    init(viewModel: SplitBillViewModel) {
+        self.viewModel = viewModel
+    }
     // Fixed sizes for calculator displays
     private let heroValueSize: CGFloat = 56
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -10,7 +14,7 @@ struct SplitResultsSection: View {
     @Environment(\.accessibilityIncreaseContrast) private var increaseContrast
 
     var body: some View {
-        VStack(spacing: GlassTheme.spacingMedium) {
+        VStack(spacing: CGFloat(GlassTheme.spacingMedium)) {
             perPersonHero
             breakdownCard
         }
@@ -20,7 +24,7 @@ struct SplitResultsSection: View {
 
     @MainActor
     private var perPersonHero: some View {
-        VStack(spacing: GlassTheme.spacingXS) {
+        VStack(spacing: CGFloat(GlassTheme.spacingXS)) {
             Text("Each Person Pays")
                 .font(GlassTheme.captionFont)
                 .foregroundStyle(GlassTheme.textSecondary)
@@ -37,7 +41,7 @@ struct SplitResultsSection: View {
                 )
         }
         .frame(maxWidth: .infinity)
-        .padding(GlassTheme.spacingLarge)
+        .padding(CGFloat(GlassTheme.spacingLarge))
         .background(heroBackground)
         .shadow(color: GlassTheme.primary.opacity(0.2), radius: 20, y: 10)
     }
@@ -72,7 +76,7 @@ struct SplitResultsSection: View {
     @MainActor
     private var breakdownCard: some View {
         GlassCard {
-            VStack(spacing: GlassTheme.spacingSmall) {
+            VStack(spacing: CGFloat(GlassTheme.spacingSmall)) {
                 breakdownRow(label: "Bill", value: viewModel.formattedBill)
 
                 if viewModel.includeTip {
@@ -138,4 +142,8 @@ struct SplitResultsSection: View {
                 .foregroundStyle(isHighlighted ? GlassTheme.text : GlassTheme.textSecondary)
         }
     }
+}
+
+#Preview {
+    SplitResultsSection(viewModel: SplitBillViewModel())
 }

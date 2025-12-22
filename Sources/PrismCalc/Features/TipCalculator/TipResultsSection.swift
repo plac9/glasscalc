@@ -4,6 +4,12 @@ import SwiftUI
 struct TipResultsSection: View {
     let viewModel: TipCalculatorViewModel
     @Binding var noteText: String
+
+    init(viewModel: TipCalculatorViewModel, noteText: Binding<String>) {
+        self.viewModel = viewModel
+        self._noteText = noteText
+    }
+
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
     @Environment(\.accessibilityIncreaseContrast) private var increaseContrast
@@ -141,3 +147,7 @@ struct TipResultsSection: View {
         }
     }
 }
+#Preview {
+    TipResultsSection(viewModel: TipCalculatorViewModel(), noteText: .constant(""))
+}
+
