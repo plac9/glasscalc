@@ -16,20 +16,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Deployed to Cloudflare Pages with custom domain and SSL
 - WidgetPreviewTypes shared model for screenshot automation
 - 9 App Store screenshots with clean naming format
+- **Custom MoreView** with themed mesh gradient navigation (2025-12-21)
+- **Website dark mode toggle** with system preference + manual override
+- New Blue-Green theme screenshots for website (Calculator, Tip, Split, Discount, More)
+- Floating pill navigation header for website
 
 ### Changed
 - SwiftLint refactoring: extracted 8 components, eliminated ALL source warnings
 - Consolidated widget fixes, reorganized tests
 - Screenshot naming now uses clean format without UUIDs
+- **Tab structure reduced from 7 to 5** (Calculator, Tip, Split, Discount, More)
+- Arc slider backgrounds removed for seamless integration with mesh gradient
+- Website hero text now white with shadow for better contrast on teal
+- Screenshot gallery breaks out of container for full-width horizontal scroll
 
 ### Removed
 - Currency conversion from Unit Converter and CurrencyService
 - Old UUID-based screenshot files
+- iPad/Mac/iCloud references from website (iPhone only for v1.0)
 
 ### Fixed
 - StoreKit loading state reset on completion paths
 - History update path for lock/unlock entries
 - ArcSlider percentage clamping to prevent bottom-half overflow
+- **More screen themed background** (was plain black from system TabView overflow)
+- Sub-pages (Settings, History, Convert) now properly themed via ThemedContent wrapper
+- Website text contrast issues on teal background
 
 ## [1.0.0] - 2025-12-07
 
