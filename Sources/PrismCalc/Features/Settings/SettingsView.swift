@@ -7,6 +7,9 @@ public struct SettingsView: View {
     @ScaledMetric(relativeTo: .caption2) private var proBadgeSize: CGFloat = 9
     @ScaledMetric(relativeTo: .title2) private var aboutIconSize: CGFloat = 48
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    #if os(iOS)
+    @State private var currentAppIconName: String? = UIApplication.shared.alternateIconName
+    #endif
 
     /// Current theme derived from stored name
     private var selectedTheme: GlassTheme.Theme {
@@ -87,6 +90,9 @@ public struct SettingsView: View {
             if selectedThemeName != GlassTheme.currentTheme.rawValue {
                 selectedThemeName = GlassTheme.currentTheme.rawValue
             }
+            #if os(iOS)
+            currentAppIconName = UIApplication.shared.alternateIconName
+            #endif
         }
         #if os(iOS)
         // iOS 18 zoom transition for theme preview using dedicated view
@@ -163,7 +169,44 @@ public struct SettingsView: View {
                     Divider()
                         .background(GlassTheme.text.opacity(0.1))
 
-                    // App Icon (placeholder for future)
+                    #if os(iOS)
+                    NavigationLink {
+                        AppIconSettingsView()
+                    } label: {
+                        HStack {
+                            Image(systemName: "app.badge")
+                                .foregroundStyle(GlassTheme.primary)
+                                .frame(width: 28)
+
+                            Text("App Icon")
+                                .font(GlassTheme.bodyFont)
+                                .foregroundStyle(GlassTheme.text)
+
+                            Spacer()
+
+                            if !storeKit.isPro {
+                                Text("PRO")
+                                    .font(.system(size: proBadgeSize, weight: .bold))
+                                    .foregroundStyle(.white)
+                                    .padding(.horizontal, 4)
+                                    .padding(.vertical, 2)
+                                    .background(Capsule().fill(GlassTheme.primary))
+                            }
+
+                            Text(AppIconSettingsView.displayName(for: currentAppIconName))
+                                .font(GlassTheme.captionFont)
+                                .foregroundStyle(GlassTheme.textSecondary)
+
+                            Image(systemName: "chevron.right")
+                                .font(.caption)
+                                .foregroundStyle(GlassTheme.textTertiary)
+                        }
+                        .padding(GlassTheme.spacingMedium)
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("App Icon")
+                    .accessibilityHint("Change the PrismCalc app icon")
+                    #else
                     HStack {
                         Image(systemName: "app.badge")
                             .foregroundStyle(GlassTheme.primary)
@@ -175,27 +218,13 @@ public struct SettingsView: View {
 
                         Spacer()
 
-                        if !storeKit.isPro {
-                            Text("PRO")
-                                .font(.system(size: proBadgeSize, weight: .bold))
-                                .foregroundStyle(.white)
-                                .padding(.horizontal, 4)
-                                .padding(.vertical, 2)
-                                .background(Capsule().fill(GlassTheme.primary))
-                        }
-
-                        Text("Default")
+                        Text("iOS only")
                             .font(GlassTheme.captionFont)
                             .foregroundStyle(GlassTheme.textSecondary)
-
-                        Image(systemName: "chevron.right")
-                            .font(.caption)
-                            .foregroundStyle(GlassTheme.textTertiary)
                     }
                     .padding(GlassTheme.spacingMedium)
-                    .opacity(0.5) // Disabled for now
-                    .accessibilityLabel("App Icon, coming soon")
-                    .accessibilityHint("This feature is not yet available")
+                    .opacity(0.6)
+                    #endif
                     
                     Divider()
                         .background(GlassTheme.text.opacity(0.1))

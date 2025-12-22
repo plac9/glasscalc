@@ -2,6 +2,32 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleIcons</key>
+	<dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconName</key>
+			<string>AppIcon</string>
+		</dict>
+		<key>CFBundleAlternateIcons</key>
+		<dict>
+			<key>LightGlass</key>
+			<dict>
+				<key>CFBundleIconName</key>
+				<string>LightGlass</string>
+			</dict>
+			<key>PrismBeam</key>
+			<dict>
+				<key>CFBundleIconName</key>
+				<string>PrismBeam</string>
+			</dict>
+			<key>NeonOps</key>
+			<dict>
+				<key>CFBundleIconName</key>
+				<string>NeonOps</string>
+			</dict>
+		</dict>
+	</dict>
 	<key>UILaunchScreen</key>
 	<dict>
 		<key>UIColorName</key>
