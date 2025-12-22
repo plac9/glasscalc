@@ -6,6 +6,8 @@ struct SplitResultsSection: View {
     // Fixed sizes for calculator displays
     private let heroValueSize: CGFloat = 56
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.accessibilityIncreaseContrast) private var increaseContrast
 
     var body: some View {
         VStack(spacing: GlassTheme.spacingMedium) {
@@ -41,10 +43,23 @@ struct SplitResultsSection: View {
     }
 
     private var heroBackground: some View {
-        GlassTheme.glassCardBackground(cornerRadius: GlassTheme.cornerRadiusXL, material: .regularMaterial)
+        GlassTheme.glassCardBackground(
+            cornerRadius: GlassTheme.cornerRadiusXL,
+            material: .regularMaterial,
+            reduceTransparency: reduceTransparency
+        )
             .overlay(
                 RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusXL)
-                    .stroke(GlassTheme.glassBorderGradient, lineWidth: GlassTheme.glassBorderLineWidth)
+                    .stroke(
+                        GlassTheme.glassBorderGradient(
+                            reduceTransparency: reduceTransparency,
+                            increaseContrast: increaseContrast
+                        ),
+                        lineWidth: GlassTheme.glassBorderLineWidth(
+                            reduceTransparency: reduceTransparency,
+                            increaseContrast: increaseContrast
+                        )
+                    )
             )
             .overlay(
                 RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusXL)

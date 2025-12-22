@@ -204,8 +204,8 @@ public struct GlassTheme: Sendable {
     // MARK: - Glass Effect Styling
 
     public static var glassBorderGradient: LinearGradient {
-        let startOpacity = AccessibilityTheme.isHighContrast ? 0.55 : 0.3
-        let endOpacity = AccessibilityTheme.isHighContrast ? 0.25 : 0.1
+        let startOpacity = AccessibilityTheme.isHighContrast ? 0.4 : 0.22
+        let endOpacity = AccessibilityTheme.isHighContrast ? 0.18 : 0.08
         return LinearGradient(
             colors: [
                 Color.white.opacity(startOpacity),
@@ -217,7 +217,7 @@ public struct GlassTheme: Sendable {
     }
 
     public static var glassBorderLineWidth: CGFloat {
-        AccessibilityTheme.isHighContrast ? 1.5 : 1
+        AccessibilityTheme.isHighContrast ? 1.25 : 0.85
     }
 
     public static var glassShadowOpacityPrimary: Double {
@@ -226,6 +226,42 @@ public struct GlassTheme: Sendable {
 
     public static var glassShadowOpacitySecondary: Double {
         AccessibilityTheme.isHighContrast ? 0.1 : 0.05
+    }
+
+    public static func glassBorderGradient(reduceTransparency: Bool, increaseContrast: Bool) -> LinearGradient {
+        let highContrast = AccessibilityTheme.isHighContrast || increaseContrast
+        let startOpacity = highContrast ? 0.4 : 0.22
+        let endOpacity = highContrast ? 0.18 : 0.08
+        let reduceMultiplier: Double = reduceTransparency ? 0.5 : 1.0
+        return LinearGradient(
+            colors: [
+                Color.white.opacity(startOpacity * reduceMultiplier),
+                Color.white.opacity(endOpacity * reduceMultiplier)
+            ],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+    }
+
+    public static func glassBorderLineWidth(reduceTransparency: Bool, increaseContrast: Bool) -> CGFloat {
+        let highContrast = AccessibilityTheme.isHighContrast || increaseContrast
+        if highContrast {
+            return reduceTransparency ? 1.0 : 1.25
+        }
+        return reduceTransparency ? 0.65 : 0.85
+    }
+
+    public static func glassHighlightGradient(reduceTransparency: Bool) -> LinearGradient {
+        let topOpacity = reduceTransparency ? 0.28 : 0.18
+        let bottomOpacity = reduceTransparency ? 0.08 : 0.04
+        return LinearGradient(
+            colors: [
+                Color.white.opacity(topOpacity),
+                Color.white.opacity(bottomOpacity)
+            ],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
     }
 
     // MARK: - Functional Colors
@@ -329,52 +365,112 @@ public struct GlassTheme: Sendable {
 public extension GlassTheme {
     @ViewBuilder
     static func glassCardBackground(cornerRadius: CGFloat, material: Material) -> some View {
+        glassCardBackground(cornerRadius: cornerRadius, material: material, reduceTransparency: false)
+    }
+
+    @ViewBuilder
+    static func glassCardBackground(cornerRadius: CGFloat, material: Material, reduceTransparency: Bool) -> some View {
         #if os(iOS)
-        if #available(iOS 26.0, *) {
+        if #available(iOS 26.0, *), !reduceTransparency {
             RoundedRectangle(cornerRadius: cornerRadius)
                 .fill(Color.clear)
                 .glassEffect(.regular)
+                .overlay(
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .fill(glassHighlightGradient(reduceTransparency: reduceTransparency))
+                        .blendMode(.screen)
+                )
         } else {
             RoundedRectangle(cornerRadius: cornerRadius)
                 .fill(material)
+                .overlay(
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .fill(glassHighlightGradient(reduceTransparency: reduceTransparency))
+                        .blendMode(.screen)
+                )
         }
         #else
         RoundedRectangle(cornerRadius: cornerRadius)
             .fill(material)
+            .overlay(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(glassHighlightGradient(reduceTransparency: reduceTransparency))
+                    .blendMode(.screen)
+            )
         #endif
     }
 
     @ViewBuilder
     static func glassCircleBackground(material: Material) -> some View {
+        glassCircleBackground(material: material, reduceTransparency: false)
+    }
+
+    @ViewBuilder
+    static func glassCircleBackground(material: Material, reduceTransparency: Bool) -> some View {
         #if os(iOS)
-        if #available(iOS 26.0, *) {
+        if #available(iOS 26.0, *), !reduceTransparency {
             Circle()
                 .fill(Color.clear)
                 .glassEffect(.regular)
+                .overlay(
+                    Circle()
+                        .fill(glassHighlightGradient(reduceTransparency: reduceTransparency))
+                        .blendMode(.screen)
+                )
         } else {
             Circle()
                 .fill(material)
+                .overlay(
+                    Circle()
+                        .fill(glassHighlightGradient(reduceTransparency: reduceTransparency))
+                        .blendMode(.screen)
+                )
         }
         #else
         Circle()
             .fill(material)
+            .overlay(
+                Circle()
+                    .fill(glassHighlightGradient(reduceTransparency: reduceTransparency))
+                    .blendMode(.screen)
+            )
         #endif
     }
 
     @ViewBuilder
     static func glassCapsuleBackground(material: Material) -> some View {
+        glassCapsuleBackground(material: material, reduceTransparency: false)
+    }
+
+    @ViewBuilder
+    static func glassCapsuleBackground(material: Material, reduceTransparency: Bool) -> some View {
         #if os(iOS)
-        if #available(iOS 26.0, *) {
+        if #available(iOS 26.0, *), !reduceTransparency {
             Capsule()
                 .fill(Color.clear)
                 .glassEffect(.regular)
+                .overlay(
+                    Capsule()
+                        .fill(glassHighlightGradient(reduceTransparency: reduceTransparency))
+                        .blendMode(.screen)
+                )
         } else {
             Capsule()
                 .fill(material)
+                .overlay(
+                    Capsule()
+                        .fill(glassHighlightGradient(reduceTransparency: reduceTransparency))
+                        .blendMode(.screen)
+                )
         }
         #else
         Capsule()
             .fill(material)
+            .overlay(
+                Capsule()
+                    .fill(glassHighlightGradient(reduceTransparency: reduceTransparency))
+                    .blendMode(.screen)
+            )
         #endif
     }
 }

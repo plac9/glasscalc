@@ -5,6 +5,8 @@ struct TipResultsSection: View {
     let viewModel: TipCalculatorViewModel
     @Binding var noteText: String
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.accessibilityIncreaseContrast) private var increaseContrast
 
     var body: some View {
         VStack(spacing: GlassTheme.spacingSmall) {
@@ -94,10 +96,23 @@ struct TipResultsSection: View {
     }
 
     private var resultsBackground: some View {
-        GlassTheme.glassCardBackground(cornerRadius: GlassTheme.cornerRadiusLarge, material: .regularMaterial)
+        GlassTheme.glassCardBackground(
+            cornerRadius: GlassTheme.cornerRadiusLarge,
+            material: .regularMaterial,
+            reduceTransparency: reduceTransparency
+        )
             .overlay(
                 RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusLarge)
-                    .stroke(GlassTheme.glassBorderGradient, lineWidth: GlassTheme.glassBorderLineWidth)
+                    .stroke(
+                        GlassTheme.glassBorderGradient(
+                            reduceTransparency: reduceTransparency,
+                            increaseContrast: increaseContrast
+                        ),
+                        lineWidth: GlassTheme.glassBorderLineWidth(
+                            reduceTransparency: reduceTransparency,
+                            increaseContrast: increaseContrast
+                        )
+                    )
             )
     }
 

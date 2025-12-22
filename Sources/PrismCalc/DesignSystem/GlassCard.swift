@@ -13,6 +13,8 @@ public struct GlassCard<Content: View>: View {
     var material: Material
     var cornerRadius: CGFloat
     var padding: CGFloat
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.accessibilityIncreaseContrast) private var increaseContrast
 
     public init(
         material: Material = .regularMaterial,
@@ -30,10 +32,23 @@ public struct GlassCard<Content: View>: View {
         content
             .padding(padding)
             .background(
-                GlassTheme.glassCardBackground(cornerRadius: cornerRadius, material: material)
+                GlassTheme.glassCardBackground(
+                    cornerRadius: cornerRadius,
+                    material: material,
+                    reduceTransparency: reduceTransparency
+                )
                     .overlay(
                         RoundedRectangle(cornerRadius: cornerRadius)
-                            .stroke(GlassTheme.glassBorderGradient, lineWidth: GlassTheme.glassBorderLineWidth)
+                            .stroke(
+                                GlassTheme.glassBorderGradient(
+                                    reduceTransparency: reduceTransparency,
+                                    increaseContrast: increaseContrast
+                                ),
+                                lineWidth: GlassTheme.glassBorderLineWidth(
+                                    reduceTransparency: reduceTransparency,
+                                    increaseContrast: increaseContrast
+                                )
+                            )
                     )
             )
             .shadow(color: Color.black.opacity(GlassTheme.glassShadowOpacityPrimary), radius: 10, y: 5)

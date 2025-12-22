@@ -35,6 +35,8 @@ public struct GlassIconButton: View {
     @State private var animationTrigger = false
     @ScaledMetric(relativeTo: .title3) private var iconScale: CGFloat = 1.0
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.accessibilityIncreaseContrast) private var increaseContrast
 
     public init(
         icon: String,
@@ -126,7 +128,7 @@ public struct GlassIconButton: View {
 
     @ViewBuilder
     private var glassBackground: some View {
-        GlassTheme.glassCapsuleBackground(material: .thinMaterial)
+        GlassTheme.glassCapsuleBackground(material: .thinMaterial, reduceTransparency: reduceTransparency)
     }
 
     @ViewBuilder
@@ -137,21 +139,48 @@ public struct GlassIconButton: View {
                 .fill(GlassTheme.primary.opacity(0.9))
                 .overlay(
                     Circle()
-                        .stroke(GlassTheme.glassBorderGradient, lineWidth: GlassTheme.glassBorderLineWidth)
+                        .stroke(
+                            GlassTheme.glassBorderGradient(
+                                reduceTransparency: reduceTransparency,
+                                increaseContrast: increaseContrast
+                            ),
+                            lineWidth: GlassTheme.glassBorderLineWidth(
+                                reduceTransparency: reduceTransparency,
+                                increaseContrast: increaseContrast
+                            )
+                        )
                 )
         case .destructive:
             Circle()
                 .fill(GlassTheme.error.opacity(0.9))
                 .overlay(
                     Circle()
-                        .stroke(GlassTheme.glassBorderGradient, lineWidth: GlassTheme.glassBorderLineWidth)
+                        .stroke(
+                            GlassTheme.glassBorderGradient(
+                                reduceTransparency: reduceTransparency,
+                                increaseContrast: increaseContrast
+                            ),
+                            lineWidth: GlassTheme.glassBorderLineWidth(
+                                reduceTransparency: reduceTransparency,
+                                increaseContrast: increaseContrast
+                            )
+                        )
                 )
         case .secondary, .plain:
             glassBackground
                 .clipShape(Circle())
                 .overlay(
                     Circle()
-                        .stroke(GlassTheme.glassBorderGradient, lineWidth: GlassTheme.glassBorderLineWidth)
+                        .stroke(
+                            GlassTheme.glassBorderGradient(
+                                reduceTransparency: reduceTransparency,
+                                increaseContrast: increaseContrast
+                            ),
+                            lineWidth: GlassTheme.glassBorderLineWidth(
+                                reduceTransparency: reduceTransparency,
+                                increaseContrast: increaseContrast
+                            )
+                        )
                 )
         }
     }
@@ -200,6 +229,8 @@ public struct GlassPillButton: View {
     @State private var isPressed = false
     @ScaledMetric(relativeTo: .subheadline) private var pillIconSize: CGFloat = 16
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.accessibilityIncreaseContrast) private var increaseContrast
 
     public init(
         icon: String,
@@ -240,7 +271,16 @@ public struct GlassPillButton: View {
                 }
                 .overlay(
                     Capsule()
-                        .stroke(GlassTheme.glassBorderGradient, lineWidth: GlassTheme.glassBorderLineWidth)
+                        .stroke(
+                            GlassTheme.glassBorderGradient(
+                                reduceTransparency: reduceTransparency,
+                                increaseContrast: increaseContrast
+                            ),
+                            lineWidth: GlassTheme.glassBorderLineWidth(
+                                reduceTransparency: reduceTransparency,
+                                increaseContrast: increaseContrast
+                            )
+                        )
                 )
             )
             .shadow(color: Color.black.opacity(0.1), radius: 4, y: 2)
@@ -302,7 +342,7 @@ public struct GlassPillButton: View {
 
     @ViewBuilder
     private var pillGlassBackground: some View {
-        GlassTheme.glassCapsuleBackground(material: .thinMaterial)
+        GlassTheme.glassCapsuleBackground(material: .thinMaterial, reduceTransparency: reduceTransparency)
     }
 
     @MainActor

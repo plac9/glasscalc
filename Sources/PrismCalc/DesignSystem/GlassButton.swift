@@ -42,6 +42,8 @@ public struct GlassButton: View {
 
     @State private var isPressed = false
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.accessibilityIncreaseContrast) private var increaseContrast
     @ScaledMetric(relativeTo: .title2) private var labelScale: CGFloat = 1.0
 
     public init(
@@ -87,14 +89,23 @@ public struct GlassButton: View {
                 .minimumScaleFactor(0.6)
                 .frame(width: size, height: size)
                 .background(
-                    GlassTheme.glassCircleBackground(material: style.material)
+                    GlassTheme.glassCircleBackground(material: style.material, reduceTransparency: reduceTransparency)
                         .overlay(
                             Circle()
                                 .fill(overlayColor)
                         )
                         .overlay(
                             Circle()
-                                .stroke(GlassTheme.glassBorderGradient, lineWidth: GlassTheme.glassBorderLineWidth)
+                                .stroke(
+                                    GlassTheme.glassBorderGradient(
+                                        reduceTransparency: reduceTransparency,
+                                        increaseContrast: increaseContrast
+                                    ),
+                                    lineWidth: GlassTheme.glassBorderLineWidth(
+                                        reduceTransparency: reduceTransparency,
+                                        increaseContrast: increaseContrast
+                                    )
+                                )
                         )
                 )
                 .shadow(color: Color.black.opacity(GlassTheme.glassShadowOpacityPrimary), radius: 8, y: 4)
@@ -166,6 +177,8 @@ public struct GlassSymbolButton: View {
 
     @State private var isPressed = false
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.accessibilityIncreaseContrast) private var increaseContrast
     @ScaledMetric(relativeTo: .title2) private var iconScale: CGFloat = 1.0
 
     public init(
@@ -194,14 +207,23 @@ public struct GlassSymbolButton: View {
                 .foregroundStyle(textColor)
                 .frame(width: size, height: size)
                 .background(
-                    GlassTheme.glassCircleBackground(material: style.material)
+                    GlassTheme.glassCircleBackground(material: style.material, reduceTransparency: reduceTransparency)
                         .overlay(
                             Circle()
                                 .fill(overlayColor)
                         )
                         .overlay(
                             Circle()
-                                .stroke(GlassTheme.glassBorderGradient, lineWidth: GlassTheme.glassBorderLineWidth)
+                                .stroke(
+                                    GlassTheme.glassBorderGradient(
+                                        reduceTransparency: reduceTransparency,
+                                        increaseContrast: increaseContrast
+                                    ),
+                                    lineWidth: GlassTheme.glassBorderLineWidth(
+                                        reduceTransparency: reduceTransparency,
+                                        increaseContrast: increaseContrast
+                                    )
+                                )
                         )
                 )
                 .shadow(color: Color.black.opacity(GlassTheme.glassShadowOpacityPrimary), radius: 8, y: 4)

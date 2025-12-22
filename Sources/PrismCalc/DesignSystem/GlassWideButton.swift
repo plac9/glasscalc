@@ -21,6 +21,8 @@ public struct GlassWideButton: View {
 
     @State private var isPressed = false
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.accessibilityIncreaseContrast) private var increaseContrast
     @ScaledMetric(relativeTo: .title2) private var labelScale: CGFloat = 1.0
 
     public init(
@@ -52,10 +54,19 @@ public struct GlassWideButton: View {
                     height: size
                 )
                 .background(
-                    GlassTheme.glassCapsuleBackground(material: .thinMaterial)
+                    GlassTheme.glassCapsuleBackground(material: .thinMaterial, reduceTransparency: reduceTransparency)
                         .overlay(
                             Capsule()
-                                .stroke(GlassTheme.glassBorderGradient, lineWidth: GlassTheme.glassBorderLineWidth)
+                                .stroke(
+                                    GlassTheme.glassBorderGradient(
+                                        reduceTransparency: reduceTransparency,
+                                        increaseContrast: increaseContrast
+                                    ),
+                                    lineWidth: GlassTheme.glassBorderLineWidth(
+                                        reduceTransparency: reduceTransparency,
+                                        increaseContrast: increaseContrast
+                                    )
+                                )
                         )
                 )
                 .shadow(color: Color.black.opacity(GlassTheme.glassShadowOpacityPrimary), radius: 8, y: 4)

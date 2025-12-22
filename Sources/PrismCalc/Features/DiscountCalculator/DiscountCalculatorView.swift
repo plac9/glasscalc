@@ -7,6 +7,8 @@ public struct DiscountCalculatorView: View {
     private let currencySymbolSize: CGFloat = 32
     private let inputValueSize: CGFloat = 48
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.accessibilityIncreaseContrast) private var increaseContrast
     @FocusState private var isInputFocused: Bool
 
     public init() {}
@@ -242,10 +244,23 @@ public struct DiscountCalculatorView: View {
             }
             .padding(GlassTheme.spacingMedium)
             .background(
-                GlassTheme.glassCardBackground(cornerRadius: GlassTheme.cornerRadiusLarge, material: .regularMaterial)
+                GlassTheme.glassCardBackground(
+                    cornerRadius: GlassTheme.cornerRadiusLarge,
+                    material: .regularMaterial,
+                    reduceTransparency: reduceTransparency
+                )
                     .overlay(
                         RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusLarge)
-                            .stroke(GlassTheme.glassBorderGradient, lineWidth: GlassTheme.glassBorderLineWidth)
+                            .stroke(
+                                GlassTheme.glassBorderGradient(
+                                    reduceTransparency: reduceTransparency,
+                                    increaseContrast: increaseContrast
+                                ),
+                                lineWidth: GlassTheme.glassBorderLineWidth(
+                                    reduceTransparency: reduceTransparency,
+                                    increaseContrast: increaseContrast
+                                )
+                            )
                     )
             )
             .shadow(color: Color.black.opacity(GlassTheme.glassShadowOpacityPrimary), radius: 15, y: 8)

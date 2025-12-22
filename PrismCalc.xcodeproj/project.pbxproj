@@ -608,6 +608,12 @@
 					40F1E933878B92B29988D02A = {
 						TestTargetID = 9FD3D6FF66B853A994461E3E;
 					};
+					45CB9BE953693B211F1D9FDF = {
+						DevelopmentTeam = N8A5T2PZY9;
+					};
+					9FD3D6FF66B853A994461E3E = {
+						DevelopmentTeam = N8A5T2PZY9;
+					};
 				};
 			};
 			buildConfigurationList = 7A034D15D447A17FA1CA3E7F /* Build configuration list for PBXProject "PrismCalc" */;
@@ -779,6 +785,7 @@
 				CODE_SIGN_ENTITLEMENTS = App/PrismCalc.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N8A5T2PZY9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PrismCalc;
@@ -791,7 +798,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.laclairtech.prismcalc;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -864,6 +871,7 @@
 				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
 				CODE_SIGN_ENTITLEMENTS = WidgetExtension/PrismCalcWidget.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N8A5T2PZY9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WidgetExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "PrismCalc Widget";
@@ -876,7 +884,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.laclairtech.prismcalc.widget;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -904,6 +912,7 @@
 				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
 				CODE_SIGN_ENTITLEMENTS = WidgetExtension/PrismCalcWidget.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N8A5T2PZY9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WidgetExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "PrismCalc Widget";
@@ -916,7 +925,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.laclairtech.prismcalc.widget;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -1038,6 +1047,7 @@
 				CODE_SIGN_ENTITLEMENTS = App/PrismCalc.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N8A5T2PZY9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PrismCalc;
@@ -1050,7 +1060,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.laclairtech.prismcalc;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
