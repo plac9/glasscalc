@@ -9,7 +9,7 @@ export function Features() {
           <span className="section-header__label">Features</span>
           <h2 className="section-header__title">Everything you need</h2>
           <p className="section-header__subtitle">
-            A complete suite of calculation tools, beautifully designed for everyday use.
+            Everyday tools designed for speed, clarity, and privacy—no clutter.
           </p>
         </div>
 

@@ -186,15 +186,46 @@ public struct GlassTheme: Sendable {
     // MARK: - Text Colors
 
     public static var text: Color {
-        Color(light: Color(hex: "1A1A1A"), dark: Color(hex: "F8F9FA"))
+        if AccessibilityTheme.isHighContrast {
+            return Color(light: Color.black, dark: Color.white)
+        } else {
+            return Color(light: Color(hex: "1A1A1A"), dark: Color(hex: "F8F9FA"))
+        }
     }
 
     public static var textSecondary: Color {
-        text.opacity(0.7)
+        AccessibilityTheme.isHighContrast ? text.opacity(0.85) : text.opacity(0.7)
     }
 
     public static var textTertiary: Color {
-        text.opacity(0.5)
+        AccessibilityTheme.isHighContrast ? text.opacity(0.7) : text.opacity(0.5)
+    }
+
+    // MARK: - Glass Effect Styling
+
+    public static var glassBorderGradient: LinearGradient {
+        let startOpacity = AccessibilityTheme.isHighContrast ? 0.55 : 0.3
+        let endOpacity = AccessibilityTheme.isHighContrast ? 0.25 : 0.1
+        return LinearGradient(
+            colors: [
+                Color.white.opacity(startOpacity),
+                Color.white.opacity(endOpacity)
+            ],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+    }
+
+    public static var glassBorderLineWidth: CGFloat {
+        AccessibilityTheme.isHighContrast ? 1.5 : 1
+    }
+
+    public static var glassShadowOpacityPrimary: Double {
+        AccessibilityTheme.isHighContrast ? 0.18 : 0.1
+    }
+
+    public static var glassShadowOpacitySecondary: Double {
+        AccessibilityTheme.isHighContrast ? 0.1 : 0.05
     }
 
     // MARK: - Functional Colors
@@ -288,8 +319,63 @@ public struct GlassTheme: Sendable {
 
     public static func glassShadow(for color: Color = .black) -> some View {
         Color.clear
-            .shadow(color: color.opacity(0.15), radius: 10, y: 5)
-            .shadow(color: color.opacity(0.1), radius: 20, y: 10)
+            .shadow(color: color.opacity(glassShadowOpacityPrimary), radius: 10, y: 5)
+            .shadow(color: color.opacity(glassShadowOpacitySecondary), radius: 20, y: 10)
+    }
+}
+
+// MARK: - Glass Effect Helpers
+
+public extension GlassTheme {
+    @ViewBuilder
+    static func glassCardBackground(cornerRadius: CGFloat, material: Material) -> some View {
+        #if os(iOS)
+        if #available(iOS 18.0, *) {
+            RoundedRectangle(cornerRadius: cornerRadius)
+                .fill(Color.clear)
+                .glassEffect(.regular)
+        } else {
+            RoundedRectangle(cornerRadius: cornerRadius)
+                .fill(material)
+        }
+        #else
+        RoundedRectangle(cornerRadius: cornerRadius)
+            .fill(material)
+        #endif
+    }
+
+    @ViewBuilder
+    static func glassCircleBackground(material: Material) -> some View {
+        #if os(iOS)
+        if #available(iOS 18.0, *) {
+            Circle()
+                .fill(Color.clear)
+                .glassEffect(.regular)
+        } else {
+            Circle()
+                .fill(material)
+        }
+        #else
+        Circle()
+            .fill(material)
+        #endif
+    }
+
+    @ViewBuilder
+    static func glassCapsuleBackground(material: Material) -> some View {
+        #if os(iOS)
+        if #available(iOS 18.0, *) {
+            Capsule()
+                .fill(Color.clear)
+                .glassEffect(.regular)
+        } else {
+            Capsule()
+                .fill(material)
+        }
+        #else
+        Capsule()
+            .fill(material)
+        #endif
     }
 }
 

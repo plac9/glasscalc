@@ -70,3 +70,8 @@ coverage/
 # Release artifacts
 releases/*.ipa
 releases/*.app
+
+# Web tooling
+website/node_modules/
+website/test-results/
+website/playwright-report/

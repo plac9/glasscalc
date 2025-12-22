@@ -52,24 +52,13 @@ public struct GlassWideButton: View {
                     height: size
                 )
                 .background(
-                    Capsule()
-                        .fill(.thinMaterial)
+                    GlassTheme.glassCapsuleBackground(material: .thinMaterial)
                         .overlay(
                             Capsule()
-                                .stroke(
-                                    LinearGradient(
-                                        colors: [
-                                            Color.white.opacity(0.4),
-                                            Color.white.opacity(0.1)
-                                        ],
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    ),
-                                    lineWidth: 1
-                                )
+                                .stroke(GlassTheme.glassBorderGradient, lineWidth: GlassTheme.glassBorderLineWidth)
                         )
                 )
-                .shadow(color: Color.black.opacity(0.1), radius: 8, y: 4)
+                .shadow(color: Color.black.opacity(GlassTheme.glassShadowOpacityPrimary), radius: 8, y: 4)
                 .scaleEffect(isPressed ? 0.96 : 1.0)
         }
         .buttonStyle(WideButtonStyle(isPressed: $isPressed, reduceMotion: reduceMotion))

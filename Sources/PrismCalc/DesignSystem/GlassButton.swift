@@ -84,28 +84,17 @@ public struct GlassButton: View {
                 .minimumScaleFactor(0.6)
                 .frame(width: size, height: size)
                 .background(
-                    Circle()
-                        .fill(style.material)
+                    GlassTheme.glassCircleBackground(material: style.material)
                         .overlay(
                             Circle()
                                 .fill(overlayColor)
                         )
                         .overlay(
                             Circle()
-                                .stroke(
-                                    LinearGradient(
-                                        colors: [
-                                            Color.white.opacity(0.4),
-                                            Color.white.opacity(0.1)
-                                        ],
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    ),
-                                    lineWidth: 1
-                                )
+                                .stroke(GlassTheme.glassBorderGradient, lineWidth: GlassTheme.glassBorderLineWidth)
                         )
                 )
-                .shadow(color: Color.black.opacity(0.1), radius: 8, y: 4)
+                .shadow(color: Color.black.opacity(GlassTheme.glassShadowOpacityPrimary), radius: 8, y: 4)
                 .scaleEffect(isPressed ? 0.92 : 1.0)
         }
         .buttonStyle(GlassButtonStyle(isPressed: $isPressed, reduceMotion: reduceMotion))
@@ -198,28 +187,17 @@ public struct GlassSymbolButton: View {
                 .foregroundStyle(textColor)
                 .frame(width: size, height: size)
                 .background(
-                    Circle()
-                        .fill(style.material)
+                    GlassTheme.glassCircleBackground(material: style.material)
                         .overlay(
                             Circle()
                                 .fill(overlayColor)
                         )
                         .overlay(
                             Circle()
-                                .stroke(
-                                    LinearGradient(
-                                        colors: [
-                                            Color.white.opacity(0.4),
-                                            Color.white.opacity(0.1)
-                                        ],
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    ),
-                                    lineWidth: 1
-                                )
+                                .stroke(GlassTheme.glassBorderGradient, lineWidth: GlassTheme.glassBorderLineWidth)
                         )
                 )
-                .shadow(color: Color.black.opacity(0.1), radius: 8, y: 4)
+                .shadow(color: Color.black.opacity(GlassTheme.glassShadowOpacityPrimary), radius: 8, y: 4)
                 .scaleEffect(isPressed ? 0.92 : 1.0)
         }
         .buttonStyle(GlassButtonStyle(isPressed: $isPressed, reduceMotion: reduceMotion))

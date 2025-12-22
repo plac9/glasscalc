@@ -8,6 +8,7 @@ public struct ContentView: View {
     @State private var selectedTab: TabIdentifier = .calculator
     @AppStorage("tabCustomization") private var tabCustomization: TabViewCustomization
     @AppStorage("selectedTheme") private var selectedThemeName: String = GlassTheme.Theme.aurora.rawValue
+    @AppStorage(AccessibilityTheme.highContrastKey) private var highContrastUI: Bool = false
     @State private var didApplyDebugTab = false
 
     private static let debugSelectedTabKey = "debug_selectedTab"
@@ -57,7 +58,7 @@ public struct ContentView: View {
     public var body: some View {
         tabContent
             // Force full re-render when theme changes by using theme as view identity
-            .id(currentTheme)
+            .id("\(currentTheme.rawValue)-\(highContrastUI)")
             .onAppear {
                 applyDebugSelectedTabIfNeeded()
                 syncTheme()

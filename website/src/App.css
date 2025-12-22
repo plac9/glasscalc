@@ -129,6 +129,12 @@
   transform: scale(1.02);
 }
 
+.header-pill__toggles {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .header-pill__theme-toggle {
   display: flex;
   align-items: center;
@@ -156,6 +162,44 @@
 
 [data-theme="dark"] .header-pill__theme-toggle:hover {
   background: rgba(255, 255, 255, 0.1);
+}
+
+.header-pill__contrast-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text);
+  border: 1px solid var(--glass-border);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.03);
+  transition: background var(--spring-quick), transform var(--spring-quick), border var(--spring-quick);
+}
+
+.header-pill__contrast-toggle:hover {
+  background: rgba(0, 0, 0, 0.08);
+  transform: scale(1.05);
+}
+
+@media (prefers-color-scheme: dark) {
+  .header-pill__contrast-toggle {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .header-pill__contrast-toggle:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
+}
+
+[data-theme="dark"] .header-pill__contrast-toggle {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .header-pill__contrast-toggle:hover {
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .header-pill__toggle {
@@ -290,11 +334,11 @@
 
 .hero__badge {
   padding: var(--spacing-xs) var(--spacing-md);
-  background: rgba(0, 206, 200, 0.15);
+  background: var(--color-accent-soft);
   border-radius: var(--radius-sm);
   font-size: 0.875rem;
   font-weight: 600;
-  color: #009994;
+  color: var(--color-accent-strong);
 }
 
 .hero__mockup {
@@ -316,12 +360,157 @@
 
 /* Sections */
 .features,
+.demo,
 .screenshots,
 .themes,
+.accessibility,
+.roadmap,
 .faq,
 .about,
 .cta {
   padding: var(--spacing-3xl) 0;
+  scroll-margin-top: 96px;
+}
+
+/* Demo */
+.demo__layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-2xl);
+  align-items: center;
+}
+
+@media (min-width: 960px) {
+  .demo__layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+.demo__controls {
+  padding: var(--spacing-xl);
+}
+
+.demo__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+}
+
+.demo__tab {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border);
+  color: var(--color-text);
+  background: transparent;
+  font-weight: 600;
+  transition: all var(--spring-quick);
+}
+
+.demo__tab--active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+}
+
+.demo__details h3 {
+  margin-bottom: var(--spacing-sm);
+}
+
+.demo__details p {
+  color: var(--color-text-secondary);
+}
+
+.demo__preview {
+  display: flex;
+  justify-content: center;
+}
+
+.demo__preview img {
+  max-width: 320px;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Accessibility */
+.accessibility__card {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: flex-start;
+  padding: var(--spacing-xl);
+}
+
+.accessibility__icon {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: var(--color-accent-soft);
+  color: var(--color-accent-strong);
+  font-weight: 700;
+}
+
+.accessibility__title {
+  margin-bottom: var(--spacing-xs);
+}
+
+.accessibility__text {
+  color: var(--color-text-secondary);
+}
+
+.accessibility__note {
+  margin-top: var(--spacing-xl);
+  text-align: center;
+  color: var(--color-text-tertiary);
+}
+
+/* Roadmap */
+.roadmap__card {
+  padding: var(--spacing-xl);
+}
+
+.roadmap__meta {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: var(--spacing-md);
+}
+
+.roadmap__status {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.08);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .roadmap__status {
+    background: rgba(255, 255, 255, 0.12);
+  }
+}
+
+[data-theme="dark"] .roadmap__status {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.roadmap__title {
+  margin-bottom: var(--spacing-sm);
+}
+
+.roadmap__text {
+  color: var(--color-text-secondary);
+}
+
+.roadmap__note {
+  margin-top: var(--spacing-xl);
+  text-align: center;
+  color: var(--color-text-tertiary);
 }
 
 /* FAQ Card */

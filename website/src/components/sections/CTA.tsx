@@ -6,10 +6,10 @@ export function CTA() {
     <section className="cta">
       <div className="container">
         <GlassCard className="cta__card" hover={false}>
-          <h2 className="cta__title">Ready to calculate beautifully?</h2>
+          <h2 className="cta__title">Ready for a faster everyday calculator?</h2>
           <p className="cta__subtitle">
-            Free to download with basic calculator. Unlock Pro for{' '}
-            <strong>{copy.proValue.price}</strong> — one-time, forever.
+            Free to download with the core calculator. Unlock Pro for{' '}
+            <strong>{copy.proValue.price}</strong> to add tip, split, discount, and conversion tools.
           </p>
 
           <a

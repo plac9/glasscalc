@@ -41,8 +41,11 @@ struct SplitResultsSection: View {
     }
 
     private var heroBackground: some View {
-        RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusXL)
-            .fill(.regularMaterial)
+        GlassTheme.glassCardBackground(cornerRadius: GlassTheme.cornerRadiusXL, material: .regularMaterial)
+            .overlay(
+                RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusXL)
+                    .stroke(GlassTheme.glassBorderGradient, lineWidth: GlassTheme.glassBorderLineWidth)
+            )
             .overlay(
                 RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusXL)
                     .stroke(GlassTheme.primary.opacity(0.3), lineWidth: 2)

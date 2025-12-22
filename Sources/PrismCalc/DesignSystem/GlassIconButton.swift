@@ -63,7 +63,7 @@ public struct GlassIconButton: View {
                 .foregroundStyle(foregroundColor)
                 .frame(width: scaledSize, height: scaledSize)
                 .background(backgroundView)
-                .shadow(color: Color.black.opacity(0.1), radius: 6, y: 3)
+                .shadow(color: Color.black.opacity(GlassTheme.glassShadowOpacityPrimary), radius: 6, y: 3)
                 .scaleEffect(isPressed ? 0.92 : 1.0)
         }
         .buttonStyle(.plain)
@@ -125,23 +125,35 @@ public struct GlassIconButton: View {
     }
 
     @ViewBuilder
+    private var glassBackground: some View {
+        GlassTheme.glassCapsuleBackground(material: .thinMaterial)
+    }
+
+    @ViewBuilder
     private var backgroundView: some View {
-        Circle()
-            .fill(backgroundFill)
-            .overlay(
-                Circle()
-                    .stroke(
-                        LinearGradient(
-                            colors: [
-                                Color.white.opacity(0.4),
-                                Color.white.opacity(0.1)
-                            ],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        ),
-                        lineWidth: 1
-                    )
-            )
+        switch style {
+        case .primary:
+            Circle()
+                .fill(GlassTheme.primary.opacity(0.9))
+                .overlay(
+                    Circle()
+                        .stroke(GlassTheme.glassBorderGradient, lineWidth: GlassTheme.glassBorderLineWidth)
+                )
+        case .destructive:
+            Circle()
+                .fill(GlassTheme.error.opacity(0.9))
+                .overlay(
+                    Circle()
+                        .stroke(GlassTheme.glassBorderGradient, lineWidth: GlassTheme.glassBorderLineWidth)
+                )
+        case .secondary, .plain:
+            glassBackground
+                .clipShape(Circle())
+                .overlay(
+                    Circle()
+                        .stroke(GlassTheme.glassBorderGradient, lineWidth: GlassTheme.glassBorderLineWidth)
+                )
+        }
     }
 
     @MainActor
@@ -219,22 +231,17 @@ public struct GlassPillButton: View {
             .padding(.horizontal, GlassTheme.spacingMedium)
             .padding(.vertical, GlassTheme.spacingSmall)
             .background(
-                Capsule()
-                    .fill(backgroundFill)
-                    .overlay(
-                        Capsule()
-                            .stroke(
-                                LinearGradient(
-                                    colors: [
-                                        Color.white.opacity(0.3),
-                                        Color.white.opacity(0.1)
-                                    ],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                ),
-                                lineWidth: 1
-                            )
-                    )
+                Group {
+                    if style == .secondary || style == .plain {
+                        pillGlassBackground
+                    } else {
+                        Capsule().fill(backgroundFill)
+                    }
+                }
+                .overlay(
+                    Capsule()
+                        .stroke(GlassTheme.glassBorderGradient, lineWidth: GlassTheme.glassBorderLineWidth)
+                )
             )
             .shadow(color: Color.black.opacity(0.1), radius: 4, y: 2)
             .scaleEffect(isPressed ? 0.95 : 1.0)
@@ -291,6 +298,11 @@ public struct GlassPillButton: View {
         case .plain:
             return GlassTheme.text
         }
+    }
+
+    @ViewBuilder
+    private var pillGlassBackground: some View {
+        GlassTheme.glassCapsuleBackground(material: .thinMaterial)
     }
 
     @MainActor

@@ -1,7 +1,10 @@
 export { Hero } from './Hero';
 export { Features } from './Features';
+export { Demo } from './Demo';
 export { Screenshots } from './Screenshots';
 export { Themes } from './Themes';
+export { Accessibility } from './Accessibility';
+export { Roadmap } from './Roadmap';
 export { FAQ } from './FAQ';
 export { About } from './About';
 export { CTA } from './CTA';

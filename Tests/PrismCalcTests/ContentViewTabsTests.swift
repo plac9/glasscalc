@@ -9,23 +9,19 @@ struct ContentViewTabsTests {
         let all = Set(ContentView.TabIdentifier.allCases)
         // Verify core tabs exist
         #expect(all.contains(.calculator))
-        #expect(all.contains(.settings))
-        #expect(all.contains(.history))
         #expect(all.contains(.tip))
-        #expect(all.contains(.discount))
         #expect(all.contains(.split))
-        #expect(all.contains(.convert))
+        #expect(all.contains(.discount))
+        #expect(all.contains(.more))
     }
 
     @Test("Pro flags are correct for tabs")
     func testProFlags() throws {
         #expect(ContentView.TabIdentifier.calculator.isPro == false)
-        #expect(ContentView.TabIdentifier.settings.isPro == false)
-        #expect(ContentView.TabIdentifier.history.isPro == true)
         #expect(ContentView.TabIdentifier.tip.isPro == true)
-        #expect(ContentView.TabIdentifier.discount.isPro == true)
         #expect(ContentView.TabIdentifier.split.isPro == true)
-        #expect(ContentView.TabIdentifier.convert.isPro == true)
+        #expect(ContentView.TabIdentifier.discount.isPro == true)
+        #expect(ContentView.TabIdentifier.more.isPro == false)
     }
 
     @Test("Icon mapping returns non-empty values")

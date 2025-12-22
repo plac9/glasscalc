@@ -30,25 +30,14 @@ public struct GlassCard<Content: View>: View {
         content
             .padding(padding)
             .background(
-                RoundedRectangle(cornerRadius: cornerRadius)
-                    .fill(material)
+                GlassTheme.glassCardBackground(cornerRadius: cornerRadius, material: material)
                     .overlay(
                         RoundedRectangle(cornerRadius: cornerRadius)
-                            .stroke(
-                                LinearGradient(
-                                    colors: [
-                                        Color.white.opacity(0.3),
-                                        Color.white.opacity(0.1)
-                                    ],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                ),
-                                lineWidth: 1
-                            )
+                            .stroke(GlassTheme.glassBorderGradient, lineWidth: GlassTheme.glassBorderLineWidth)
                     )
             )
-            .shadow(color: Color.black.opacity(0.1), radius: 10, y: 5)
-            .shadow(color: Color.black.opacity(0.05), radius: 20, y: 10)
+            .shadow(color: Color.black.opacity(GlassTheme.glassShadowOpacityPrimary), radius: 10, y: 5)
+            .shadow(color: Color.black.opacity(GlassTheme.glassShadowOpacitySecondary), radius: 20, y: 10)
     }
 }
 

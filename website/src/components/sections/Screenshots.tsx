@@ -9,7 +9,7 @@ export function Screenshots() {
           <span className="section-header__label">Gallery</span>
           <h2 className="section-header__title">See it in action</h2>
           <p className="section-header__subtitle">
-            Experience the stunning glassmorphic design across all features.
+            Explore the UI at a glance, then try the interactive demo above.
           </p>
         </div>
 

@@ -1,17 +1,17 @@
 // PrismCalc Website - Marketing Copy
 
 export const copy = {
-  tagline: 'The beautiful way to calculate',
+  tagline: 'Beautiful calculations, real-world clarity',
 
   heroSubtitle:
-    'A spectacularly designed calculator featuring iOS 18 glassmorphism, animated mesh gradients, and practical tools for everyday calculations.',
+    'A fast everyday calculator with tip, discount, split, and unit conversions—wrapped in iOS 18 glass and built for privacy.',
 
   shortDescription:
-    'Beautiful glassmorphic calculator with tip splitting, discounts, unit conversion, and stunning iOS 18 visual effects. Pro tools for everyday math.',
+    'Glassmorphic calculator for iPhone, iPad, and Mac with tip, discount, split, conversion tools, and private on-device history.',
 
   privacy: {
     headline: 'Your data stays yours',
-    body: 'PrismCalc does not collect, store, or transmit any personal information. All calculations happen on your device. No analytics, no tracking, no servers.',
+    body: 'PrismCalc does not collect, store, or transmit personal data. All calculations stay on your device—no analytics, no tracking, no servers.',
   },
 
   proValue: {
@@ -26,24 +26,28 @@ export const copy = {
   },
 
   about: {
-    headline: 'Built with care',
-    body: 'PrismCalc was crafted by LaClair Technologies with a focus on beautiful design and practical utility. Every detail, from the animated mesh gradients to the haptic feedback, was designed to make calculations a delightful experience.',
+    headline: 'Built by an indie team that sweats the details',
+    body: 'PrismCalc is built by LaClair Technologies with a focus on clarity, speed, and privacy. Every interaction—glass layers, haptics, and typography—is designed to make everyday math feel effortless.',
     developer: 'LaClair Technologies',
+    support: 'support@laclairtech.com',
   },
 
   meta: {
-    title: 'PrismCalc - The beautiful way to calculate',
+    title: 'PrismCalc - Beautiful calculations, real-world clarity',
     description:
-      'Beautiful glassmorphic calculator for iPhone. Tip splitting, discounts, unit conversion, and 6 stunning themes.',
+      'Glassmorphic calculator for iPhone, iPad, and Mac. Tip, discount, split, unit conversion, private history, and one-time Pro unlock.',
     keywords:
-      'calculator, tip calculator, glassmorphism, iOS app, iPhone calculator, split bill, unit converter, discount calculator',
+      'calculator, tip calculator, split bill, discount calculator, unit converter, glassmorphism, iOS app, privacy, one-time purchase',
     url: 'https://prismcalc.app',
   },
 
   footer: {
     copyright: `© ${new Date().getFullYear()} LaClair Technologies. All rights reserved.`,
     links: [
-      { label: 'Privacy Policy', href: '/privacy' },
+      { label: 'About', href: '#about' },
+      { label: 'Accessibility', href: '#accessibility' },
+      { label: 'Roadmap', href: '#roadmap' },
+      { label: 'Privacy', href: '#privacy' },
       { label: 'Support', href: 'mailto:support@laclairtech.com' },
     ],
   },

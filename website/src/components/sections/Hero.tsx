@@ -19,6 +19,7 @@ export function Hero() {
               <img
                 src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83"
                 alt="Download on the App Store"
+                loading="eager"
               />
             </a>
             <GlassButton variant="secondary" href="#features">
@@ -28,7 +29,9 @@ export function Hero() {
 
           <div className="hero__badges">
             <span className="hero__badge">iOS 18+</span>
-            <span className="hero__badge">iPhone</span>
+            <span className="hero__badge">iPadOS 18+</span>
+            <span className="hero__badge">macOS 15+</span>
+            <span className="hero__badge">Privacy-first</span>
           </div>
         </div>
 
@@ -38,6 +41,9 @@ export function Hero() {
               src="/screenshots/01_BlueGreen_Calculator.png"
               alt="PrismCalc app screenshot"
               className="hero__screenshot"
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
             />
           </div>
         </div>

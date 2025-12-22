@@ -196,6 +196,32 @@ public struct SettingsView: View {
                     .opacity(0.5) // Disabled for now
                     .accessibilityLabel("App Icon, coming soon")
                     .accessibilityHint("This feature is not yet available")
+                    
+                    Divider()
+                        .background(GlassTheme.text.opacity(0.1))
+
+                    NavigationLink {
+                        AccessibilitySettings()
+                    } label: {
+                        HStack {
+                            Image(systemName: "figure.wave")
+                                .foregroundStyle(GlassTheme.primary)
+                                .frame(width: 28)
+
+                            Text("Accessibility")
+                                .font(GlassTheme.bodyFont)
+                                .foregroundStyle(GlassTheme.text)
+
+                            Spacer()
+
+                            Image(systemName: "chevron.right")
+                                .font(.caption)
+                                .foregroundStyle(GlassTheme.textTertiary)
+                        }
+                        .padding(GlassTheme.spacingMedium)
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("Accessibility settings")
                 }
             }
         }

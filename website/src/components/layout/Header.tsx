@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react';
 import { copy } from '../../data/copy';
 
 const navItems = [
+  { id: 'demo', label: 'Demo', href: '#demo' },
   { id: 'features', label: 'Features', href: '#features' },
+  { id: 'accessibility', label: 'Accessibility', href: '#accessibility' },
   { id: 'faq', label: 'FAQ', href: '#faq' },
   { id: 'about', label: 'About', href: '#about' },
 ];
@@ -18,6 +20,14 @@ export function Header() {
     }
     return false;
   });
+  const [isHighContrast, setIsHighContrast] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('contrast');
+      if (saved) return saved === 'high';
+      return window.matchMedia('(prefers-contrast: more)').matches;
+    }
+    return false;
+  });
 
   useEffect(() => {
     // Apply theme to document
@@ -25,11 +35,22 @@ export function Header() {
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
   }, [isDark]);
 
+  useEffect(() => {
+    if (isHighContrast) {
+      document.documentElement.setAttribute('data-contrast', 'high');
+      localStorage.setItem('contrast', 'high');
+    } else {
+      document.documentElement.removeAttribute('data-contrast');
+      localStorage.setItem('contrast', 'normal');
+    }
+  }, [isHighContrast]);
+
   const toggleTheme = () => setIsDark(!isDark);
+  const toggleContrast = () => setIsHighContrast(!isHighContrast);
 
   return (
     <header className="header-floating">
-      <nav className="header-pill">
+      <nav className="header-pill" aria-label="Primary navigation">
         {/* Logo */}
         <a href="/" className="header-pill__logo">
           <span className="header-pill__icon">◇</span>
@@ -49,14 +70,29 @@ export function Header() {
           ))}
         </div>
 
-        {/* Theme Toggle */}
-        <button
-          className="header-pill__theme-toggle"
-          onClick={toggleTheme}
-          aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-        >
-          {isDark ? '☀️' : '🌙'}
-        </button>
+        <div className="header-pill__toggles">
+          {/* Theme Toggle */}
+          <button
+            className="header-pill__theme-toggle"
+            onClick={toggleTheme}
+            aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+            aria-pressed={isDark}
+            type="button"
+          >
+            {isDark ? '☀️' : '🌙'}
+          </button>
+
+          {/* High Contrast Toggle */}
+          <button
+            className="header-pill__contrast-toggle"
+            onClick={toggleContrast}
+            aria-label={isHighContrast ? 'Disable high contrast mode' : 'Enable high contrast mode'}
+            aria-pressed={isHighContrast}
+            type="button"
+          >
+            Aa
+          </button>
+        </div>
 
         {/* Download Button */}
         <a
@@ -72,6 +108,7 @@ export function Header() {
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle menu"
           aria-expanded={isMenuOpen}
+          type="button"
         >
           {isMenuOpen ? '✕' : '☰'}
         </button>

@@ -30,7 +30,7 @@ struct TipResultsSection: View {
         }
         .padding(GlassTheme.spacingMedium)
         .background(resultsBackground)
-        .shadow(color: Color.black.opacity(0.1), radius: 15, y: 8)
+        .shadow(color: Color.black.opacity(GlassTheme.glassShadowOpacityPrimary), radius: 15, y: 8)
     }
 
     // MARK: - Subviews
@@ -94,21 +94,10 @@ struct TipResultsSection: View {
     }
 
     private var resultsBackground: some View {
-        RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusLarge)
-            .fill(.regularMaterial)
+        GlassTheme.glassCardBackground(cornerRadius: GlassTheme.cornerRadiusLarge, material: .regularMaterial)
             .overlay(
                 RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusLarge)
-                    .stroke(
-                        LinearGradient(
-                            colors: [
-                                Color.white.opacity(0.4),
-                                Color.white.opacity(0.1)
-                            ],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        ),
-                        lineWidth: 1
-                    )
+                    .stroke(GlassTheme.glassBorderGradient, lineWidth: GlassTheme.glassBorderLineWidth)
             )
     }
 

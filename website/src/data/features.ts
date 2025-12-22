@@ -7,7 +7,7 @@ export const features: Feature[] = [
     id: 'calculator',
     title: 'Basic Calculator',
     description:
-      'Beautiful glassmorphic calculator with full arithmetic operations. Precise calculations with an elegant, responsive interface and haptic feedback.',
+      'Fast, precise arithmetic with a responsive glass UI and haptic feedback. Built for everyday calculations you trust.',
     icon: '🧮',
     isPro: false,
   },
@@ -15,7 +15,7 @@ export const features: Feature[] = [
     id: 'tip',
     title: 'Tip Calculator',
     description:
-      'Calculate tips effortlessly with our unique arc slider. Quick presets for 15%, 18%, 20%, 25%. Split bills between any number of people instantly.',
+      'Dial in any percentage with the arc slider and quick presets. Split totals across any group in seconds.',
     icon: '💵',
     isPro: true,
     highlight: 'Arc Slider',
@@ -24,7 +24,7 @@ export const features: Feature[] = [
     id: 'discount',
     title: 'Discount Calculator',
     description:
-      'Find the final price after any discount. See both your savings and the final amount. Perfect for shopping and comparing deals.',
+      'See savings and final price instantly—ideal for shopping, price matching, and deal hunting.',
     icon: '🏷️',
     isPro: true,
   },
@@ -32,7 +32,7 @@ export const features: Feature[] = [
     id: 'split',
     title: 'Split Bill',
     description:
-      'Divide expenses fairly among friends. Include or exclude tip in the split. Perfect for group dinners and shared expenses.',
+      'Split bills fairly with optional tip and per-person totals. Great for dinners, trips, and shared expenses.',
     icon: '👥',
     isPro: true,
   },
@@ -40,16 +40,16 @@ export const features: Feature[] = [
     id: 'converter',
     title: 'Unit Converter',
     description:
-      'Convert length, weight, and temperature instantly. Miles to kilometers, pounds to kilograms, Fahrenheit to Celsius, and more.',
+      'Convert length, weight, and temperature with a clean, fast workflow and history-aware results.',
     icon: '🔄',
     isPro: true,
   },
   {
-    id: 'themes',
-    title: '6 Premium Themes',
+    id: 'history',
+    title: 'History + Widgets',
     description:
-      'Aurora, Calming Blues, Forest Earth, Soft Tranquil, Blue-Green Harmony, and Midnight. Each with unique animated mesh gradients.',
-    icon: '🎨',
+      'Keep your last calculations handy and add a widget for quick access. Pro unlocks unlimited history and more widget styles.',
+    icon: '🕘',
     isPro: true,
   },
 ];

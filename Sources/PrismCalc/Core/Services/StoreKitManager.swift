@@ -58,8 +58,10 @@ public final class StoreKitManager {
 
         do {
             products = try await Product.products(for: [Self.proProductID])
+            Diagnostics.storeKit.info("Loaded products: \(self.products.map(\.id).joined(separator: ", "), privacy: .public)")
         } catch {
             errorMessage = "Failed to load products: \(error.localizedDescription)"
+            Diagnostics.storeKit.error("Failed to load products: \(error.localizedDescription, privacy: .public)")
         }
 
         isLoading = false
@@ -77,25 +79,31 @@ public final class StoreKitManager {
         defer { isLoading = false }
 
         do {
+            Diagnostics.storeKit.info("Starting purchase for product: \(product.id, privacy: .public)")
             let result = try await product.purchase()
 
             switch result {
             case .success(let verification):
+                Diagnostics.storeKit.info("Purchase success, verifying transaction")
                 let transaction = try checkVerified(verification)
                 await transaction.finish()
                 await updatePurchasedProducts()
 
             case .userCancelled:
+                Diagnostics.storeKit.info("Purchase cancelled by user")
                 break
 
             case .pending:
+                Diagnostics.storeKit.info("Purchase pending approval")
                 errorMessage = "Purchase is pending approval"
 
             @unknown default:
+                Diagnostics.storeKit.notice("Unknown purchase result")
                 errorMessage = "Unknown purchase result"
             }
         } catch {
             errorMessage = "Purchase failed: \(error.localizedDescription)"
+            Diagnostics.storeKit.error("Purchase failed: \(error.localizedDescription, privacy: .public)")
             throw error
         }
     }
@@ -103,11 +111,13 @@ public final class StoreKitManager {
     // MARK: - Restore Purchases
 
     public func restorePurchases() async {
+        Diagnostics.storeKit.info("Restoring purchases")
         isLoading = true
         errorMessage = nil
 
         do {
             try await AppStore.sync()
+            Diagnostics.storeKit.info("AppStore sync complete")
             await updatePurchasedProducts()
 
             if !isPro {
@@ -115,6 +125,7 @@ public final class StoreKitManager {
             }
         } catch {
             errorMessage = "Restore failed: \(error.localizedDescription)"
+            Diagnostics.storeKit.error("Restore failed: \(error.localizedDescription, privacy: .public)")
         }
 
         isLoading = false
@@ -140,6 +151,7 @@ public final class StoreKitManager {
         for await result in Transaction.updates {
             guard case .verified(let transaction) = result else { continue }
             await transaction.finish()
+            Diagnostics.storeKit.info("Transaction finished for product: \(transaction.productID, privacy: .public)")
             await updatePurchasedProducts()
         }
     }

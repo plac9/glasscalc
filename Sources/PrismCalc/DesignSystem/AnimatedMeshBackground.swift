@@ -1,4 +1,5 @@
 import SwiftUI
+import Foundation
 
 /// Animated mesh gradient background view for iOS 18+
 /// Uses TimelineView for smooth, performant animations
@@ -29,6 +30,14 @@ public struct AnimatedMeshBackground: View {
         colorScheme == .dark ? config.darkColors : config.lightColors
     }
 
+    private var frameInterval: Double {
+        #if os(iOS)
+        return ProcessInfo.processInfo.isLowPowerModeEnabled ? (1.0 / 20.0) : (1.0 / 30.0)
+        #else
+        return 1.0 / 30.0
+        #endif
+    }
+
     public var body: some View {
         if animated && !reduceMotion {
             animatedMesh
@@ -39,7 +48,7 @@ public struct AnimatedMeshBackground: View {
 
     /// Animated mesh using TimelineView
     private var animatedMesh: some View {
-        TimelineView(.animation(minimumInterval: 1.0 / 30.0)) { timeline in
+        TimelineView(.animation(minimumInterval: frameInterval)) { timeline in
             let elapsed = timeline.date.timeIntervalSince(startTime)
             let points = config.animatedPoints(for: elapsed)
 

@@ -13,6 +13,7 @@ export function ScreenshotGallery({ screenshots }: ScreenshotGalleryProps) {
             src={screenshot.src}
             alt={screenshot.alt}
             loading="lazy"
+            decoding="async"
           />
           {screenshot.caption && (
             <span className="screenshot-caption">{screenshot.caption}</span>
