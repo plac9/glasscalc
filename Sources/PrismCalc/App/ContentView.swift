@@ -28,31 +28,28 @@ public struct ContentView: View {
     }
 
     /// Tab identifiers for navigation
+    /// Limited to 5 tabs to avoid system "More" overflow (which lacks themed background)
     public enum TabIdentifier: String, CaseIterable, Hashable {
         case calculator = "Calculator"
-        case history = "History"
         case tip = "Tip"
-        case discount = "Discount"
         case split = "Split"
-        case convert = "Convert"
-        case settings = "Settings"
+        case discount = "Discount"
+        case more = "More"
 
         var icon: String {
             switch self {
             case .calculator: return "plus.forwardslash.minus"
-            case .history: return "clock.arrow.circlepath"
             case .tip: return "dollarsign.circle"
-            case .discount: return "tag"
             case .split: return "person.2"
-            case .convert: return "arrow.left.arrow.right"
-            case .settings: return "gearshape"
+            case .discount: return "tag"
+            case .more: return "ellipsis.circle"
             }
         }
 
         var isPro: Bool {
             switch self {
-            case .calculator, .settings: return false
-            case .history, .tip, .discount, .split, .convert: return true
+            case .calculator, .more: return false
+            case .tip, .discount, .split: return true
             }
         }
     }
@@ -76,8 +73,9 @@ public struct ContentView: View {
         GlassTheme.currentTheme = currentTheme
     }
 
-    /// Tab content using iOS 18's new Tab API with sidebarAdaptable style
-    /// Order: Calculator (locked) → Pro features (Tip, Split, Discount, Convert) → History → Settings
+    /// Tab content using iOS 18's new Tab API
+    /// Limited to 5 tabs to fit on iPhone tab bar without system "More" overflow
+    /// Order: Calculator → Pro features (Tip, Split, Discount) → More (Convert, History, Settings)
     @ViewBuilder
     private var tabContent: some View {
         TabView(selection: $selectedTab) {
@@ -126,38 +124,14 @@ public struct ContentView: View {
             .customizationID("tab.discount")
             .accessibilityIdentifier("tab-discount")
 
-            // Convert - Pro feature
-            Tab("Convert", systemImage: TabIdentifier.convert.icon, value: .convert) {
-                ThemedContent {
-                    ProGatedView(featureName: "Unit Converter", featureIcon: TabIdentifier.convert.icon) {
-                        UnitConverterView()
-                    }
-                }
+            // More - contains Convert, History, Settings with themed navigation
+            // MoreView has its own embedded ThemedMeshBackground to work with NavigationStack
+            Tab("More", systemImage: TabIdentifier.more.icon, value: .more) {
+                MoreView()
             }
-            .customizationID("tab.convert")
-            .accessibilityIdentifier("tab-convert")
-
-            // History - reference view
-            Tab("History", systemImage: TabIdentifier.history.icon, value: .history) {
-                ThemedContent {
-                    ProGatedView(featureName: "History", featureIcon: TabIdentifier.history.icon) {
-                        HistoryView()
-                    }
-                }
-            }
-            .customizationID("tab.history")
-            .accessibilityIdentifier("tab-history")
-
-            // Settings - least frequently accessed
-            Tab("Settings", systemImage: TabIdentifier.settings.icon, value: .settings) {
-                ThemedContent {
-                    SettingsView()
-                }
-            }
-            .customizationID("tab.settings")
-            .accessibilityIdentifier("tab-settings")
+            .customizationID("tab.more")
+            .accessibilityIdentifier("tab-more")
         }
-        .tabViewStyle(.sidebarAdaptable)
         .tabViewCustomization($tabCustomization)
         #if os(iOS)
         .toolbarBackgroundVisibility(.hidden, for: .tabBar)

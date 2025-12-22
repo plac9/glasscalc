@@ -72,11 +72,12 @@ public struct ArcSlider: View {
 
     @MainActor
     private var arcTrack: some View {
+        // Subtle track without material background for seamless look
         ArcShape(startAngle: .degrees(180), endAngle: .degrees(0), radius: arcRadius)
-            .stroke(.ultraThinMaterial, lineWidth: trackWidth)
+            .stroke(GlassTheme.text.opacity(0.15), lineWidth: trackWidth)
             .overlay {
                 ArcShape(startAngle: .degrees(180), endAngle: .degrees(0), radius: arcRadius)
-                    .stroke(GlassTheme.primary.opacity(0.2), lineWidth: 1)
+                    .stroke(GlassTheme.primary.opacity(0.3), lineWidth: 1)
             }
     }
 
@@ -128,6 +129,7 @@ public struct ArcSlider: View {
 
     @MainActor
     private var centerDisplay: some View {
+        // Center display without background for seamless integration
         VStack(spacing: GlassTheme.spacingXS) {
             Text(label)
                 .font(.system(size: 12, weight: .medium, design: .rounded))
@@ -140,8 +142,6 @@ public struct ArcSlider: View {
                 .animation(reduceMotion ? nil : .easeInOut(duration: 0.1), value: value)
         }
         .padding(GlassTheme.spacingSmall)
-        .background(.thinMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusSmall))
         .offset(y: 20)
     }
 

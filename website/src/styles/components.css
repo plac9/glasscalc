@@ -22,10 +22,15 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .glass-card--subtle {
+  :root:not([data-theme="light"]) .glass-card--subtle {
     background: rgba(26, 33, 48, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
+}
+
+[data-theme="dark"] .glass-card--subtle {
+  background: rgba(26, 33, 48, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Glass Button */

@@ -13,7 +13,7 @@ export const screenshots: Screenshot[] = [
   {
     id: 'tip',
     src: '/screenshots/05_Tip_Calculator_Pro.png',
-    alt: 'Tip calculator with arc slider',
+    alt: 'Tip calculator with seamless arc slider',
     caption: 'Tip Calculator',
     theme: 'Pro Feature',
   },
@@ -32,16 +32,10 @@ export const screenshots: Screenshot[] = [
     theme: 'Pro Feature',
   },
   {
-    id: 'converter',
-    src: '/screenshots/08_Unit_Converter_Pro.png',
-    alt: 'Unit converter for length, weight, temperature',
-    caption: 'Unit Converter',
+    id: 'more',
+    src: '/screenshots/09_More_Menu.png',
+    alt: 'More menu with themed navigation',
+    caption: 'More Features',
     theme: 'Pro Feature',
-  },
-  {
-    id: 'themes',
-    src: '/screenshots/04_Themes_Free.png',
-    alt: 'Theme selection screen showing all 6 themes',
-    caption: 'Theme Selection',
   },
 ];

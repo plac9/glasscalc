@@ -67,9 +67,9 @@
   --gradient-6: rgb(72, 209, 204);
 }
 
-/* Dark Mode */
+/* Dark Mode - via system preference */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --color-bg: #0a0e1a;
     --color-bg-card: rgba(26, 33, 48, 0.8);
     --color-text: #F8F9FA;
@@ -80,6 +80,19 @@
     --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
     --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
   }
+}
+
+/* Dark Mode - via manual toggle */
+:root[data-theme="dark"] {
+  --color-bg: #0a0e1a;
+  --color-bg-card: rgba(26, 33, 48, 0.8);
+  --color-text: #F8F9FA;
+  --color-text-secondary: rgba(248, 249, 250, 0.85);
+  --color-text-tertiary: rgba(248, 249, 250, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 
 /* Base Reset */
