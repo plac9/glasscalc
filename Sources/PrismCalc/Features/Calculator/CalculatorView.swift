@@ -188,8 +188,13 @@ public struct CalculatorView: View {
         layoutMetrics: LayoutMetrics,
         action: @escaping () -> Void
     ) -> some View {
-        GlassButton(title, style: style, size: layoutMetrics.buttonSize, action: action)
-            .accessibilityIdentifier(id)
+        GlassButton(
+            title,
+            style: style,
+            size: layoutMetrics.buttonSize,
+            accessibilityIdentifier: id,
+            action: action
+        )
     }
 
     @ViewBuilder
@@ -198,12 +203,12 @@ public struct CalculatorView: View {
             systemName: "delete.backward",
             style: .special,
             size: layoutMetrics.buttonSize,
-            accessibilityLabel: "Delete"
+            accessibilityLabel: "Delete",
+            accessibilityIdentifier: "calculator-button-delete"
         ) {
             viewModel.backspace()
         }
         .accessibilityHint("Removes the last digit")
-        .accessibilityIdentifier("calculator-button-delete")
     }
 
     private func calculateLayout(for size: CGSize, isIPad: Bool) -> LayoutMetrics {

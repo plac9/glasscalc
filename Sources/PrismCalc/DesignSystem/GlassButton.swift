@@ -28,6 +28,7 @@ public struct GlassButton: View {
     let style: Style
     let size: CGFloat
     let accessibilityText: String
+    let accessibilityIdentifier: String?
     let action: () -> Void
 
     #if os(iOS)
@@ -48,12 +49,14 @@ public struct GlassButton: View {
         style: Style = .number,
         size: CGFloat = GlassTheme.buttonSize,
         accessibilityLabel: String? = nil,
+        accessibilityIdentifier: String? = nil,
         action: @escaping () -> Void
     ) {
         self.label = label
         self.style = style
         self.size = size
         self.accessibilityText = accessibilityLabel ?? Self.defaultAccessibilityLabel(for: label)
+        self.accessibilityIdentifier = accessibilityIdentifier
         self.action = action
     }
 
@@ -100,6 +103,7 @@ public struct GlassButton: View {
         .buttonStyle(GlassButtonStyle(isPressed: $isPressed, reduceMotion: reduceMotion))
         .accessibilityLabel(accessibilityText)
         .accessibilityAddTraits(.isButton)
+        .optionalAccessibilityIdentifier(accessibilityIdentifier)
         .sensoryFeedback(.impact(flexibility: .soft), trigger: isPressed)
         .contentShape(Rectangle())
         #if os(iOS)
@@ -149,6 +153,7 @@ public struct GlassSymbolButton: View {
     let style: GlassButton.Style
     let size: CGFloat
     let accessibilityText: String
+    let accessibilityIdentifier: String?
     let action: () -> Void
 
     #if os(iOS)
@@ -168,12 +173,14 @@ public struct GlassSymbolButton: View {
         style: GlassButton.Style = .special,
         size: CGFloat = GlassTheme.buttonSize,
         accessibilityLabel: String,
+        accessibilityIdentifier: String? = nil,
         action: @escaping () -> Void
     ) {
         self.systemName = systemName
         self.style = style
         self.size = size
         self.accessibilityText = accessibilityLabel
+        self.accessibilityIdentifier = accessibilityIdentifier
         self.action = action
     }
 
@@ -203,6 +210,7 @@ public struct GlassSymbolButton: View {
         .buttonStyle(GlassButtonStyle(isPressed: $isPressed, reduceMotion: reduceMotion))
         .accessibilityLabel(accessibilityText)
         .accessibilityAddTraits(.isButton)
+        .optionalAccessibilityIdentifier(accessibilityIdentifier)
         .sensoryFeedback(.impact(flexibility: .soft), trigger: isPressed)
         .contentShape(Rectangle())
         #if os(iOS)
@@ -262,6 +270,24 @@ private struct GlassButtonStyle: ButtonStyle {
                     }
                 }
             }
+    }
+}
+
+private struct OptionalAccessibilityIdentifier: ViewModifier {
+    let identifier: String?
+
+    func body(content: Content) -> some View {
+        if let identifier, !identifier.isEmpty {
+            content.accessibilityIdentifier(identifier)
+        } else {
+            content
+        }
+    }
+}
+
+private extension View {
+    func optionalAccessibilityIdentifier(_ identifier: String?) -> some View {
+        modifier(OptionalAccessibilityIdentifier(identifier: identifier))
     }
 }
 

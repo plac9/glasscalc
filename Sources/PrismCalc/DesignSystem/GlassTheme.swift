@@ -330,7 +330,7 @@ public extension GlassTheme {
     @ViewBuilder
     static func glassCardBackground(cornerRadius: CGFloat, material: Material) -> some View {
         #if os(iOS)
-        if #available(iOS 18.0, *) {
+        if #available(iOS 26.0, *) {
             RoundedRectangle(cornerRadius: cornerRadius)
                 .fill(Color.clear)
                 .glassEffect(.regular)
@@ -347,7 +347,7 @@ public extension GlassTheme {
     @ViewBuilder
     static func glassCircleBackground(material: Material) -> some View {
         #if os(iOS)
-        if #available(iOS 18.0, *) {
+        if #available(iOS 26.0, *) {
             Circle()
                 .fill(Color.clear)
                 .glassEffect(.regular)
@@ -364,7 +364,7 @@ public extension GlassTheme {
     @ViewBuilder
     static func glassCapsuleBackground(material: Material) -> some View {
         #if os(iOS)
-        if #available(iOS 18.0, *) {
+        if #available(iOS 26.0, *) {
             Capsule()
                 .fill(Color.clear)
                 .glassEffect(.regular)
