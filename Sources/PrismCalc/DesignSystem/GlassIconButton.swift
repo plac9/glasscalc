@@ -1,4 +1,7 @@
 import SwiftUI
+#if os(iOS)
+import UIKit
+#endif
 
 /// Glassmorphic button with SF Symbol and iOS 18 symbol effects
 ///
@@ -36,7 +39,19 @@ public struct GlassIconButton: View {
     @ScaledMetric(relativeTo: .title3) private var iconScale: CGFloat = 1.0
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
-    @Environment(\.accessibilityIncreaseContrast) private var increaseContrast
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+
+    private var isIncreasedContrast: Bool {
+        if #available(iOS 17.0, macOS 14.0, *) {
+            return colorSchemeContrast == .increased
+        } else {
+            #if os(iOS)
+            return UIAccessibility.isDarkerSystemColorsEnabled
+            #else
+            return false
+            #endif
+        }
+    }
 
     public init(
         icon: String,
@@ -140,32 +155,32 @@ public struct GlassIconButton: View {
                 .overlay(
                     Circle()
                         .stroke(
-                            GlassTheme.glassBorderGradient(
-                                reduceTransparency: reduceTransparency,
-                                increaseContrast: increaseContrast
-                            ),
-                            lineWidth: GlassTheme.glassBorderLineWidth(
-                                reduceTransparency: reduceTransparency,
-                                increaseContrast: increaseContrast
+                                GlassTheme.glassBorderGradient(
+                                    reduceTransparency: reduceTransparency,
+                                    increaseContrast: isIncreasedContrast
+                                ),
+                                lineWidth: GlassTheme.glassBorderLineWidth(
+                                    reduceTransparency: reduceTransparency,
+                                    increaseContrast: isIncreasedContrast
+                                )
                             )
-                        )
-                )
+                    )
         case .destructive:
             Circle()
                 .fill(GlassTheme.error.opacity(0.9))
                 .overlay(
                     Circle()
                         .stroke(
-                            GlassTheme.glassBorderGradient(
-                                reduceTransparency: reduceTransparency,
-                                increaseContrast: increaseContrast
-                            ),
-                            lineWidth: GlassTheme.glassBorderLineWidth(
-                                reduceTransparency: reduceTransparency,
-                                increaseContrast: increaseContrast
+                                GlassTheme.glassBorderGradient(
+                                    reduceTransparency: reduceTransparency,
+                                    increaseContrast: isIncreasedContrast
+                                ),
+                                lineWidth: GlassTheme.glassBorderLineWidth(
+                                    reduceTransparency: reduceTransparency,
+                                    increaseContrast: isIncreasedContrast
+                                )
                             )
-                        )
-                )
+                    )
         case .secondary, .plain:
             glassBackground
                 .clipShape(Circle())
@@ -174,11 +189,11 @@ public struct GlassIconButton: View {
                         .stroke(
                             GlassTheme.glassBorderGradient(
                                 reduceTransparency: reduceTransparency,
-                                increaseContrast: increaseContrast
+                                increaseContrast: isIncreasedContrast
                             ),
                             lineWidth: GlassTheme.glassBorderLineWidth(
                                 reduceTransparency: reduceTransparency,
-                                increaseContrast: increaseContrast
+                                increaseContrast: isIncreasedContrast
                             )
                         )
                 )
@@ -200,7 +215,7 @@ public struct GlassIconButton: View {
     }
 
     private func triggerHaptic() {
-        #if os(iOS)
+        #if os(iOS) && !targetEnvironment(macCatalyst)
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.impactOccurred()
         #endif
@@ -230,7 +245,19 @@ public struct GlassPillButton: View {
     @ScaledMetric(relativeTo: .subheadline) private var pillIconSize: CGFloat = 16
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
-    @Environment(\.accessibilityIncreaseContrast) private var increaseContrast
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+
+    private var isIncreasedContrast: Bool {
+        if #available(iOS 17.0, macOS 14.0, *) {
+            return colorSchemeContrast == .increased
+        } else {
+            #if os(iOS)
+            return UIAccessibility.isDarkerSystemColorsEnabled
+            #else
+            return false
+            #endif
+        }
+    }
 
     public init(
         icon: String,
@@ -274,11 +301,11 @@ public struct GlassPillButton: View {
                         .stroke(
                             GlassTheme.glassBorderGradient(
                                 reduceTransparency: reduceTransparency,
-                                increaseContrast: increaseContrast
+                                increaseContrast: isIncreasedContrast
                             ),
                             lineWidth: GlassTheme.glassBorderLineWidth(
                                 reduceTransparency: reduceTransparency,
-                                increaseContrast: increaseContrast
+                                increaseContrast: isIncreasedContrast
                             )
                         )
                 )

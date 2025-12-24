@@ -1,4 +1,4 @@
-# PrismCalc Layout Optimization Session
+# prismCalc Layout Optimization Session
 **Date**: 2025-12-07
 **Session Focus**: Universal Adaptive Layout for iOS & iPadOS
 **Status**: ✅ Complete & Production-Ready
@@ -7,7 +7,7 @@
 
 ## Overview
 
-Transformed PrismCalc from a basic iPhone-only layout to a **universal adaptive layout system** that works flawlessly across all iOS and iPadOS devices without any hardcoded breakpoints or device-specific code.
+Transformed prismCalc from a basic iPhone-only layout to a **universal adaptive layout system** that works flawlessly across all iOS and iPadOS devices without any hardcoded breakpoints or device-specific code.
 
 ---
 
@@ -385,4 +385,4 @@ Instead of hardcoding heights, calculate required space first:
 
 ---
 
-**PrismCalc now feels like a true native app on every iOS device from iPhone 16e to iPad Pro 13"!** 🚀
+**prismCalc now feels like a true native app on every iOS device from iPhone 16e to iPad Pro 13"!** 🚀

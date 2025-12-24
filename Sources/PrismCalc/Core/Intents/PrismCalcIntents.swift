@@ -256,10 +256,10 @@ struct ConvertUnitsIntent: AppIntent {
 
 // MARK: - Open Calculator Intent
 
-/// Siri: "Open PrismCalc"
+/// Siri: "Open prismCalc"
 struct OpenCalculatorIntent: AppIntent {
-    static let title: LocalizedStringResource = "Open PrismCalc"
-    static let description = IntentDescription("Open the PrismCalc calculator app")
+    static let title: LocalizedStringResource = "Open prismCalc"
+    static let description = IntentDescription("Open the prismCalc calculator app")
 
     static let openAppWhenRun: Bool = true
 

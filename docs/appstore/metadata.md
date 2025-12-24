@@ -1,8 +1,8 @@
-# PrismCalc - App Store Metadata
+# prismCalc - App Store Metadata
 
 ## App Information
 
-**App Name**: PrismCalc
+**App Name**: prismCalc
 **Subtitle**: Glassmorphic Calculator
 **Bundle ID**: com.laclairtech.prismcalc
 **Category**: Utilities
@@ -17,7 +17,7 @@ Beautiful glassmorphic calculator with tip splitting, discounts, unit conversion
 
 ### Full Description (4000 chars max)
 
-PrismCalc is a beautifully designed calculator that combines powerful everyday tools with a stunning glassmorphic interface. Built exclusively for iOS 18, it showcases the latest Apple design language with animated mesh gradients, smooth transitions, and delightful micro-interactions.
+prismCalc is a beautifully designed calculator that combines powerful everyday tools with a stunning glassmorphic interface. Built exclusively for iOS 18, it showcases the latest Apple design language with animated mesh gradients, smooth transitions, and delightful micro-interactions.
 
 **CORE CALCULATOR**
 • Clean, intuitive interface for basic arithmetic
@@ -68,7 +68,7 @@ PrismCalc is a beautifully designed calculator that combines powerful everyday t
 • Dynamic Type for adjustable text sizes
 • Reduce Motion support for sensitive users
 
-Download PrismCalc and experience calculation the beautiful way.
+Download prismCalc and experience calculation the beautiful way.
 
 ---
 
@@ -82,7 +82,7 @@ calculator,tip,split,bill,discount,converter,glass,theme,widget,siri
 
 ## What's New (Version 1.0)
 
-Introducing PrismCalc - the beautiful way to calculate.
+Introducing prismCalc - the beautiful way to calculate.
 
 • Stunning glassmorphic design with 6 themes
 • Core calculator with history
@@ -99,7 +99,7 @@ Introducing PrismCalc - the beautiful way to calculate.
 ## App Privacy
 
 **Data Not Collected**
-PrismCalc does not collect any data. All calculations are performed locally on your device.
+prismCalc does not collect any data. All calculations are performed locally on your device.
 
 **Privacy Practices**
 - No tracking
@@ -112,7 +112,7 @@ PrismCalc does not collect any data. All calculations are performed locally on y
 
 ## In-App Purchases
 
-**PrismCalc Pro** - $2.99 (one-time purchase)
+**prismCalc Pro** - $2.99 (one-time purchase)
 - Tip Calculator
 - Bill Split
 - Discount Calculator
@@ -141,6 +141,6 @@ PrismCalc does not collect any data. All calculations are performed locally on y
 
 This app uses StoreKit 2 for in-app purchases. The Pro features can be tested using the StoreKit sandbox environment.
 
-Siri Shortcuts require enabling in Settings > Siri & Search > PrismCalc.
+Siri Shortcuts require enabling in Settings > Siri & Search > prismCalc.
 
 Control Center widgets require iOS 18 and manual addition via Control Center customization.

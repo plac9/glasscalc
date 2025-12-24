@@ -3,88 +3,174 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 63;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		001C7270D38F2C5222564C8B /* Diagnostics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5B7CAD29BB47584B6C95D7 /* Diagnostics.swift */; };
 		0040C4560D53BC24CA5103C0 /* AppIconSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7754AA8BC5D872B8DF9A33 /* AppIconSettingsView.swift */; };
 		018774231347F8EC7C86FC1E /* ControlCenterWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A68CCC4BE306F885918B33 /* ControlCenterWidget.swift */; };
+		0220135BAB7C23E86EDA9F4B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 8A0862606E37D374E2CD09E2 /* PrivacyInfo.xcprivacy */; };
 		028409B7FB405D21EDB4C921 /* SharedDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71565CF5E5341BE10949329 /* SharedDataService.swift */; };
 		0284D5F9C894D068D25B1D3B /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14823C00C5E6D032BBFD208D /* MoreView.swift */; };
+		02899308664A50CD58711A0C /* WidgetIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E0252FF2BA6C5DAAFD0DB2 /* WidgetIntents.swift */; };
 		09BAD84539BFABA36D3FC7FA /* ArcSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936046028363571724E74217 /* ArcSlider.swift */; };
 		0A2EC0D051D1973B799A49B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AB837CC33799E95545E4B89 /* Assets.xcassets */; };
+		0AEA426A7D0019BD68B0FE40 /* WatchContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EB5CAF764B8C74F28BA992 /* WatchContentView.swift */; };
+		0AF835E454D47E42D5B35AD8 /* PrismCalcTips.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD796F479868C33E700B5E /* PrismCalcTips.swift */; };
+		0B30006A6902A579E2E10314 /* PrismCalcWatchWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CADAEB756ABC6C1647AC3AA /* PrismCalcWatchWidget.swift */; };
 		0B929A2B04433AC687373070 /* UISmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DE1135A393DA43C8A47BDB /* UISmokeTests.swift */; };
+		0CE7169F32FED64897982720 /* SplitBillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819A14F0A68DA1BE1883F99F /* SplitBillView.swift */; };
 		0EDBEB65FAF395356DFAA847 /* GlassWideButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5349DC43F236B5AFC9EDD51C /* GlassWideButton.swift */; };
 		0FC3FBB4F5AF6185F6991525 /* GlassButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BFC3E377C7A003C333D42B /* GlassButton.swift */; };
 		11FABC4720B59F50561D5F55 /* PrismCalcWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8DED8AEA78DE4D071D75CC /* PrismCalcWidget.swift */; };
+		125C17ACD18C0AFE8245C23B /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C197E91E245912A5A63A81B /* ViewExtensions.swift */; };
 		14C8EF20C20C8AFE36C633EF /* ContentViewTabsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B781A93DE476DC3D1ABE03 /* ContentViewTabsTests.swift */; };
+		154DB3E96AAC7668391DEC5B /* ProUpgradeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA80662AF411BFB0599326E /* ProUpgradeSection.swift */; };
 		173C4663F3D51DF98DDCAF54 /* SplitBillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819A14F0A68DA1BE1883F99F /* SplitBillView.swift */; };
 		188E8A45227D63C98B7EDA89 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58FEAE60BC6E1FE1BE0C771 /* Main.swift */; };
 		1A3CA5FE9E98AD35F7716B90 /* TipCalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E69055F05C2DFDD39CBC69 /* TipCalculatorView.swift */; };
 		1B5B8F4F2EAB698F9575DC11 /* GlassCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A27DAAE53A112B615A0673 /* GlassCard.swift */; };
+		1B85206276647C507FA8A1FC /* PrismCalcWidgetBundle_watchOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B096CE7EC1D73723E428B7 /* PrismCalcWidgetBundle_watchOS.swift */; };
+		1F57718C70023D048C71B111 /* SplitBillViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1FD0ABEE01013B0EDAB877 /* SplitBillViewModel.swift */; };
 		20063AF423770BF585391581 /* WidgetIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E0252FF2BA6C5DAAFD0DB2 /* WidgetIntents.swift */; };
+		211F04B6A637FC375655180E /* StoreKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112208D79CF5E1EC11D5664E /* StoreKitManager.swift */; };
+		231848EAFFCE3C04C236267D /* DiscountCalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF6CDE231F2B566218561B4 /* DiscountCalculatorView.swift */; };
+		272FBD82DC40845DE9E0D51A /* CustomizationSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C5E9A7C15EA50D4438169D /* CustomizationSection.swift */; };
 		27AD096E5124E0363C10F3E5 /* GlassDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A25C893566C6F690106CDDF /* GlassDisplay.swift */; };
 		291E45FE85A5ED8E0289B463 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2D0715FF0317C514E6F1951 /* SwiftUI.framework */; };
-		2A78B103BEFCF80EF516457E /* PrismCalcWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C522D5E3668EAAB23D1A070 /* PrismCalcWidgetBundle.swift */; };
+		2B8CB15D9593FC29A1CE0AE8 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2D0715FF0317C514E6F1951 /* SwiftUI.framework */; };
 		2D65EB4333436683076960ED /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B7B50423B6D89E4720B631E /* WidgetKit.framework */; };
+		2FC6E14A065E016FDBFB159A /* CalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97A63E08B14D3F943EAAA4C /* CalculatorViewModel.swift */; };
+		2FE38216EA5B43EA2FF6288D /* DiscountCalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892AD060FDE8B8637A29F117 /* DiscountCalculatorViewModel.swift */; };
 		310BB87D04D5A6ECCDEFDE01 /* AnimatedMeshBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A0661C3A9837C68807DCCF /* AnimatedMeshBackground.swift */; };
 		359F8A49F62A3BF428EFDDE5 /* TipResultsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBDDE8DAA2D19C523798502 /* TipResultsSection.swift */; };
 		35C12CC120019966BF2FA546 /* SplitResultsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4032A2D0EDDA0230E4EAD7AF /* SplitResultsSection.swift */; };
+		36C7129ADA2832BD66B9A009 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58FEAE60BC6E1FE1BE0C771 /* Main.swift */; };
 		3763CF84B70E24CD9C7504B3 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B816A3B1DB1B25E2793EBE /* PaywallView.swift */; };
 		41C6946A6A6F688A3269A54D /* ThemePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C228C0D8343BBC4BC4AD26A9 /* ThemePickerView.swift */; };
-		43AF97B6E7D3010CF49AF011 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF804420EFCDF536EE758402 /* Assets.xcassets */; };
 		47069FF46CF36514A8CF4DD2 /* ProGatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A12B447B4864A04D20652CF /* ProGatedView.swift */; };
 		4CD2689C981943E6639333F3 /* PrismCalcIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69813B6E869CB554F7414F40 /* PrismCalcIntents.swift */; };
+		4D812FF029E307E99554B05A /* PrismCalcWatchWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 028AA41A44F4AF86625A2E04 /* PrismCalcWatchWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4FA1E29059DC9F8733611CEB /* GlassButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BFC3E377C7A003C333D42B /* GlassButton.swift */; };
+		4FF43CB46F133360DCAAE20A /* GlassWideButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5349DC43F236B5AFC9EDD51C /* GlassWideButton.swift */; };
+		515C11D21CCF9E32A8F2C037 /* ContentWidth.swift in Sources */ = {isa = PBXBuildFile; fileRef = D177792E7DCA76A6B8993D43 /* ContentWidth.swift */; };
+		54D7EEE8FAF196095A92D5CF /* HistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693A3C61991A360DD9FD744D /* HistoryService.swift */; };
+		555306F78F4A8C3929C37A77 /* GlassCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A27DAAE53A112B615A0673 /* GlassCard.swift */; };
+		5592EC684DCF58588CE11F15 /* AppIconSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7754AA8BC5D872B8DF9A33 /* AppIconSettingsView.swift */; };
 		56B0F555DB677FAED067BC17 /* FeatureViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DC50BD1E20F7CD60B7DA70 /* FeatureViewModelTests.swift */; };
 		595B54FCDC996C8FCF38C555 /* GlassTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B9E1DF093FC8DFA5195584 /* GlassTheme.swift */; };
+		5B0BCCA765979347107F8A8C /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C4F48E8638FC6BECBD59F5 /* CalculatorView.swift */; };
+		5D2414DBDDB7CE0BDA76A126 /* Assets-macOS.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BA674BFBF3E93043DC158C1 /* Assets-macOS.xcassets */; };
+		5E48F753DE9A34485F3DFBCD /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14823C00C5E6D032BBFD208D /* MoreView.swift */; };
 		5F2C96E12A6D463319525924 /* ThemePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009970927EF00CF27C9619CE /* ThemePreviewView.swift */; };
+		5F3C2562213F1836745AD341 /* AccessibilitySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8F7B3907B418B87DC33827 /* AccessibilitySettings.swift */; };
+		61DE1BF89319B77EC6A8FE9E /* WatchCalculatorEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D445AD1FA1ED151E29088EC1 /* WatchCalculatorEngine.swift */; };
 		63BBF3F7F05C66189DED57A8 /* HistoryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7177F593655E80F190FEE9 /* HistoryCardView.swift */; };
+		642FFC75D2E1D1B2987CA89A /* WidgetPreviewTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FE4E297C14978BAA7DC488 /* WidgetPreviewTypes.swift */; };
+		649FC3EB044E00991DCE93C1 /* PrismCalcIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69813B6E869CB554F7414F40 /* PrismCalcIntents.swift */; };
+		657808FE430916FCC5338AE5 /* SharedDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71565CF5E5341BE10949329 /* SharedDataService.swift */; };
 		689262E1FC794911F747365A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B074F9AC198B8A2488025590 /* SettingsView.swift */; };
+		68D479D64633892374FAB45D /* MacMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C048F2DC530E8BCCFC735D /* MacMain.swift */; };
+		6DAB5FA4683B2227DD4ADC35 /* Diagnostics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5B7CAD29BB47584B6C95D7 /* Diagnostics.swift */; };
+		6DBF89FDB3AA5A3EE25AE8AD /* ArcSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936046028363571724E74217 /* ArcSlider.swift */; };
 		704D769752DB6A7E348E62DB /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C4F48E8638FC6BECBD59F5 /* CalculatorView.swift */; };
+		75BFB6421CCDC87A28D97EEB /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B7B50423B6D89E4720B631E /* WidgetKit.framework */; };
 		784D54FD75879BED23763AA7 /* ThemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B8FAA34DEE532FFBA6E335 /* ThemeTests.swift */; };
+		78B229F9B5C33522A04715D3 /* TipCalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB362B6AFFBCCA93CE6B4B35 /* TipCalculatorViewModel.swift */; };
 		78F21574959188B763480B4D /* PrismCalcIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69813B6E869CB554F7414F40 /* PrismCalcIntents.swift */; };
 		7B7D9CB51D554E0BFF005AAD /* WidgetPreviewTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FE4E297C14978BAA7DC488 /* WidgetPreviewTypes.swift */; };
+		7C19FB658ED89E5891E3D07B /* GlassDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A25C893566C6F690106CDDF /* GlassDisplay.swift */; };
 		7DE47DE34CE55A737BD50F77 /* AccessibilitySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8F7B3907B418B87DC33827 /* AccessibilitySettings.swift */; };
+		7F99A18831343D83ACB69C2A /* PrismCalcMacWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = DBE1866D706F909D470AD036 /* PrismCalcMacWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8457D0CDAE83CC0C1B80669D /* HistoryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7177F593655E80F190FEE9 /* HistoryCardView.swift */; };
 		85174233C2D7B20D07855A5F /* CalculatorEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372CB58120B9A90634A2EC54 /* CalculatorEngineTests.swift */; };
 		888BE6A6F170B04DBE7A3313 /* SplitBillViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1FD0ABEE01013B0EDAB877 /* SplitBillViewModel.swift */; };
 		8A1448363ACFF317DBC9A279 /* ScreenshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18838FACCEAD94472FD6DA36 /* ScreenshotTests.swift */; };
+		8AC0B290D2A6D0D5066ED086 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13278145FCCBBBDC5FC3985 /* ContentView.swift */; };
+		8CE9247086DC9069DC514930 /* MacMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C048F2DC530E8BCCFC735D /* MacMain.swift */; };
+		8D46531FE55AE5DEF2A054E1 /* GlassTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B9E1DF093FC8DFA5195584 /* GlassTheme.swift */; };
+		8DA6BD6A65DDC3052E3DF7E1 /* PrismCalcWatchApp.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = FB6969F752ADD1AC2F074090 /* PrismCalcWatchApp.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8DB2B73E2C10B0A1B6AA8E09 /* CalculatorEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A7DCC91BA6A1E97EAF6CB0 /* CalculatorEngine.swift */; };
+		8E358D923F15CC0E8F804A84 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B7B50423B6D89E4720B631E /* WidgetKit.framework */; };
 		8E77DC9EB8AB5B602B45C8AD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13278145FCCBBBDC5FC3985 /* ContentView.swift */; };
+		90B2512BCAACA027AE9F8828 /* ControlCenterWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A68CCC4BE306F885918B33 /* ControlCenterWidget.swift */; };
+		9313A45FCE33C9560C3277FB /* UnitConverterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444839D3946D96E3A83271E3 /* UnitConverterViewModel.swift */; };
 		94A615BCE19AF31F47766EFB /* UnitConverterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444839D3946D96E3A83271E3 /* UnitConverterViewModel.swift */; };
 		952644DD55515B66A2B4F98E /* CalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97A63E08B14D3F943EAAA4C /* CalculatorViewModel.swift */; };
 		992E8937A3FC27B033FA7FA5 /* ProUpgradeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA80662AF411BFB0599326E /* ProUpgradeSection.swift */; };
+		99315E344333BFF6FB957A58 /* CalculatorEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A7DCC91BA6A1E97EAF6CB0 /* CalculatorEngine.swift */; };
+		9AC11E77CD3E4B578F0E81AE /* WidgetIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E0252FF2BA6C5DAAFD0DB2 /* WidgetIntents.swift */; };
+		9B78410FC19DE8AA4F289FE7 /* TipCalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E69055F05C2DFDD39CBC69 /* TipCalculatorView.swift */; };
 		9B861F1B3365BEA7AEF2BCAF /* MeshGradientConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307466B6734F61816EFE045 /* MeshGradientConfig.swift */; };
+		9C72F03E55B35E8B2C0B46E9 /* PrismCalcWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8DED8AEA78DE4D071D75CC /* PrismCalcWidget.swift */; };
 		9CCB3CB630185D94BE392524 /* WidgetSmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62423F99FC08B971C5AB133 /* WidgetSmokeTests.swift */; };
 		9E7F52DDCC0772597EF0B705 /* SharedDataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11164F17F7B1F297F70A834 /* SharedDataServiceTests.swift */; };
+		9F73FC1B0144CC914EB400C1 /* PrismCalcWidgetBundle_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3231027DBADA7CF1864E27 /* PrismCalcWidgetBundle_macOS.swift */; };
+		A569872904D9E3692CAB9EE4 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B816A3B1DB1B25E2793EBE /* PaywallView.swift */; };
+		AD756BA21899845D2F72F129 /* WidgetSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3896905D3F8152A111D0AC1C /* WidgetSettingsView.swift */; };
 		AE700F0510731F9023DE38EF /* SharedDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71565CF5E5341BE10949329 /* SharedDataService.swift */; };
+		B046134154C467F742133633 /* UnitConverterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDACDAC490A4971A27748771 /* UnitConverterView.swift */; };
 		B0D0583C113A62BD481273B2 /* UnitConverterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDACDAC490A4971A27748771 /* UnitConverterView.swift */; };
 		B3E765B65DAB2BE2364AB7AF /* DiscountCalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF6CDE231F2B566218561B4 /* DiscountCalculatorView.swift */; };
 		B70AD0318FAFC0445FD03AD9 /* AccessibilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3E07E5C047C4C117751D25 /* AccessibilityTests.swift */; };
 		B737B278B61BF3C27ECFA560 /* CalculatorViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C014ABC95C8D372EBB1AC7 /* CalculatorViewModelTests.swift */; };
 		B75972CF66C88928334D004E /* HistoryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F670765787CBDE7479E12868 /* HistoryEntry.swift */; };
+		B75FB81F81EE04FEE5BF8BE1 /* AccessibilityTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DB731AB9039385861F5FD7 /* AccessibilityTheme.swift */; };
 		BA6A4805ECCA7D532A3B08E3 /* HistoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14537D61F92159E7708154D3 /* HistoryDetailView.swift */; };
+		BCDE16A5C89143D8A8055474 /* ControlCenterWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A68CCC4BE306F885918B33 /* ControlCenterWidget.swift */; };
 		BE6C267F0F1B8A48EAF54AC0 /* FeatureSmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8917446E33DAE6151748DEC /* FeatureSmokeTests.swift */; };
 		C01278E4C5D75A5FD630D501 /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 81CE0250B1CF6AAF0880B921 /* Configuration.storekit */; };
+		C0F72BC27BD2BDEDA12C98B0 /* PrismCalcWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B625E041228C8B1DB255F245 /* PrismCalcWidgetBundle.swift */; };
+		C15A520CDC52897454449C28 /* GlassIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214A5BC18578DBB7ED248C8E /* GlassIconButton.swift */; };
+		C31BE2C77D5692D81CB807AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8EB5F4578C65453638D979D /* Assets.xcassets */; };
+		C4E7A4C333ED6CAEC04DE6D6 /* SplitResultsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4032A2D0EDDA0230E4EAD7AF /* SplitResultsSection.swift */; };
+		C546C3499F659AE77C8FB38A /* SharedDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71565CF5E5341BE10949329 /* SharedDataService.swift */; };
 		C746DE45CB839E3D1164EA95 /* CustomizationFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B656073700EE2B78061BE369 /* CustomizationFlowTests.swift */; };
 		CA8AF5F631900A16D9E9B662 /* PrismCalcWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 5EF4A68693D57D301E371A82 /* PrismCalcWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CEDED62B2AFAD1258DED430E /* ThemePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009970927EF00CF27C9619CE /* ThemePreviewView.swift */; };
+		D1BA1A59931AEA487DD1C7A8 /* PrismCalcWatchWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CADAEB756ABC6C1647AC3AA /* PrismCalcWatchWidget.swift */; };
+		D2C627BEC0E3F804EDA9AEB0 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B11B78137158AFA4B728E9 /* HistoryView.swift */; };
+		D5A517A996C24A762EC43FD7 /* AnimatedMeshBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A0661C3A9837C68807DCCF /* AnimatedMeshBackground.swift */; };
+		D67ED8EA09868C710EBAC156 /* ContentWidth.swift in Sources */ = {isa = PBXBuildFile; fileRef = D177792E7DCA76A6B8993D43 /* ContentWidth.swift */; };
 		D86C9FC2909427C07D3EA52E /* HistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693A3C61991A360DD9FD744D /* HistoryService.swift */; };
+		D88A412FA129EF8C9533EB64 /* PrismCalcApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F47AA3C4343F1ACD4AC871 /* PrismCalcApp.swift */; };
 		DADD21C8A2621A7A0663FF16 /* TipCalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB362B6AFFBCCA93CE6B4B35 /* TipCalculatorViewModel.swift */; };
 		DB26D57ACDEB862FC1FF2277 /* PrismCalcApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F47AA3C4343F1ACD4AC871 /* PrismCalcApp.swift */; };
+		DB86361D163C54390A03A283 /* HistoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14537D61F92159E7708154D3 /* HistoryDetailView.swift */; };
 		DC05C4EF649B91FA0ACA6796 /* WidgetSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3896905D3F8152A111D0AC1C /* WidgetSettingsView.swift */; };
+		DD79A77B5AF947117C9F4A22 /* HistoryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F670765787CBDE7479E12868 /* HistoryEntry.swift */; };
 		DF2CB64DFA7D2445674F5FCB /* AccessibilityTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DB731AB9039385861F5FD7 /* AccessibilityTheme.swift */; };
 		E27A507584F5E904682D5961 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C197E91E245912A5A63A81B /* ViewExtensions.swift */; };
 		E45A90A8A40FAE921E3C81B1 /* StoreKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112208D79CF5E1EC11D5664E /* StoreKitManager.swift */; };
+		E5FC7266747F27A3B4654687 /* ThemePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C228C0D8343BBC4BC4AD26A9 /* ThemePickerView.swift */; };
+		E6CA3823CADD190511D4BD3E /* PrismCalcWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8DED8AEA78DE4D071D75CC /* PrismCalcWidget.swift */; };
+		E8DCFC363D6BEBDE7A27BBC4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B074F9AC198B8A2488025590 /* SettingsView.swift */; };
 		E9755B612561BC0E5411D030 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B11B78137158AFA4B728E9 /* HistoryView.swift */; };
+		EB0D7DFED15AF73D1546BA68 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2D0715FF0317C514E6F1951 /* SwiftUI.framework */; };
+		EC743741060B43A95A925718 /* TipResultsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBDDE8DAA2D19C523798502 /* TipResultsSection.swift */; };
 		ED96C2142778F1CD2D234DBC /* GlassIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214A5BC18578DBB7ED248C8E /* GlassIconButton.swift */; };
 		EDF4E13C5C18DA98B4EDCBF6 /* CustomizationSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C5E9A7C15EA50D4438169D /* CustomizationSection.swift */; };
+		F34841D9939A1BA116BF45CF /* WatchTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B83AB6B0D78A033994DF43 /* WatchTheme.swift */; };
 		F389F2A3DCE36F8F080724C6 /* DiscountCalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892AD060FDE8B8637A29F117 /* DiscountCalculatorViewModel.swift */; };
 		F5C7110D2BC737E849C5E506 /* PersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26509E15A54254B49C270A72 /* PersistenceTests.swift */; };
 		F8D9ADF694A7E48B2C7B541C /* PrismCalcTips.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD796F479868C33E700B5E /* PrismCalcTips.swift */; };
+		F9757259A6E56A9BFE360F67 /* PrismCalcWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF021FAE5131E3F1699D1F1B /* PrismCalcWatchApp.swift */; };
+		F9BB074CEDAE8BD523FB0202 /* PrismCalcWatchWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CADAEB756ABC6C1647AC3AA /* PrismCalcWatchWidget.swift */; };
 		FA1AB9F71214EFA86CCCAD2B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 8A0862606E37D374E2CD09E2 /* PrivacyInfo.xcprivacy */; };
+		FC4C8642821FC90614D08762 /* ProGatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A12B447B4864A04D20652CF /* ProGatedView.swift */; };
+		FCB96930904AD6CE15EE7E48 /* SharedDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71565CF5E5341BE10949329 /* SharedDataService.swift */; };
+		FE76CD71665F0215178FE479 /* MeshGradientConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307466B6734F61816EFE045 /* MeshGradientConfig.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0303D1CD2F91DF663457897F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 468F91089A26F0C41565C47F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E05584D7D75886E57CFC6842;
+			remoteInfo = PrismCalcWatchWidgetExtension;
+		};
 		15058761E41DE981B3FEC598 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 468F91089A26F0C41565C47F /* Project object */;
@@ -99,6 +185,20 @@
 			remoteGlobalIDString = 9FD3D6FF66B853A994461E3E;
 			remoteInfo = PrismCalc;
 		};
+		9FDE6103CBE016E8C3EBBE0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 468F91089A26F0C41565C47F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 89E0AE3904FBFC81925903F2;
+			remoteInfo = PrismCalcMacWidgetExtension;
+		};
+		BF23D9E0C67EC72CB653F529 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 468F91089A26F0C41565C47F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2921DA1BB4E72FFD4C79A827;
+			remoteInfo = PrismCalcWatchApp;
+		};
 		F9B434D027F5E2CDA4E1B884 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 468F91089A26F0C41565C47F /* Project object */;
@@ -109,6 +209,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		41B2880A6E5E0525970AF795 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				4D812FF029E307E99554B05A /* PrismCalcWatchWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8675ED65440F2BA6652CC14E /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -120,17 +231,39 @@
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ED89DDE11254704571BF40C1 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				7F99A18831343D83ACB69C2A /* PrismCalcMacWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F89B37B883F7268CB897FCAC /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				8DA6BD6A65DDC3052E3DF7E1 /* PrismCalcWatchApp.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		009970927EF00CF27C9619CE /* ThemePreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePreviewView.swift; sourceTree = "<group>"; };
 		011A7154BC4B2935F58251A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		028AA41A44F4AF86625A2E04 /* PrismCalcWatchWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PrismCalcWatchWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A8DED8AEA78DE4D071D75CC /* PrismCalcWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismCalcWidget.swift; sourceTree = "<group>"; };
 		0E5B7CAD29BB47584B6C95D7 /* Diagnostics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diagnostics.swift; sourceTree = "<group>"; };
 		112208D79CF5E1EC11D5664E /* StoreKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitManager.swift; sourceTree = "<group>"; };
 		14537D61F92159E7708154D3 /* HistoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailView.swift; sourceTree = "<group>"; };
 		14823C00C5E6D032BBFD208D /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
-		17BC2D603C7CEB1FB9D8D4AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		18838FACCEAD94472FD6DA36 /* ScreenshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotTests.swift; sourceTree = "<group>"; };
 		20B816A3B1DB1B25E2793EBE /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
 		214A5BC18578DBB7ED248C8E /* GlassIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassIconButton.swift; sourceTree = "<group>"; };
@@ -140,7 +273,6 @@
 		30A27DAAE53A112B615A0673 /* GlassCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassCard.swift; sourceTree = "<group>"; };
 		30F47AA3C4343F1ACD4AC871 /* PrismCalcApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismCalcApp.swift; sourceTree = "<group>"; };
 		31C4F48E8638FC6BECBD59F5 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
-		32A0AE7938185EBA6C99D705 /* PrismCalcWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PrismCalcWidget.entitlements; sourceTree = "<group>"; };
 		35A0661C3A9837C68807DCCF /* AnimatedMeshBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedMeshBackground.swift; sourceTree = "<group>"; };
 		36E0252FF2BA6C5DAAFD0DB2 /* WidgetIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetIntents.swift; sourceTree = "<group>"; };
 		372CB58120B9A90634A2EC54 /* CalculatorEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorEngineTests.swift; sourceTree = "<group>"; };
@@ -150,26 +282,30 @@
 		3B7B50423B6D89E4720B631E /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WidgetKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4032A2D0EDDA0230E4EAD7AF /* SplitResultsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitResultsSection.swift; sourceTree = "<group>"; };
 		444839D3946D96E3A83271E3 /* UnitConverterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConverterViewModel.swift; sourceTree = "<group>"; };
+		4CADAEB756ABC6C1647AC3AA /* PrismCalcWatchWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismCalcWatchWidget.swift; sourceTree = "<group>"; };
 		5349DC43F236B5AFC9EDD51C /* GlassWideButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassWideButton.swift; sourceTree = "<group>"; };
 		53FE4E297C14978BAA7DC488 /* WidgetPreviewTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetPreviewTypes.swift; sourceTree = "<group>"; };
 		58B781A93DE476DC3D1ABE03 /* ContentViewTabsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewTabsTests.swift; sourceTree = "<group>"; };
-		5EF4A68693D57D301E371A82 /* PrismCalcWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PrismCalcWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B3A98413B9451AE8BB9E7C6 /* Info-macOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Info-macOS.plist"; sourceTree = "<group>"; };
+		5EF4A68693D57D301E371A82 /* PrismCalcWidgetExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = PrismCalcWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		64B83AB6B0D78A033994DF43 /* WatchTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchTheme.swift; sourceTree = "<group>"; };
 		66A7DCC91BA6A1E97EAF6CB0 /* CalculatorEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorEngine.swift; sourceTree = "<group>"; };
 		67C5E9A7C15EA50D4438169D /* CustomizationSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizationSection.swift; sourceTree = "<group>"; };
 		693A3C61991A360DD9FD744D /* HistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryService.swift; sourceTree = "<group>"; };
 		69813B6E869CB554F7414F40 /* PrismCalcIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismCalcIntents.swift; sourceTree = "<group>"; };
-		6C522D5E3668EAAB23D1A070 /* PrismCalcWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismCalcWidgetBundle.swift; sourceTree = "<group>"; };
+		6BA674BFBF3E93043DC158C1 /* Assets-macOS.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets-macOS.xcassets"; sourceTree = "<group>"; };
 		6D7177F593655E80F190FEE9 /* HistoryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCardView.swift; sourceTree = "<group>"; };
 		71B9E1DF093FC8DFA5195584 /* GlassTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassTheme.swift; sourceTree = "<group>"; };
 		7307466B6734F61816EFE045 /* MeshGradientConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshGradientConfig.swift; sourceTree = "<group>"; };
 		77BFC3E377C7A003C333D42B /* GlassButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassButton.swift; sourceTree = "<group>"; };
+		79EB5CAF764B8C74F28BA992 /* WatchContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchContentView.swift; sourceTree = "<group>"; };
 		819A14F0A68DA1BE1883F99F /* SplitBillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitBillView.swift; sourceTree = "<group>"; };
-		81CE0250B1CF6AAF0880B921 /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
+		81CE0250B1CF6AAF0880B921 /* Configuration.storekit */ = {isa = PBXFileReference; path = Configuration.storekit; sourceTree = "<group>"; };
 		81DE1135A393DA43C8A47BDB /* UISmokeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISmokeTests.swift; sourceTree = "<group>"; };
 		892AD060FDE8B8637A29F117 /* DiscountCalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountCalculatorViewModel.swift; sourceTree = "<group>"; };
-		8A0862606E37D374E2CD09E2 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		8A0862606E37D374E2CD09E2 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		8A12B447B4864A04D20652CF /* ProGatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProGatedView.swift; sourceTree = "<group>"; };
-		8B945D05266736A7BAB4318C /* PrismCalcUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrismCalcUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B945D05266736A7BAB4318C /* PrismCalcUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = PrismCalcUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C197E91E245912A5A63A81B /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		936046028363571724E74217 /* ArcSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcSlider.swift; sourceTree = "<group>"; };
 		98DC50BD1E20F7CD60B7DA70 /* FeatureViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureViewModelTests.swift; sourceTree = "<group>"; };
@@ -183,29 +319,50 @@
 		AEA80662AF411BFB0599326E /* ProUpgradeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProUpgradeSection.swift; sourceTree = "<group>"; };
 		B074F9AC198B8A2488025590 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B08C9B495C216FA7885D2924 /* PrismCalc.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PrismCalc.entitlements; sourceTree = "<group>"; };
-		B40A206F27D504D1DC20D8D5 /* PrismCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrismCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B40A206F27D504D1DC20D8D5 /* PrismCalc.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = PrismCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B625E041228C8B1DB255F245 /* PrismCalcWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismCalcWidgetBundle.swift; sourceTree = "<group>"; };
 		B656073700EE2B78061BE369 /* CustomizationFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizationFlowTests.swift; sourceTree = "<group>"; };
+		B8EB5F4578C65453638D979D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB3E07E5C047C4C117751D25 /* AccessibilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityTests.swift; sourceTree = "<group>"; };
 		C11164F17F7B1F297F70A834 /* SharedDataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDataServiceTests.swift; sourceTree = "<group>"; };
 		C13278145FCCBBBDC5FC3985 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C228C0D8343BBC4BC4AD26A9 /* ThemePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePickerView.swift; sourceTree = "<group>"; };
 		C58FEAE60BC6E1FE1BE0C771 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
-		C7AAD00DAC3A5F836A7D40C6 /* PrismCalcTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrismCalcTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6D1A3EF1A7BFD8001FE0F73 /* PrismCalcMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrismCalcMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7AAD00DAC3A5F836A7D40C6 /* PrismCalcTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = PrismCalcTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8917446E33DAE6151748DEC /* FeatureSmokeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureSmokeTests.swift; sourceTree = "<group>"; };
 		CDACDAC490A4971A27748771 /* UnitConverterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConverterView.swift; sourceTree = "<group>"; };
 		CDBDDE8DAA2D19C523798502 /* TipResultsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipResultsSection.swift; sourceTree = "<group>"; };
+		CF021FAE5131E3F1699D1F1B /* PrismCalcWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismCalcWatchApp.swift; sourceTree = "<group>"; };
+		D177792E7DCA76A6B8993D43 /* ContentWidth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentWidth.swift; sourceTree = "<group>"; };
+		D445AD1FA1ED151E29088EC1 /* WatchCalculatorEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchCalculatorEngine.swift; sourceTree = "<group>"; };
+		D4B096CE7EC1D73723E428B7 /* PrismCalcWidgetBundle_watchOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismCalcWidgetBundle_watchOS.swift; sourceTree = "<group>"; };
+		D5E5DCFFD5A651C542B0AB32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D62423F99FC08B971C5AB133 /* WidgetSmokeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetSmokeTests.swift; sourceTree = "<group>"; };
 		D97A63E08B14D3F943EAAA4C /* CalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewModel.swift; sourceTree = "<group>"; };
+		DBE1866D706F909D470AD036 /* PrismCalcMacWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PrismCalcMacWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6A68CCC4BE306F885918B33 /* ControlCenterWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlCenterWidget.swift; sourceTree = "<group>"; };
 		E71565CF5E5341BE10949329 /* SharedDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDataService.swift; sourceTree = "<group>"; };
+		E7C048F2DC530E8BCCFC735D /* MacMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacMain.swift; sourceTree = "<group>"; };
 		E7DB731AB9039385861F5FD7 /* AccessibilityTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityTheme.swift; sourceTree = "<group>"; };
+		E9F8C898DEA7CCAEC4A7A143 /* PrismCalcWatchApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PrismCalcWatchApp.entitlements; sourceTree = "<group>"; };
+		EB3231027DBADA7CF1864E27 /* PrismCalcWidgetBundle_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismCalcWidgetBundle_macOS.swift; sourceTree = "<group>"; };
 		F2DD796F479868C33E700B5E /* PrismCalcTips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismCalcTips.swift; sourceTree = "<group>"; };
 		F670765787CBDE7479E12868 /* HistoryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryEntry.swift; sourceTree = "<group>"; };
+		FB6969F752ADD1AC2F074090 /* PrismCalcWatchApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrismCalcWatchApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE7754AA8BC5D872B8DF9A33 /* AppIconSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconSettingsView.swift; sourceTree = "<group>"; };
-		FF804420EFCDF536EE758402 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		25EC59D9C8BA56DEE051E0B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2B8CB15D9593FC29A1CE0AE8 /* SwiftUI.framework in Frameworks */,
+				8E358D923F15CC0E8F804A84 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		52DA1658F1EBFDDAC1F9D992 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -215,9 +372,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DAF6AD52306BE35A7FA82B24 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB0D7DFED15AF73D1546BA68 /* SwiftUI.framework in Frameworks */,
+				75BFB6421CCDC87A28D97EEB /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0FC3CDCA81068B158A1DA14A /* watchOS */ = {
+			isa = PBXGroup;
+			children = (
+				D4B096CE7EC1D73723E428B7 /* PrismCalcWidgetBundle_watchOS.swift */,
+			);
+			name = watchOS;
+			path = WidgetExtension/watchOS;
+			sourceTree = "<group>";
+		};
 		1308B64BBEF5FFE894464333 /* TipCalculator */ = {
 			isa = PBXGroup;
 			children = (
@@ -237,14 +412,26 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		1A207977892F674A735C2C1E /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				B625E041228C8B1DB255F245 /* PrismCalcWidgetBundle.swift */,
+			);
+			name = iOS;
+			path = WidgetExtension/iOS;
+			sourceTree = "<group>";
+		};
 		1D7E29821BC9F1666468E9F6 = {
 			isa = PBXGroup;
 			children = (
 				DBC0C206356176590851AD87 /* App */,
+				1A207977892F674A735C2C1E /* iOS */,
+				4D07B37C489BB2FE53BAA805 /* macOS */,
 				7476517F4EBE9AB00E77F36D /* PrismCalc */,
 				D46ECEBDB88DF1B3F8AB6461 /* PrismCalcTests */,
 				377FA568060572B2ECF2206D /* PrismCalcUITests */,
-				EEC5BD8AFEC7C9A84BE139E7 /* WidgetExtension */,
+				6D7D83D76E64BB38CDEB8B37 /* WatchApp */,
+				0FC3CDCA81068B158A1DA14A /* watchOS */,
 				DC94EF0221ED45E829AB3F9D /* Widgets */,
 				689520496D7070AA17515C08 /* Frameworks */,
 				77F64D687867A93AACA6AB7C /* Products */,
@@ -266,6 +453,7 @@
 			children = (
 				35A0661C3A9837C68807DCCF /* AnimatedMeshBackground.swift */,
 				936046028363571724E74217 /* ArcSlider.swift */,
+				D177792E7DCA76A6B8993D43 /* ContentWidth.swift */,
 				77BFC3E377C7A003C333D42B /* GlassButton.swift */,
 				30A27DAAE53A112B615A0673 /* GlassCard.swift */,
 				3A25C893566C6F690106CDDF /* GlassDisplay.swift */,
@@ -294,6 +482,7 @@
 				E71565CF5E5341BE10949329 /* SharedDataService.swift */,
 				112208D79CF5E1EC11D5664E /* StoreKitManager.swift */,
 			);
+			name = Services;
 			path = Services;
 			sourceTree = "<group>";
 		};
@@ -320,6 +509,15 @@
 				4F2DC244309FB7BDC74D72EA /* UnitConverter */,
 			);
 			path = Features;
+			sourceTree = "<group>";
+		};
+		4D07B37C489BB2FE53BAA805 /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				EB3231027DBADA7CF1864E27 /* PrismCalcWidgetBundle_macOS.swift */,
+			);
+			name = macOS;
+			path = WidgetExtension/macOS;
 			sourceTree = "<group>";
 		};
 		4F2DC244309FB7BDC74D72EA /* UnitConverter */ = {
@@ -356,6 +554,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6D7D83D76E64BB38CDEB8B37 /* WatchApp */ = {
+			isa = PBXGroup;
+			children = (
+				B8EB5F4578C65453638D979D /* Assets.xcassets */,
+				D5E5DCFFD5A651C542B0AB32 /* Info.plist */,
+				E9F8C898DEA7CCAEC4A7A143 /* PrismCalcWatchApp.entitlements */,
+				CF021FAE5131E3F1699D1F1B /* PrismCalcWatchApp.swift */,
+				D445AD1FA1ED151E29088EC1 /* WatchCalculatorEngine.swift */,
+				79EB5CAF764B8C74F28BA992 /* WatchContentView.swift */,
+				64B83AB6B0D78A033994DF43 /* WatchTheme.swift */,
+			);
+			path = WatchApp;
+			sourceTree = "<group>";
+		};
 		7476517F4EBE9AB00E77F36D /* PrismCalc */ = {
 			isa = PBXGroup;
 			children = (
@@ -372,8 +584,12 @@
 			isa = PBXGroup;
 			children = (
 				B40A206F27D504D1DC20D8D5 /* PrismCalc.app */,
+				C6D1A3EF1A7BFD8001FE0F73 /* PrismCalcMac.app */,
+				DBE1866D706F909D470AD036 /* PrismCalcMacWidgetExtension.appex */,
 				C7AAD00DAC3A5F836A7D40C6 /* PrismCalcTests.xctest */,
 				8B945D05266736A7BAB4318C /* PrismCalcUITests.xctest */,
+				FB6969F752ADD1AC2F074090 /* PrismCalcWatchApp.app */,
+				028AA41A44F4AF86625A2E04 /* PrismCalcWatchWidgetExtension.appex */,
 				5EF4A68693D57D301E371A82 /* PrismCalcWidgetExtension.appex */,
 			);
 			name = Products;
@@ -394,6 +610,7 @@
 			children = (
 				69813B6E869CB554F7414F40 /* PrismCalcIntents.swift */,
 			);
+			name = Intents;
 			path = Intents;
 			sourceTree = "<group>";
 		};
@@ -457,9 +674,12 @@
 		DBC0C206356176590851AD87 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				6BA674BFBF3E93043DC158C1 /* Assets-macOS.xcassets */,
 				3AB837CC33799E95545E4B89 /* Assets.xcassets */,
 				81CE0250B1CF6AAF0880B921 /* Configuration.storekit */,
+				5B3A98413B9451AE8BB9E7C6 /* Info-macOS.plist */,
 				011A7154BC4B2935F58251A9 /* Info.plist */,
+				E7C048F2DC530E8BCCFC735D /* MacMain.swift */,
 				C58FEAE60BC6E1FE1BE0C771 /* Main.swift */,
 				B08C9B495C216FA7885D2924 /* PrismCalc.entitlements */,
 				8A0862606E37D374E2CD09E2 /* PrivacyInfo.xcprivacy */,
@@ -471,6 +691,7 @@
 			isa = PBXGroup;
 			children = (
 				E6A68CCC4BE306F885918B33 /* ControlCenterWidget.swift */,
+				4CADAEB756ABC6C1647AC3AA /* PrismCalcWatchWidget.swift */,
 				0A8DED8AEA78DE4D071D75CC /* PrismCalcWidget.swift */,
 				36E0252FF2BA6C5DAAFD0DB2 /* WidgetIntents.swift */,
 			);
@@ -495,17 +716,6 @@
 			path = DiscountCalculator;
 			sourceTree = "<group>";
 		};
-		EEC5BD8AFEC7C9A84BE139E7 /* WidgetExtension */ = {
-			isa = PBXGroup;
-			children = (
-				FF804420EFCDF536EE758402 /* Assets.xcassets */,
-				17BC2D603C7CEB1FB9D8D4AC /* Info.plist */,
-				32A0AE7938185EBA6C99D705 /* PrismCalcWidget.entitlements */,
-				6C522D5E3668EAAB23D1A070 /* PrismCalcWidgetBundle.swift */,
-			);
-			path = WidgetExtension;
-			sourceTree = "<group>";
-		};
 		F5E1BA5C047B67B57ED42431 /* SplitBill */ = {
 			isa = PBXGroup;
 			children = (
@@ -519,6 +729,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2921DA1BB4E72FFD4C79A827 /* PrismCalcWatchApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C6B09E331B9DDB3A704B9315 /* Build configuration list for PBXNativeTarget "PrismCalcWatchApp" */;
+			buildPhases = (
+				BF6BDD9860C09D0CE48E5BFF /* Sources */,
+				0519632DDDFA3B258A789085 /* Resources */,
+				41B2880A6E5E0525970AF795 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C2286393E58A2D3208AAA377 /* PBXTargetDependency */,
+			);
+			name = PrismCalcWatchApp;
+			packageProductDependencies = (
+			);
+			productName = PrismCalcWatchApp;
+			productReference = FB6969F752ADD1AC2F074090 /* PrismCalcWatchApp.app */;
+			productType = "com.apple.product-type.application";
+		};
 		40F1E933878B92B29988D02A /* PrismCalcUITests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F46720AD72AB4D69CA0F1B14 /* Build configuration list for PBXNativeTarget "PrismCalcUITests" */;
@@ -542,7 +772,6 @@
 			buildConfigurationList = 6681BD3D5275424354A8029E /* Build configuration list for PBXNativeTarget "PrismCalcWidgetExtension" */;
 			buildPhases = (
 				D30847A27DAB36B5F55B649C /* Sources */,
-				439F323E719372880EBDFDF1 /* Resources */,
 				52DA1658F1EBFDDAC1F9D992 /* Frameworks */,
 			);
 			buildRules = (
@@ -556,6 +785,24 @@
 			productReference = 5EF4A68693D57D301E371A82 /* PrismCalcWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		89E0AE3904FBFC81925903F2 /* PrismCalcMacWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9D61D2339572BE371B430105 /* Build configuration list for PBXNativeTarget "PrismCalcMacWidgetExtension" */;
+			buildPhases = (
+				411FCBCE39FABAC89683BA12 /* Sources */,
+				25EC59D9C8BA56DEE051E0B6 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PrismCalcMacWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = PrismCalcMacWidgetExtension;
+			productReference = DBE1866D706F909D470AD036 /* PrismCalcMacWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		9FD3D6FF66B853A994461E3E /* PrismCalc */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 59E13740F0EB5C30814A0610 /* Build configuration list for PBXNativeTarget "PrismCalc" */;
@@ -563,17 +810,39 @@
 				6405F8E5778A8CD90960BA5A /* Sources */,
 				D0A1F204A8598E1D375F00CD /* Resources */,
 				8675ED65440F2BA6652CC14E /* Embed Foundation Extensions */,
+				F89B37B883F7268CB897FCAC /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				FD080C169D05815B9E75D2FB /* PBXTargetDependency */,
+				8E07E505A375DF37E58DDB60 /* PBXTargetDependency */,
 			);
 			name = PrismCalc;
 			packageProductDependencies = (
 			);
 			productName = PrismCalc;
 			productReference = B40A206F27D504D1DC20D8D5 /* PrismCalc.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A331FCC759CCA2F55A09F23A /* PrismCalcMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FDF2360897CE257D7B740303 /* Build configuration list for PBXNativeTarget "PrismCalcMac" */;
+			buildPhases = (
+				E10D922CCF9D1A9E2DABBC77 /* Sources */,
+				5990C53E6DB060ED18CC9AAE /* Resources */,
+				ED89DDE11254704571BF40C1 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3EEA03DA57AAF455D2A2B331 /* PBXTargetDependency */,
+			);
+			name = PrismCalcMac;
+			packageProductDependencies = (
+			);
+			productName = PrismCalcMac;
+			productReference = C6D1A3EF1A7BFD8001FE0F73 /* PrismCalcMac.app */;
 			productType = "com.apple.product-type.application";
 		};
 		AF4DA448EE3E91D2C0E7F29F /* PrismCalcTests */ = {
@@ -594,6 +863,24 @@
 			productReference = C7AAD00DAC3A5F836A7D40C6 /* PrismCalcTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		E05584D7D75886E57CFC6842 /* PrismCalcWatchWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 93F1332DC47C7BC10C935070 /* Build configuration list for PBXNativeTarget "PrismCalcWatchWidgetExtension" */;
+			buildPhases = (
+				EE53E6A8C3245D9AB786AA31 /* Sources */,
+				DAF6AD52306BE35A7FA82B24 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PrismCalcWatchWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = PrismCalcWatchWidgetExtension;
+			productReference = 028AA41A44F4AF86625A2E04 /* PrismCalcWatchWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -601,15 +888,27 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 2620;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					2921DA1BB4E72FFD4C79A827 = {
+						DevelopmentTeam = N8A5T2PZY9;
+					};
 					40F1E933878B92B29988D02A = {
 						TestTargetID = 9FD3D6FF66B853A994461E3E;
 					};
 					45CB9BE953693B211F1D9FDF = {
 						DevelopmentTeam = N8A5T2PZY9;
 					};
+					89E0AE3904FBFC81925903F2 = {
+						DevelopmentTeam = N8A5T2PZY9;
+					};
 					9FD3D6FF66B853A994461E3E = {
+						DevelopmentTeam = N8A5T2PZY9;
+					};
+					A331FCC759CCA2F55A09F23A = {
+						DevelopmentTeam = N8A5T2PZY9;
+					};
+					E05584D7D75886E57CFC6842 = {
 						DevelopmentTeam = N8A5T2PZY9;
 					};
 				};
@@ -624,23 +923,37 @@
 			);
 			mainGroup = 1D7E29821BC9F1666468E9F6;
 			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				9FD3D6FF66B853A994461E3E /* PrismCalc */,
+				A331FCC759CCA2F55A09F23A /* PrismCalcMac */,
+				89E0AE3904FBFC81925903F2 /* PrismCalcMacWidgetExtension */,
 				AF4DA448EE3E91D2C0E7F29F /* PrismCalcTests */,
 				40F1E933878B92B29988D02A /* PrismCalcUITests */,
+				2921DA1BB4E72FFD4C79A827 /* PrismCalcWatchApp */,
+				E05584D7D75886E57CFC6842 /* PrismCalcWatchWidgetExtension */,
 				45CB9BE953693B211F1D9FDF /* PrismCalcWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		439F323E719372880EBDFDF1 /* Resources */ = {
+		0519632DDDFA3B258A789085 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43AF97B6E7D3010CF49AF011 /* Assets.xcassets in Resources */,
+				C31BE2C77D5692D81CB807AC /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5990C53E6DB060ED18CC9AAE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D2414DBDDB7CE0BDA76A126 /* Assets-macOS.xcassets in Resources */,
+				0220135BAB7C23E86EDA9F4B /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -675,6 +988,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		411FCBCE39FABAC89683BA12 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				90B2512BCAACA027AE9F8828 /* ControlCenterWidget.swift in Sources */,
+				F9BB074CEDAE8BD523FB0202 /* PrismCalcWatchWidget.swift in Sources */,
+				E6CA3823CADD190511D4BD3E /* PrismCalcWidget.swift in Sources */,
+				9F73FC1B0144CC914EB400C1 /* PrismCalcWidgetBundle_macOS.swift in Sources */,
+				657808FE430916FCC5338AE5 /* SharedDataService.swift in Sources */,
+				9AC11E77CD3E4B578F0E81AE /* WidgetIntents.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6405F8E5778A8CD90960BA5A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -688,6 +1014,7 @@
 				704D769752DB6A7E348E62DB /* CalculatorView.swift in Sources */,
 				952644DD55515B66A2B4F98E /* CalculatorViewModel.swift in Sources */,
 				8E77DC9EB8AB5B602B45C8AD /* ContentView.swift in Sources */,
+				D67ED8EA09868C710EBAC156 /* ContentWidth.swift in Sources */,
 				EDF4E13C5C18DA98B4EDCBF6 /* CustomizationSection.swift in Sources */,
 				001C7270D38F2C5222564C8B /* Diagnostics.swift in Sources */,
 				B3E765B65DAB2BE2364AB7AF /* DiscountCalculatorView.swift in Sources */,
@@ -703,6 +1030,7 @@
 				B75972CF66C88928334D004E /* HistoryEntry.swift in Sources */,
 				D86C9FC2909427C07D3EA52E /* HistoryService.swift in Sources */,
 				E9755B612561BC0E5411D030 /* HistoryView.swift in Sources */,
+				8CE9247086DC9069DC514930 /* MacMain.swift in Sources */,
 				188E8A45227D63C98B7EDA89 /* Main.swift in Sources */,
 				9B861F1B3365BEA7AEF2BCAF /* MeshGradientConfig.swift in Sources */,
 				0284D5F9C894D068D25B1D3B /* MoreView.swift in Sources */,
@@ -740,16 +1068,99 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BF6BDD9860C09D0CE48E5BFF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9757259A6E56A9BFE360F67 /* PrismCalcWatchApp.swift in Sources */,
+				61DE1BF89319B77EC6A8FE9E /* WatchCalculatorEngine.swift in Sources */,
+				0AEA426A7D0019BD68B0FE40 /* WatchContentView.swift in Sources */,
+				F34841D9939A1BA116BF45CF /* WatchTheme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D30847A27DAB36B5F55B649C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				018774231347F8EC7C86FC1E /* ControlCenterWidget.swift in Sources */,
 				78F21574959188B763480B4D /* PrismCalcIntents.swift in Sources */,
+				D1BA1A59931AEA487DD1C7A8 /* PrismCalcWatchWidget.swift in Sources */,
 				11FABC4720B59F50561D5F55 /* PrismCalcWidget.swift in Sources */,
-				2A78B103BEFCF80EF516457E /* PrismCalcWidgetBundle.swift in Sources */,
+				C0F72BC27BD2BDEDA12C98B0 /* PrismCalcWidgetBundle.swift in Sources */,
 				028409B7FB405D21EDB4C921 /* SharedDataService.swift in Sources */,
 				20063AF423770BF585391581 /* WidgetIntents.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E10D922CCF9D1A9E2DABBC77 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5F3C2562213F1836745AD341 /* AccessibilitySettings.swift in Sources */,
+				B75FB81F81EE04FEE5BF8BE1 /* AccessibilityTheme.swift in Sources */,
+				D5A517A996C24A762EC43FD7 /* AnimatedMeshBackground.swift in Sources */,
+				5592EC684DCF58588CE11F15 /* AppIconSettingsView.swift in Sources */,
+				6DBF89FDB3AA5A3EE25AE8AD /* ArcSlider.swift in Sources */,
+				99315E344333BFF6FB957A58 /* CalculatorEngine.swift in Sources */,
+				5B0BCCA765979347107F8A8C /* CalculatorView.swift in Sources */,
+				2FC6E14A065E016FDBFB159A /* CalculatorViewModel.swift in Sources */,
+				8AC0B290D2A6D0D5066ED086 /* ContentView.swift in Sources */,
+				515C11D21CCF9E32A8F2C037 /* ContentWidth.swift in Sources */,
+				272FBD82DC40845DE9E0D51A /* CustomizationSection.swift in Sources */,
+				6DAB5FA4683B2227DD4ADC35 /* Diagnostics.swift in Sources */,
+				231848EAFFCE3C04C236267D /* DiscountCalculatorView.swift in Sources */,
+				2FE38216EA5B43EA2FF6288D /* DiscountCalculatorViewModel.swift in Sources */,
+				4FA1E29059DC9F8733611CEB /* GlassButton.swift in Sources */,
+				555306F78F4A8C3929C37A77 /* GlassCard.swift in Sources */,
+				7C19FB658ED89E5891E3D07B /* GlassDisplay.swift in Sources */,
+				C15A520CDC52897454449C28 /* GlassIconButton.swift in Sources */,
+				8D46531FE55AE5DEF2A054E1 /* GlassTheme.swift in Sources */,
+				4FF43CB46F133360DCAAE20A /* GlassWideButton.swift in Sources */,
+				8457D0CDAE83CC0C1B80669D /* HistoryCardView.swift in Sources */,
+				DB86361D163C54390A03A283 /* HistoryDetailView.swift in Sources */,
+				DD79A77B5AF947117C9F4A22 /* HistoryEntry.swift in Sources */,
+				54D7EEE8FAF196095A92D5CF /* HistoryService.swift in Sources */,
+				D2C627BEC0E3F804EDA9AEB0 /* HistoryView.swift in Sources */,
+				68D479D64633892374FAB45D /* MacMain.swift in Sources */,
+				36C7129ADA2832BD66B9A009 /* Main.swift in Sources */,
+				FE76CD71665F0215178FE479 /* MeshGradientConfig.swift in Sources */,
+				5E48F753DE9A34485F3DFBCD /* MoreView.swift in Sources */,
+				A569872904D9E3692CAB9EE4 /* PaywallView.swift in Sources */,
+				D88A412FA129EF8C9533EB64 /* PrismCalcApp.swift in Sources */,
+				649FC3EB044E00991DCE93C1 /* PrismCalcIntents.swift in Sources */,
+				0AF835E454D47E42D5B35AD8 /* PrismCalcTips.swift in Sources */,
+				FC4C8642821FC90614D08762 /* ProGatedView.swift in Sources */,
+				154DB3E96AAC7668391DEC5B /* ProUpgradeSection.swift in Sources */,
+				E8DCFC363D6BEBDE7A27BBC4 /* SettingsView.swift in Sources */,
+				C546C3499F659AE77C8FB38A /* SharedDataService.swift in Sources */,
+				0CE7169F32FED64897982720 /* SplitBillView.swift in Sources */,
+				1F57718C70023D048C71B111 /* SplitBillViewModel.swift in Sources */,
+				C4E7A4C333ED6CAEC04DE6D6 /* SplitResultsSection.swift in Sources */,
+				211F04B6A637FC375655180E /* StoreKitManager.swift in Sources */,
+				E5FC7266747F27A3B4654687 /* ThemePickerView.swift in Sources */,
+				CEDED62B2AFAD1258DED430E /* ThemePreviewView.swift in Sources */,
+				9B78410FC19DE8AA4F289FE7 /* TipCalculatorView.swift in Sources */,
+				78B229F9B5C33522A04715D3 /* TipCalculatorViewModel.swift in Sources */,
+				EC743741060B43A95A925718 /* TipResultsSection.swift in Sources */,
+				B046134154C467F742133633 /* UnitConverterView.swift in Sources */,
+				9313A45FCE33C9560C3277FB /* UnitConverterViewModel.swift in Sources */,
+				125C17ACD18C0AFE8245C23B /* ViewExtensions.swift in Sources */,
+				642FFC75D2E1D1B2987CA89A /* WidgetPreviewTypes.swift in Sources */,
+				AD756BA21899845D2F72F129 /* WidgetSettingsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE53E6A8C3245D9AB786AA31 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCDE16A5C89143D8A8055474 /* ControlCenterWidget.swift in Sources */,
+				0B30006A6902A579E2E10314 /* PrismCalcWatchWidget.swift in Sources */,
+				9C72F03E55B35E8B2C0B46E9 /* PrismCalcWidget.swift in Sources */,
+				1B85206276647C507FA8A1FC /* PrismCalcWidgetBundle_watchOS.swift in Sources */,
+				FCB96930904AD6CE15EE7E48 /* SharedDataService.swift in Sources */,
+				02899308664A50CD58711A0C /* WidgetIntents.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -761,10 +1172,25 @@
 			target = 9FD3D6FF66B853A994461E3E /* PrismCalc */;
 			targetProxy = 7520855A8C2CB2737BCB6C82 /* PBXContainerItemProxy */;
 		};
+		3EEA03DA57AAF455D2A2B331 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 89E0AE3904FBFC81925903F2 /* PrismCalcMacWidgetExtension */;
+			targetProxy = 9FDE6103CBE016E8C3EBBE0C /* PBXContainerItemProxy */;
+		};
+		8E07E505A375DF37E58DDB60 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2921DA1BB4E72FFD4C79A827 /* PrismCalcWatchApp */;
+			targetProxy = BF23D9E0C67EC72CB653F529 /* PBXContainerItemProxy */;
+		};
 		A22426397F29530D8EF9A92F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9FD3D6FF66B853A994461E3E /* PrismCalc */;
 			targetProxy = 15058761E41DE981B3FEC598 /* PBXContainerItemProxy */;
+		};
+		C2286393E58A2D3208AAA377 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E05584D7D75886E57CFC6842 /* PrismCalcWatchWidgetExtension */;
+			targetProxy = 0303D1CD2F91DF663457897F /* PBXContainerItemProxy */;
 		};
 		FD080C169D05815B9E75D2FB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -785,7 +1211,7 @@
 				DEVELOPMENT_TEAM = N8A5T2PZY9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = App/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = PrismCalc;
+				INFOPLIST_KEY_CFBundleDisplayName = prismCalc;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -794,8 +1220,12 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.laclairtech.prismcalc;
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -803,7 +1233,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -837,7 +1266,6 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -853,15 +1281,36 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		2A620EBB263F2BA5B8B110F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
+				CODE_SIGN_ENTITLEMENTS = WatchApp/PrismCalcWatchApp.entitlements;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N8A5T2PZY9;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WatchApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = prismCalc;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.laclairtech.prismcalc;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.laclairtech.prismcalc.watch;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 4;
 			};
 			name = Debug;
 		};
@@ -874,7 +1323,7 @@
 				DEVELOPMENT_TEAM = N8A5T2PZY9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WidgetExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "PrismCalc Widget";
+				INFOPLIST_KEY_CFBundleDisplayName = "prismCalc Widget";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -884,9 +1333,76 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.laclairtech.prismcalc.widget;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
+		};
+		3DD6B7F9FC473D3136FDF907 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
+				CODE_SIGN_ENTITLEMENTS = App/PrismCalc.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N8A5T2PZY9;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "App/Info-macOS.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = prismCalc;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.laclairtech.prismcalc.mac;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		41ABA879FA1E5A3ECEF3FFAD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
+				CODE_SIGN_ENTITLEMENTS = WidgetExtension/PrismCalcWidget.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N8A5T2PZY9;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "WidgetExtension/Info-macOS.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "prismCalc Widget";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.laclairtech.prismcalc.mac.widget;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		43AAED18A4918453AA90720F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
+				CODE_SIGN_ENTITLEMENTS = WatchApp/PrismCalcWatchApp.entitlements;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N8A5T2PZY9;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WatchApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = prismCalc;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.laclairtech.prismcalc;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.laclairtech.prismcalc.watch;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Release;
 		};
 		6A480E16A8DBFF769432A068 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -915,7 +1431,7 @@
 				DEVELOPMENT_TEAM = N8A5T2PZY9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WidgetExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "PrismCalc Widget";
+				INFOPLIST_KEY_CFBundleDisplayName = "prismCalc Widget";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -925,9 +1441,56 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.laclairtech.prismcalc.widget;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
+		};
+		A2DFAAAE7D0620D0E03AA93E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
+				CODE_SIGN_ENTITLEMENTS = WidgetExtension/PrismCalcWidget.entitlements;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N8A5T2PZY9;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "WidgetExtension/Info-watchOS.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "prismCalc Widget";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.laclairtech.prismcalc.watch.widget;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Release;
+		};
+		B23F3A8ED3B95EBA5DBF5725 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
+				CODE_SIGN_ENTITLEMENTS = App/PrismCalc.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N8A5T2PZY9;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "App/Info-macOS.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = prismCalc;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.laclairtech.prismcalc.mac;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
 		};
 		BA583A147EC2E282C12DA0FF /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -965,11 +1528,34 @@
 			};
 			name = Release;
 		};
+		D92E9AA24D2F3F0A0EE928A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
+				CODE_SIGN_ENTITLEMENTS = WidgetExtension/PrismCalcWidget.entitlements;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N8A5T2PZY9;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "WidgetExtension/Info-watchOS.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "prismCalc Widget";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.laclairtech.prismcalc.watch.widget;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Debug;
+		};
 		DD020A40722608A862CCB759 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1003,7 +1589,6 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1013,16 +1598,39 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Release;
+		};
+		EA02893DB20EDCBDEC904705 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
+				CODE_SIGN_ENTITLEMENTS = WidgetExtension/PrismCalcWidget.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N8A5T2PZY9;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "WidgetExtension/Info-macOS.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "prismCalc Widget";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.laclairtech.prismcalc.mac.widget;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
 		};
 		F30D14895DCF2C35F1D2E8A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1053,7 +1661,7 @@
 				DEVELOPMENT_TEAM = N8A5T2PZY9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = App/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = PrismCalc;
+				INFOPLIST_KEY_CFBundleDisplayName = prismCalc;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1062,8 +1670,12 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.laclairtech.prismcalc;
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -1106,11 +1718,47 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
+		93F1332DC47C7BC10C935070 /* Build configuration list for PBXNativeTarget "PrismCalcWatchWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D92E9AA24D2F3F0A0EE928A0 /* Debug */,
+				A2DFAAAE7D0620D0E03AA93E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		9D61D2339572BE371B430105 /* Build configuration list for PBXNativeTarget "PrismCalcMacWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EA02893DB20EDCBDEC904705 /* Debug */,
+				41ABA879FA1E5A3ECEF3FFAD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		C6B09E331B9DDB3A704B9315 /* Build configuration list for PBXNativeTarget "PrismCalcWatchApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A620EBB263F2BA5B8B110F7 /* Debug */,
+				43AAED18A4918453AA90720F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		F46720AD72AB4D69CA0F1B14 /* Build configuration list for PBXNativeTarget "PrismCalcUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6A480E16A8DBFF769432A068 /* Debug */,
 				BA583A147EC2E282C12DA0FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		FDF2360897CE257D7B740303 /* Build configuration list for PBXNativeTarget "PrismCalcMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B23F3A8ED3B95EBA5DBF5725 /* Debug */,
+				3DD6B7F9FC473D3136FDF907 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

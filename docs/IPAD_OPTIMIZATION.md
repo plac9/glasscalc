@@ -1,4 +1,4 @@
-# iPad Optimization for PrismCalc
+# iPad Optimization for prismCalc
 
 **Date**: 2025-12-07
 **Issue**: iPad layout had excessive unused space with tiny buttons
@@ -321,7 +321,7 @@ The adaptive layout maintains accessibility:
 **Files Modified**: 2 (CalculatorView.swift, GlassDisplay.swift)
 **Impact**: High (massive UX improvement on iPad)
 
-The optimization makes PrismCalc feel like a **true iPad app** with smart, adaptive layouts that work across all iPad sizes without hardcoded constraints.
+The optimization makes prismCalc feel like a **true iPad app** with smart, adaptive layouts that work across all iPad sizes without hardcoded constraints.
 
 ---
 

@@ -1,8 +1,8 @@
-# AuADHD iOS Dev Workflow + PrismCalc
+# AuADHD iOS Dev Workflow + prismCalc
 
 Visual, chunked, Apple-native. Search: /. Expand all: A.
 
-## PrismCalc pipeline (glass-first)
+## prismCalc pipeline (glass-first)
 
 Same structure, tuned for "latest glass visuals" + calculator trustworthiness.
 
@@ -12,7 +12,7 @@ Math must be correct
 
 DEFINE VALUE -> MVP MODES -> UI SYSTEM -> CALC ENGINE -> GLASS COMPONENTS -> HAPTICS/ANIM -> TEST (MATH+UI) -> TESTFLIGHT -> RELEASE
 
-## PrismCalc "must not fail" list
+## prismCalc "must not fail" list
 
 Landmines
 - Math correctness (trust is everything)
@@ -20,7 +20,7 @@ Landmines
 - Performance (blur effects can be heavy)
 - Accessibility (VoiceOver labels, Dynamic Type)
 
-## PrismCalc phase cards
+## prismCalc phase cards
 
 ### P0 - Define it
 
@@ -29,14 +29,14 @@ Do
 - Pick a user: everyday iPhone users who frequently do money math (students, parents, bartenders)
 
 Output
-- Promise: "PrismCalc is for everyday iPhone users who want a gorgeous, trustworthy calculator for money math without clutter."
+- Promise: "prismCalc is for everyday iPhone users who want a gorgeous, trustworthy calculator for money math without clutter."
 - Supporting features (v1):
   - Glass-first UI with one-tap clarity
   - Tip / discount / split tools (Pro)
   - History tape (Pro only)
 
 Checkpoint
-- "PrismCalc is for everyday iPhone users who want a gorgeous, trustworthy calculator for money math without clutter."
+- "prismCalc is for everyday iPhone users who want a gorgeous, trustworthy calculator for money math without clutter."
 
 Real world
 - "Everyone" is not a target audience; pick a real scenario and optimize for it.

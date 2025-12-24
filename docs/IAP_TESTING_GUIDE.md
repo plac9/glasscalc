@@ -1,8 +1,8 @@
-# PrismCalc - In-App Purchase Testing Guide
+# prismCalc - In-App Purchase Testing Guide
 
 ## StoreKit Configuration File Testing (Simulator)
 
-PrismCalc uses **StoreKit Configuration File** for local testing without needing App Store Connect setup.
+prismCalc uses **StoreKit Configuration File** for local testing without needing App Store Connect setup.
 
 ### ✅ Current Status
 

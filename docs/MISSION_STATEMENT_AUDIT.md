@@ -1,11 +1,11 @@
-# PrismCalc Mission Statement Audit
+# prismCalc Mission Statement Audit
 
 Date: 2025-12-19
 Scope: Purpose definition + alignment to current implementation
 
 ## Proposed Mission Statement (v1)
 
-"PrismCalc is for everyday iPhone users who want a gorgeous, trustworthy calculator for money math without clutter."
+"prismCalc is for everyday iPhone users who want a gorgeous, trustworthy calculator for money math without clutter."
 
 ## Purpose Definition
 

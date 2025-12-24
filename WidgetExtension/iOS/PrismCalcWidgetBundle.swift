@@ -13,6 +13,7 @@ struct PrismCalcWidgetBundle: WidgetBundle {
             TipCalculatorControlWidget()
             BillSplitControlWidget()
             UnitConverterControlWidget()
+            DiscountControlWidget()
         }
     }
 }

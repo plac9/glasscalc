@@ -3,6 +3,8 @@ options:
   bundleIdPrefix: com.laclairtech
   deploymentTarget:
     iOS: 18.0
+    macOS: 15.0
+    watchOS: 10.0
 
 schemes:
   PrismCalc:
@@ -19,18 +21,40 @@ schemes:
         - PrismCalcTests
         - PrismCalcUITests
 
+  PrismCalcMac:
+    build:
+      targets:
+        PrismCalcMac: all
+        PrismCalcMacWidgetExtension: all
+    run:
+      config: Debug
+
+  PrismCalcWatchApp:
+    build:
+      targets:
+        PrismCalcWatchApp: all
+        PrismCalcWatchWidgetExtension: all
+    run:
+      config: Debug
+
 targets:
   PrismCalc:
     type: application
     platform: iOS
+    supportedDestinations: [iOS]
     sources:
-      - App
+      - path: App
+        excludes:
+          - Assets-macOS.xcassets
+          - Info-macOS.plist
       - App/PrivacyInfo.xcprivacy
       - path: Sources/PrismCalc
         excludes:
           - Widgets/**
     dependencies:
       - target: PrismCalcWidgetExtension
+      - target: PrismCalcWatchApp
+        embed: true
     entitlements:
       path: App/PrismCalc.entitlements
     settings:
@@ -38,19 +62,53 @@ targets:
       GENERATE_INFOPLIST_FILE: YES
       INFOPLIST_KEY_UILaunchScreen_Generation: YES
       SWIFT_VERSION: 6.0
-      TARGETED_DEVICE_FAMILY: 1
+      TARGETED_DEVICE_FAMILY: 1,2
       DEVELOPMENT_TEAM: N8A5T2PZY9
       MARKETING_VERSION: 1.0.0
       CURRENT_PROJECT_VERSION: 1
       CODE_SIGN_ENTITLEMENTS: App/PrismCalc.entitlements
       CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION: YES
-      INFOPLIST_KEY_CFBundleDisplayName: PrismCalc
+      INFOPLIST_KEY_CFBundleDisplayName: prismCalc
+    info:
+      path: App/Info.plist
+
+  PrismCalcMac:
+    type: application
+    platform: macOS
+    sources:
+      - path: App
+        excludes:
+          - Assets.xcassets
+          - Info.plist
+          - Configuration.storekit
+      - App/Assets-macOS.xcassets
+      - App/PrivacyInfo.xcprivacy
+      - path: Sources/PrismCalc
+        excludes:
+          - Widgets/**
+    dependencies:
+      - target: PrismCalcMacWidgetExtension
+        embed: true
+    entitlements:
+      path: App/PrismCalc.entitlements
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.laclairtech.prismcalc.mac
+      GENERATE_INFOPLIST_FILE: YES
+      SWIFT_VERSION: 6.0
+      DEVELOPMENT_TEAM: N8A5T2PZY9
+      MARKETING_VERSION: 1.0.0
+      CURRENT_PROJECT_VERSION: 1
+      CODE_SIGN_ENTITLEMENTS: App/PrismCalc.entitlements
+      CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION: YES
+      INFOPLIST_KEY_CFBundleDisplayName: prismCalc
+    info:
+      path: App/Info-macOS.plist
 
   PrismCalcWidgetExtension:
     type: app-extension
     platform: iOS
     sources:
-      - WidgetExtension
+      - WidgetExtension/iOS
       - path: Sources/PrismCalc/Widgets
       - path: Sources/PrismCalc/Core/Services
         name: Services
@@ -71,15 +129,106 @@ targets:
       PRODUCT_BUNDLE_IDENTIFIER: com.laclairtech.prismcalc.widget
       GENERATE_INFOPLIST_FILE: YES
       SWIFT_VERSION: 6.0
-      TARGETED_DEVICE_FAMILY: 1
+      TARGETED_DEVICE_FAMILY: 1,2
       DEVELOPMENT_TEAM: N8A5T2PZY9
       MARKETING_VERSION: 1.0.0
       CURRENT_PROJECT_VERSION: 1
-      INFOPLIST_KEY_CFBundleDisplayName: PrismCalc Widget
+      INFOPLIST_KEY_CFBundleDisplayName: prismCalc Widget
       CODE_SIGN_ENTITLEMENTS: WidgetExtension/PrismCalcWidget.entitlements
       CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION: YES
     info:
       path: WidgetExtension/Info.plist
+      properties:
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+
+  PrismCalcMacWidgetExtension:
+    type: app-extension
+    platform: macOS
+    sources:
+      - WidgetExtension/macOS
+      - path: Sources/PrismCalc/Widgets
+      - path: Sources/PrismCalc/Core/Services
+        name: Services
+        includes:
+          - SharedDataService.swift
+    dependencies:
+      - framework: SwiftUI.framework
+        implicit: true
+      - framework: WidgetKit.framework
+        implicit: true
+    entitlements:
+      path: WidgetExtension/PrismCalcWidget.entitlements
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.laclairtech.prismcalc.mac.widget
+      GENERATE_INFOPLIST_FILE: YES
+      SWIFT_VERSION: 6.0
+      DEVELOPMENT_TEAM: N8A5T2PZY9
+      MARKETING_VERSION: 1.0.0
+      CURRENT_PROJECT_VERSION: 1
+      INFOPLIST_KEY_CFBundleDisplayName: prismCalc Widget
+      CODE_SIGN_ENTITLEMENTS: WidgetExtension/PrismCalcWidget.entitlements
+      CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION: YES
+    info:
+      path: WidgetExtension/Info-macOS.plist
+      properties:
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+
+  PrismCalcWatchApp:
+    type: application
+    platform: watchOS
+    sources:
+      - WatchApp
+      - WatchApp/Assets.xcassets
+    dependencies:
+      - target: PrismCalcWatchWidgetExtension
+        embed: true
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.laclairtech.prismcalc.watch
+      GENERATE_INFOPLIST_FILE: YES
+      SWIFT_VERSION: 6.0
+      DEVELOPMENT_TEAM: N8A5T2PZY9
+      MARKETING_VERSION: 1.0.0
+      CURRENT_PROJECT_VERSION: 1
+      INFOPLIST_KEY_CFBundleDisplayName: prismCalc
+      INFOPLIST_KEY_WKCompanionAppBundleIdentifier: com.laclairtech.prismcalc
+      CODE_SIGN_ENTITLEMENTS: WatchApp/PrismCalcWatchApp.entitlements
+      CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION: YES
+    entitlements:
+      path: WatchApp/PrismCalcWatchApp.entitlements
+    info:
+      path: WatchApp/Info.plist
+
+  PrismCalcWatchWidgetExtension:
+    type: app-extension
+    platform: watchOS
+    sources:
+      - WidgetExtension/watchOS
+      - path: Sources/PrismCalc/Widgets
+      - path: Sources/PrismCalc/Core/Services
+        name: Services
+        includes:
+          - SharedDataService.swift
+    dependencies:
+      - framework: SwiftUI.framework
+        implicit: true
+      - framework: WidgetKit.framework
+        implicit: true
+    entitlements:
+      path: WidgetExtension/PrismCalcWidget.entitlements
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.laclairtech.prismcalc.watch.widget
+      GENERATE_INFOPLIST_FILE: YES
+      SWIFT_VERSION: 6.0
+      DEVELOPMENT_TEAM: N8A5T2PZY9
+      MARKETING_VERSION: 1.0.0
+      CURRENT_PROJECT_VERSION: 1
+      INFOPLIST_KEY_CFBundleDisplayName: prismCalc Widget
+      CODE_SIGN_ENTITLEMENTS: WidgetExtension/PrismCalcWidget.entitlements
+      CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION: YES
+    info:
+      path: WidgetExtension/Info-watchOS.plist
       properties:
         NSExtension:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension

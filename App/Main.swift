@@ -1,5 +1,6 @@
 import SwiftUI
 
+#if os(iOS)
 /// PrismCalc iOS App Entry Point
 @main
 struct PrismCalcMainApp: App {
@@ -7,3 +8,4 @@ struct PrismCalcMainApp: App {
         PrismCalcApp.scene
     }
 }
+#endif

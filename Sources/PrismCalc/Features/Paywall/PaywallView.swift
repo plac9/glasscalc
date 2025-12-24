@@ -46,7 +46,7 @@ public struct PaywallView: View {
             // Pro benefits
             GlassCard {
                 VStack(alignment: .leading, spacing: GlassTheme.spacingSmall) {
-                    Text("Unlock PrismCalc Pro")
+                    Text("Unlock prismCalc Pro")
                         .font(GlassTheme.headlineFont)
                         .foregroundStyle(GlassTheme.text)
 
@@ -100,7 +100,7 @@ public struct PaywallView: View {
             .buttonStyle(.plain)
             .disabled(storeKit.isLoading)
             .accessibilityIdentifier("paywall-upgrade-button")
-            .accessibilityLabel("Upgrade to PrismCalc Pro for \(storeKit.proPrice)")
+            .accessibilityLabel("Upgrade to prismCalc Pro for \(storeKit.proPrice)")
             .accessibilityHint("Unlocks all calculators, themes, and history with lock/unlock entries")
             .padding(.horizontal)
 
@@ -126,6 +126,7 @@ public struct PaywallView: View {
             Spacer()
         }
         .padding()
+        .prismContentMaxWidth()
         .sensoryFeedback(.success, trigger: purchaseSuccess)
         .sensoryFeedback(.error, trigger: showPurchaseError)
         .alert("Purchase Error", isPresented: $showPurchaseError) {

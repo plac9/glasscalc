@@ -5,6 +5,7 @@ public struct ThemePickerView: View {
     @Binding var selectedTheme: GlassTheme.Theme
     @Environment(\.dismiss) private var dismiss
     @ScaledMetric(relativeTo: .caption2) private var proBadgeSize: CGFloat = 9
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
 
     // iOS 18 zoom transition support for theme preview
     @Namespace private var themeNamespace
@@ -27,6 +28,7 @@ public struct ThemePickerView: View {
                 }
             }
             .padding()
+            .prismContentMaxWidth()
         }
         .scrollContentBackground(.hidden)
         .background(.clear)
@@ -96,9 +98,12 @@ public struct ThemePickerView: View {
             )
             .frame(height: 80)
             .overlay(
-                RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusSmall)
-                    .fill(.ultraThinMaterial)
-                    .padding(12)
+                GlassTheme.glassCardBackground(
+                    cornerRadius: GlassTheme.cornerRadiusSmall,
+                    material: .ultraThin,
+                    reduceTransparency: reduceTransparency
+                )
+                .padding(12)
             )
             .overlay(themeStatusIcon(isSelected: isSelected, isLocked: isLocked))
     }
@@ -135,12 +140,15 @@ public struct ThemePickerView: View {
     }
 
     private func cardBackground(isSelected: Bool) -> some View {
-        RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusMedium)
-            .fill(.thinMaterial)
-            .overlay(
-                RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusMedium)
-                    .stroke(isSelected ? GlassTheme.primary : Color.clear, lineWidth: 2)
-            )
+        GlassTheme.glassCardBackground(
+            cornerRadius: GlassTheme.cornerRadiusMedium,
+            material: .thin,
+            reduceTransparency: reduceTransparency
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusMedium)
+                .stroke(isSelected ? GlassTheme.primary : Color.clear, lineWidth: 2)
+        )
     }
 
     private func themeAccessibilityLabel(

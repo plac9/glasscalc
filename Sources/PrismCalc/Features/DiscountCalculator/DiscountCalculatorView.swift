@@ -1,4 +1,18 @@
 import SwiftUI
+#if os(iOS)
+import UIKit
+#endif
+
+private extension View {
+    @ViewBuilder
+    func ifAvailableiOS17<Content: View>(_ transform: (Self) -> Content) -> some View {
+        if #available(iOS 17.0, *) {
+            transform(self)
+        } else {
+            self
+        }
+    }
+}
 
 /// Discount Calculator showing original price, discount %, and savings
 public struct DiscountCalculatorView: View {
@@ -6,9 +20,20 @@ public struct DiscountCalculatorView: View {
     // Fixed sizes for calculator displays - should not scale with Dynamic Type
     private let currencySymbolSize: CGFloat = 32
     private let inputValueSize: CGFloat = 48
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
-    @Environment(\.accessibilityIncreaseContrast) private var increaseContrast
+    @Environment(\EnvironmentValues.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\EnvironmentValues.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+    private var isIncreasedContrast: Bool {
+        if #available(iOS 17.0, *) {
+            return colorSchemeContrast == .increased
+        } else {
+            #if os(iOS)
+            return UIAccessibility.isDarkerSystemColorsEnabled
+            #else
+            return false
+            #endif
+        }
+    }
     @FocusState private var isInputFocused: Bool
 
     public init() {}
@@ -20,16 +45,20 @@ public struct DiscountCalculatorView: View {
             VStack(spacing: GlassTheme.spacingLarge) {
                 // Original Price Input
                 priceInputSection
-                    .scrollTransition(.animated, axis: .vertical) { content, phase in
-                        return content.opacity(reduce || phase.isIdentity ? 1 : 0.85)
+                    .ifAvailableiOS17 {
+                        $0.scrollTransition(.animated, axis: .vertical) { content, phase in
+                            content.opacity(reduce || phase.isIdentity ? 1 : 0.85)
+                        }
                     }
 
                 // Discount Percentage Arc Slider
                 discountSliderSection
-                    .scrollTransition(.animated, axis: .vertical) { content, phase in
-                        return content
-                            .opacity(reduce || phase.isIdentity ? 1 : 0.85)
-                            .scaleEffect(reduce || phase.isIdentity ? 1 : 0.97)
+                    .ifAvailableiOS17 {
+                        $0.scrollTransition(.animated, axis: .vertical) { content, phase in
+                            content
+                                .opacity(reduce || phase.isIdentity ? 1 : 0.85)
+                                .scaleEffect(reduce || phase.isIdentity ? 1 : 0.97)
+                        }
                     }
 
                 // Quick Discount Buttons
@@ -37,13 +66,16 @@ public struct DiscountCalculatorView: View {
 
                 // Results with visual savings indicator
                 resultsSection
-                    .scrollTransition(.animated, axis: .vertical) { content, phase in
-                        return content
-                            .opacity(reduce || phase.isIdentity ? 1 : 0.9)
-                            .offset(y: reduce || phase.isIdentity ? 0 : phase.value * 8)
+                    .ifAvailableiOS17 {
+                        $0.scrollTransition(.animated, axis: .vertical) { content, phase in
+                            content
+                                .opacity(reduce || phase.isIdentity ? 1 : 0.9)
+                                .offset(y: reduce || phase.isIdentity ? 0 : phase.value * 8)
+                        }
                     }
             }
             .padding()
+            .prismContentMaxWidth()
         }
         .scrollDismissesKeyboard(.interactively)
         .toolbar {
@@ -129,20 +161,21 @@ public struct DiscountCalculatorView: View {
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, GlassTheme.spacingSmall)
                         .background(
-                            Capsule()
-                                .fill(
-                                    viewModel.discountPercentage == discount
-                                        ? GlassTheme.primary
-                                        : .clear
-                                )
-                                .background(
-                                    Capsule()
-                                        .fill(.thinMaterial)
-                                )
+                            GlassTheme.glassCapsuleBackground(
+                                material: .thin,
+                                reduceTransparency: reduceTransparency
+                            )
+                            .overlay(
+                                Capsule()
+                                    .fill(GlassTheme.primary)
+                                    .opacity(viewModel.discountPercentage == discount ? 0.9 : 0)
+                            )
                         )
                 }
                 .buttonStyle(.plain)
-                .sensoryFeedback(.selection, trigger: viewModel.discountPercentage)
+                .ifAvailableiOS17 { view in
+                    view.sensoryFeedback(.selection, trigger: viewModel.discountPercentage)
+                }
                 .accessibilityLabel("\(Int(discount)) percent discount")
                 .accessibilityHint(
                     viewModel.discountPercentage == discount ? "Currently selected" : "Double tap to select"
@@ -174,7 +207,9 @@ public struct DiscountCalculatorView: View {
                     Capsule()
                         .fill(GlassTheme.success.opacity(0.15))
                 )
-                .sensoryFeedback(.success, trigger: viewModel.discountAmount)
+                .ifAvailableiOS17 { view in
+                    view.sensoryFeedback(.success, trigger: viewModel.discountAmount)
+                }
             }
 
             // Price Breakdown
@@ -219,8 +254,10 @@ public struct DiscountCalculatorView: View {
 
                     Text(viewModel.formattedFinal)
                         .font(.system(.title, design: .rounded, weight: .bold))
+                        .ifAvailableiOS17 { view in
+                            view.contentTransition(reduceMotionSnapshot ? .identity : .numericText())
+                        }
                         .foregroundStyle(GlassTheme.primary)
-                        .contentTransition(reduceMotionSnapshot ? .identity : .numericText())
                         .animation(reduceMotionSnapshot ? nil : .easeInOut(duration: 0.15), value: viewModel.finalPrice)
                 }
 
@@ -237,7 +274,9 @@ public struct DiscountCalculatorView: View {
                             .foregroundStyle(GlassTheme.primary)
                     }
                     .buttonStyle(.plain)
-                    .sensoryFeedback(.success, trigger: viewModel.priceValue)
+                    .ifAvailableiOS17 { view in
+                        view.sensoryFeedback(.success, trigger: viewModel.priceValue)
+                    }
                     .accessibilityLabel("Save to history")
                     .accessibilityHint("Saves this discount calculation to your history")
                 }
@@ -254,11 +293,11 @@ public struct DiscountCalculatorView: View {
                             .stroke(
                                 GlassTheme.glassBorderGradient(
                                     reduceTransparency: reduceTransparency,
-                                    increaseContrast: increaseContrast
+                                    increaseContrast: isIncreasedContrast
                                 ),
                                 lineWidth: GlassTheme.glassBorderLineWidth(
                                     reduceTransparency: reduceTransparency,
-                                    increaseContrast: increaseContrast
+                                    increaseContrast: isIncreasedContrast
                                 )
                             )
                     )

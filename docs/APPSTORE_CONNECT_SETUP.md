@@ -1,6 +1,6 @@
-# PrismCalc - App Store Connect Setup Guide
+# prismCalc - App Store Connect Setup Guide
 
-Complete step-by-step guide for setting up PrismCalc in App Store Connect.
+Complete step-by-step guide for setting up prismCalc in App Store Connect.
 
 ---
 
@@ -27,7 +27,7 @@ Fill out the new app form:
 | Field | Value |
 |-------|-------|
 | **Platform** | iOS |
-| **Name** | PrismCalc |
+| **Name** | prismCalc |
 | **Primary Language** | English (U.S.) |
 | **Bundle ID** | `com.laclairtech.prismcalc` |
 | **SKU** | `prismcalc-ios` (unique identifier) |
@@ -48,13 +48,13 @@ Fill out the new app form:
 ### 2.2 Configure App ID
 | Field | Value |
 |-------|-------|
-| **Description** | PrismCalc - Glassmorphic Calculator |
+| **Description** | prismCalc - Glassmorphic Calculator |
 | **Bundle ID** | Explicit: `com.laclairtech.prismcalc` |
 | **Capabilities** | • In-App Purchase ✓<br>• App Groups ✓ (for widget)<br>• Siri ✓ |
 
 ### 2.3 App Group (for Widget)
 1. **Identifiers** → **"+"** → **App Groups**
-2. **Description**: PrismCalc Shared Data
+2. **Description**: prismCalc Shared Data
 3. **Identifier**: `group.com.laclairtech.prismcalc`
 4. Click **Continue** → **Register**
 
@@ -99,7 +99,7 @@ Click **"Edit"** next to Age Rating:
 ### 4.2 Reference Information
 | Field | Value |
 |-------|-------|
-| **Reference Name** | PrismCalc Pro |
+| **Reference Name** | prismCalc Pro |
 | **Product ID** | `com.laclairtech.prismcalc.pro` |
 
 ⚠️ **Must match** StoreKit config and code!
@@ -113,7 +113,7 @@ Click **"Edit"** next to Age Rating:
 ### 4.4 Localization (English - U.S.)
 | Field | Value |
 |-------|-------|
-| **Display Name** | PrismCalc Pro |
+| **Display Name** | prismCalc Pro |
 | **Description** | Unlock all calculators, themes, and features |
 
 ### 4.5 Review Information
@@ -130,7 +130,7 @@ Click **"Submit for Review"** on the IAP (separate from app review)
 ### 5.1 App Information
 Fill from `docs/appstore/metadata.md`:
 
-**App Name**: PrismCalc
+**App Name**: prismCalc
 
 **Subtitle** (30 chars max):
 ```
@@ -206,11 +206,11 @@ https://laclairtech.com/prismcalc
 - **Email**: Your email
 
 ### 7.2 Demo Account (if needed)
-Not needed for PrismCalc (no login required)
+Not needed for prismCalc (no login required)
 
 ### 7.3 Notes for Reviewer
 ```
-PrismCalc is a calculator app with freemium model:
+prismCalc is a calculator app with freemium model:
 
 FREE TIER:
 - Basic calculator
@@ -395,7 +395,7 @@ You mentioned having AI assistants connected to Xcode. Here's how to work with t
 
 **Context to Share**:
 ```
-Working on PrismCalc iOS app submission.
+Working on prismCalc iOS app submission.
 Bundle ID: com.laclairtech.prismcalc
 IAP Product: com.laclairtech.prismcalc.pro ($2.99)
 Freemium model: Free calculator | Pro: all tools + history with lock/unlock entries

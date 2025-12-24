@@ -76,6 +76,7 @@ public final class SharedDataService: @unchecked Sendable {
     private func reloadWidget() {
         guard shouldReloadWidgets else { return }
         WidgetCenter.shared.reloadTimelines(ofKind: "PrismCalcWidget")
+        WidgetCenter.shared.reloadTimelines(ofKind: "PrismCalcWatchWidget")
     }
 }
 

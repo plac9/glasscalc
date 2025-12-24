@@ -1,4 +1,4 @@
-# PrismCalc App Icon Design
+# prismCalc App Icon Design
 
 **Created**: 2025-12-07
 **Designer**: Programmatically generated
@@ -8,7 +8,7 @@
 
 ## Design Concept
 
-The PrismCalc app icon embodies the app's glassmorphic aesthetic and "prism" theme with a beautiful, modern design.
+The prismCalc app icon embodies the app's glassmorphic aesthetic and "prism" theme with a beautiful, modern design.
 
 ### Visual Elements
 
@@ -206,7 +206,7 @@ The icon features:
 └─────────────────────────┘
 ```
 
-Clean, modern, glassmorphic calculator icon that matches PrismCalc's premium aesthetic.
+Clean, modern, glassmorphic calculator icon that matches prismCalc's premium aesthetic.
 
 ---
 

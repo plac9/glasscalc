@@ -1,4 +1,4 @@
-# PrismCalc - Screenshot Requirements
+# prismCalc - Screenshot Requirements
 
 ## Required Device Sizes
 
@@ -66,7 +66,7 @@
 
 ### 10. Control Center (iOS 18)
 **Theme**: N/A
-**Content**: Control Center showing PrismCalc buttons
+**Content**: Control Center showing prismCalc buttons
 **Caption**: "Quick Access Anywhere"
 
 ---

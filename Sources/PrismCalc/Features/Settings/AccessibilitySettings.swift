@@ -44,6 +44,7 @@ public struct AccessibilitySettings: View {
                 }
             }
             .padding()
+            .prismContentMaxWidth()
         }
         .navigationTitle("Accessibility")
         #if os(iOS)

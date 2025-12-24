@@ -8,49 +8,50 @@ struct PersistenceTests {
 
     // MARK: - Setup/Teardown
 
-    private func cleanupUserDefaults() {
-        UserDefaults.standard.removeObject(forKey: "zeroOnRight")
-        UserDefaults.standard.removeObject(forKey: "tabCustomization")
+    private func makeTestDefaults(_ name: String) -> UserDefaults {
+        let suiteName = "test.persistence.\(name)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        defaults.removePersistentDomain(forName: suiteName)
+        return defaults
     }
 
     // MARK: - Zero Position Preference
 
     @Test("zeroOnRight default is false")
     func testZeroOnRightDefault() {
-        cleanupUserDefaults()
-        let value = UserDefaults.standard.bool(forKey: "zeroOnRight")
+        let defaults = makeTestDefaults("zeroOnRight.default")
+        let value = defaults.bool(forKey: "zeroOnRight")
         #expect(value == false)
     }
 
     @Test("zeroOnRight persists true")
     func testZeroOnRightPersistsTrue() {
-        cleanupUserDefaults()
-        UserDefaults.standard.set(true, forKey: "zeroOnRight")
-        let value = UserDefaults.standard.bool(forKey: "zeroOnRight")
+        let defaults = makeTestDefaults("zeroOnRight.true")
+        defaults.set(true, forKey: "zeroOnRight")
+        let value = defaults.bool(forKey: "zeroOnRight")
         #expect(value == true)
-        cleanupUserDefaults()
     }
 
     @Test("zeroOnRight persists false")
     func testZeroOnRightPersistsFalse() {
-        cleanupUserDefaults()
-        UserDefaults.standard.set(true, forKey: "zeroOnRight")
-        UserDefaults.standard.set(false, forKey: "zeroOnRight")
-        let value = UserDefaults.standard.bool(forKey: "zeroOnRight")
+        let defaults = makeTestDefaults("zeroOnRight.false")
+        defaults.set(true, forKey: "zeroOnRight")
+        defaults.set(false, forKey: "zeroOnRight")
+        let value = defaults.bool(forKey: "zeroOnRight")
         #expect(value == false)
-        cleanupUserDefaults()
     }
 
     // MARK: - Tab Customization
 
     @Test("tabCustomization removal works")
     func testTabCustomizationRemoval() {
+        let defaults = makeTestDefaults("tabCustomization")
         // Set a value
-        UserDefaults.standard.set("test", forKey: "tabCustomization")
+        defaults.set("test", forKey: "tabCustomization")
         // Remove it
-        UserDefaults.standard.removeObject(forKey: "tabCustomization")
+        defaults.removeObject(forKey: "tabCustomization")
         // Verify it's gone
-        let value = UserDefaults.standard.object(forKey: "tabCustomization")
+        let value = defaults.object(forKey: "tabCustomization")
         #expect(value == nil)
     }
 

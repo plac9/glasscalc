@@ -3,6 +3,7 @@ import SwiftUI
 /// Widget management view showing available widgets with previews and add instructions
 public struct WidgetSettingsView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
 
     public init() {}
 
@@ -32,6 +33,7 @@ public struct WidgetSettingsView: View {
                     }
             }
             .padding()
+            .prismContentMaxWidth()
         }
         .scrollContentBackground(.hidden)
         .background(.clear)
@@ -61,7 +63,7 @@ public struct WidgetSettingsView: View {
                 VStack(alignment: .leading, spacing: GlassTheme.spacingSmall) {
                     instructionStep(number: 1, text: "Long-press on your Home Screen")
                     instructionStep(number: 2, text: "Tap the + button in the top corner")
-                    instructionStep(number: 3, text: "Search for \"PrismCalc\"")
+                    instructionStep(number: 3, text: "Search for \"prismCalc\"")
                     instructionStep(number: 4, text: "Choose a widget size and tap \"Add Widget\"")
                 }
             }
@@ -160,8 +162,11 @@ public struct WidgetSettingsView: View {
                     .frame(maxWidth: .infinity)
                     .padding(GlassTheme.spacingSmall)
                     .background(
-                        RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusMedium)
-                            .fill(.ultraThinMaterial)
+                        GlassTheme.glassCardBackground(
+                            cornerRadius: GlassTheme.cornerRadiusMedium,
+                            material: .ultraThin,
+                            reduceTransparency: reduceTransparency
+                        )
                     )
             }
         }
@@ -187,7 +192,7 @@ public struct WidgetSettingsView: View {
                     .font(GlassTheme.captionFont)
                     .foregroundStyle(GlassTheme.textSecondary)
 
-                Text("• Tap any widget to open PrismCalc instantly")
+                Text("• Tap any widget to open prismCalc instantly")
                     .font(GlassTheme.captionFont)
                     .foregroundStyle(GlassTheme.textSecondary)
 

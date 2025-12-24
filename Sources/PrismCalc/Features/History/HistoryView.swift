@@ -9,6 +9,7 @@ public struct HistoryView: View {
     @State private var showClearConfirm = false
     @ScaledMetric(relativeTo: .title2) private var emptyIconSize: CGFloat = 48
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
 
     // iOS 18 zoom transition support
     @Namespace private var historyNamespace
@@ -46,6 +47,7 @@ public struct HistoryView: View {
                         }
                     }
                     .padding()
+                    .prismContentMaxWidth()
                 }
                 .onAppear {
                     loadHistory()
@@ -127,8 +129,10 @@ public struct HistoryView: View {
                         .foregroundStyle(GlassTheme.error)
                         .frame(width: 44, height: 44)
                         .background(
-                            Circle()
-                                .fill(.ultraThinMaterial)
+                            GlassTheme.glassCircleBackground(
+                                material: .ultraThin,
+                                reduceTransparency: reduceTransparency
+                            )
                         )
                 }
                 .buttonStyle(.plain)
@@ -188,12 +192,15 @@ public struct HistoryView: View {
             .padding(.horizontal, GlassTheme.spacingSmall)
             .padding(.vertical, GlassTheme.spacingXS)
             .background(
-                Capsule()
-                    .fill(isSelected ? GlassTheme.primary : .clear)
-                    .background(
-                        Capsule()
-                            .fill(.thinMaterial)
-                    )
+                GlassTheme.glassCapsuleBackground(
+                    material: .thin,
+                    reduceTransparency: reduceTransparency
+                )
+                .overlay(
+                    Capsule()
+                        .fill(GlassTheme.primary)
+                        .opacity(isSelected ? 0.9 : 0)
+                )
             )
         }
         .buttonStyle(.plain)

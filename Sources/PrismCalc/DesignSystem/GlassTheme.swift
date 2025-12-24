@@ -287,6 +287,11 @@ public struct GlassTheme: Sendable {
     public static let spacingLarge: CGFloat = 24
     public static let spacingXL: CGFloat = 32
 
+    // MARK: - Layout
+
+    public static let contentMaxWidth: CGFloat = 720
+    public static let contentMaxWidthWide: CGFloat = 860
+
     // MARK: - Corner Radius
 
     public static let cornerRadiusSmall: CGFloat = 12

@@ -11,6 +11,7 @@ public struct SplitBillView: View {
     private let peopleCountSize: CGFloat = 56
     private let peopleControlSize: CGFloat = 56
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
     @FocusState private var isInputFocused: Bool
 
     public init() {}
@@ -45,6 +46,7 @@ public struct SplitBillView: View {
                     }
             }
             .padding()
+            .prismContentMaxWidth()
         }
         .scrollDismissesKeyboard(.interactively)
         .toolbar {
@@ -112,8 +114,10 @@ public struct SplitBillView: View {
                             )
                             .frame(width: peopleControlSize, height: peopleControlSize)
                             .background(
-                                Circle()
-                                    .fill(.thinMaterial)
+                                GlassTheme.glassCircleBackground(
+                                    material: .thin,
+                                    reduceTransparency: reduceTransparency
+                                )
                             )
                     }
                     .buttonStyle(.plain)
@@ -158,8 +162,10 @@ public struct SplitBillView: View {
                             .foregroundStyle(GlassTheme.text)
                             .frame(width: peopleControlSize, height: peopleControlSize)
                             .background(
-                                Circle()
-                                    .fill(.thinMaterial)
+                                GlassTheme.glassCircleBackground(
+                                    material: .thin,
+                                    reduceTransparency: reduceTransparency
+                                )
                             )
                     }
                     .buttonStyle(.plain)

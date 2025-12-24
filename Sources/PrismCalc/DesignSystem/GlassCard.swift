@@ -1,4 +1,18 @@
 import SwiftUI
+#if os(iOS)
+import UIKit
+#endif
+
+private extension View {
+    @ViewBuilder
+    func ifAvailableiOS17<Content: View>(_ transform: (Self) -> Content) -> some View {
+        if #available(iOS 17.0, *) {
+            transform(self)
+        } else {
+            self
+        }
+    }
+}
 
 /// Floating glass card with material background and subtle shadow
 ///
@@ -13,11 +27,23 @@ public struct GlassCard<Content: View>: View {
     var material: Material
     var cornerRadius: CGFloat
     var padding: CGFloat
-    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
-    @Environment(\.accessibilityIncreaseContrast) private var increaseContrast
+    @Environment(\EnvironmentValues.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+
+    private var isIncreasedContrast: Bool {
+        if #available(iOS 17.0, *) {
+            return colorSchemeContrast == .increased
+        } else {
+            #if os(iOS)
+            return UIAccessibility.isDarkerSystemColorsEnabled
+            #else
+            return false
+            #endif
+        }
+    }
 
     public init(
-        material: Material = .regularMaterial,
+        material: Material = .regular,
         cornerRadius: CGFloat = GlassTheme.cornerRadiusMedium,
         padding: CGFloat = GlassTheme.spacingMedium,
         @ViewBuilder content: () -> Content
@@ -29,30 +55,32 @@ public struct GlassCard<Content: View>: View {
     }
 
     public var body: some View {
-        content
-            .padding(padding)
-            .background(
-                GlassTheme.glassCardBackground(
-                    cornerRadius: cornerRadius,
-                    material: material,
-                    reduceTransparency: reduceTransparency
-                )
-                    .overlay(
-                        RoundedRectangle(cornerRadius: cornerRadius)
-                            .stroke(
-                                GlassTheme.glassBorderGradient(
-                                    reduceTransparency: reduceTransparency,
-                                    increaseContrast: increaseContrast
-                                ),
-                                lineWidth: GlassTheme.glassBorderLineWidth(
-                                    reduceTransparency: reduceTransparency,
-                                    increaseContrast: increaseContrast
-                                )
-                            )
+        Group {
+            content
+                .padding(padding)
+                .background(
+                    GlassTheme.glassCardBackground(
+                        cornerRadius: cornerRadius,
+                        material: material,
+                        reduceTransparency: reduceTransparency
                     )
-            )
-            .shadow(color: Color.black.opacity(GlassTheme.glassShadowOpacityPrimary), radius: 10, y: 5)
-            .shadow(color: Color.black.opacity(GlassTheme.glassShadowOpacitySecondary), radius: 20, y: 10)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: cornerRadius)
+                                .stroke(
+                                    GlassTheme.glassBorderGradient(
+                                        reduceTransparency: reduceTransparency,
+                                        increaseContrast: isIncreasedContrast
+                                    ),
+                                    lineWidth: GlassTheme.glassBorderLineWidth(
+                                        reduceTransparency: reduceTransparency,
+                                        increaseContrast: isIncreasedContrast
+                                    )
+                                )
+                        )
+                )
+                .shadow(color: Color.black.opacity(GlassTheme.glassShadowOpacityPrimary), radius: 10, y: 5)
+                .shadow(color: Color.black.opacity(GlassTheme.glassShadowOpacitySecondary), radius: 20, y: 10)
+        }
     }
 }
 
@@ -79,3 +107,4 @@ public struct GlassCard<Content: View>: View {
         .padding()
     }
 }
+

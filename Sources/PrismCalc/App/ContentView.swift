@@ -20,7 +20,7 @@ public struct ContentView: View {
 
     public init() {
         // Make TabView background transparent to show mesh gradient
-        #if os(iOS)
+        #if os(iOS) && !targetEnvironment(macCatalyst)
         let appearance = UITabBarAppearance()
         appearance.configureWithTransparentBackground()
         UITabBar.appearance().standardAppearance = appearance
@@ -79,6 +79,19 @@ public struct ContentView: View {
     /// Order: Calculator → Pro features (Tip, Split, Discount) → More (Convert, History, Settings)
     @ViewBuilder
     private var tabContent: some View {
+        #if os(iOS)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            baseTabView
+                .tabViewStyle(.sidebarAdaptable)
+        } else {
+            baseTabView
+        }
+        #else
+        baseTabView
+        #endif
+    }
+
+    private var baseTabView: some View {
         TabView(selection: $selectedTab) {
             // Calculator - primary feature (locked, cannot be moved or hidden)
             Tab("Calculator", systemImage: TabIdentifier.calculator.icon, value: .calculator) {

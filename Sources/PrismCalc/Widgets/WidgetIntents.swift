@@ -6,7 +6,7 @@ import WidgetKit
 /// Intent to open the app and navigate to a specific feature
 struct OpenFeatureIntent: AppIntent {
     static let title: LocalizedStringResource = "Open Feature"
-    static let description = IntentDescription("Open PrismCalc to a specific feature")
+    static let description = IntentDescription("Open prismCalc to a specific feature")
 
     static let openAppWhenRun: Bool = true
 

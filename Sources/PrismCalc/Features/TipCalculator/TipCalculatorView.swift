@@ -10,6 +10,7 @@ public struct TipCalculatorView: View {
     private let currencySymbolSize: CGFloat = 32
     private let inputValueSize: CGFloat = 48
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
     @FocusState private var isInputFocused: Bool
 
     public init() {}
@@ -48,6 +49,7 @@ public struct TipCalculatorView: View {
                     }
             }
             .padding()
+            .prismContentMaxWidth()
         }
         .scrollDismissesKeyboard(.interactively)
         .toolbar {
@@ -133,16 +135,15 @@ public struct TipCalculatorView: View {
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, GlassTheme.spacingSmall)
                         .background(
-                            Capsule()
-                                .fill(
-                                    viewModel.tipPercentage == tip
-                                        ? GlassTheme.primary
-                                        : .clear
-                                )
-                                .background(
-                                    Capsule()
-                                        .fill(.thinMaterial)
-                                )
+                            GlassTheme.glassCapsuleBackground(
+                                material: .thin,
+                                reduceTransparency: reduceTransparency
+                            )
+                            .overlay(
+                                Capsule()
+                                    .fill(GlassTheme.primary)
+                                    .opacity(viewModel.tipPercentage == tip ? 0.9 : 0)
+                            )
                         )
                 }
                 .buttonStyle(.plain)

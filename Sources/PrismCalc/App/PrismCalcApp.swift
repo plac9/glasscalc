@@ -29,7 +29,13 @@ public enum PrismCalcApp {
                 .onAppear {
                     handleLaunchArgumentsIfNeeded()
                 }
+                #if os(macOS)
+                .frame(minWidth: 860, minHeight: 640)
+                #endif
         }
+        #if os(macOS)
+        .defaultSize(width: 1000, height: 720)
+        #endif
     }
 
     /// Handle launch arguments for UI testing

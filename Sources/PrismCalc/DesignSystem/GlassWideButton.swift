@@ -1,4 +1,7 @@
 import SwiftUI
+#if os(iOS)
+import UIKit
+#endif
 
 // MARK: - Wide Button (for zero)
 
@@ -10,7 +13,7 @@ public struct GlassWideButton: View {
     let spacing: CGFloat
     let action: () -> Void
 
-    #if os(iOS)
+    #if os(iOS) && !targetEnvironment(macCatalyst)
     /// Shared generator to avoid reallocation on every tap
     private static let hapticGenerator: UIImpactFeedbackGenerator = {
         let generator = UIImpactFeedbackGenerator(style: .light)
@@ -22,8 +25,20 @@ public struct GlassWideButton: View {
     @State private var isPressed = false
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
-    @Environment(\.accessibilityIncreaseContrast) private var increaseContrast
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     @ScaledMetric(relativeTo: .title2) private var labelScale: CGFloat = 1.0
+
+    private var isIncreasedContrast: Bool {
+        if #available(iOS 17.0, macOS 14.0, *) {
+            return colorSchemeContrast == .increased
+        } else {
+            #if os(iOS)
+            return UIAccessibility.isDarkerSystemColorsEnabled
+            #else
+            return false
+            #endif
+        }
+    }
 
     public init(
         _ label: String,
@@ -60,11 +75,11 @@ public struct GlassWideButton: View {
                                 .stroke(
                                     GlassTheme.glassBorderGradient(
                                         reduceTransparency: reduceTransparency,
-                                        increaseContrast: increaseContrast
+                                        increaseContrast: isIncreasedContrast
                                     ),
                                     lineWidth: GlassTheme.glassBorderLineWidth(
                                         reduceTransparency: reduceTransparency,
-                                        increaseContrast: increaseContrast
+                                        increaseContrast: isIncreasedContrast
                                     )
                                 )
                         )
@@ -83,7 +98,7 @@ public struct GlassWideButton: View {
     }
 
     private func triggerHaptic() {
-        #if os(iOS)
+        #if os(iOS) && !targetEnvironment(macCatalyst)
         let generator = Self.hapticGenerator
         generator.impactOccurred()
         generator.prepare()

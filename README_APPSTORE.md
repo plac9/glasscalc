@@ -1,4 +1,4 @@
-# PrismCalc - App Store Readiness Summary
+# prismCalc - App Store Readiness Summary
 
 ## 🎉 What's Complete
 
@@ -55,7 +55,7 @@ Register Bundle IDs and App Groups at https://developer.apple.com/account
 Create app record at https://appstoreconnect.apple.com
 
 **What you'll do**:
-1. Create new app record for PrismCalc
+1. Create new app record for prismCalc
 2. Set categories (Utilities/Finance)
 3. Set age rating (4+)
 4. Add privacy and support URLs
@@ -109,7 +109,7 @@ Test the app before submission
 **What you'll do**:
 1. Add yourself as internal tester
 2. Install TestFlight app on iPhone
-3. Install PrismCalc via TestFlight
+3. Install prismCalc via TestFlight
 4. Test all features
 5. Test IAP purchase with sandbox account
 6. Verify everything works perfectly
@@ -168,7 +168,7 @@ Submit for Apple review - **ONLY when you're 100% confident**
 
 ### Configuration
 - **`App/Configuration.storekit`** - StoreKit testing configuration
-- **`App/PrismCalc.entitlements`** - App entitlements (App Groups)
+- **`App/prismCalc.entitlements`** - App entitlements (App Groups)
 - **`WidgetExtension/PrismCalcWidget.entitlements`** - Widget entitlements (App Groups)
 
 ---

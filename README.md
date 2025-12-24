@@ -1,11 +1,11 @@
-# PrismCalc
+# prismCalc
 
 **Spectacular glassmorphic calculator for iOS**
 
 Part of the LaClair Tech suite - Beautiful, functional tools with stunning UI design.
 
 ![Status](https://img.shields.io/badge/status-development-yellow?style=flat-square)
-![Platform](https://img.shields.io/badge/platform-iOS%2018.0%2B%20%7C%20macOS%2015.0%2B-lightgrey?style=flat-square)
+![Platform](https://img.shields.io/badge/platform-iOS%2018.0%2B%20%7C%20iPadOS%2018.0%2B%20%7C%20macOS%2015.0%2B%20%7C%20watchOS%2010.0%2B-lightgrey?style=flat-square)
 ![Swift](https://img.shields.io/badge/swift-6.0-orange?style=flat-square)
 ![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)
 
@@ -13,9 +13,9 @@ Part of the LaClair Tech suite - Beautiful, functional tools with stunning UI de
 
 ## Overview
 
-PrismCalc is a beautifully designed calculator app featuring full glassmorphism effects, leveraging iOS 18's Liquid Glass design language. Primary focus on spectacular UI while providing practical real-world calculation tools.
+prismCalc is a beautifully designed calculator app featuring full glassmorphism effects, leveraging iOS 18's Liquid Glass design language. Primary focus on spectacular UI while providing practical real-world calculation tools.
 
-**Mission**: PrismCalc is for everyday iPhone users who want a gorgeous, trustworthy calculator for money math without clutter.
+**Mission**: prismCalc is for everyday iPhone users who want a gorgeous, trustworthy calculator for money math without clutter.
 
 **Design Philosophy**:
 - **UI First**: Stunning glassmorphism with layered materials
@@ -85,8 +85,8 @@ PrismCalc is a beautifully designed calculator app featuring full glassmorphism 
 ### Technology Stack
 - **Language**: Swift 6.0 (strict concurrency enabled)
 - **UI Framework**: 100% SwiftUI
-- **Platforms**: iOS 18.0+, iPadOS 18.0+, macOS 15.0+
-- **Bundle IDs**: App `com.laclairtech.prismcalc`, Widget `com.laclairtech.prismcalc.widget`
+- **Platforms**: iOS 18.0+, iPadOS 18.0+, macOS 15.0+ (native), watchOS 10.0+
+- **Bundle IDs**: iOS `com.laclairtech.prismcalc`, macOS `com.laclairtech.prismcalc.mac`, watchOS `com.laclairtech.prismcalc.watch`, widgets `com.laclairtech.prismcalc.widget`, `com.laclairtech.prismcalc.mac.widget`, `com.laclairtech.prismcalc.watch.widget`
 - **App Group**: `group.com.laclairtech.prismcalc`
 - **Package Manager**: Swift Package Manager
 
@@ -117,7 +117,7 @@ PrismCalc/
 ### Requirements
 - Xcode 16.0+
 - Swift 6.0+
-- iOS 18.0+ / macOS 15.0+
+- iOS 18.0+ / iPadOS 18.0+ / macOS 15.0+ / watchOS 10.0+
 
 ### Building
 ```bash
@@ -175,7 +175,7 @@ open Package.swift
 
 Reference: `docs/AUADHD_IOS_WORKFLOW_PRISMCALC.md`
 
-**Scope**: iOS-first (iPadOS/macOS polishing after iOS ships)
+**Scope**: native iOS/iPadOS/macOS/watchOS parity in progress
 
 - P0 Define Value: ✅ (glass + trust for money math)
 - P1 Decide Scope: ✅ (single primary layout; Calculator tab anchor)

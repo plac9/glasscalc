@@ -51,6 +51,7 @@ public struct MoreView: View {
                         }
                     }
                     .padding()
+                    .prismContentMaxWidth()
                 }
                 .scrollContentBackground(.hidden)
             }

@@ -13,6 +13,7 @@ public struct ArcSlider: View {
 
     @State private var isDragging: Bool = false
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
 
     private let arcRadius: CGFloat = 100
     private let trackWidth: CGFloat = 24
@@ -105,12 +106,14 @@ public struct ArcSlider: View {
         let thumbX = arcRadius * cos(radians)
         let thumbY = -arcRadius * sin(radians)
 
-        return Circle()
-            .fill(.regularMaterial)
-            .overlay {
-                Circle()
-                    .strokeBorder(GlassTheme.primary, lineWidth: 3)
-            }
+        return GlassTheme.glassCircleBackground(
+            material: .regular,
+            reduceTransparency: reduceTransparency
+        )
+        .overlay {
+            Circle()
+                .strokeBorder(GlassTheme.primary, lineWidth: 3)
+        }
             .frame(width: thumbSize, height: thumbSize)
             .shadow(color: GlassTheme.primary.opacity(0.4), radius: 10, y: 4)
             .offset(x: thumbX, y: thumbY)
@@ -192,7 +195,7 @@ public struct ArcSlider: View {
     }
 
     private func triggerHaptic() {
-        #if os(iOS)
+        #if os(iOS) && !targetEnvironment(macCatalyst)
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.impactOccurred()
         #endif

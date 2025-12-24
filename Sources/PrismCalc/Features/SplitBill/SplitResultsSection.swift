@@ -1,4 +1,18 @@
 import SwiftUI
+#if os(iOS)
+import UIKit
+#endif
+
+private extension View {
+    @ViewBuilder
+    func ifAvailableiOS17<Content: View>(_ transform: (Self) -> Content) -> some View {
+        if #available(iOS 17.0, *) {
+            transform(self)
+        } else {
+            self
+        }
+    }
+}
 
 /// Results display section for split bill calculator
 struct SplitResultsSection: View {
@@ -9,9 +23,21 @@ struct SplitResultsSection: View {
     }
     // Fixed sizes for calculator displays
     private let heroValueSize: CGFloat = 56
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
-    @Environment(\.accessibilityIncreaseContrast) private var increaseContrast
+    @Environment(\EnvironmentValues.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\EnvironmentValues.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+
+    private var isIncreasedContrast: Bool {
+        if #available(iOS 17.0, *) {
+            return colorSchemeContrast == .increased
+        } else {
+            #if os(iOS)
+            return UIAccessibility.isDarkerSystemColorsEnabled
+            #else
+            return false
+            #endif
+        }
+    }
 
     var body: some View {
         VStack(spacing: CGFloat(GlassTheme.spacingMedium)) {
@@ -34,7 +60,9 @@ struct SplitResultsSection: View {
                 .foregroundStyle(GlassTheme.primary)
                 .lineLimit(1)
                 .minimumScaleFactor(0.6)
-                .contentTransition(reduceMotion ? .identity : .numericText())
+                .ifAvailableiOS17 { view in
+                    view.contentTransition(reduceMotion ? .identity : .numericText())
+                }
                 .animation(
                     reduceMotion ? nil : .easeInOut(duration: 0.15),
                     value: viewModel.perPersonShare
@@ -49,7 +77,7 @@ struct SplitResultsSection: View {
     private var heroBackground: some View {
         GlassTheme.glassCardBackground(
             cornerRadius: GlassTheme.cornerRadiusXL,
-            material: .regularMaterial,
+            material: .regular,
             reduceTransparency: reduceTransparency
         )
             .overlay(
@@ -57,11 +85,11 @@ struct SplitResultsSection: View {
                     .stroke(
                         GlassTheme.glassBorderGradient(
                             reduceTransparency: reduceTransparency,
-                            increaseContrast: increaseContrast
+                            increaseContrast: isIncreasedContrast
                         ),
                         lineWidth: GlassTheme.glassBorderLineWidth(
                             reduceTransparency: reduceTransparency,
-                            increaseContrast: increaseContrast
+                            increaseContrast: isIncreasedContrast
                         )
                     )
             )
@@ -116,7 +144,9 @@ struct SplitResultsSection: View {
                     .foregroundStyle(GlassTheme.primary)
             }
             .buttonStyle(.plain)
-            .sensoryFeedback(.success, trigger: viewModel.billValue)
+            .ifAvailableiOS17 { view in
+                view.sensoryFeedback(.success, trigger: viewModel.billValue)
+            }
             .accessibilityLabel("Save to history")
             .accessibilityHint("Saves this split bill calculation to your history")
         }
@@ -147,3 +177,4 @@ struct SplitResultsSection: View {
 #Preview {
     SplitResultsSection(viewModel: SplitBillViewModel())
 }
+

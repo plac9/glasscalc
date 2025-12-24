@@ -1,4 +1,4 @@
-# PrismCalc Automation Run Plan
+# prismCalc Automation Run Plan
 
 ## Scope
 - App: Liquid Glass background unification, high-contrast accessibility toggle, StoreKit OSLog diagnostics.

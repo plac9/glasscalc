@@ -4,7 +4,7 @@
 
 **Date**: 2025-12-19
 **Author**: Claude Code iOS Engineering Agent
-**Scope**: iOS-first only. iPadOS/macOS polish happens after iOS ships.
+**Scope**: native iOS/iPadOS/macOS/watchOS parity in progress.
 
 ---
 
@@ -207,7 +207,7 @@ Dead UI damages trust. Fix these first.
 
 **What Changes**:
 1. Move Theme selection into drill-in menu item ("Themes >")
-2. Move "PrismCalc" branding into "About" section
+2. Move "prismCalc" branding into "About" section
 3. Move Pro unlock to bottom (visible but not obnoxious)
 4. Add placeholders for: Keypad Layout, Menu Order, Widget Management
 
@@ -785,8 +785,8 @@ Per mission guardrails, these are **out of scope**:
 4. **Heavy workflow features** - Keep it simple
 5. **Full keypad rearrangement** - Too complex for v1
 6. **Custom button sizes** - Unnecessary complexity
-7. **iPad/macOS polish** - iOS-first, other platforms post-launch
-8. **Apple Watch app** - Post v1
+7. **tvOS support** - Post v1
+8. **visionOS support** - Post v1
 
 ---
 

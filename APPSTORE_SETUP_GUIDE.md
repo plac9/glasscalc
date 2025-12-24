@@ -1,4 +1,4 @@
-# PrismCalc App Store Setup Guide
+# prismCalc App Store Setup Guide
 
 **Status**: Ready for setup (screenshots captured, code complete)
 **Goal**: Prepare for App Store submission WITHOUT submitting for review yet
@@ -12,7 +12,7 @@ Go to: https://developer.apple.com/account/resources/identifiers
 
 **Main App Bundle ID:**
 - Click '+' to create new App ID
-- Description: `PrismCalc`
+- Description: `prismCalc`
 - Bundle ID: `com.laclairtech.prismcalc`
 - Capabilities to enable:
   - ✅ In-App Purchase
@@ -22,7 +22,7 @@ Go to: https://developer.apple.com/account/resources/identifiers
 
 **Widget Bundle ID:**
 - Click '+' to create new App ID
-- Description: `PrismCalc Widget`
+- Description: `prismCalc Widget`
 - Bundle ID: `com.laclairtech.prismcalc.widget`
 - Capabilities to enable:
   - ✅ App Groups
@@ -32,7 +32,7 @@ Go to: https://developer.apple.com/account/resources/identifiers
 Go to: https://developer.apple.com/account/resources/identifiers
 
 - Click '+' → Select "App Groups"
-- Description: `PrismCalc Shared Data`
+- Description: `prismCalc Shared Data`
 - Identifier: `group.com.laclairtech.prismcalc`
 - Click Continue → Register
 
@@ -51,7 +51,7 @@ Go to: https://appstoreconnect.apple.com
 
 - Click "My Apps" → '+' → "New App"
 - **Platform**: iOS
-- **Name**: PrismCalc
+- **Name**: prismCalc
 - **Primary Language**: English (U.S.)
 - **Bundle ID**: Select `com.laclairtech.prismcalc`
 - **SKU**: `prismcalc-ios`
@@ -88,7 +88,7 @@ In App Store Connect → Your App → In-App Purchases:
 - **Type**: Non-Consumable
 - Click "Create"
 
-**Reference Name**: `PrismCalc Pro`
+**Reference Name**: `prismCalc Pro`
 **Product ID**: `com.laclairtech.prismcalc.pro`
 
 **Price**:
@@ -99,7 +99,7 @@ In App Store Connect → Your App → In-App Purchases:
 
 **Localization**:
 - Add localization for English (U.S.)
-- **Display Name**: `PrismCalc Pro`
+- **Display Name**: `prismCalc Pro`
 - **Description**: `Unlock all calculators, themes, and features`
 - Save
 
@@ -157,7 +157,7 @@ Experience the most beautiful calculator on iOS. Stunning glassmorphic design me
 
 **Description** (copy from `docs/appstore/metadata.md`):
 ```
-PrismCalc brings a spectacular glassmorphic design to your everyday calculations. More than just a calculator – it's a beautiful, functional tool you'll love using.
+prismCalc brings a spectacular glassmorphic design to your everyday calculations. More than just a calculator – it's a beautiful, functional tool you'll love using.
 
 ✨ FREE FEATURES
 • Stunning glassmorphic design
@@ -218,7 +218,7 @@ calculator,tip,split,bill,discount,converter,glass,theme,widget,siri
 
 **Notes:**
 ```
-PrismCalc is a premium calculator app with a freemium model:
+prismCalc is a premium calculator app with a freemium model:
 
 FREE TIER:
 - Basic calculator
@@ -230,7 +230,7 @@ PRO TIER ($2.99 one-time purchase):
 - History with lock/unlock entries
 
 To test Pro features without purchase:
-1. The IAP product "PrismCalc Pro" should be approved alongside the app
+1. The IAP product "prismCalc Pro" should be approved alongside the app
 2. Pro features can be tested via TestFlight sandbox accounts
 
 No special configuration needed. The app works immediately after installation.
@@ -286,7 +286,7 @@ TestFlight:
 1. In App Store Connect → TestFlight → Internal Testing
 2. Add your Apple ID as internal tester
 3. Install TestFlight app on iPhone
-4. Install PrismCalc from TestFlight
+4. Install prismCalc from TestFlight
 5. Test all features thoroughly
 
 ### Sandbox IAP Testing:

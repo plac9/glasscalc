@@ -1,4 +1,18 @@
 import SwiftUI
+#if os(iOS)
+import UIKit
+#endif
+
+private extension View {
+    @ViewBuilder
+    func ifAvailableiOS17<Content: View>(_ transform: (Self) -> Content) -> some View {
+        if #available(iOS 17.0, *) {
+            transform(self)
+        } else {
+            self
+        }
+    }
+}
 
 /// Glassmorphic button with haptic feedback and press animation
 ///
@@ -16,10 +30,10 @@ public struct GlassButton: View {
 
         var material: Material {
             switch self {
-            case .number: return .thinMaterial
-            case .operation: return .regularMaterial
-            case .special: return .ultraThinMaterial
-            case .equals: return .regularMaterial
+            case .number: return .thin
+            case .operation: return .regular
+            case .special: return .ultraThin
+            case .equals: return .regular
             }
         }
     }
@@ -31,7 +45,7 @@ public struct GlassButton: View {
     let accessibilityIdentifier: String?
     let action: () -> Void
 
-    #if os(iOS)
+    #if os(iOS) && !targetEnvironment(macCatalyst)
     /// Shared generator to avoid reallocation on every tap
     private static let hapticGenerator: UIImpactFeedbackGenerator = {
         let generator = UIImpactFeedbackGenerator(style: .light)
@@ -41,10 +55,22 @@ public struct GlassButton: View {
     #endif
 
     @State private var isPressed = false
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
-    @Environment(\.accessibilityIncreaseContrast) private var increaseContrast
+    @Environment(\EnvironmentValues.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\EnvironmentValues.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     @ScaledMetric(relativeTo: .title2) private var labelScale: CGFloat = 1.0
+
+    private var isIncreasedContrast: Bool {
+        if #available(iOS 17.0, macOS 14.0, *) {
+            return colorSchemeContrast == .increased
+        } else {
+            #if os(iOS)
+            return UIAccessibility.isDarkerSystemColorsEnabled
+            #else
+            return false
+            #endif
+        }
+    }
 
     public init(
         _ label: String,
@@ -99,11 +125,11 @@ public struct GlassButton: View {
                                 .stroke(
                                     GlassTheme.glassBorderGradient(
                                         reduceTransparency: reduceTransparency,
-                                        increaseContrast: increaseContrast
+                                        increaseContrast: isIncreasedContrast
                                     ),
                                     lineWidth: GlassTheme.glassBorderLineWidth(
                                         reduceTransparency: reduceTransparency,
-                                        increaseContrast: increaseContrast
+                                        increaseContrast: isIncreasedContrast
                                     )
                                 )
                         )
@@ -115,7 +141,9 @@ public struct GlassButton: View {
         .accessibilityLabel(accessibilityText)
         .accessibilityAddTraits(.isButton)
         .optionalAccessibilityIdentifier(accessibilityIdentifier)
-        .sensoryFeedback(.impact(flexibility: .soft), trigger: isPressed)
+        .ifAvailableiOS17 { view in
+            view.sensoryFeedback(.impact(flexibility: .soft), trigger: isPressed)
+        }
         .contentShape(Rectangle())
         #if os(iOS)
         .hoverEffect(.highlight)
@@ -148,7 +176,7 @@ public struct GlassButton: View {
     }
 
     private func triggerHaptic() {
-        #if os(iOS)
+        #if os(iOS) && !targetEnvironment(macCatalyst)
         let generator = Self.hapticGenerator
         generator.impactOccurred()
         generator.prepare()
@@ -167,7 +195,7 @@ public struct GlassSymbolButton: View {
     let accessibilityIdentifier: String?
     let action: () -> Void
 
-    #if os(iOS)
+    #if os(iOS) && !targetEnvironment(macCatalyst)
     private static let hapticGenerator: UIImpactFeedbackGenerator = {
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.prepare()
@@ -176,10 +204,22 @@ public struct GlassSymbolButton: View {
     #endif
 
     @State private var isPressed = false
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
-    @Environment(\.accessibilityIncreaseContrast) private var increaseContrast
+    @Environment(\EnvironmentValues.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\EnvironmentValues.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     @ScaledMetric(relativeTo: .title2) private var iconScale: CGFloat = 1.0
+
+    private var isIncreasedContrast: Bool {
+        if #available(iOS 17.0, macOS 14.0, *) {
+            return colorSchemeContrast == .increased
+        } else {
+            #if os(iOS)
+            return UIAccessibility.isDarkerSystemColorsEnabled
+            #else
+            return false
+            #endif
+        }
+    }
 
     public init(
         systemName: String,
@@ -217,11 +257,11 @@ public struct GlassSymbolButton: View {
                                 .stroke(
                                     GlassTheme.glassBorderGradient(
                                         reduceTransparency: reduceTransparency,
-                                        increaseContrast: increaseContrast
+                                        increaseContrast: isIncreasedContrast
                                     ),
                                     lineWidth: GlassTheme.glassBorderLineWidth(
                                         reduceTransparency: reduceTransparency,
-                                        increaseContrast: increaseContrast
+                                        increaseContrast: isIncreasedContrast
                                     )
                                 )
                         )
@@ -233,7 +273,9 @@ public struct GlassSymbolButton: View {
         .accessibilityLabel(accessibilityText)
         .accessibilityAddTraits(.isButton)
         .optionalAccessibilityIdentifier(accessibilityIdentifier)
-        .sensoryFeedback(.impact(flexibility: .soft), trigger: isPressed)
+        .ifAvailableiOS17 { view in
+            view.sensoryFeedback(.impact(flexibility: .soft), trigger: isPressed)
+        }
         .contentShape(Rectangle())
         #if os(iOS)
         .hoverEffect(.highlight)
@@ -266,7 +308,7 @@ public struct GlassSymbolButton: View {
     }
 
     private func triggerHaptic() {
-        #if os(iOS)
+        #if os(iOS) && !targetEnvironment(macCatalyst)
         let generator = Self.hapticGenerator
         generator.impactOccurred()
         generator.prepare()

@@ -161,7 +161,7 @@ public final class HistoryService {
         guard let context else { return [] }
 
         let descriptor = FetchDescriptor<HistoryEntry>(
-            sortBy: [SortDescriptor(\.timestamp, order: .reverse)]
+            sortBy: [SortDescriptor<HistoryEntry>(\HistoryEntry.timestamp, order: .reverse)]
         )
 
         return (try? context.fetch(descriptor)) ?? []
@@ -172,7 +172,7 @@ public final class HistoryService {
         guard let context else { return [] }
 
         var descriptor = FetchDescriptor<HistoryEntry>(
-            sortBy: [SortDescriptor(\.timestamp, order: .reverse)]
+            sortBy: [SortDescriptor<HistoryEntry>(\HistoryEntry.timestamp, order: .reverse)]
         )
         descriptor.fetchLimit = limit
 
@@ -210,3 +210,4 @@ public final class HistoryService {
         container
     }
 }
+

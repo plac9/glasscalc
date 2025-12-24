@@ -8,7 +8,8 @@ public struct UnitConverterView: View {
     private let inputValueSize: CGFloat = 48
     private let resultValueSize: CGFloat = 48
     private let swapButtonSize: CGFloat = 44
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\EnvironmentValues.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
     @FocusState private var isInputFocused: Bool
 
     public init() {}
@@ -46,6 +47,7 @@ public struct UnitConverterView: View {
                     }
             }
             .padding()
+            .prismContentMaxWidth()
         }
         .scrollDismissesKeyboard(.interactively)
         .toolbar {
@@ -90,16 +92,16 @@ public struct UnitConverterView: View {
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, GlassTheme.spacingSmall)
                     .background(
-                        RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusSmall)
-                            .fill(
-                                viewModel.selectedCategory == category
-                                    ? GlassTheme.primary
-                                    : .clear
-                            )
-                            .background(
-                                RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusSmall)
-                                    .fill(.thinMaterial)
-                            )
+                        GlassTheme.glassCardBackground(
+                            cornerRadius: GlassTheme.cornerRadiusSmall,
+                            material: .thin,
+                            reduceTransparency: reduceTransparency
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusSmall)
+                                .fill(GlassTheme.primary)
+                                .opacity(viewModel.selectedCategory == category ? 0.9 : 0)
+                        )
                     )
                 }
                 .buttonStyle(.plain)
@@ -164,8 +166,10 @@ public struct UnitConverterView: View {
                     .foregroundStyle(GlassTheme.primary)
                     .frame(width: swapButtonSize, height: swapButtonSize)
                     .background(
-                        Circle()
-                            .fill(.regularMaterial)
+                        GlassTheme.glassCircleBackground(
+                            material: .regular,
+                            reduceTransparency: reduceTransparency
+                        )
                     )
             }
             .buttonStyle(.plain)
@@ -250,12 +254,15 @@ public struct UnitConverterView: View {
         .frame(maxWidth: .infinity)
         .padding(GlassTheme.spacingXL)
         .background(
-            RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusXL)
-                .fill(.regularMaterial)
-                .overlay(
-                    RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusXL)
-                        .stroke(GlassTheme.primary.opacity(0.3), lineWidth: 2)
-                )
+            GlassTheme.glassCardBackground(
+                cornerRadius: GlassTheme.cornerRadiusXL,
+                material: .regular,
+                reduceTransparency: reduceTransparency
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: GlassTheme.cornerRadiusXL)
+                    .stroke(GlassTheme.primary.opacity(0.3), lineWidth: 2)
+            )
         )
         .shadow(color: GlassTheme.primary.opacity(0.2), radius: 20, y: 10)
     }

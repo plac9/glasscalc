@@ -2,6 +2,8 @@ import WidgetKit
 import SwiftUI
 import AppIntents
 
+#if !os(watchOS)
+
 /// PrismCalc Widget - Shows recent calculations with interactive buttons
 public struct PrismCalcWidget: Widget {
     public let kind: String = "PrismCalcWidget"
@@ -13,7 +15,7 @@ public struct PrismCalcWidget: Widget {
             PrismCalcWidgetEntryView(entry: entry)
                 .containerBackground(.fill.tertiary, for: .widget)
         }
-        .configurationDisplayName("PrismCalc")
+        .configurationDisplayName("prismCalc")
         .description("Quick calculations and history")
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
     }
@@ -160,7 +162,7 @@ struct AdaptivePrismCalcWidgetView: View {
                     .font(.title2)
                     .foregroundStyle(.blue.gradient)
 
-                Text("PrismCalc")
+                Text("prismCalc")
                     .font(.caption)
                     .fontWeight(.medium)
                     .foregroundStyle(.secondary)
@@ -267,7 +269,7 @@ struct AdaptivePrismCalcWidgetView: View {
                     .font(.title2)
                     .foregroundStyle(.blue.gradient)
 
-                Text("PrismCalc")
+                Text("prismCalc")
                     .font(.headline)
 
                 Spacer()
@@ -400,3 +402,4 @@ struct AdaptivePrismCalcWidgetView: View {
         ]
     )
 }
+#endif

@@ -9,6 +9,7 @@ public struct HistoryDetailView: View {
     let entry: HistoryEntry
     @Environment(\.dismiss) private var dismiss
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
 
     @State private var showCopied = false
     @ScaledMetric(relativeTo: .largeTitle) private var iconSize: CGFloat = 64
@@ -40,7 +41,8 @@ public struct HistoryDetailView: View {
                     Spacer(minLength: GlassTheme.spacingXL)
                 }
                 .padding()
-            }
+                .prismContentMaxWidth()
+        }
         }
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
@@ -119,8 +121,10 @@ public struct HistoryDetailView: View {
                 .padding(.horizontal, GlassTheme.spacingSmall)
                 .padding(.vertical, GlassTheme.spacingXS)
                 .background(
-                    Capsule()
-                        .fill(.ultraThinMaterial)
+                    GlassTheme.glassCapsuleBackground(
+                        material: .ultraThin,
+                        reduceTransparency: reduceTransparency
+                    )
                 )
         }
     }
@@ -247,7 +251,7 @@ public struct HistoryDetailView: View {
         if let note = entry.note, !note.isEmpty {
             text += "\nNote: \(note)"
         }
-        text += "\n— Shared from PrismCalc"
+        text += "\n— Shared from prismCalc"
 
         let activityVC = UIActivityViewController(
             activityItems: [text],

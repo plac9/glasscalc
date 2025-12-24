@@ -47,6 +47,7 @@ public struct WidgetPreviewEntry {
 /// Preview widget view for WidgetSettingsView (without WidgetKit dependency)
 public struct WidgetPreviewView: View {
     public let entry: WidgetPreviewEntry
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
 
     public init(entry: WidgetPreviewEntry) {
         self.entry = entry
@@ -57,25 +58,25 @@ public struct WidgetPreviewView: View {
             HStack {
                 Image(systemName: "equal.square.fill")
                     .font(.title2)
-                    .foregroundStyle(.blue.gradient)
+                    .foregroundStyle(GlassTheme.primary)
 
-                Text("PrismCalc")
+                Text("prismCalc")
                     .font(.caption)
                     .fontWeight(.medium)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(GlassTheme.textSecondary)
             }
 
             Spacer()
 
             Text(entry.lastResult)
                 .font(.system(size: 32, weight: .medium, design: .rounded))
-                .foregroundStyle(.primary)
+                .foregroundStyle(GlassTheme.text)
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
 
             Text(entry.lastExpression)
                 .font(.caption)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(GlassTheme.textSecondary)
 
             if !entry.recentHistory.isEmpty {
                 Divider()
@@ -84,7 +85,7 @@ public struct WidgetPreviewView: View {
                     HStack(spacing: 8) {
                         Image(systemName: item.icon)
                             .font(.caption)
-                            .foregroundStyle(.blue)
+                            .foregroundStyle(GlassTheme.primary)
 
                         VStack(alignment: .leading, spacing: 2) {
                             Text(item.result)
@@ -93,7 +94,7 @@ public struct WidgetPreviewView: View {
 
                             Text(item.details)
                                 .font(.caption2)
-                                .foregroundStyle(.secondary)
+                                .foregroundStyle(GlassTheme.textSecondary)
                         }
 
                         Spacer()
@@ -103,8 +104,11 @@ public struct WidgetPreviewView: View {
         }
         .padding()
         .background(
-            RoundedRectangle(cornerRadius: 16)
-                .fill(.ultraThinMaterial)
+            GlassTheme.glassCardBackground(
+                cornerRadius: 16,
+                material: .ultraThin,
+                reduceTransparency: reduceTransparency
+            )
         )
     }
 }

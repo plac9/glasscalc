@@ -12,7 +12,7 @@ public struct ProUpgradeSection: View {
             VStack(spacing: GlassTheme.spacingMedium) {
                 HStack {
                     VStack(alignment: .leading, spacing: GlassTheme.spacingXS) {
-                        Text("PrismCalc Pro")
+                        Text("prismCalc Pro")
                             .font(GlassTheme.headlineFont)
                             .foregroundStyle(GlassTheme.text)
 

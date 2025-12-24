@@ -13,11 +13,11 @@ struct PrismCalcControlWidget: ControlWidget {
     var body: some ControlWidgetConfiguration {
         StaticControlConfiguration(kind: Self.kind) {
             ControlWidgetButton(action: OpenCalculatorIntent()) {
-                Label("PrismCalc", systemImage: "equal.square.fill")
+                Label("prismCalc", systemImage: "equal.square.fill")
             }
         }
-        .displayName("PrismCalc")
-        .description("Quick access to PrismCalc calculator")
+        .displayName("prismCalc")
+        .description("Quick access to prismCalc calculator")
     }
 }
 

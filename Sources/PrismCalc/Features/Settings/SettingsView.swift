@@ -7,7 +7,7 @@ public struct SettingsView: View {
     @ScaledMetric(relativeTo: .caption2) private var proBadgeSize: CGFloat = 9
     @ScaledMetric(relativeTo: .title2) private var aboutIconSize: CGFloat = 48
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    #if os(iOS)
+    #if os(iOS) && !targetEnvironment(macCatalyst)
     @State private var currentAppIconName: String? = UIApplication.shared.alternateIconName
     #endif
 
@@ -75,6 +75,7 @@ public struct SettingsView: View {
                         }
                 }
                 .padding()
+                .prismContentMaxWidth()
             }
             .scrollContentBackground(.hidden)
             .background(.clear)
@@ -90,7 +91,7 @@ public struct SettingsView: View {
             if selectedThemeName != GlassTheme.currentTheme.rawValue {
                 selectedThemeName = GlassTheme.currentTheme.rawValue
             }
-            #if os(iOS)
+            #if os(iOS) && !targetEnvironment(macCatalyst)
             currentAppIconName = UIApplication.shared.alternateIconName
             #endif
         }
@@ -169,7 +170,7 @@ public struct SettingsView: View {
                     Divider()
                         .background(GlassTheme.text.opacity(0.1))
 
-                    #if os(iOS)
+                    #if os(iOS) && !targetEnvironment(macCatalyst)
                     NavigationLink {
                         AppIconSettingsView()
                     } label: {
@@ -205,7 +206,7 @@ public struct SettingsView: View {
                     }
                     .buttonStyle(.plain)
                     .accessibilityLabel("App Icon")
-                    .accessibilityHint("Change the PrismCalc app icon")
+                    .accessibilityHint("Change the prismCalc app icon")
                     #else
                     HStack {
                         Image(systemName: "app.badge")
@@ -218,7 +219,7 @@ public struct SettingsView: View {
 
                         Spacer()
 
-                        Text("iOS only")
+                        Text("iOS/iPadOS only")
                             .font(GlassTheme.captionFont)
                             .foregroundStyle(GlassTheme.textSecondary)
                     }
@@ -283,7 +284,7 @@ public struct SettingsView: View {
                         )
                     )
 
-                Text("PrismCalc")
+                Text("prismCalc")
                     .font(GlassTheme.titleFont)
                     .foregroundStyle(GlassTheme.text)
 

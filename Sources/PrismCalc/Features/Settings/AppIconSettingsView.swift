@@ -79,6 +79,7 @@ public struct AppIconSettingsView: View {
                 }
             }
             .padding()
+            .prismContentMaxWidth()
         }
         .navigationTitle("App Icon")
         #if os(iOS)
@@ -98,7 +99,7 @@ public struct AppIconSettingsView: View {
         }
 
         if !storeKit.isPro && option.isProOnly {
-            errorMessage = "Alternate icons require PrismCalc Pro."
+            errorMessage = "Alternate icons require prismCalc Pro."
             return
         }
 

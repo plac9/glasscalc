@@ -34,7 +34,8 @@ public struct CalculatorView: View {
                             "AC",
                             style: .special,
                             id: "calculator-button-AC",
-                            layoutMetrics: layoutMetrics
+                            layoutMetrics: layoutMetrics,
+                            shortcut: .escape
                         ) {
                             viewModel.clear()
                         }
@@ -52,7 +53,8 @@ public struct CalculatorView: View {
                             "%",
                             style: .special,
                             id: "calculator-button-percent",
-                            layoutMetrics: layoutMetrics
+                            layoutMetrics: layoutMetrics,
+                            shortcut: "%"
                         ) {
                             viewModel.percentage()
                         }
@@ -61,7 +63,8 @@ public struct CalculatorView: View {
                             "/",
                             style: .operation,
                             id: "calculator-button-divide",
-                            layoutMetrics: layoutMetrics
+                            layoutMetrics: layoutMetrics,
+                            shortcut: "/"
                         ) {
                             viewModel.inputOperation(.divide)
                         }
@@ -69,15 +72,15 @@ public struct CalculatorView: View {
 
                     // Row 2: 7, 8, 9, x
                     HStack(spacing: spacing) {
-                        calculatorButton("7", id: "calculator-button-7", layoutMetrics: layoutMetrics) {
+                        calculatorButton("7", id: "calculator-button-7", layoutMetrics: layoutMetrics, shortcut: "7") {
                             viewModel.inputDigit("7")
                         }
 
-                        calculatorButton("8", id: "calculator-button-8", layoutMetrics: layoutMetrics) {
+                        calculatorButton("8", id: "calculator-button-8", layoutMetrics: layoutMetrics, shortcut: "8") {
                             viewModel.inputDigit("8")
                         }
 
-                        calculatorButton("9", id: "calculator-button-9", layoutMetrics: layoutMetrics) {
+                        calculatorButton("9", id: "calculator-button-9", layoutMetrics: layoutMetrics, shortcut: "9") {
                             viewModel.inputDigit("9")
                         }
 
@@ -85,7 +88,8 @@ public struct CalculatorView: View {
                             "x",
                             style: .operation,
                             id: "calculator-button-multiply",
-                            layoutMetrics: layoutMetrics
+                            layoutMetrics: layoutMetrics,
+                            shortcut: "x"
                         ) {
                             viewModel.inputOperation(.multiply)
                         }
@@ -93,15 +97,15 @@ public struct CalculatorView: View {
 
                     // Row 3: 4, 5, 6, -
                     HStack(spacing: spacing) {
-                        calculatorButton("4", id: "calculator-button-4", layoutMetrics: layoutMetrics) {
+                        calculatorButton("4", id: "calculator-button-4", layoutMetrics: layoutMetrics, shortcut: "4") {
                             viewModel.inputDigit("4")
                         }
 
-                        calculatorButton("5", id: "calculator-button-5", layoutMetrics: layoutMetrics) {
+                        calculatorButton("5", id: "calculator-button-5", layoutMetrics: layoutMetrics, shortcut: "5") {
                             viewModel.inputDigit("5")
                         }
 
-                        calculatorButton("6", id: "calculator-button-6", layoutMetrics: layoutMetrics) {
+                        calculatorButton("6", id: "calculator-button-6", layoutMetrics: layoutMetrics, shortcut: "6") {
                             viewModel.inputDigit("6")
                         }
 
@@ -109,7 +113,8 @@ public struct CalculatorView: View {
                             "-",
                             style: .operation,
                             id: "calculator-button-subtract",
-                            layoutMetrics: layoutMetrics
+                            layoutMetrics: layoutMetrics,
+                            shortcut: "-"
                         ) {
                             viewModel.inputOperation(.subtract)
                         }
@@ -117,15 +122,15 @@ public struct CalculatorView: View {
 
                     // Row 4: 1, 2, 3, +
                     HStack(spacing: spacing) {
-                        calculatorButton("1", id: "calculator-button-1", layoutMetrics: layoutMetrics) {
+                        calculatorButton("1", id: "calculator-button-1", layoutMetrics: layoutMetrics, shortcut: "1") {
                             viewModel.inputDigit("1")
                         }
 
-                        calculatorButton("2", id: "calculator-button-2", layoutMetrics: layoutMetrics) {
+                        calculatorButton("2", id: "calculator-button-2", layoutMetrics: layoutMetrics, shortcut: "2") {
                             viewModel.inputDigit("2")
                         }
 
-                        calculatorButton("3", id: "calculator-button-3", layoutMetrics: layoutMetrics) {
+                        calculatorButton("3", id: "calculator-button-3", layoutMetrics: layoutMetrics, shortcut: "3") {
                             viewModel.inputDigit("3")
                         }
 
@@ -133,7 +138,8 @@ public struct CalculatorView: View {
                             "+",
                             style: .operation,
                             id: "calculator-button-add",
-                            layoutMetrics: layoutMetrics
+                            layoutMetrics: layoutMetrics,
+                            shortcut: "+"
                         ) {
                             viewModel.inputOperation(.add)
                         }
@@ -143,20 +149,20 @@ public struct CalculatorView: View {
                     HStack(spacing: spacing) {
                         if zeroOnRight {
                             // Alternative layout: ., 0, ⌫, =
-                            calculatorButton(".", id: "calculator-button-decimal", layoutMetrics: layoutMetrics) {
+                            calculatorButton(".", id: "calculator-button-decimal", layoutMetrics: layoutMetrics, shortcut: ".") {
                                 viewModel.inputDigit(".")
                             }
 
-                            calculatorButton("0", id: "calculator-button-0", layoutMetrics: layoutMetrics) {
+                            calculatorButton("0", id: "calculator-button-0", layoutMetrics: layoutMetrics, shortcut: "0") {
                                 viewModel.inputDigit("0")
                             }
                         } else {
                             // Standard layout: 0, ., ⌫, =
-                            calculatorButton("0", id: "calculator-button-0", layoutMetrics: layoutMetrics) {
+                            calculatorButton("0", id: "calculator-button-0", layoutMetrics: layoutMetrics, shortcut: "0") {
                                 viewModel.inputDigit("0")
                             }
 
-                            calculatorButton(".", id: "calculator-button-decimal", layoutMetrics: layoutMetrics) {
+                            calculatorButton(".", id: "calculator-button-decimal", layoutMetrics: layoutMetrics, shortcut: ".") {
                                 viewModel.inputDigit(".")
                             }
                         }
@@ -168,7 +174,8 @@ public struct CalculatorView: View {
                             "=",
                             style: .equals,
                             id: "calculator-button-equals",
-                            layoutMetrics: layoutMetrics
+                            layoutMetrics: layoutMetrics,
+                            shortcut: "="
                         ) {
                             viewModel.calculate()
                         }
@@ -186,15 +193,22 @@ public struct CalculatorView: View {
         style: GlassButton.Style = .number,
         id: String,
         layoutMetrics: LayoutMetrics,
+        shortcut: KeyEquivalent? = nil,
+        modifiers: EventModifiers = [],
         action: @escaping () -> Void
     ) -> some View {
-        GlassButton(
+        let button = GlassButton(
             title,
             style: style,
             size: layoutMetrics.buttonSize,
             accessibilityIdentifier: id,
             action: action
         )
+        if let shortcut {
+            button.keyboardShortcut(shortcut, modifiers: modifiers)
+        } else {
+            button
+        }
     }
 
     @ViewBuilder
@@ -209,6 +223,7 @@ public struct CalculatorView: View {
             viewModel.backspace()
         }
         .accessibilityHint("Removes the last digit")
+        .keyboardShortcut(.delete)
     }
 
     private func calculateLayout(for size: CGSize, isIPad: Bool) -> LayoutMetrics {

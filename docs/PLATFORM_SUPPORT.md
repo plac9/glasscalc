@@ -1,14 +1,14 @@
-# PrismCalc Platform Support
+# prismCalc Platform Support
 
 **Generated**: 2025-12-07
-**Project**: PrismCalc v1.0.0
-**Minimum Deployment Target**: iOS 18.0
+**Project**: prismCalc v1.0.0
+**Minimum Deployment Target**: iOS 18.0 / iPadOS 18.0 / macOS 15.0 / watchOS 10.0
 
 ---
 
 ## Supported Platforms
 
-PrismCalc is currently built for **iOS and iPadOS only**. The app is optimized for modern Apple devices running iOS 18 or later.
+prismCalc is currently built for **native iOS, native iPadOS, native macOS, and watchOS**. The app is optimized for modern Apple devices running iOS 18 or later, with companion coverage on Apple Watch and native widgets per platform.
 
 ### ✅ iPhone Support
 
@@ -23,7 +23,6 @@ PrismCalc is currently built for **iOS and iPadOS only**. The app is optimized f
 
 #### Optimized For
 - **Portrait orientation** (primary)
-- **Landscape orientation** (supported)
 - All iPhone screen sizes from iPhone SE to iPhone Pro Max
 - iOS 18 floating tab bar (`.sidebarAdaptable`)
 - Dynamic Type for accessibility
@@ -63,27 +62,42 @@ PrismCalc is currently built for **iOS and iPadOS only**. The app is optimized f
 
 ---
 
-## Unsupported Platforms
+### ✅ macOS Support (Native SwiftUI)
 
-The following platforms are **NOT currently supported** by PrismCalc. To add support, significant code changes and additional configuration would be required.
+**Deployment Target**: macOS 15.0+ (native)
 
-### ❌ macOS (Mac Catalyst)
+#### Optimized For
+- Apple Silicon Macs running macOS 15+
+- Pointer input + keyboard usage
+- Resizable window layouts
+- Same glassmorphic UI principles as iOS/iPadOS
 
-**Status**: Not configured
-**Why Not Supported**:
-- Project is iOS-only (`platform: iOS` in `project.yml`)
-- No Mac Catalyst entitlements or configuration
-- Would require macOS-specific UI adaptations (menu bar, window chrome, keyboard shortcuts)
-- Calculator layouts optimized for touch, not mouse/trackpad
-
-**To Add Support**:
-1. Enable Mac Catalyst in `project.yml` (`supportedDestinations: [iOS, macCatalyst]`)
-2. Add macOS-specific entitlements
-3. Adapt UI for mouse/keyboard input
-4. Test menu bar integration
-5. Update App Store listing for macOS
+#### Notes
+- Native macOS app target with its own bundle ID
+- Native macOS WidgetKit extension included
+- iOS-only behaviors (haptics, tab bar appearance) are guarded
 
 ---
+
+### ✅ watchOS Support (Companion App)
+
+**Deployment Target**: watchOS 10.0+
+
+#### Optimized For
+- Quick calculations on the wrist
+- Compact keypad and display
+- Glass-inspired visuals tuned for small screens
+
+#### Notes
+- Focused feature set (basic operations)
+- No history or Pro feature gating on watchOS
+- Native watchOS widget extension (accessory families)
+
+---
+
+## Unsupported Platforms
+
+The following platforms are **NOT currently supported** by prismCalc. To add support, significant code changes and additional configuration would be required.
 
 ### ❌ tvOS (Apple TV)
 
@@ -100,24 +114,6 @@ The following platforms are **NOT currently supported** by PrismCalc. To add sup
 3. Implement focus engine navigation
 4. Add Siri Remote support
 5. Rethink UX for living room use
-
----
-
-### ❌ watchOS (Apple Watch)
-
-**Status**: Not configured
-**Why Not Supported**:
-- No watchOS target in project configuration
-- Small screen size incompatible with current calculator layout
-- Complexity of calculator UI not suitable for watch
-- Better suited for quick calculations via complications or Siri
-
-**To Add Support**:
-1. Create watchOS target in `project.yml`
-2. Design minimal calculator UI for tiny screen
-3. Add watchOS complications for quick calculations
-4. Implement Digital Crown input
-5. Consider Siri shortcuts integration
 
 ---
 
@@ -155,7 +151,7 @@ TARGETED_DEVICE_FAMILY: 1,2
 - `6` = Mac Catalyst (macOS)
 - `7` = Apple Vision (visionOS)
 
-**Current Configuration**: `1,2` (iPhone + iPad only)
+**Current Configuration**: iOS target uses `1,2` (iPhone + iPad). macOS and watchOS are separate native targets.
 
 ---
 
@@ -198,17 +194,32 @@ TARGETED_DEVICE_FAMILY: 1,2
 - [ ] Landscape orientation
 - [ ] External keyboard shortcuts (if implemented)
 
+#### macOS Testing
+- [ ] Resizable window (min/max sizes)
+- [ ] Keyboard shortcuts (calculator input)
+- [ ] Pointer and hover behaviors
+- [ ] Menu bar + focus ring visibility
+- [ ] Widget install + refresh
+
+#### watchOS Testing
+- [ ] Launch + basic calculations
+- [ ] Crown/scroll behavior (if any)
+- [ ] Widget accessory families
+- [ ] Dark/light readability
+
 ---
 
 ## App Store Configuration
 
 When submitting to App Store Connect:
 
-**Supported Platforms**: iOS, iPadOS
-**Device Support**: iPhone, iPad
-**Minimum OS Version**: iOS 18.0 / iPadOS 18.0
+**Supported Platforms**: iOS, iPadOS, macOS (native), watchOS (companion)
+**Device Support**: iPhone, iPad, Apple Silicon Mac, Apple Watch
+**Minimum OS Version**: iOS 18.0 / iPadOS 18.0 / macOS 15.0 / watchOS 10.0
 **Supported Languages**: English (en-US) - more can be added
 **Pricing**: Free with $2.99 Pro upgrade (IAP)
+**watchOS**: Companion app ships with the iOS bundle (no separate App Store listing)
+**Widgets**: Separate WidgetKit extensions for iOS/iPadOS, macOS, and watchOS
 
 ---
 
@@ -216,10 +227,8 @@ When submitting to App Store Connect:
 
 If you want to expand to other platforms in the future, prioritize based on:
 
-1. **Mac Catalyst** (Easiest) - Minimal changes, large user base
-2. **visionOS** (Most Innovative) - Future-forward, differentiator
-3. **watchOS** (Useful) - Quick calculations on wrist
-4. **tvOS** (Lowest Priority) - Limited use case
+1. **visionOS** (Most Innovative) - Future-forward, differentiator
+2. **tvOS** (Lowest Priority) - Limited use case
 
 ---
 
@@ -256,37 +265,26 @@ xcrun simctl launch <DEVICE_ID> com.laclairtech.prismcalc
 
 ## Currently Running
 
-As of this session (2025-12-07):
-
-✅ **iPhone 17 Pro** (iOS 26.1)
-- Process ID: 96798
-- Status: Running
-- Build: Debug-iphonesimulator
-
-✅ **iPad Pro 13-inch (M5)** (iOS 26.1)
-- Process ID: 92059
-- Status: Running
-- Build: Debug-iphonesimulator
-
-Both devices are showing PrismCalc with the new glassmorphic app icon and all features working correctly.
+Not tracked in this doc. Verify active simulators/devices in Xcode or Simulator.
 
 ---
 
 ## Summary
 
-**What PrismCalc Supports**:
+**What prismCalc Supports**:
 - ✅ iPhone (iOS 18+)
 - ✅ iPad (iPadOS 18+)
+- ✅ macOS native app (macOS 15+)
+- ✅ Apple Watch companion (watchOS 10+)
+- ✅ Widgets on iOS/iPadOS, macOS, and watchOS
 
-**What PrismCalc Does NOT Support** (yet):
-- ❌ macOS (Mac Catalyst)
+**What prismCalc Does NOT Support** (yet):
 - ❌ tvOS (Apple TV)
-- ❌ watchOS (Apple Watch)
 - ❌ visionOS (Apple Vision Pro)
 
 To add support for other platforms, you'll need to update `project.yml`, create platform-specific targets, and adapt the UI for each platform's interaction model.
 
 ---
 
-**Status**: ✅ iOS/iPadOS support complete and tested
-**Next Steps**: Test on physical devices, prepare for App Store submission
+**Status**: 🟡 native iOS/iPadOS/macOS/watchOS support in progress
+**Next Steps**: Validate iOS + watchOS builds after installing watchOS platform; run device testing before App Store submission

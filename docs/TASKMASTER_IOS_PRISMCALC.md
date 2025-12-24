@@ -2,7 +2,7 @@
 
 **Last Updated**: 2025-12-20
 **Implementation Plan**: `docs/IMPLEMENTATION_PLAN_V2.md`
-**Scope**: iOS-first only. iPadOS/macOS polish happens after iOS ships.
+**Scope**: native iOS/iPadOS/macOS/watchOS parity in progress.
 
 ---
 

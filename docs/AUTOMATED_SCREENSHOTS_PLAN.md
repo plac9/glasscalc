@@ -27,7 +27,7 @@ Automatically capture all 10 App Store screenshots without manual intervention u
 └─────────────────────────────────────────────┘
               ↓ controls ↓
 ┌─────────────────────────────────────────────┐
-│  PrismCalc App with Accessibility IDs       │
+│  prismCalc App with Accessibility IDs       │
 │  └─ All interactive elements tagged         │
 │     ├─ Buttons: "calculator-button-1"       │
 │     ├─ Tabs: "tab-calculator", "tab-tip"    │

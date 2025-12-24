@@ -1,4 +1,7 @@
 import SwiftUI
+#if os(iOS)
+import UIKit
+#endif
 
 /// Results display section for tip calculator with save to history
 struct TipResultsSection: View {
@@ -12,7 +15,19 @@ struct TipResultsSection: View {
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
-    @Environment(\.accessibilityIncreaseContrast) private var increaseContrast
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+
+    private var isIncreasedContrast: Bool {
+        if #available(iOS 17.0, macOS 14.0, *) {
+            return colorSchemeContrast == .increased
+        } else {
+            #if os(iOS)
+            return UIAccessibility.isDarkerSystemColorsEnabled
+            #else
+            return false
+            #endif
+        }
+    }
 
     var body: some View {
         VStack(spacing: GlassTheme.spacingSmall) {
@@ -112,11 +127,11 @@ struct TipResultsSection: View {
                     .stroke(
                         GlassTheme.glassBorderGradient(
                             reduceTransparency: reduceTransparency,
-                            increaseContrast: increaseContrast
+                            increaseContrast: isIncreasedContrast
                         ),
                         lineWidth: GlassTheme.glassBorderLineWidth(
                             reduceTransparency: reduceTransparency,
-                            increaseContrast: increaseContrast
+                            increaseContrast: isIncreasedContrast
                         )
                     )
             )
@@ -150,4 +165,3 @@ struct TipResultsSection: View {
 #Preview {
     TipResultsSection(viewModel: TipCalculatorViewModel(), noteText: .constant(""))
 }
-
