@@ -50,6 +50,18 @@
 - watchOS screenshot set: `screenshots/automated/2025-12-25-watchos-46mm-refresh-2/`.
 - Website build (`npm run build`) succeeded.
 
+---
+
+## QA Refresh (2025-12-26)
+
+- macOS: increased min window height, transparent titlebar enabled, history toggle accessible on edge hover, and history rows fit 10 entries.
+- iPhone screenshots refreshed: `screenshots/automated/2025-12-26-iphone-17/`.
+- iPad screenshots refreshed: `screenshots/automated/2025-12-26-ipad-13/`.
+- macOS build passed (`xcodebuild -scheme PrismCalcMac -configuration Debug build`).
+- watchOS build passed (`xcodebuild -scheme PrismCalcWatchApp -destination 'platform=watchOS Simulator,name=Apple Watch Series 11 (46mm)' build`).
+- Website build + Playwright e2e tests passed (`npm run build`, `npm run test:e2e`).
+- macOS/watchOS screenshots still pending refresh after latest UI changes.
+
 **Build Commands (Release)**:
 ```
 xcodebuild -scheme PrismCalc -configuration Release -destination 'platform=iOS Simulator,name=iPhone 17' build

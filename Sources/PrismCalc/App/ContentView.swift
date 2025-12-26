@@ -18,7 +18,7 @@ extension EnvironmentValues {
 
 #if os(macOS)
 private enum MacLayout {
-    static let contentSpacing: CGFloat = 10
+    static let contentSpacing: CGFloat = 6
     static let compactHorizontalPadding: CGFloat = 6
     static let expandedHorizontalPadding: CGFloat = 6
     static let compactWindowWidth: CGFloat = 320
@@ -29,7 +29,7 @@ private enum MacLayout {
     static let wideThreshold: CGFloat = expandedWindowWidth - 1
     static let barInsetCompact: CGFloat = 52
     static let barInsetExpanded: CGFloat = 64
-    static let minWindowHeight: CGFloat = 560
+    static let minWindowHeight: CGFloat = 620
 }
 
 enum MacTabBarMode: String, CaseIterable, Identifiable {
@@ -419,7 +419,7 @@ private struct MacTabBar: View {
                 GlassTheme.glassCapsuleBackground(material: .regularMaterial, reduceTransparency: reduceTransparency)
                     .overlay(
                         Capsule()
-                            .fill(Color.white.opacity(reduceTransparency ? 0.12 : 0.06))
+                            .fill(Color.white.opacity(reduceTransparency ? 0.18 : 0.1))
                     )
                     .overlay(
                         Capsule()
@@ -444,10 +444,10 @@ private struct MacTabBar: View {
     private func selectionBackground(for tab: ContentView.TabIdentifier) -> some View {
         if selectedTab == tab {
             Capsule()
-                .fill(GlassTheme.primary.opacity(reduceTransparency ? 0.9 : 0.85))
+                .fill(GlassTheme.primary.opacity(reduceTransparency ? 0.94 : 0.9))
         } else {
             Capsule()
-                .fill(Color.white.opacity(reduceTransparency ? 0.32 : 0.22))
+                .fill(Color.white.opacity(reduceTransparency ? 0.42 : 0.3))
         }
     }
 
@@ -459,8 +459,8 @@ private struct MacTabBar: View {
             return colorScheme == .dark ? Color.white : Color.black
         }
         return colorScheme == .dark
-            ? Color.white.opacity(0.86)
-            : Color.black.opacity(0.8)
+            ? Color.white.opacity(0.97)
+            : Color.black.opacity(0.9)
     }
 
     private func iconShadowColor(for tab: ContentView.TabIdentifier) -> Color {
@@ -573,23 +573,21 @@ private struct MacCalculatorSplitView: View {
             .padding(.horizontal, horizontalPadding)
             .animation(.easeInOut(duration: 0.25), value: showsHistory)
             .overlay(alignment: .trailing) {
-                if isWide && isHoveringEdge {
+                if isHoveringEdge || showHistoryPanel {
                     HistoryPanelToggle(isVisible: $showHistoryPanel)
                         .padding(.trailing, 4)
                         .transition(.opacity)
                 }
             }
             .overlay(alignment: .trailing) {
-                if isWide {
-                    Color.clear
-                        .frame(width: 24)
-                        .contentShape(Rectangle())
-                        .onHover { hovering in
-                            withAnimation(.easeInOut(duration: 0.2)) {
-                                isHoveringEdge = hovering
-                            }
+                Color.clear
+                    .frame(width: 24)
+                    .contentShape(Rectangle())
+                    .onHover { hovering in
+                        withAnimation(.easeInOut(duration: 0.2)) {
+                            isHoveringEdge = hovering
                         }
-                }
+                    }
             }
         }
         .background(
@@ -612,13 +610,18 @@ private struct MacHistoryPanel: View {
         GeometryReader { proxy in
             let headerHeight: CGFloat = 28
             let headerSpacing: CGFloat = GlassTheme.spacingSmall
-            let availableHeight = max(0, proxy.size.height - headerHeight - headerSpacing)
+            let rowSpacing: CGFloat = GlassTheme.spacingXS
+            let contentPadding: CGFloat = GlassTheme.spacingMedium
+            let availableHeight = max(
+                0,
+                proxy.size.height - (contentPadding * 2) - headerHeight - headerSpacing - (rowSpacing * CGFloat(maxEntries - 1))
+            )
             let rowHeight = max(18, availableHeight / CGFloat(maxEntries))
 
             GlassCard(
                 material: .thinMaterial,
                 cornerRadius: GlassTheme.cornerRadiusLarge,
-                padding: GlassTheme.spacingMedium
+                padding: 0
             ) {
                 VStack(alignment: .leading, spacing: headerSpacing) {
                     HStack {
@@ -645,7 +648,7 @@ private struct MacHistoryPanel: View {
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                     } else {
-                        VStack(spacing: GlassTheme.spacingXS) {
+                        VStack(spacing: rowSpacing) {
                             ForEach(visibleEntries) { entry in
                                 MacHistoryRow(
                                     entry: entry,
@@ -657,6 +660,7 @@ private struct MacHistoryPanel: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                     }
                 }
+                .padding(contentPadding)
             }
             .frame(maxHeight: .infinity, alignment: .top)
             .onAppear {
@@ -805,7 +809,7 @@ private struct MacWindowSnapper: NSViewRepresentable {
         )
         DispatchQueue.main.async {
             context.coordinator.attach(to: nsView.window)
-            context.coordinator.snapToCurrentState(animated: false)
+            context.coordinator.syncHistoryState()
         }
     }
 
@@ -817,6 +821,7 @@ private struct MacWindowSnapper: NSViewRepresentable {
         private var minHeight: CGFloat
         private weak var window: NSWindow?
         private var isSnapping = false
+        private var lastShowHistoryPanel: Bool?
 
         init(
             showHistoryPanel: Binding<Bool>,
@@ -864,7 +869,18 @@ private struct MacWindowSnapper: NSViewRepresentable {
             window.minSize = minFrameSize
             window.maxSize = NSSize(width: maxFrameSize.width, height: .greatestFiniteMagnitude)
             window.contentResizeIncrements = NSSize(width: max(1, expandedWidth - compactWidth), height: 1)
+            window.titleVisibility = .hidden
+            window.titlebarAppearsTransparent = true
+            window.isMovableByWindowBackground = true
+            window.toolbarStyle = .unifiedCompact
             snapToCurrentState(animated: false)
+        }
+
+        func syncHistoryState() {
+            let current = showHistoryPanel.wrappedValue
+            let shouldAnimate = lastShowHistoryPanel != nil && lastShowHistoryPanel != current
+            lastShowHistoryPanel = current
+            snapToCurrentState(animated: shouldAnimate)
         }
 
         func snapToCurrentState(animated: Bool) {
@@ -874,18 +890,20 @@ private struct MacWindowSnapper: NSViewRepresentable {
             let targetSize = NSSize(width: targetWidth, height: currentHeight)
             guard window.contentLayoutRect.size != targetSize else { return }
             isSnapping = true
-            window.setContentSize(targetSize)
+            if animated {
+                window.animator().setContentSize(targetSize)
+            } else {
+                window.setContentSize(targetSize)
+            }
             isSnapping = false
         }
 
         func windowWillResize(_ sender: NSWindow, to frameSize: NSSize) -> NSSize {
             if isSnapping { return frameSize }
             let contentRect = sender.contentRect(forFrameRect: NSRect(origin: .zero, size: frameSize))
-            let midpoint = (compactWidth + expandedWidth) / 2
-            let targetContentWidth = contentRect.width < midpoint ? compactWidth : expandedWidth
+            let targetContentWidth = showHistoryPanel.wrappedValue ? expandedWidth : compactWidth
             let targetContentHeight = max(contentRect.height, minHeight)
             let targetFrame = sender.frameRect(forContentRect: NSRect(origin: .zero, size: NSSize(width: targetContentWidth, height: targetContentHeight)))
-            updateHistoryVisibility(for: targetContentWidth)
             return targetFrame.size
         }
 
@@ -897,17 +915,9 @@ private struct MacWindowSnapper: NSViewRepresentable {
             guard let window else { return }
             if isSnapping { return }
             let width = window.contentLayoutRect.width
-            updateHistoryVisibility(for: width)
-            if width != compactWidth && width != expandedWidth {
+            let targetWidth = showHistoryPanel.wrappedValue ? expandedWidth : compactWidth
+            if width != targetWidth {
                 snapToCurrentState(animated: false)
-            }
-        }
-
-        private func updateHistoryVisibility(for contentWidth: CGFloat) {
-            let midpoint = (compactWidth + expandedWidth) / 2
-            let shouldShow = contentWidth >= midpoint
-            if showHistoryPanel.wrappedValue != shouldShow {
-                showHistoryPanel.wrappedValue = shouldShow
             }
         }
 

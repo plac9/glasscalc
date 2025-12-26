@@ -20,10 +20,13 @@ public struct TipCalculatorView: View {
         let reduce = reduceMotion
 
         GeometryReader { proxy in
-            let isTwoColumn = horizontalSizeClass == .regular && proxy.size.width >= 760
+            let isTwoColumn = horizontalSizeClass == .regular && proxy.size.width >= 820
+            let columnSpacing = isTwoColumn ? GlassTheme.spacingMedium : GlassTheme.spacingSmall
+            let sectionSpacing = isTwoColumn ? GlassTheme.spacingMedium : GlassTheme.spacingLarge
+            let contentPadding = isTwoColumn ? GlassTheme.spacingLarge : GlassTheme.spacingMedium
             ScrollView {
-                AdaptiveColumns(isSplit: isTwoColumn, spacing: GlassTheme.spacingLarge) {
-                    VStack(spacing: GlassTheme.spacingLarge) {
+                AdaptiveColumns(isSplit: isTwoColumn, spacing: columnSpacing) {
+                    VStack(spacing: sectionSpacing) {
                         // Bill Amount Input
                         billInputSection
                             .scrollTransition { content, phase in
@@ -42,7 +45,7 @@ public struct TipCalculatorView: View {
                         quickTipSection
                     }
                 } right: {
-                    VStack(spacing: GlassTheme.spacingLarge) {
+                    VStack(spacing: sectionSpacing) {
                         // Split Between People
                         splitSection
 
@@ -55,7 +58,7 @@ public struct TipCalculatorView: View {
                             }
                     }
                 }
-                .padding()
+                .padding(contentPadding)
                 .prismContentMaxWidth()
             }
         }

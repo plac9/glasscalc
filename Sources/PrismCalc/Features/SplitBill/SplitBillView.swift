@@ -20,10 +20,13 @@ public struct SplitBillView: View {
     public var body: some View {
         let reduce = reduceMotion
         GeometryReader { proxy in
-            let isTwoColumn = horizontalSizeClass == .regular && proxy.size.width >= 760
+            let isTwoColumn = horizontalSizeClass == .regular && proxy.size.width >= 820
+            let columnSpacing = isTwoColumn ? GlassTheme.spacingMedium : GlassTheme.spacingSmall
+            let sectionSpacing = isTwoColumn ? GlassTheme.spacingMedium : GlassTheme.spacingLarge
+            let contentPadding = isTwoColumn ? GlassTheme.spacingLarge : GlassTheme.spacingMedium
             ScrollView {
-                AdaptiveColumns(isSplit: isTwoColumn, spacing: GlassTheme.spacingLarge) {
-                    VStack(spacing: GlassTheme.spacingLarge) {
+                AdaptiveColumns(isSplit: isTwoColumn, spacing: columnSpacing) {
+                    VStack(spacing: sectionSpacing) {
                         // Total Bill Input
                         billInputSection
                             .scrollTransition { content, phase in
@@ -42,7 +45,7 @@ public struct SplitBillView: View {
                         tipSection
                     }
                 } right: {
-                    VStack(spacing: GlassTheme.spacingLarge) {
+                    VStack(spacing: sectionSpacing) {
                         // Results
                         SplitResultsSection(viewModel: viewModel)
                             .scrollTransition { content, phase in
@@ -52,7 +55,7 @@ public struct SplitBillView: View {
                             }
                     }
                 }
-                .padding()
+                .padding(contentPadding)
                 .prismContentMaxWidth()
             }
         }

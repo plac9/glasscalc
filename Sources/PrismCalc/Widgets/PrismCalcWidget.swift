@@ -3,6 +3,44 @@ import SwiftUI
 import AppIntents
 
 #if !os(watchOS)
+private enum WidgetTheme {
+    static let backgroundGradient: [Color] = [
+        Color(red: 0.18, green: 0.22, blue: 0.50),
+        Color(red: 0.34, green: 0.26, blue: 0.64),
+        Color(red: 0.20, green: 0.45, blue: 0.70)
+    ]
+    static let accentPrimary = Color(red: 0.48, green: 0.64, blue: 0.98)
+    static let accentSecondary = Color(red: 0.36, green: 0.82, blue: 0.88)
+    static let text = Color.white
+    static let textSecondary = Color.white.opacity(0.72)
+    static let textTertiary = Color.white.opacity(0.55)
+
+    static func borderGradient(reduceTransparency: Bool, increaseContrast: Bool) -> LinearGradient {
+        let highContrast = increaseContrast
+        let startOpacity = highContrast ? 0.32 : 0.18
+        let endOpacity = highContrast ? 0.16 : 0.08
+        let reduceMultiplier: Double = reduceTransparency ? 0.6 : 1.0
+        return LinearGradient(
+            colors: [
+                Color.white.opacity(startOpacity * reduceMultiplier),
+                Color.white.opacity(endOpacity * reduceMultiplier)
+            ],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+    }
+
+    static func borderLineWidth(reduceTransparency: Bool, increaseContrast: Bool) -> CGFloat {
+        if increaseContrast {
+            return reduceTransparency ? 0.9 : 1.1
+        }
+        return reduceTransparency ? 0.6 : 0.8
+    }
+
+    static func borderBlendMode(for colorScheme: ColorScheme) -> BlendMode {
+        colorScheme == .dark ? .overlay : .softLight
+    }
+}
 
 /// PrismCalc Widget - Shows recent calculations with interactive buttons
 public struct PrismCalcWidget: Widget {
@@ -13,7 +51,6 @@ public struct PrismCalcWidget: Widget {
     public var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: PrismCalcTimelineProvider()) { entry in
             PrismCalcWidgetEntryView(entry: entry)
-                .containerBackground(.fill.tertiary, for: .widget)
         }
         .configurationDisplayName("prismCalc")
         .description("Quick calculations and history")
@@ -136,7 +173,18 @@ public struct PrismCalcWidgetEntryView: View {
 // A single adaptive view that renders appropriately for each family size
 struct AdaptivePrismCalcWidgetView: View {
     @Environment(\.widgetFamily) private var family
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+    @Environment(\.colorScheme) private var colorScheme
     let entry: PrismCalcEntry
+
+    private var isIncreasedContrast: Bool {
+        if #available(iOS 14.0, *) {
+            return colorSchemeContrast == .increased
+        } else {
+            return false
+        }
+    }
 
     var body: some View {
         Group {
@@ -152,6 +200,8 @@ struct AdaptivePrismCalcWidgetView: View {
             }
         }
         .padding()
+        .background(widgetHighlightOverlay)
+        .containerBackground(widgetBackground, for: .widget)
     }
 
     // MARK: - Small
@@ -160,35 +210,34 @@ struct AdaptivePrismCalcWidgetView: View {
             HStack {
                 Image(systemName: "equal.square.fill")
                     .font(.title2)
-                    .foregroundStyle(.blue.gradient)
+                    .foregroundStyle(widgetAccentGradient)
 
                 Text("prismCalc")
                     .font(.caption)
                     .fontWeight(.medium)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(WidgetTheme.textSecondary)
             }
 
             Spacer()
 
             Text(entry.lastResult)
                 .font(.system(size: 32, weight: .medium, design: .rounded))
-                .foregroundStyle(.primary)
+                .foregroundStyle(WidgetTheme.text)
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
 
             Text(entry.lastExpression)
                 .font(.caption)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(WidgetTheme.textSecondary)
 
             HStack(spacing: 8) {
                 ForEach([WidgetFeature.tipCalculator, .billSplit], id: \.rawValue) { feature in
                     Button(intent: OpenFeatureIntent(feature: feature)) {
                         Image(systemName: feature.icon)
                             .font(.caption)
-                            .foregroundStyle(.blue)
+                            .foregroundStyle(WidgetTheme.text)
                             .frame(width: 28, height: 28)
-                            .background(.blue.opacity(0.15))
-                            .clipShape(Circle())
+                            .background(widgetCircleBackground)
                     }
                     .buttonStyle(.plain)
                 }
@@ -202,10 +251,10 @@ struct AdaptivePrismCalcWidgetView: View {
             VStack(alignment: .leading, spacing: 4) {
                 HStack {
                     Image(systemName: "equal.square.fill")
-                        .foregroundStyle(.blue.gradient)
+                        .foregroundStyle(widgetAccentGradient)
                     Text("Latest")
                         .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(WidgetTheme.textSecondary)
                 }
 
                 Spacer()
@@ -214,10 +263,11 @@ struct AdaptivePrismCalcWidgetView: View {
                     .font(.system(size: 24, weight: .medium, design: .rounded))
                     .lineLimit(1)
                     .minimumScaleFactor(0.7)
+                    .foregroundStyle(WidgetTheme.text)
 
                 Text(entry.lastExpression)
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(WidgetTheme.textSecondary)
                     .lineLimit(1)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -227,7 +277,7 @@ struct AdaptivePrismCalcWidgetView: View {
             VStack(spacing: 8) {
                 Text("Quick Actions")
                     .font(.caption2)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(WidgetTheme.textSecondary)
 
                 LazyVGrid(
                     columns: [GridItem(.flexible()), GridItem(.flexible())],
@@ -241,16 +291,15 @@ struct AdaptivePrismCalcWidgetView: View {
                             VStack(spacing: 4) {
                                 Image(systemName: feature.icon)
                                     .font(.body)
-                                    .foregroundStyle(.blue)
+                                    .foregroundStyle(WidgetTheme.text)
 
                                 Text(feature.label)
                                     .font(.system(size: 9))
-                                    .foregroundStyle(.secondary)
+                                    .foregroundStyle(WidgetTheme.textSecondary)
                             }
                             .frame(maxWidth: .infinity)
                             .frame(height: 44)
-                            .background(.blue.opacity(0.1))
-                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                            .background(widgetRoundedBackground(cornerRadius: 10))
                         }
                         .buttonStyle(.plain)
                     }
@@ -267,26 +316,28 @@ struct AdaptivePrismCalcWidgetView: View {
             HStack {
                 Image(systemName: "equal.square.fill")
                     .font(.title2)
-                    .foregroundStyle(.blue.gradient)
+                    .foregroundStyle(widgetAccentGradient)
 
                 Text("prismCalc")
                     .font(.headline)
+                    .foregroundStyle(WidgetTheme.text)
 
                 Spacer()
 
                 Text("Latest Result")
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(WidgetTheme.textSecondary)
             }
 
             // Result
             VStack(alignment: .leading, spacing: 4) {
                 Text(entry.lastResult)
                     .font(.system(size: 36, weight: .medium, design: .rounded))
+                    .foregroundStyle(WidgetTheme.text)
 
                 Text(entry.lastExpression)
                     .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(WidgetTheme.textSecondary)
             }
             .padding(.vertical, 4)
 
@@ -300,16 +351,15 @@ struct AdaptivePrismCalcWidgetView: View {
                         VStack(spacing: 4) {
                             Image(systemName: feature.icon)
                                 .font(.body)
-                                .foregroundStyle(.blue)
+                                .foregroundStyle(WidgetTheme.text)
 
                             Text(feature.label)
                                 .font(.system(size: 10))
-                                .foregroundStyle(.secondary)
+                                .foregroundStyle(WidgetTheme.textSecondary)
                         }
                         .frame(maxWidth: .infinity)
                         .frame(height: 48)
-                        .background(.blue.opacity(0.1))
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .background(widgetRoundedBackground(cornerRadius: 12))
                     }
                     .buttonStyle(.plain)
                 }
@@ -322,7 +372,7 @@ struct AdaptivePrismCalcWidgetView: View {
                 HStack {
                     Text("Recent History")
                         .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(WidgetTheme.textSecondary)
 
                     Spacer()
                 }
@@ -331,32 +381,92 @@ struct AdaptivePrismCalcWidgetView: View {
                     HStack(spacing: 12) {
                         Image(systemName: item.icon)
                             .font(.body)
-                            .foregroundStyle(.blue)
+                            .foregroundStyle(WidgetTheme.text)
                             .frame(width: 24, height: 24)
-                            .background(Color.blue.opacity(0.1))
-                            .clipShape(Circle())
+                            .background(widgetCircleBackground)
 
                         VStack(alignment: .leading, spacing: 2) {
                             Text(item.result)
                                 .font(.subheadline)
                                 .fontWeight(.medium)
+                                .foregroundStyle(WidgetTheme.text)
 
                             Text(item.details)
                                 .font(.caption)
-                                .foregroundStyle(.secondary)
+                                .foregroundStyle(WidgetTheme.textSecondary)
                         }
 
                         Spacer()
 
                         Text(item.type)
                             .font(.caption2)
-                            .foregroundStyle(.tertiary)
+                            .foregroundStyle(WidgetTheme.textTertiary)
                     }
                 }
             }
 
             Spacer(minLength: 0)
         }
+    }
+
+    private var widgetBackground: LinearGradient {
+        LinearGradient(
+            colors: WidgetTheme.backgroundGradient,
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+    }
+
+    private var widgetHighlightOverlay: some View {
+        Color.white
+            .opacity(reduceTransparency ? 0.12 : 0.06)
+            .blendMode(.softLight)
+    }
+
+    private var widgetAccentGradient: LinearGradient {
+        LinearGradient(
+            colors: [WidgetTheme.accentPrimary, WidgetTheme.accentSecondary],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+    }
+
+    private var widgetCircleBackground: some View {
+        Circle()
+            .fill(Color.white.opacity(reduceTransparency ? 0.2 : 0.12))
+            .overlay(
+                Circle()
+                    .strokeBorder(
+                        WidgetTheme.borderGradient(
+                            reduceTransparency: reduceTransparency,
+                            increaseContrast: isIncreasedContrast
+                        ),
+                        lineWidth: WidgetTheme.borderLineWidth(
+                            reduceTransparency: reduceTransparency,
+                            increaseContrast: isIncreasedContrast
+                        )
+                    )
+                    .blendMode(WidgetTheme.borderBlendMode(for: colorScheme))
+            )
+    }
+
+    private func widgetRoundedBackground(cornerRadius: CGFloat) -> some View {
+        RoundedRectangle(cornerRadius: cornerRadius)
+            .fill(Color.white.opacity(reduceTransparency ? 0.2 : 0.12))
+            .overlay(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .strokeBorder(
+                        WidgetTheme.borderGradient(
+                            reduceTransparency: reduceTransparency,
+                            increaseContrast: isIncreasedContrast
+                        ),
+                        lineWidth: WidgetTheme.borderLineWidth(
+                            reduceTransparency: reduceTransparency,
+                            increaseContrast: isIncreasedContrast
+                        )
+                    )
+                    .blendMode(WidgetTheme.borderBlendMode(for: colorScheme))
+            )
     }
 }
 

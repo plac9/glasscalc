@@ -1,20 +1,71 @@
 # PrismCalc - Test Execution Report
 
-**Date**: 2025-12-25
-**Execution Type**: Xcode builds + UI tests (`xcodebuild build`, `xcodebuild test`)
-**Environment**: macOS (Xcode 17C52, iOS Simulator 26.2 iPhone 17)
-**Note**: Updated 2025-12-25 with UI test run + refreshed screenshot extraction.
+**Date**: 2025-12-26
+**Execution Type**: Xcode builds + UI screenshot tests + web build + Playwright
+**Environment**: macOS (Xcode 17C52, iOS Simulator 26.2 iPhone 17 + iPad Pro 13-inch (M5), watchOS Simulator 26.2 Apple Watch Series 11 (46mm))
+**Note**: Updated 2025-12-26 with iPhone/iPad screenshot runs, macOS/watch builds, and web build + e2e tests.
 
 ---
 
 ## Executive Summary
 
-✅ **ALL TESTS PASSED**
+✅ **ALL EXECUTED TESTS PASSED**
 
-**Total Tests Run**: 158 unit tests + 9 UI tests
+**Total Tests Run**: 2 UI screenshot runs + 2 Playwright e2e tests
 **Pass Rate**: 100%
 **Failures**: 0
-**Time**: ~6 seconds (SwiftPM) + ~381 seconds (UI tests)
+**Time**: ~239s (iPad UI) + ~194s (iPhone UI) + ~3s (Playwright)
+
+---
+
+## Latest Run (2025-12-26)
+
+### ✅ Builds: PASSED
+
+**Commands**:
+```
+./scripts/run-screenshot-tests.sh "iPhone 17" "screenshots/automated/2025-12-26-iphone-17" "iphone67"
+./scripts/run-screenshot-tests.sh "iPad Pro 13-inch (M5)" "screenshots/automated/2025-12-26-ipad-13" "ipad13"
+xcodebuild -scheme PrismCalcMac -configuration Debug build
+xcodebuild -scheme PrismCalcWatchApp -destination 'platform=watchOS Simulator,name=Apple Watch Series 11 (46mm)' build
+```
+
+**Status**: ✅ BUILD SUCCEEDED
+
+**Notes**:
+- Screenshot scripts run `build-for-testing` on iOS (iPhone/iPad) before UI capture.
+
+### ✅ UI Screenshot Tests: PASSED (iPhone 17)
+
+**Command**:
+```
+./scripts/run-screenshot-tests.sh "iPhone 17" "screenshots/automated/2025-12-26-iphone-17" "iphone67"
+```
+
+**Status**: ✅ TEST SUCCEEDED  
+**xcresult**: `DerivedData/Logs/Test/Test-PrismCalc-2025.12.26_13-56-34--0500.xcresult`  
+**Screenshots**: `screenshots/automated/2025-12-26-iphone-17/`
+
+### ✅ UI Screenshot Tests: PASSED (iPad Pro 13-inch (M5))
+
+**Command**:
+```
+./scripts/run-screenshot-tests.sh "iPad Pro 13-inch (M5)" "screenshots/automated/2025-12-26-ipad-13" "ipad13"
+```
+
+**Status**: ✅ TEST SUCCEEDED  
+**xcresult**: `DerivedData/Logs/Test/Test-PrismCalc-2025.12.26_13-50-28--0500.xcresult`  
+**Screenshots**: `screenshots/automated/2025-12-26-ipad-13/`
+
+### ✅ Web Build + E2E: PASSED
+
+**Commands**:
+```
+npm run build
+npm run test:e2e
+```
+
+**Status**: ✅ BUILD + TEST SUCCEEDED
 
 ---
 

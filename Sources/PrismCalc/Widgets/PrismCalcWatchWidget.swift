@@ -2,6 +2,16 @@ import SwiftUI
 import WidgetKit
 
 #if os(watchOS)
+private enum WatchWidgetTheme {
+    static let backgroundGradient: [Color] = [
+        Color(red: 0.10, green: 0.20, blue: 0.45),
+        Color(red: 0.20, green: 0.30, blue: 0.60),
+        Color(red: 0.08, green: 0.12, blue: 0.28)
+    ]
+    static let text = Color.white
+    static let textSecondary = Color.white.opacity(0.7)
+}
+
 private struct PrismCalcWatchEntry: TimelineEntry {
     let date: Date
     let lastResult: String
@@ -56,10 +66,12 @@ private struct PrismCalcWatchWidgetView: View {
                 .font(.system(size: 18, weight: .semibold, design: .rounded))
                 .minimumScaleFactor(0.6)
                 .lineLimit(1)
-                .containerBackground(.fill.tertiary, for: .widget)
+                .foregroundStyle(WatchWidgetTheme.text)
+                .containerBackground(widgetBackground, for: .widget)
         case .accessoryInline:
             Text("Calc \(entry.lastResult)")
                 .font(.system(.caption, design: .rounded))
+                .foregroundStyle(WatchWidgetTheme.text)
                 .containerBackground(.clear, for: .widget)
         default:
             VStack(alignment: .leading, spacing: 4) {
@@ -67,16 +79,25 @@ private struct PrismCalcWatchWidgetView: View {
                     .font(.system(size: 18, weight: .semibold, design: .rounded))
                     .lineLimit(1)
                     .minimumScaleFactor(0.6)
+                    .foregroundStyle(WatchWidgetTheme.text)
                 if !entry.lastExpression.isEmpty {
                     Text(entry.lastExpression)
                         .font(.system(.caption2, design: .rounded))
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(WatchWidgetTheme.textSecondary)
                         .lineLimit(1)
                         .minimumScaleFactor(0.6)
                 }
             }
-            .containerBackground(.fill.tertiary, for: .widget)
+            .containerBackground(widgetBackground, for: .widget)
         }
+    }
+
+    private var widgetBackground: LinearGradient {
+        LinearGradient(
+            colors: WatchWidgetTheme.backgroundGradient,
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
     }
 }
 #endif

@@ -18,17 +18,20 @@ public struct UnitConverterView: View {
     public var body: some View {
         let reduce = reduceMotion
         GeometryReader { proxy in
-            let isTwoColumn = horizontalSizeClass == .regular && proxy.size.width >= 760
+            let isTwoColumn = horizontalSizeClass == .regular && proxy.size.width >= 820
+            let columnSpacing = isTwoColumn ? GlassTheme.spacingMedium : GlassTheme.spacingSmall
+            let sectionSpacing = isTwoColumn ? GlassTheme.spacingMedium : GlassTheme.spacingLarge
+            let contentPadding = isTwoColumn ? GlassTheme.spacingLarge : GlassTheme.spacingMedium
             ScrollView {
-                VStack(spacing: GlassTheme.spacingLarge) {
+                VStack(spacing: sectionSpacing) {
                     // Category Selector
                     categorySelector
                         .scrollTransition { content, phase in
                             content.opacity(reduce || phase.isIdentity ? 1 : 0.85)
                         }
 
-                    AdaptiveColumns(isSplit: isTwoColumn, spacing: GlassTheme.spacingLarge) {
-                        VStack(spacing: GlassTheme.spacingLarge) {
+                    AdaptiveColumns(isSplit: isTwoColumn, spacing: columnSpacing) {
+                        VStack(spacing: sectionSpacing) {
                             // Input
                             inputSection
                                 .scrollTransition { content, phase in
@@ -44,7 +47,7 @@ public struct UnitConverterView: View {
                                 }
                         }
                     } right: {
-                        VStack(spacing: GlassTheme.spacingLarge) {
+                        VStack(spacing: sectionSpacing) {
                             // Result
                             resultSection
                                 .scrollTransition { content, phase in
@@ -55,7 +58,7 @@ public struct UnitConverterView: View {
                         }
                     }
                 }
-                .padding()
+                .padding(contentPadding)
                 .prismContentMaxWidth()
             }
         }

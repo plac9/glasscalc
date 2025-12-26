@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - watchOS calculator UI and watch widget entry point.
 - App Group entitlements for app and widget targets.
 - Platform parity checklist and refreshed automated screenshots (iPhone 17, iPad Pro 13, watchOS 46mm, macOS native).
+- Refreshed automated screenshot sets for iPhone 17 and iPad Pro 13-inch (M5) in `screenshots/automated/2025-12-26-*`.
 
 ### Changed
 - Set iPhone + iPad targeting (`TARGETED_DEVICE_FAMILY = 1,2`) and codified team ID in `project.yml`.
@@ -33,6 +34,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - macOS window sizing snaps between calculator-only and calculator+history widths; history visibility follows resize state.
 - iPad large-screen calculator buttons now cap at 140pt for layout balance.
 - watchOS display supports long-press backspace on the calculator output.
+- macOS min window height increased; titlebar now transparent; history panel toggle is available on edge hover even when compact.
+- macOS history panel row sizing now fits 10 entries without scrolling; tab bar icon contrast increased.
 
 ### Fixed
 - UI screenshot tests can tap calculator buttons via explicit accessibility identifiers.

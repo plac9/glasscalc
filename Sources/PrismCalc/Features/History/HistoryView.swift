@@ -25,10 +25,14 @@ public struct HistoryView: View {
     public var body: some View {
         NavigationStack {
             GeometryReader { proxy in
-                let isTwoColumn = horizontalSizeClass == .regular && proxy.size.width >= 760
+                let isTwoColumn = horizontalSizeClass == .regular && proxy.size.width >= 820
+                let columnSpacing = isTwoColumn ? GlassTheme.spacingMedium : GlassTheme.spacingLarge
+                let sectionSpacing = isTwoColumn ? GlassTheme.spacingSmall : GlassTheme.spacingMedium
+                let contentPadding = isTwoColumn ? GlassTheme.spacingLarge : GlassTheme.spacingMedium
+                let listSpacing = isTwoColumn ? GlassTheme.spacingXS : GlassTheme.spacingSmall
                 ScrollView {
-                    AdaptiveColumns(isSplit: isTwoColumn, spacing: GlassTheme.spacingLarge) {
-                        VStack(spacing: GlassTheme.spacingMedium) {
+                    AdaptiveColumns(isSplit: isTwoColumn, spacing: columnSpacing) {
+                        VStack(spacing: sectionSpacing) {
                             // Header with filter and clear
                             headerSection
 
@@ -48,12 +52,12 @@ public struct HistoryView: View {
                             filterSection
                         }
                     } right: {
-                        VStack(spacing: GlassTheme.spacingMedium) {
+                        VStack(spacing: sectionSpacing) {
                             // History entries
                             if filteredEntries.isEmpty {
                                 emptyState
                             } else {
-                                entriesList
+                                entriesList(spacing: listSpacing)
                             }
 
                             if !isPro {
@@ -61,7 +65,7 @@ public struct HistoryView: View {
                             }
                         }
                     }
-                    .padding()
+                    .padding(contentPadding)
                     .prismContentMaxWidth()
                 }
             }
@@ -224,8 +228,8 @@ public struct HistoryView: View {
     // MARK: - Entries List
 
     @MainActor
-    private var entriesList: some View {
-        LazyVStack(spacing: GlassTheme.spacingSmall) {
+    private func entriesList(spacing: CGFloat) -> some View {
+        LazyVStack(spacing: spacing) {
             ForEach(filteredEntries) { entry in
                 HistoryCardView(
                     entry: entry,

@@ -16,13 +16,13 @@ private struct WatchHistoryEntry: Identifiable, Codable {
 }
 
 struct WatchContentView: View {
-    @ScaledMetric private var gridSpacing: CGFloat = 6
-    @ScaledMetric private var verticalSpacing: CGFloat = 8
-    @ScaledMetric private var outerPadding: CGFloat = 8
+    @ScaledMetric private var gridSpacing: CGFloat = 5
+    @ScaledMetric private var verticalSpacing: CGFloat = 7
+    @ScaledMetric private var outerPadding: CGFloat = 6
     @ScaledMetric private var displayFontSize: CGFloat = 22
-    @ScaledMetric private var displayHorizontalPadding: CGFloat = 6
-    @ScaledMetric private var historyRowSpacing: CGFloat = 6
-    @ScaledMetric private var sectionSpacing: CGFloat = 10
+    @ScaledMetric private var displayHorizontalPadding: CGFloat = 4
+    @ScaledMetric private var historyRowSpacing: CGFloat = 4
+    @ScaledMetric private var sectionSpacing: CGFloat = 8
 
     private var columns: [GridItem] {
         Array(repeating: GridItem(.flexible(), spacing: gridSpacing), count: 4)
@@ -499,14 +499,16 @@ private struct WatchGlassButton: View {
         .foregroundStyle(isAccent ? Color.white : WatchTheme.text)
         .background(backgroundStyle)
         .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+        .overlay(highlightOverlay)
         .overlay(
             RoundedRectangle(cornerRadius: cornerRadius)
                 .strokeBorder(
-                    Color.white.opacity(isHighContrast ? 0.28 : 0.14),
-                    lineWidth: isHighContrast ? 0.9 : 0.5
+                    Color.white.opacity(isHighContrast ? 0.34 : 0.18),
+                    lineWidth: isHighContrast ? 1.0 : 0.6
                 )
                 .blendMode(.overlay)
         )
+        .shadow(color: Color.black.opacity(isAccent ? 0.35 : 0.25), radius: 1.5, y: 1)
         .accessibilityLabel(accessibilityLabel)
         .accessibilityAddTraits(.isButton)
     }
@@ -515,16 +517,40 @@ private struct WatchGlassButton: View {
     private var backgroundStyle: some View {
         if isAccent {
             RoundedRectangle(cornerRadius: cornerRadius)
-                .fill(WatchTheme.accent.opacity(isHighContrast ? 1.0 : 0.85))
+                .fill(
+                    LinearGradient(
+                        colors: [
+                            WatchTheme.accent.opacity(isHighContrast ? 1.0 : 0.95),
+                            WatchTheme.accent.opacity(isHighContrast ? 0.9 : 0.65)
+                        ],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
         } else {
             if isHighContrast {
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .fill(Color.white.opacity(reduceTransparency ? 0.25 : 0.15))
+                    .fill(Color.white.opacity(reduceTransparency ? 0.28 : 0.18))
             } else {
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .fill(.ultraThinMaterial)
+                    .fill(Color.white.opacity(reduceTransparency ? 0.22 : 0.14))
             }
         }
+    }
+
+    private var highlightOverlay: some View {
+        RoundedRectangle(cornerRadius: cornerRadius)
+            .fill(
+                LinearGradient(
+                    colors: [
+                        Color.white.opacity(reduceTransparency ? 0.18 : 0.12),
+                        Color.white.opacity(0.02)
+                    ],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            )
+            .blendMode(.softLight)
     }
 
     private static func defaultAccessibilityLabel(for title: String) -> String {
@@ -557,7 +583,7 @@ private struct WatchGlassButton: View {
 
 private struct WatchHistoryRow: View {
     let entry: WatchHistoryEntry
-    @ScaledMetric private var rowPadding: CGFloat = 8
+    @ScaledMetric private var rowPadding: CGFloat = 6
     @ScaledMetric private var rowSpacing: CGFloat = 2
 
     var body: some View {
@@ -576,10 +602,21 @@ private struct WatchHistoryRow: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(
             RoundedRectangle(cornerRadius: 10)
-                .fill(.ultraThinMaterial)
+                .fill(Color.white.opacity(0.14))
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
-                        .strokeBorder(Color.white.opacity(0.12), lineWidth: 0.5)
+                        .strokeBorder(Color.white.opacity(0.18), lineWidth: 0.6)
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(
+                            LinearGradient(
+                                colors: [Color.white.opacity(0.12), Color.white.opacity(0.02)],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
+                        .blendMode(.softLight)
                 )
         )
     }
@@ -629,14 +666,25 @@ private struct WatchGlassCard<Content: View>: View {
 
     var body: some View {
         content
-            .padding(10)
+            .padding(8)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(
                 RoundedRectangle(cornerRadius: 12)
-                    .fill(Color.white.opacity(reduceTransparency ? 0.18 : 0.10))
+                    .fill(Color.white.opacity(reduceTransparency ? 0.2 : 0.12))
                     .overlay(
                         RoundedRectangle(cornerRadius: 12)
-                            .strokeBorder(Color.white.opacity(0.12), lineWidth: 0.5)
+                            .strokeBorder(Color.white.opacity(0.18), lineWidth: 0.6)
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(
+                                LinearGradient(
+                                    colors: [Color.white.opacity(0.16), Color.white.opacity(0.02)],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
+                            )
+                            .blendMode(.softLight)
                     )
             )
     }
