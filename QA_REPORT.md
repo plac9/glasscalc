@@ -55,6 +55,7 @@
 ## QA Refresh (2025-12-26)
 
 - macOS: increased min window height, transparent titlebar enabled, history toggle accessible on edge hover, and history rows fit 10 entries.
+- Added iOS/iPad supported orientations in build settings (generated Info.plist) to satisfy App Store Connect multitasking validation.
 - iPhone screenshots refreshed: `screenshots/automated/2025-12-26-iphone-17/`.
 - iPad screenshots refreshed: `screenshots/automated/2025-12-26-ipad-13/`.
 - macOS build passed (`xcodebuild -scheme PrismCalcMac -configuration Debug build`).

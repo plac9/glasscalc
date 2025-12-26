@@ -61,6 +61,8 @@ targets:
       PRODUCT_BUNDLE_IDENTIFIER: com.laclairtech.prismcalc
       GENERATE_INFOPLIST_FILE: YES
       INFOPLIST_KEY_UILaunchScreen_Generation: YES
+      INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+      INFOPLIST_KEY_UISupportedInterfaceOrientations~ipad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
       SWIFT_VERSION: 6.0
       TARGETED_DEVICE_FAMILY: 1,2
       SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO

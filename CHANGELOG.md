@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Set iPhone + iPad targeting (`TARGETED_DEVICE_FAMILY = 1,2`) and codified team ID in `project.yml`.
 - Tuned glass highlights and borders for reduce-transparency/increase-contrast accessibility settings.
-- Locked orientation to portrait in `App/Info.plist`.
+- Added supported orientations in iOS build settings (generated Info.plist) to satisfy iPad multitasking requirements.
 - Regenerated Xcode project/scheme from `project.yml`.
 - Display name and user-facing strings aligned to `prismCalc`.
 - iPad tab view uses sidebar-adaptable layout; macOS default window size set; watch UI contrast improved.

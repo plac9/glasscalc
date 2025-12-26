@@ -26,6 +26,7 @@
 ```
 ./scripts/run-screenshot-tests.sh "iPhone 17" "screenshots/automated/2025-12-26-iphone-17" "iphone67"
 ./scripts/run-screenshot-tests.sh "iPad Pro 13-inch (M5)" "screenshots/automated/2025-12-26-ipad-13" "ipad13"
+xcodebuild -scheme PrismCalc -destination 'platform=iOS Simulator,name=iPhone 17' build
 xcodebuild -scheme PrismCalcMac -configuration Debug build
 xcodebuild -scheme PrismCalcWatchApp -destination 'platform=watchOS Simulator,name=Apple Watch Series 11 (46mm)' build
 ```
