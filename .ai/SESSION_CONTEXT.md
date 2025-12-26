@@ -1,6 +1,6 @@
 # PrismCalc - Session Context
 
-**Last Updated**: 2025-12-20
+**Last Updated**: 2025-12-26
 **Status**: Phase 4 - Launch
 **Version**: 1.0.0 (Build 2)
 **Brand**: LaClair Technologies
@@ -10,7 +10,7 @@
 - **Current Phase**: Phase 4 - Launch preparation
 - **Active Work**: All TASKMASTER milestones complete (M1-M5), ready for submission
 - **Blockers**: Privacy policy URL, M4-T4 needs physical device for Instruments
-- **Next Steps**: Physical device performance profiling, finalize App Store metadata
+- **Next Steps**: Upload latest archive to App Store Connect, review macOS/watch screenshots, physical device performance profiling, finalize App Store metadata
 
 ## Project Overview
 
@@ -56,7 +56,9 @@ Spectacular glassmorphic calculator for iOS with freemium model. Core calculator
 - [ ] Manual VoiceOver verification
 - [ ] Device performance profiling (Instruments)
 - [ ] Screenshot review/crop for App Store (latest device sets)
+- [ ] Review refreshed macOS/watch screenshots
 - [ ] Privacy policy URL live
+- [ ] Upload latest archive to App Store Connect
 - [ ] App Store metadata completion
 - [ ] TestFlight beta submission
 - [ ] Production release
@@ -66,6 +68,8 @@ Spectacular glassmorphic calculator for iOS with freemium model. Core calculator
 - Manual accessibility pass still needed despite static audit passing
 
 ### Recent Changes
+- **2025-12-26**: Refreshed macOS snap and watchOS 46mm screenshot sets
+- **2025-12-26**: iOS archive created at `build/archives/PrismCalc-2025-12-26.xcarchive`
 - **2025-12-20**: Completed all TASKMASTER M1-M5 milestones (142 tests)
 - **2025-12-20**: Tab order: Calc → Tip → Split → Discount → Convert → History → Settings
 - **2025-12-20**: Removed currency conversion from Unit Converter
