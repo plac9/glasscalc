@@ -41,7 +41,7 @@ Legend: `[x]` done, `[~]` in progress, `[ ]` not started
 | Bottom glass tab bar (auto-hide) | [~] | Readability tuned (contrast + sizing) | Validate in app |
 | macOS-specific UI polish | [~] | Spacing tightened | Refine typography/spacing |
 | Widgets (macOS) | [~] | Native widget target | Validate visuals |
-| Snap sizing screenshots | [~] | `screenshots/automated/2025-12-25-macos-native-refresh-2/` | Refresh after snap + height updates |
+| Snap sizing screenshots | [x] | `screenshots/automated/2025-12-26-macos-snap/` | Review for quality |
 
 ## watchOS (companion)
 
@@ -54,4 +54,4 @@ Legend: `[x]` done, `[~]` in progress, `[ ]` not started
 | Watch-specific interaction cues | [~] | Tap haptics + long-press backspace | Evaluate for gestures + errors |
 | Widgets (watchOS) | [~] | Watch widget gradient styling updated | Validate families |
 | Accessibility (contrast/size) | [~] | Scaled metrics used | Audit with settings |
-| Screenshot capture (watch) | [~] | `screenshots/automated/2025-12-25-watchos-46mm-refresh-2/` | Refresh after watch polish updates |
+| Screenshot capture (watch) | [x] | `screenshots/automated/2025-12-26-watchos-46mm/` | Review for quality |

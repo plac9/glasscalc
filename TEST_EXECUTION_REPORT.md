@@ -3,7 +3,7 @@
 **Date**: 2025-12-26
 **Execution Type**: Xcode builds + UI screenshot tests + web build + Playwright
 **Environment**: macOS (Xcode 17C52, iOS Simulator 26.2 iPhone 17 + iPad Pro 13-inch (M5), watchOS Simulator 26.2 Apple Watch Series 11 (46mm))
-**Note**: Updated 2025-12-26 with iPhone/iPad screenshot runs, macOS/watch builds, and web build + e2e tests.
+**Note**: Updated 2025-12-26 with iPhone/iPad screenshot runs, macOS/watch builds, web build + e2e tests, refreshed macOS/watch screenshots, and iOS archive.
 
 ---
 
@@ -36,6 +36,16 @@ xcodebuild -scheme PrismCalcWatchApp -destination 'platform=watchOS Simulator,na
 **Notes**:
 - Screenshot scripts run `build-for-testing` on iOS (iPhone/iPad) before UI capture.
 
+### ✅ Archive: PASSED (iOS)
+
+**Command**:
+```
+xcodebuild archive -scheme PrismCalc -destination 'generic/platform=iOS' -archivePath build/archives/PrismCalc-2025-12-26.xcarchive -allowProvisioningUpdates
+```
+
+**Status**: ✅ ARCHIVE SUCCEEDED  
+**Archive**: `build/archives/PrismCalc-2025-12-26.xcarchive`
+
 ### ✅ UI Screenshot Tests: PASSED (iPhone 17)
 
 **Command**:
@@ -57,6 +67,22 @@ xcodebuild -scheme PrismCalcWatchApp -destination 'platform=watchOS Simulator,na
 **Status**: ✅ TEST SUCCEEDED  
 **xcresult**: `DerivedData/Logs/Test/Test-PrismCalc-2025.12.26_13-50-28--0500.xcresult`  
 **Screenshots**: `screenshots/automated/2025-12-26-ipad-13/`
+
+### ✅ macOS + watchOS Screenshots: CAPTURED
+
+**Commands**:
+```
+defaults write com.laclairtech.prismcalc.mac macHistoryPanelVisible -bool false
+screencapture -R 120,120,320,720 screenshots/automated/2025-12-26-macos-snap/prismcalc_macos_compact_snap.png
+defaults write com.laclairtech.prismcalc.mac macHistoryPanelVisible -bool true
+screencapture -R 120,120,634,720 screenshots/automated/2025-12-26-macos-snap/prismcalc_macos_wide_history_snap.png
+
+xcrun simctl launch <watch-udid> com.laclairtech.prismcalc.watch --args WATCH_TAB:calculator WATCH_VALUE:1234.56
+xcrun simctl io <watch-udid> screenshot screenshots/automated/2025-12-26-watchos-46mm/watch_calc.png
+```
+
+**Status**: ✅ CAPTURED  
+**Screenshots**: `screenshots/automated/2025-12-26-macos-snap/`, `screenshots/automated/2025-12-26-watchos-46mm/`
 
 ### ✅ Web Build + E2E: PASSED
 

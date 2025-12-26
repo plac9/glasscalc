@@ -1,7 +1,7 @@
 # PrismCalc - Comprehensive QA Report
 
 **Version**: 1.0.0 (Build 1)
-**Test Date**: 2025-12-25
+**Test Date**: 2025-12-26
 **Tester**: Automated Code Review + Build Tests
 **Status**: ✅ READY FOR TESTFLIGHT
 
@@ -58,10 +58,12 @@
 - Added iOS/iPad supported orientations in build settings (generated Info.plist) to satisfy App Store Connect multitasking validation.
 - iPhone screenshots refreshed: `screenshots/automated/2025-12-26-iphone-17/`.
 - iPad screenshots refreshed: `screenshots/automated/2025-12-26-ipad-13/`.
+- macOS snap screenshots refreshed: `screenshots/automated/2025-12-26-macos-snap/`.
+- watchOS screenshot set refreshed: `screenshots/automated/2025-12-26-watchos-46mm/`.
 - macOS build passed (`xcodebuild -scheme PrismCalcMac -configuration Debug build`).
 - watchOS build passed (`xcodebuild -scheme PrismCalcWatchApp -destination 'platform=watchOS Simulator,name=Apple Watch Series 11 (46mm)' build`).
+- iOS archive created: `build/archives/PrismCalc-2025-12-26.xcarchive`.
 - Website build + Playwright e2e tests passed (`npm run build`, `npm run test:e2e`).
-- macOS/watchOS screenshots still pending refresh after latest UI changes.
 
 **Build Commands (Release)**:
 ```
