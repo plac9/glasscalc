@@ -18,6 +18,9 @@ Glassmorphic calculator app (Swift 6, SwiftUI, SwiftData, StoreKit 2) targeting 
 - `swift test` or `swift test --enable-code-coverage`
 - `xcodebuild test -scheme PrismCalc -destination 'platform=iOS Simulator,name=iPhone 16'` — UI tests when needed
 
+## Notes
+- `glassEffect` (Liquid Glass) is iOS 26+ in the current SDK; keep availability guards and use Material fallbacks for iOS 18.
+
 ## Cross-References
 - iOS overview: `../CLAUDE.md`
 - Workspace hub: `~/dev/AGENTS.md`

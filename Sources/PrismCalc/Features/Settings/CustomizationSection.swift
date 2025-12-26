@@ -3,6 +3,9 @@ import SwiftUI
 /// Customization settings section for keypad layout, tab order, and widgets
 public struct CustomizationSection: View {
     @AppStorage("zeroOnRight") private var zeroOnRight: Bool = false
+    #if os(macOS)
+    @AppStorage("macTabBarMode") private var macTabBarMode: MacTabBarMode = .always
+    #endif
     @ScaledMetric(relativeTo: .caption2) private var proBadgeSize: CGFloat = 9
 
     public init() {}
@@ -17,6 +20,13 @@ public struct CustomizationSection: View {
 
                     Divider()
                         .background(GlassTheme.text.opacity(0.1))
+
+                    #if os(macOS)
+                    macTabBarRow
+
+                    Divider()
+                        .background(GlassTheme.text.opacity(0.1))
+                    #endif
 
                     resetTabOrderRow
 
@@ -102,6 +112,41 @@ public struct CustomizationSection: View {
         .accessibilityLabel("Reset tab order")
         .accessibilityHint("Restores tabs to their default order")
     }
+
+    #if os(macOS)
+    @MainActor
+    private var macTabBarRow: some View {
+        HStack(alignment: .center, spacing: GlassTheme.spacingSmall) {
+            Image(systemName: "dock.rectangle")
+                .foregroundStyle(GlassTheme.primary)
+                .frame(width: 28)
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Bottom Bar")
+                    .font(GlassTheme.bodyFont)
+                    .foregroundStyle(GlassTheme.text)
+
+                Text(macTabBarMode.subtitle)
+                    .font(GlassTheme.captionFont)
+                    .foregroundStyle(GlassTheme.textTertiary)
+            }
+
+            Spacer()
+
+            Picker("", selection: $macTabBarMode) {
+                ForEach(MacTabBarMode.allCases) { mode in
+                    Text(mode.title).tag(mode)
+                }
+            }
+            .pickerStyle(.segmented)
+            .frame(width: 180)
+            .labelsHidden()
+        }
+        .padding(GlassTheme.spacingMedium)
+        .accessibilityLabel("Bottom bar mode")
+        .accessibilityHint("Choose always visible or auto-hide")
+    }
+    #endif
 
     @MainActor
     private var widgetSettingsRow: some View {

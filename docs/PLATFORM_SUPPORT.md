@@ -1,6 +1,6 @@
 # prismCalc Platform Support
 
-**Generated**: 2025-12-07
+**Generated**: 2025-12-25
 **Project**: prismCalc v1.0.0
 **Minimum Deployment Target**: iOS 18.0 / iPadOS 18.0 / macOS 15.0 / watchOS 10.0
 
@@ -25,12 +25,14 @@ prismCalc is currently built for **native iOS, native iPadOS, native macOS, and 
 - **Portrait orientation** (primary)
 - All iPhone screen sizes from iPhone SE to iPhone Pro Max
 - iOS 18 floating tab bar (`.sidebarAdaptable`)
+- Liquid Glass (`glassEffect`) on iOS 26+, layered glass fallback on iOS 18+
 - Dynamic Type for accessibility
 - VoiceOver support
 
 #### Tested On
-✅ **iPhone 17 Pro** (iOS 26.1 Simulator) - Running
-✅ **iPhone 17 Pro Max** (iOS 26.1 Simulator) - Running
+✅ **iPhone 17** (iOS 26.2 Simulator) - Running
+✅ **iPhone 17 Pro** (iOS 26.2 Simulator) - Running
+✅ **iPhone 17 Pro Max** (iOS 26.2 Simulator) - Running
 
 ---
 
@@ -52,9 +54,10 @@ prismCalc is currently built for **native iOS, native iPadOS, native macOS, and 
 - Keyboard shortcuts (if implemented)
 - Apple Pencil support (future consideration)
 - Stage Manager compatibility
+- Liquid Glass (`glassEffect`) on iOS 26+, layered glass fallback on iOS 18+
 
 #### Tested On
-✅ **iPad Pro 13-inch (M5)** (iOS 26.1 Simulator) - Running
+✅ **iPad Pro 13-inch (M5)** (iOS 26.2 Simulator) - Running
 - iPad Pro 11-inch (available but not currently running)
 - iPad Air 13-inch (available but not currently running)
 - iPad Air 11-inch (available but not currently running)
@@ -69,13 +72,16 @@ prismCalc is currently built for **native iOS, native iPadOS, native macOS, and 
 #### Optimized For
 - Apple Silicon Macs running macOS 15+
 - Pointer input + keyboard usage
-- Resizable window layouts
+- Resizable window layouts with a compact calculator-first footprint
+- Slide-in history panel (last 10 entries) when the window is expanded wide
 - Same glassmorphic UI principles as iOS/iPadOS
 
 #### Notes
 - Native macOS app target with its own bundle ID
 - Native macOS WidgetKit extension included
+- "Designed for iPad" distribution disabled (native macOS target only)
 - iOS-only behaviors (haptics, tab bar appearance) are guarded
+- Default macOS window size: 320x560; history panel is opt-in via edge toggle
 
 ---
 
@@ -90,8 +96,12 @@ prismCalc is currently built for **native iOS, native iPadOS, native macOS, and 
 
 #### Notes
 - Focused feature set (basic operations)
-- No history or Pro feature gating on watchOS
+- History tab with last 10 calculations (on-device)
+- Tap haptics for keypad feedback
+- Quick Tip/Discount/Split tools using calculator input
 - Native watchOS widget extension (accessory families)
+#### Tested On
+✅ **Apple Watch Series 11 (46mm)** (watchOS 26.2 Simulator) - Running
 
 ---
 

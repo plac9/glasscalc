@@ -55,7 +55,7 @@ Fill out the new app form:
 ### 2.3 App Group (for Widget)
 1. **Identifiers** → **"+"** → **App Groups**
 2. **Description**: prismCalc Shared Data
-3. **Identifier**: `group.com.laclairtech.prismcalc`
+3. **Identifier**: `group.com.laclairtech.prismcalc.shared`
 4. Click **Continue** → **Register**
 
 ### 2.4 Widget Extension Bundle ID
@@ -139,7 +139,7 @@ Glassmorphic Calculator
 
 **Promotional Text** (170 chars - can be updated anytime):
 ```
-Beautiful calculator with iOS 18 glassmorphism, tip splitting, discounts, unit conversion, and 6 stunning themes. Pro tools for everyday math.
+Beautiful calculator with iOS 18+ glassmorphism (Liquid Glass on iOS 26+), tip splitting, discounts, unit conversion, and 6 stunning themes. Pro tools for everyday math.
 ```
 
 ### 5.2 Description
@@ -148,7 +148,7 @@ Copy from `docs/appstore/metadata.md` → Full Description section
 Key points to include:
 - Core calculator features
 - Pro features (Tip, Discount, Split, Convert)
-- Design highlights (6 themes, iOS 18, glassmorphism)
+- Design highlights (6 themes, iOS 18+ glassmorphism, Liquid Glass on iOS 26+)
 - Widgets & Siri
 - Accessibility
 
@@ -374,7 +374,7 @@ Create simple policy stating:
 **Bundle IDs**:
 - App: `com.laclairtech.prismcalc`
 - Widget: `com.laclairtech.prismcalc.widget`
-- App Group: `group.com.laclairtech.prismcalc`
+- App Group: `group.com.laclairtech.prismcalc.shared`
 
 **IAP**:
 - Product ID: `com.laclairtech.prismcalc.pro`

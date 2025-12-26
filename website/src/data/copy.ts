@@ -4,10 +4,10 @@ export const copy = {
   tagline: 'Beautiful calculations, real-world clarity',
 
   heroSubtitle:
-    'A fast everyday calculator with tip, discount, split, and unit conversions—wrapped in iOS 18 glass and built for privacy.',
+    'A fast everyday calculator with tip, discount, split, and unit conversions—wrapped in glassmorphism (Liquid Glass on iOS 26+) and built for privacy.',
 
   shortDescription:
-    'Glassmorphic calculator for iPhone, iPad, and Mac with tip, discount, split, conversion tools, and private on-device history.',
+    'Glassmorphic calculator for iPhone, iPad, and Mac with a companion Apple Watch app for quick calculations.',
 
   privacy: {
     headline: 'Your data stays yours',
@@ -35,9 +35,9 @@ export const copy = {
   meta: {
     title: 'PrismCalc - Beautiful calculations, real-world clarity',
     description:
-      'Glassmorphic calculator for iPhone, iPad, and Mac. Tip, discount, split, unit conversion, private history, and one-time Pro unlock.',
+      'Glassmorphic calculator for iPhone, iPad, Mac, and Apple Watch. Tip, discount, split, unit conversion, private history, and one-time Pro unlock.',
     keywords:
-      'calculator, tip calculator, split bill, discount calculator, unit converter, glassmorphism, iOS app, privacy, one-time purchase',
+      'calculator, tip calculator, split bill, discount calculator, unit converter, glassmorphism, iOS app, watchOS app, Apple Watch, privacy, one-time purchase',
     url: 'https://prismcalc.app',
   },
 

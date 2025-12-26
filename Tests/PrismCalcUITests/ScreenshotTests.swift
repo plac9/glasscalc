@@ -66,7 +66,7 @@ final class ScreenshotTests: XCTestCase {
             self.tapCalculatorButtons(["1", "2", "3", "4", "decimal", "5", "6"])
         }
 
-        // 2. History - Free tier paywall (Pro-only)
+        // 2. History - Free tier (last 10 + upgrade CTA)
         captureScreenshotOnTab(
             name: "02_History_Free",
             tab: "History",
@@ -198,9 +198,46 @@ final class ScreenshotTests: XCTestCase {
     ) {
         setupApp(pro: pro, theme: theme, populateData: populateData, selectedTab: tab)
         sleep(1)
+        navigateTo(tab: tab)
+        sleep(1)
         afterLaunch?()
         sleep(1)
         captureScreenshot(name)
+    }
+
+    private func navigateTo(tab: String) {
+        if tapNavigationItem(named: tab, timeout: 3) {
+            return
+        }
+
+        if tapNavigationItem(named: "More", timeout: 5) {
+            XCTAssertTrue(
+                tapNavigationItem(named: tab, timeout: 5),
+                "\(tab) should exist in More"
+            )
+        }
+    }
+
+    private func tapNavigationItem(named label: String, timeout: TimeInterval) -> Bool {
+        let tabBarButton = app.tabBars.buttons.matching(identifier: label).firstMatch
+        if tabBarButton.waitForExistence(timeout: timeout) {
+            tabBarButton.tap()
+            return true
+        }
+
+        let sidebarButton = app.buttons.matching(identifier: label).firstMatch
+        if sidebarButton.waitForExistence(timeout: timeout) {
+            sidebarButton.tap()
+            return true
+        }
+
+        let sidebarCell = app.cells.matching(identifier: label).firstMatch
+        if sidebarCell.waitForExistence(timeout: timeout) {
+            sidebarCell.tap()
+            return true
+        }
+
+        return false
     }
 
     private func tapCalculatorButtons(_ buttons: [String]) {
@@ -208,7 +245,7 @@ final class ScreenshotTests: XCTestCase {
             let identifier = "calculator-button-\(button)"
             let buttonElement = app.buttons[identifier]
 
-            if buttonElement.waitForExistence(timeout: 3) {
+            if buttonElement.waitForExistence(timeout: 5) {
                 buttonElement.tap()
                 usleep(100000) // 0.1 second between taps
             } else {

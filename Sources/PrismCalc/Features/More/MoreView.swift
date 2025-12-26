@@ -5,6 +5,9 @@ import SwiftUI
 public struct MoreView: View {
     @ScaledMetric(relativeTo: .body) private var iconSize: CGFloat = 24
     @ScaledMetric(relativeTo: .caption2) private var proBadgeSize: CGFloat = 9
+    #if os(macOS)
+    @Environment(\.macBottomBarInset) private var macBottomBarInset
+    #endif
 
     private var storeKit: StoreKitManager { StoreKitManager.shared }
 
@@ -34,11 +37,9 @@ public struct MoreView: View {
                         moreItem(
                             title: "History",
                             icon: "clock.arrow.circlepath",
-                            isPro: true
+                            isPro: false
                         ) {
-                            ProGatedView(featureName: "History", featureIcon: "clock.arrow.circlepath") {
-                                HistoryView()
-                            }
+                            HistoryView()
                         }
 
                         // Settings
@@ -51,6 +52,9 @@ public struct MoreView: View {
                         }
                     }
                     .padding()
+                    #if os(macOS)
+                    .padding(.bottom, macBottomBarInset)
+                    #endif
                     .prismContentMaxWidth()
                 }
                 .scrollContentBackground(.hidden)

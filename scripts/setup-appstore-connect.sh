@@ -21,7 +21,7 @@ echo ""
 # Configuration
 BUNDLE_ID="com.laclairtech.prismcalc"
 WIDGET_BUNDLE_ID="com.laclairtech.prismcalc.widget"
-APP_GROUP="group.com.laclairtech.prismcalc"
+APP_GROUP="group.com.laclairtech.prismcalc.shared"
 IAP_PRODUCT_ID="com.laclairtech.prismcalc.pro"
 APP_NAME="PrismCalc"
 SKU="prismcalc-ios"
@@ -191,7 +191,7 @@ cat > appstore-checklist.md <<'EOF'
   - [ ] Enable Siri capability
 - [ ] Register com.laclairtech.prismcalc.widget
   - [ ] Enable App Groups capability
-- [ ] Create App Group: group.com.laclairtech.prismcalc
+- [ ] Create App Group: group.com.laclairtech.prismcalc.shared
 
 ## App Record
 - [ ] Create new app in App Store Connect

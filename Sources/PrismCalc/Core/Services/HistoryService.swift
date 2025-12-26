@@ -6,6 +6,7 @@ import SwiftUI
 @MainActor
 public final class HistoryService {
     public static let shared = HistoryService()
+    public static let didUpdateNotification = Notification.Name("HistoryServiceDidUpdate")
 
     private var container: ModelContainer?
     private var context: ModelContext?
@@ -40,6 +41,7 @@ public final class HistoryService {
         do {
             try context.save()
             syncToWidget(entry: entry)
+            NotificationCenter.default.post(name: Self.didUpdateNotification, object: nil)
         } catch {
             print("Failed to save history entry: \(error)")
         }
@@ -51,6 +53,7 @@ public final class HistoryService {
         do {
             try context.save()
             syncToWidget(entry: entry)
+            NotificationCenter.default.post(name: Self.didUpdateNotification, object: nil)
         } catch {
             print("Failed to update history entry: \(error)")
         }
@@ -185,6 +188,7 @@ public final class HistoryService {
         context.delete(entry)
         do {
             try context.save()
+            NotificationCenter.default.post(name: Self.didUpdateNotification, object: nil)
         } catch {
             print("Failed to delete history entry: \(error)")
         }
@@ -200,6 +204,7 @@ public final class HistoryService {
         }
         do {
             try context.save()
+            NotificationCenter.default.post(name: Self.didUpdateNotification, object: nil)
         } catch {
             print("Failed to clear history: \(error)")
         }
@@ -210,4 +215,3 @@ public final class HistoryService {
         container
     }
 }
-

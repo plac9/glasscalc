@@ -29,6 +29,7 @@ public struct GlassCard<Content: View>: View {
     var padding: CGFloat
     @Environment(\EnvironmentValues.accessibilityReduceTransparency) private var reduceTransparency
     @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+    @Environment(\.colorScheme) private var colorScheme
 
     private var isIncreasedContrast: Bool {
         if #available(iOS 17.0, *) {
@@ -66,7 +67,7 @@ public struct GlassCard<Content: View>: View {
                     )
                         .overlay(
                             RoundedRectangle(cornerRadius: cornerRadius)
-                                .stroke(
+                                .strokeBorder(
                                     GlassTheme.glassBorderGradient(
                                         reduceTransparency: reduceTransparency,
                                         increaseContrast: isIncreasedContrast
@@ -76,6 +77,7 @@ public struct GlassCard<Content: View>: View {
                                         increaseContrast: isIncreasedContrast
                                     )
                                 )
+                                .blendMode(GlassTheme.glassBorderBlendMode(for: colorScheme))
                         )
                 )
                 .shadow(color: Color.black.opacity(GlassTheme.glassShadowOpacityPrimary), radius: 10, y: 5)
@@ -107,4 +109,3 @@ public struct GlassCard<Content: View>: View {
         .padding()
     }
 }
-

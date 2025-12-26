@@ -10,6 +10,7 @@ public struct HistoryView: View {
     @ScaledMetric(relativeTo: .title2) private var emptyIconSize: CGFloat = 48
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     // iOS 18 zoom transition support
     @Namespace private var historyNamespace
@@ -17,77 +18,89 @@ public struct HistoryView: View {
 
     private let addWidgetTip = AddWidgetTip()
     private var storeKit: StoreKitManager { StoreKitManager.shared }
+    private let freeHistoryLimit = 10
 
     public init() {}
 
     public var body: some View {
         NavigationStack {
-            if storeKit.isPro {
+            GeometryReader { proxy in
+                let isTwoColumn = horizontalSizeClass == .regular && proxy.size.width >= 760
                 ScrollView {
-                    VStack(spacing: GlassTheme.spacingMedium) {
-                        // Header with filter and clear
-                        headerSection
+                    AdaptiveColumns(isSplit: isTwoColumn, spacing: GlassTheme.spacingLarge) {
+                        VStack(spacing: GlassTheme.spacingMedium) {
+                            // Header with filter and clear
+                            headerSection
 
-                        // Widget tip with action handler
-                        TipView(addWidgetTip) { action in
-                            if action.id == "dismiss" {
-                                addWidgetTip.invalidate(reason: .actionPerformed)
+                            if !isPro {
+                                freeTierNotice
                             }
+
+                            // Widget tip with action handler
+                            TipView(addWidgetTip) { action in
+                                if action.id == "dismiss" {
+                                    addWidgetTip.invalidate(reason: .actionPerformed)
+                                }
+                            }
+                            .tipBackground(Color.clear)
+
+                            // Filter chips
+                            filterSection
                         }
-                        .tipBackground(Color.clear)
+                    } right: {
+                        VStack(spacing: GlassTheme.spacingMedium) {
+                            // History entries
+                            if filteredEntries.isEmpty {
+                                emptyState
+                            } else {
+                                entriesList
+                            }
 
-                        // Filter chips
-                        filterSection
-
-                        // History entries
-                        if filteredEntries.isEmpty {
-                            emptyState
-                        } else {
-                            entriesList
+                            if !isPro {
+                                ProUpgradeSection()
+                            }
                         }
                     }
                     .padding()
                     .prismContentMaxWidth()
                 }
-                .onAppear {
-                    loadHistory()
+            }
+            .onAppear {
+                loadHistory()
+            }
+            .confirmationDialog(
+                "Clear History",
+                isPresented: $showClearConfirm,
+                titleVisibility: .visible
+            ) {
+                Button("Clear Unlocked", role: .destructive) {
+                    clearHistory()
                 }
-                .confirmationDialog(
-                    "Clear History",
-                    isPresented: $showClearConfirm,
-                    titleVisibility: .visible
-                ) {
-                    Button("Clear Unlocked", role: .destructive) {
-                        clearHistory()
-                    }
-                    Button("Cancel", role: .cancel) {}
-                } message: {
-                    let lockedCount = entries.filter { $0.isLocked }.count
-                    if lockedCount > 0 {
-                        Text("""
-                            This will delete all unlocked history. \
-                            \(lockedCount) locked \(lockedCount == 1 ? "entry" : "entries") will be preserved.
-                            """)
-                    } else {
-                        Text("This will permanently delete all calculation history.")
-                    }
+                Button("Cancel", role: .cancel) {}
+            } message: {
+                let lockedCount = entries.filter { $0.isLocked }.count
+                if lockedCount > 0 {
+                    Text("""
+                        This will delete all unlocked history. \
+                        \(lockedCount) locked \(lockedCount == 1 ? "entry" : "entries") will be preserved.
+                        """)
+                } else {
+                    Text("This will permanently delete all calculation history.")
                 }
-                // iOS 18 zoom navigation destination
-                .navigationDestination(item: $selectedEntry) { entry in
-                    if #available(iOS 18.0, *) {
-                        #if os(iOS)
-                        HistoryDetailView(entry: entry)
-                            .navigationTransition(.zoom(sourceID: entry.id, in: historyNamespace))
-                        #else
-                        HistoryDetailView(entry: entry)
-                        #endif
-                    } else {
-                        // Fallback for iOS 17 (shouldn't be needed as app requires iOS 18+)
-                        Text("Detail view requires iOS 18+")
-                    }
+            }
+            // iOS 18 zoom navigation destination
+            .navigationDestination(item: $selectedEntry) { entry in
+                if #available(iOS 18.0, *) {
+                    #if os(iOS)
+                    HistoryDetailView(entry: entry)
+                        .navigationTransition(.zoom(sourceID: entry.id, in: historyNamespace))
+                    #else
+                    HistoryDetailView(entry: entry)
+                    #endif
+                } else {
+                    // Fallback for iOS 17 (shouldn't be needed as app requires iOS 18+)
+                    Text("Detail view requires iOS 18+")
                 }
-            } else {
-                PaywallView(featureName: "History", featureIcon: "clock.arrow.circlepath")
             }
         }
     }
@@ -95,11 +108,12 @@ public struct HistoryView: View {
     // MARK: - Filtered Entries
 
     private var filteredEntries: [HistoryEntry] {
+        let scopedEntries = visibleEntries
         var filtered: [HistoryEntry]
         if let selectedType {
-            filtered = entries.filter { $0.type == selectedType }
+            filtered = scopedEntries.filter { $0.type == selectedType }
         } else {
-            filtered = entries
+            filtered = scopedEntries
         }
         return filtered
     }
@@ -114,7 +128,7 @@ public struct HistoryView: View {
                     .font(GlassTheme.titleFont)
                     .foregroundStyle(GlassTheme.text)
 
-                Text("\(entries.count) calculations")
+                Text(historyCountText)
                     .font(GlassTheme.captionFont)
                     .foregroundStyle(GlassTheme.textSecondary)
             }
@@ -218,7 +232,8 @@ public struct HistoryView: View {
                     namespace: historyNamespace,
                     onDelete: deleteEntry,
                     onToggleLock: toggleLock,
-                    onSelect: { selectedEntry = $0 }
+                    onSelect: { selectedEntry = $0 },
+                    allowsLocking: isPro
                 )
                 .scrollTransition { [reduceMotionNow = reduceMotion] content, phase in
                     content
@@ -228,6 +243,40 @@ public struct HistoryView: View {
                 }
             }
         }
+    }
+
+    @MainActor
+    private var freeTierNotice: some View {
+        GlassCard(material: .ultraThinMaterial) {
+            VStack(alignment: .leading, spacing: GlassTheme.spacingXS) {
+                Text("Free History")
+                    .font(GlassTheme.headlineFont)
+                    .foregroundStyle(GlassTheme.text)
+                Text("Showing the last \(freeHistoryLimit) entries. Upgrade for unlimited history and lock controls.")
+                    .font(GlassTheme.captionFont)
+                    .foregroundStyle(GlassTheme.textSecondary)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private var isPro: Bool {
+        storeKit.isPro
+    }
+
+    private var visibleEntries: [HistoryEntry] {
+        if isPro {
+            return entries
+        }
+        return Array(entries.prefix(freeHistoryLimit))
+    }
+
+    private var historyCountText: String {
+        if isPro {
+            return "\(entries.count) calculations"
+        }
+        let count = min(entries.count, freeHistoryLimit)
+        return "Last \(count) of \(freeHistoryLimit)"
     }
 
     // MARK: - Empty State
@@ -286,6 +335,7 @@ public struct HistoryView: View {
     }
 
     private func toggleLock(_ entry: HistoryEntry) {
+        guard isPro else { return }
         entry.isLocked.toggle()
         HistoryService.shared.update(entry)
         let reduceMotionSnapshot = reduceMotion

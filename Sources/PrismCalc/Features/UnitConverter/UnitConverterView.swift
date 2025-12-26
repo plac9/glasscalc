@@ -10,44 +10,54 @@ public struct UnitConverterView: View {
     private let swapButtonSize: CGFloat = 44
     @Environment(\EnvironmentValues.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @FocusState private var isInputFocused: Bool
 
     public init() {}
 
     public var body: some View {
         let reduce = reduceMotion
-        ScrollView {
-            VStack(spacing: GlassTheme.spacingLarge) {
-                // Category Selector
-                categorySelector
-                    .scrollTransition { content, phase in
-                        content.opacity(reduce || phase.isIdentity ? 1 : 0.85)
-                    }
+        GeometryReader { proxy in
+            let isTwoColumn = horizontalSizeClass == .regular && proxy.size.width >= 760
+            ScrollView {
+                VStack(spacing: GlassTheme.spacingLarge) {
+                    // Category Selector
+                    categorySelector
+                        .scrollTransition { content, phase in
+                            content.opacity(reduce || phase.isIdentity ? 1 : 0.85)
+                        }
 
-                // Input
-                inputSection
-                    .scrollTransition { content, phase in
-                        content.opacity(reduce || phase.isIdentity ? 1 : 0.85)
-                    }
+                    AdaptiveColumns(isSplit: isTwoColumn, spacing: GlassTheme.spacingLarge) {
+                        VStack(spacing: GlassTheme.spacingLarge) {
+                            // Input
+                            inputSection
+                                .scrollTransition { content, phase in
+                                    content.opacity(reduce || phase.isIdentity ? 1 : 0.85)
+                                }
 
-                // Unit Selectors with Swap
-                unitSelectors
-                    .scrollTransition { content, phase in
-                        content
-                            .opacity(reduce || phase.isIdentity ? 1 : 0.85)
-                            .scaleEffect(reduce || phase.isIdentity ? 1 : 0.97)
+                            // Unit Selectors with Swap
+                            unitSelectors
+                                .scrollTransition { content, phase in
+                                    content
+                                        .opacity(reduce || phase.isIdentity ? 1 : 0.85)
+                                        .scaleEffect(reduce || phase.isIdentity ? 1 : 0.97)
+                                }
+                        }
+                    } right: {
+                        VStack(spacing: GlassTheme.spacingLarge) {
+                            // Result
+                            resultSection
+                                .scrollTransition { content, phase in
+                                    content
+                                        .opacity(reduce || phase.isIdentity ? 1 : 0.9)
+                                        .offset(y: reduce || phase.isIdentity ? 0 : phase.value * 8)
+                                }
+                        }
                     }
-
-                // Result
-                resultSection
-                    .scrollTransition { content, phase in
-                        content
-                            .opacity(reduce || phase.isIdentity ? 1 : 0.9)
-                            .offset(y: reduce || phase.isIdentity ? 0 : phase.value * 8)
-                    }
+                }
+                .padding()
+                .prismContentMaxWidth()
             }
-            .padding()
-            .prismContentMaxWidth()
         }
         .scrollDismissesKeyboard(.interactively)
         .toolbar {
@@ -112,6 +122,7 @@ public struct UnitConverterView: View {
             }
         }
         .sensoryFeedback(.selection, trigger: viewModel.selectedCategory)
+        .frame(maxWidth: .infinity)
     }
 
     // MARK: - Input
@@ -135,6 +146,7 @@ public struct UnitConverterView: View {
                     .accessibilityLabel("Input value")
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     // MARK: - Unit Selectors
@@ -183,6 +195,7 @@ public struct UnitConverterView: View {
                 units: viewModel.availableUnits
             )
         }
+        .frame(maxWidth: .infinity)
     }
 
     @MainActor
@@ -203,6 +216,7 @@ public struct UnitConverterView: View {
                 .tint(GlassTheme.primary)
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     // MARK: - Swap Button Icon

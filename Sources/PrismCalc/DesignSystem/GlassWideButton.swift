@@ -26,6 +26,7 @@ public struct GlassWideButton: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
     @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+    @Environment(\.colorScheme) private var colorScheme
     @ScaledMetric(relativeTo: .title2) private var labelScale: CGFloat = 1.0
 
     private var isIncreasedContrast: Bool {
@@ -72,7 +73,7 @@ public struct GlassWideButton: View {
                     GlassTheme.glassCapsuleBackground(material: .thinMaterial, reduceTransparency: reduceTransparency)
                         .overlay(
                             Capsule()
-                                .stroke(
+                                .strokeBorder(
                                     GlassTheme.glassBorderGradient(
                                         reduceTransparency: reduceTransparency,
                                         increaseContrast: isIncreasedContrast
@@ -82,6 +83,7 @@ public struct GlassWideButton: View {
                                         increaseContrast: isIncreasedContrast
                                     )
                                 )
+                                .blendMode(GlassTheme.glassBorderBlendMode(for: colorScheme))
                         )
                 )
                 .shadow(color: Color.black.opacity(GlassTheme.glassShadowOpacityPrimary), radius: 8, y: 4)

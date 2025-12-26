@@ -23,6 +23,7 @@ public struct DiscountCalculatorView: View {
     @Environment(\EnvironmentValues.accessibilityReduceMotion) private var reduceMotion
     @Environment(\EnvironmentValues.accessibilityReduceTransparency) private var reduceTransparency
     @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     private var isIncreasedContrast: Bool {
         if #available(iOS 17.0, *) {
             return colorSchemeContrast == .increased
@@ -41,41 +42,48 @@ public struct DiscountCalculatorView: View {
     public var body: some View {
         let reduce = reduceMotion
 
-        ScrollView {
-            VStack(spacing: GlassTheme.spacingLarge) {
-                // Original Price Input
-                priceInputSection
-                    .ifAvailableiOS17 {
-                        $0.scrollTransition(.animated, axis: .vertical) { content, phase in
-                            content.opacity(reduce || phase.isIdentity ? 1 : 0.85)
-                        }
-                    }
+        GeometryReader { proxy in
+            let isTwoColumn = horizontalSizeClass == .regular && proxy.size.width >= 760
+            ScrollView {
+                AdaptiveColumns(isSplit: isTwoColumn, spacing: GlassTheme.spacingLarge) {
+                    VStack(spacing: GlassTheme.spacingLarge) {
+                        // Original Price Input
+                        priceInputSection
+                            .ifAvailableiOS17 {
+                                $0.scrollTransition(.animated, axis: .vertical) { content, phase in
+                                    content.opacity(reduce || phase.isIdentity ? 1 : 0.85)
+                                }
+                            }
 
-                // Discount Percentage Arc Slider
-                discountSliderSection
-                    .ifAvailableiOS17 {
-                        $0.scrollTransition(.animated, axis: .vertical) { content, phase in
-                            content
-                                .opacity(reduce || phase.isIdentity ? 1 : 0.85)
-                                .scaleEffect(reduce || phase.isIdentity ? 1 : 0.97)
-                        }
-                    }
+                        // Discount Percentage Arc Slider
+                        discountSliderSection
+                            .ifAvailableiOS17 {
+                                $0.scrollTransition(.animated, axis: .vertical) { content, phase in
+                                    content
+                                        .opacity(reduce || phase.isIdentity ? 1 : 0.85)
+                                        .scaleEffect(reduce || phase.isIdentity ? 1 : 0.97)
+                                }
+                            }
 
-                // Quick Discount Buttons
-                quickDiscountSection
-
-                // Results with visual savings indicator
-                resultsSection
-                    .ifAvailableiOS17 {
-                        $0.scrollTransition(.animated, axis: .vertical) { content, phase in
-                            content
-                                .opacity(reduce || phase.isIdentity ? 1 : 0.9)
-                                .offset(y: reduce || phase.isIdentity ? 0 : phase.value * 8)
-                        }
+                        // Quick Discount Buttons
+                        quickDiscountSection
                     }
+                } right: {
+                    VStack(spacing: GlassTheme.spacingLarge) {
+                        // Results with visual savings indicator
+                        resultsSection
+                            .ifAvailableiOS17 {
+                                $0.scrollTransition(.animated, axis: .vertical) { content, phase in
+                                    content
+                                        .opacity(reduce || phase.isIdentity ? 1 : 0.9)
+                                        .offset(y: reduce || phase.isIdentity ? 0 : phase.value * 8)
+                                }
+                            }
+                    }
+                }
+                .padding()
+                .prismContentMaxWidth()
             }
-            .padding()
-            .prismContentMaxWidth()
         }
         .scrollDismissesKeyboard(.interactively)
         .toolbar {
@@ -116,6 +124,7 @@ public struct DiscountCalculatorView: View {
                 }
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     // MARK: - Discount Slider
@@ -132,6 +141,7 @@ public struct DiscountCalculatorView: View {
             }
             .padding(.vertical, GlassTheme.spacingSmall)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     // MARK: - Quick Discounts
@@ -182,6 +192,7 @@ public struct DiscountCalculatorView: View {
                 )
             }
         }
+        .frame(maxWidth: .infinity)
     }
 
     // MARK: - Results
@@ -304,6 +315,7 @@ public struct DiscountCalculatorView: View {
             )
             .shadow(color: Color.black.opacity(GlassTheme.glassShadowOpacityPrimary), radius: 15, y: 8)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     // MARK: - Savings Tag Icon (Reduce Motion Support)

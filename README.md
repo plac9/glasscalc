@@ -13,7 +13,7 @@ Part of the LaClair Tech suite - Beautiful, functional tools with stunning UI de
 
 ## Overview
 
-prismCalc is a beautifully designed calculator app featuring full glassmorphism effects, leveraging iOS 18's Liquid Glass design language. Primary focus on spectacular UI while providing practical real-world calculation tools.
+prismCalc is a beautifully designed calculator app featuring full glassmorphism effects. On iOS 26+ it uses Liquid Glass (`glassEffect`); on iOS 18+ it uses layered material fallbacks while keeping the same visual language.
 
 **Mission**: prismCalc is for everyday iPhone users who want a gorgeous, trustworthy calculator for money math without clutter.
 
@@ -47,7 +47,7 @@ prismCalc is a beautifully designed calculator app featuring full glassmorphism 
 
 ## Screenshots
 
-*Coming soon - Full glassmorphism UI*
+Screenshots live in `screenshots/` and `docs/appstore/`.
 
 ---
 
@@ -87,7 +87,7 @@ prismCalc is a beautifully designed calculator app featuring full glassmorphism 
 - **UI Framework**: 100% SwiftUI
 - **Platforms**: iOS 18.0+, iPadOS 18.0+, macOS 15.0+ (native), watchOS 10.0+
 - **Bundle IDs**: iOS `com.laclairtech.prismcalc`, macOS `com.laclairtech.prismcalc.mac`, watchOS `com.laclairtech.prismcalc.watch`, widgets `com.laclairtech.prismcalc.widget`, `com.laclairtech.prismcalc.mac.widget`, `com.laclairtech.prismcalc.watch.widget`
-- **App Group**: `group.com.laclairtech.prismcalc`
+- **App Group**: `group.com.laclairtech.prismcalc.shared`
 - **Package Manager**: Swift Package Manager
 
 ### Project Structure

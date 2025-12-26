@@ -44,6 +44,7 @@ struct SplitResultsSection: View {
             perPersonHero
             breakdownCard
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     // MARK: - Per Person Hero
@@ -128,6 +129,7 @@ struct SplitResultsSection: View {
                 }
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     @MainActor
@@ -177,4 +179,3 @@ struct SplitResultsSection: View {
 #Preview {
     SplitResultsSection(viewModel: SplitBillViewModel())
 }
-

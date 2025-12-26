@@ -31,6 +31,7 @@ export function Hero() {
             <span className="hero__badge">iOS 18+</span>
             <span className="hero__badge">iPadOS 18+</span>
             <span className="hero__badge">macOS 15+</span>
+            <span className="hero__badge">watchOS 10+</span>
             <span className="hero__badge">Privacy-first</span>
           </div>
         </div>

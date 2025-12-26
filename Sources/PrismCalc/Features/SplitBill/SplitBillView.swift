@@ -12,41 +12,49 @@ public struct SplitBillView: View {
     private let peopleControlSize: CGFloat = 56
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @FocusState private var isInputFocused: Bool
 
     public init() {}
 
     public var body: some View {
         let reduce = reduceMotion
-        ScrollView {
-            VStack(spacing: GlassTheme.spacingLarge) {
-                // Total Bill Input
-                billInputSection
-                    .scrollTransition { content, phase in
-                        content.opacity(reduce || phase.isIdentity ? 1 : 0.85)
-                    }
+        GeometryReader { proxy in
+            let isTwoColumn = horizontalSizeClass == .regular && proxy.size.width >= 760
+            ScrollView {
+                AdaptiveColumns(isSplit: isTwoColumn, spacing: GlassTheme.spacingLarge) {
+                    VStack(spacing: GlassTheme.spacingLarge) {
+                        // Total Bill Input
+                        billInputSection
+                            .scrollTransition { content, phase in
+                                content.opacity(reduce || phase.isIdentity ? 1 : 0.85)
+                            }
 
-                // Number of People
-                peopleSection
-                    .scrollTransition { content, phase in
-                        content
-                            .opacity(reduce || phase.isIdentity ? 1 : 0.85)
-                            .scaleEffect(reduce || phase.isIdentity ? 1 : 0.97)
-                    }
+                        // Number of People
+                        peopleSection
+                            .scrollTransition { content, phase in
+                                content
+                                    .opacity(reduce || phase.isIdentity ? 1 : 0.85)
+                                    .scaleEffect(reduce || phase.isIdentity ? 1 : 0.97)
+                            }
 
-                // Tip Toggle and Slider
-                tipSection
-
-                // Results
-                SplitResultsSection(viewModel: viewModel)
-                    .scrollTransition { content, phase in
-                        content
-                            .opacity(reduce || phase.isIdentity ? 1 : 0.9)
-                            .offset(y: reduce || phase.isIdentity ? 0 : phase.value * 8)
+                        // Tip Toggle and Slider
+                        tipSection
                     }
+                } right: {
+                    VStack(spacing: GlassTheme.spacingLarge) {
+                        // Results
+                        SplitResultsSection(viewModel: viewModel)
+                            .scrollTransition { content, phase in
+                                content
+                                    .opacity(reduce || phase.isIdentity ? 1 : 0.9)
+                                    .offset(y: reduce || phase.isIdentity ? 0 : phase.value * 8)
+                            }
+                    }
+                }
+                .padding()
+                .prismContentMaxWidth()
             }
-            .padding()
-            .prismContentMaxWidth()
         }
         .scrollDismissesKeyboard(.interactively)
         .toolbar {
@@ -87,6 +95,7 @@ public struct SplitBillView: View {
                 }
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     // MARK: - People Section
@@ -175,6 +184,7 @@ public struct SplitBillView: View {
                 .sensoryFeedback(.selection, trigger: viewModel.numberOfPeople)
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     // MARK: - Tip Section
@@ -224,6 +234,7 @@ public struct SplitBillView: View {
             }
             .animation(reduceMotion ? nil : GlassTheme.springAnimation, value: viewModel.includeTip)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     // MARK: - Button Icons (Reduce Motion Support)

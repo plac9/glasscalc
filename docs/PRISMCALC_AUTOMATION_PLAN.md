@@ -1,7 +1,7 @@
 # prismCalc Automation Run Plan
 
 ## Scope
-- App: Liquid Glass background unification, high-contrast accessibility toggle, StoreKit OSLog diagnostics.
+- App: Liquid Glass on iOS 26+ with layered glass fallback for iOS 18, high-contrast accessibility toggle, StoreKit OSLog diagnostics.
 - Website: demo section, accessibility improvements, SEO/meta updates, content depth (About/Support/Roadmap).
 - Product roadmap: scientific tools, currency/tax, smart split, localization, and web/PWA exploration.
 
@@ -15,7 +15,7 @@
 1. Sync repo state and verify clean working tree.
 2. Run the automation script (preferred): `scripts/run-prismcalc-automation.sh`.
 3. Apply app updates:
-   - Update DesignSystem for Liquid Glass helpers.
+   - Update DesignSystem for Liquid Glass helpers (iOS 26+) and iOS 18 fallback layers.
    - Wire high-contrast state to GlassTheme + Settings.
    - Add OSLog diagnostics for StoreKit flows.
 4. Run Swift build + tests:
@@ -49,6 +49,7 @@
 - Daily note every 15 minutes while active.
 - Email status every 15 minutes:
   - `python3 ~/dev/.standards/send-status-email.py --agent Codex --focus "prismcalc" --status "in progress" --next "..." --blockers "None" --changes "..." --debt "..."`
+  - Template now uses visual snapshot cards + flow diagram for quick scanning (AuADHD layout).
 
 ## Roadmap Follow-Through (Automation Targets)
 - Generate GitHub issues from `Roadmap` section data.

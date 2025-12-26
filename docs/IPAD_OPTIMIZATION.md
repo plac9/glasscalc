@@ -74,10 +74,10 @@ private func calculateButtonSize(for size: CGSize) -> CGFloat {
 private func calculateLayout(for size: CGSize, isIPad: Bool) -> LayoutMetrics {
     // Calculate button size based on width
     let spacing: CGFloat = isIPad ? GlassTheme.spacingMedium : GlassTheme.spacingSmall
-    let horizontalPadding: CGFloat = isIPad ? (GlassTheme.spacingXL * 4) : (GlassTheme.spacingMedium * 2)
+    let horizontalPadding: CGFloat = isIPad ? (GlassTheme.spacingXL * 2) : (GlassTheme.spacingMedium * 2)
     let availableWidth = size.width - horizontalPadding - (spacing * 3)
     let calculatedButtonSize = availableWidth / 4
-    let maxButtonSize: CGFloat = isIPad ? 200 : GlassTheme.buttonSizeLarge
+    let maxButtonSize: CGFloat = isIPad ? 140 : GlassTheme.buttonSizeLarge
     let buttonSize = min(calculatedButtonSize, maxButtonSize)
 
     // Calculate total button grid height (5 rows + 4 gaps)
@@ -107,9 +107,9 @@ private struct LayoutMetrics {
 - **Proportional layout**: Calculates button grid height first, then allocates remaining space to display
 - **No hardcoded heights**: Everything adapts to actual screen dimensions
 - **Prevents button cutoff**: Ensures button grid always fits by working backwards from required space
-- **iPad horizontal padding**: 128px (32px × 4) vs 32px on iPhone
+- **iPad horizontal padding**: 64px (32px × 2) vs 32px on iPhone
 - **iPad spacing**: 16px vs 8px on iPhone
-- **iPad max button size**: 200px vs 84px on iPhone
+- **iPad max button size**: 140px vs 84px on iPhone
 
 ---
 
@@ -137,22 +137,21 @@ Applied to:
 
 **Result**:
 - **iPhone**: 16px horizontal margins
-- **iPad**: 64px horizontal margins (4× more space)
+- **iPad**: 64px horizontal margins (2× more space)
 
 ---
 
 ### 4. Width Constraint (CalculatorView.swift:171-172)
 
 ```swift
-.frame(maxWidth: isIPad ? 800 : .infinity)
-.frame(maxWidth: .infinity)  // Center the constrained content
+.frame(width: layoutMetrics.contentWidth)
+.frame(maxWidth: .infinity, alignment: .top)
 ```
 
-**Why 800pt?**
-- Comfortable width for calculator on iPad
-- Prevents buttons from becoming grotesquely large on 13-inch displays
-- Leaves balanced margins on both sides
-- Centers the calculator elegantly
+**Why this works**:
+- Content width is derived from grid width + horizontal padding
+- Button size cap keeps the calculator from ballooning on 13-inch displays
+- The view stays centered while preserving balanced margins
 
 ---
 
@@ -189,23 +188,23 @@ Applied to:
 | **iPhone SE** | 375pt | 84px | 8px | 32px |
 | **iPhone 17 Pro** | 393pt | 84px | 8px | 32px |
 | **iPhone 17 Pro Max** | 430pt | 84px | 8px | 32px |
-| **iPad mini** | 744pt | 136px* | 16px | 128px |
-| **iPad Air 11"** | 820pt | 149px* | 16px | 128px |
-| **iPad Pro 13"** | 1024pt | 200px (capped) | 16px | 128px |
+| **iPad mini** | 744pt | 140px (capped) | 16px | 64px |
+| **iPad Air 11"** | 820pt | 140px (capped) | 16px | 64px |
+| **iPad Pro 13"** | 1024pt | 140px (capped) | 16px | 64px |
 
-*Calculated dynamically based on available width: (screenWidth - 128 - 48) / 4
+*Calculated dynamically based on available width: (screenWidth - 128 - 48) / 4, capped at 140
 
 ---
 
 ## Testing
 
 ### Verified On
-- ✅ iPhone 17 Pro (iOS 26.1 Simulator) - No changes, works as before
-- ✅ iPad Pro 13-inch (iOS 26.1 Simulator) - **Significantly improved**
+- ✅ iPhone 17 Pro (iOS 26.2 Simulator) - No changes, works as before
+- ✅ iPad Pro 13-inch (iOS 26.2 Simulator) - **Significantly improved**
 
 ### Test Cases
 1. **Portrait orientation**: ✅ Buttons are large, spacing is generous
-2. **Landscape orientation**: ✅ Constrained to 800pt, well-centered
+2. **Landscape orientation**: ✅ Content width derived from grid + padding, centered
 3. **Split View (iPad)**: ✅ Falls back to compact layout (iPhone-style) when narrow
 4. **Slide Over (iPad)**: ✅ Uses compact layout appropriately
 
@@ -326,4 +325,3 @@ The optimization makes prismCalc feel like a **true iPad app** with smart, adapt
 ---
 
 **Status**: ✅ Complete - Ready for testing on physical iPad devices
-

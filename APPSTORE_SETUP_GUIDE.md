@@ -33,13 +33,13 @@ Go to: https://developer.apple.com/account/resources/identifiers
 
 - Click '+' → Select "App Groups"
 - Description: `prismCalc Shared Data`
-- Identifier: `group.com.laclairtech.prismcalc`
+- Identifier: `group.com.laclairtech.prismcalc.shared`
 - Click Continue → Register
 
 **Then link to Bundle IDs:**
 - Select `com.laclairtech.prismcalc` → Edit
 - Enable "App Groups" → Configure
-- Select `group.com.laclairtech.prismcalc`
+- Select `group.com.laclairtech.prismcalc.shared`
 - Repeat for `com.laclairtech.prismcalc.widget`
 
 ---
@@ -162,7 +162,8 @@ prismCalc brings a spectacular glassmorphic design to your everyday calculations
 ✨ FREE FEATURES
 • Stunning glassmorphic design
 • Aurora theme included
-• iOS 18 optimized with smooth animations
+• iOS 18+ optimized with smooth animations
+• Liquid Glass on iOS 26+ with layered material fallback on iOS 18
 
 🎯 PRISMCALC PRO ($2.99)
 Unlock the complete experience:
@@ -185,8 +186,9 @@ FEATURES
 • Home Screen widgets
 • Control Center widget
 • Live Activities support
+• Apple Watch companion app + complications
 
-DESIGNED FOR iOS 18
+DESIGNED FOR iOS 18+ (Liquid Glass on iOS 26+)
 • Native floating tab bar
 • Smooth zoom transitions
 • Haptic feedback
@@ -199,7 +201,7 @@ Perfect for students, professionals, and anyone who appreciates beautiful design
 
 **Keywords** (100 characters max):
 ```
-calculator,tip,split,bill,discount,converter,glass,theme,widget,siri
+calculator,tip,split,bill,discount,converter,glass,theme,widget,siri,watch
 ```
 
 **Support URL**: `https://laclairtech.com/support/prismcalc`

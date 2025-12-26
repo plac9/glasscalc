@@ -5,7 +5,7 @@
 ### ✅ Code & Build
 - [x] All features implemented (Calculator, History (Pro), Tip, Discount, Split, Converter)
 - [x] Freemium model with IAP (Free tier + Pro $2.99)
-- [x] iOS 18 features (floating tab bar, zoom transitions, mesh gradients)
+- [x] iOS 18+ features (floating tab bar, zoom transitions, mesh gradients) with Liquid Glass on iOS 26+
 - [x] Widget Extension with shared data
 - [x] Siri Shortcuts integration
 - [x] App Groups entitlements configured
@@ -44,7 +44,7 @@ Register Bundle IDs and App Groups at https://developer.apple.com/account
 **What you'll do**:
 1. Register main app Bundle ID: `com.laclairtech.prismcalc`
 2. Register widget Bundle ID: `com.laclairtech.prismcalc.widget`
-3. Create App Group: `group.com.laclairtech.prismcalc`
+3. Create App Group: `group.com.laclairtech.prismcalc.shared`
 4. Link both Bundle IDs to the App Group
 
 **Detailed instructions**: `EXECUTION_CHECKLIST.md` Phase 1

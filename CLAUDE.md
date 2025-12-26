@@ -5,7 +5,7 @@ This file provides context and conventions for AI assistants working on this cod
 ## Project Overview
 
 **PrismCalc** is a glassmorphic calculator app for iOS featuring:
-- Full glassmorphism effects using iOS 18's Liquid Glass design language
+- Full glassmorphism effects with Liquid Glass on iOS 26+ and layered material fallback on iOS 18+
 - Swift 6.0 with strict concurrency
 - 100% SwiftUI with haptic feedback
 - Freemium model with in-app purchases
@@ -13,7 +13,7 @@ This file provides context and conventions for AI assistants working on this cod
 **Key URLs:**
 - Bundle ID: `com.laclairtech.prismcalc`
 - Widget Bundle ID: `com.laclairtech.prismcalc.widget`
-- App Group: `group.com.laclairtech.prismcalc`
+- App Group: `group.com.laclairtech.prismcalc.shared`
 
 ## Technology Stack
 

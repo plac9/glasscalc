@@ -145,6 +145,8 @@ public final class StoreKitManager {
         }
 
         purchasedProductIDs = purchased
+        let productList = purchased.sorted().joined(separator: ", ")
+        Diagnostics.storeKit.info("Updated entitlements: \(productList.isEmpty ? "none" : productList, privacy: .public)")
     }
 
     private func listenForTransactions() async {
@@ -159,6 +161,7 @@ public final class StoreKitManager {
     private func checkVerified<T>(_ result: VerificationResult<T>) throws -> T {
         switch result {
         case .unverified:
+            Diagnostics.storeKit.error("Unverified StoreKit transaction")
             throw StoreKitError.verificationFailed
         case .verified(let safe):
             return safe

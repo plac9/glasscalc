@@ -10,26 +10,52 @@ import SwiftUI
 public struct GlassDisplay: View {
     let value: String
     let expression: String
+    let isLargeScreenOverride: Bool?
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     // Calculator display uses fixed sizes - should not scale with Dynamic Type
     // to ensure numbers always fit properly on screen
-    private let baseDisplaySize: CGFloat = 64
-    private let baseExpressionSize: CGFloat = 18
-
-    public init(value: String, expression: String = "") {
-        self.value = value
-        self.expression = expression
+    private var baseDisplaySize: CGFloat {
+        #if os(macOS)
+        return 42
+        #else
+        return 64
+        #endif
     }
 
-    private var isIPad: Bool {
-        horizontalSizeClass == .regular
+    private var baseExpressionSize: CGFloat {
+        #if os(macOS)
+        return 12
+        #else
+        return 18
+        #endif
+    }
+
+    public init(value: String, expression: String = "", isLargeScreen: Bool? = nil) {
+        self.value = value
+        self.expression = expression
+        self.isLargeScreenOverride = isLargeScreen
+    }
+
+    private var isLargeScreen: Bool {
+        if let isLargeScreenOverride {
+            return isLargeScreenOverride
+        }
+        #if os(macOS)
+        return false
+        #else
+        return horizontalSizeClass == .regular
+        #endif
     }
 
     public var body: some View {
-        GlassCard(material: .ultraThinMaterial, cornerRadius: GlassTheme.cornerRadiusLarge) {
-            VStack(alignment: .trailing, spacing: isIPad ? GlassTheme.spacingMedium : GlassTheme.spacingXS) {
+        GlassCard(
+            material: .ultraThinMaterial,
+            cornerRadius: cardCornerRadius,
+            padding: cardPadding
+        ) {
+            VStack(alignment: .trailing, spacing: isLargeScreen ? GlassTheme.spacingMedium : GlassTheme.spacingXS) {
                 // Expression breadcrumb - expanded to show full calculation
                 // Uses horizontal scroll for very long expressions
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -57,13 +83,45 @@ public struct GlassDisplay: View {
                     .animation(reduceMotion ? nil : .easeInOut(duration: GlassTheme.animationQuick), value: value)
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
-            .padding(.vertical, isIPad ? GlassTheme.spacingLarge : GlassTheme.spacingSmall)
-            .padding(.horizontal, isIPad ? GlassTheme.spacingMedium : GlassTheme.spacingSmall)
+            .padding(.vertical, verticalPadding)
+            .padding(.horizontal, horizontalPadding)
             .animation(reduceMotion ? nil : .easeInOut(duration: GlassTheme.animationQuick), value: expression.isEmpty)
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel(accessibilityDescription)
         .accessibilityValue(value)
+    }
+
+    private var verticalPadding: CGFloat {
+        #if os(macOS)
+        return 4
+        #else
+        return isLargeScreen ? GlassTheme.spacingLarge : GlassTheme.spacingSmall
+        #endif
+    }
+
+    private var horizontalPadding: CGFloat {
+        #if os(macOS)
+        return 4
+        #else
+        return isLargeScreen ? GlassTheme.spacingMedium : GlassTheme.spacingSmall
+        #endif
+    }
+
+    private var cardPadding: CGFloat {
+        #if os(macOS)
+        return 8
+        #else
+        return GlassTheme.spacingMedium
+        #endif
+    }
+
+    private var cardCornerRadius: CGFloat {
+        #if os(macOS)
+        return GlassTheme.cornerRadiusMedium
+        #else
+        return GlassTheme.cornerRadiusLarge
+        #endif
     }
 
     private var accessibilityDescription: String {
@@ -75,7 +133,7 @@ public struct GlassDisplay: View {
     }
 
     private var displayFontSize: CGFloat {
-        let baseMultiplier: CGFloat = isIPad ? 1.5 : 1.0
+        let baseMultiplier: CGFloat = isLargeScreen ? 1.5 : 1.0
 
         switch value.count {
         case 0...6: return baseDisplaySize * baseMultiplier
@@ -86,7 +144,7 @@ public struct GlassDisplay: View {
     }
 
     private var expressionFontSize: CGFloat {
-        let baseMultiplier: CGFloat = isIPad ? 1.55 : 1.0
+        let baseMultiplier: CGFloat = isLargeScreen ? 1.55 : 1.0
         return baseExpressionSize * baseMultiplier
     }
 }

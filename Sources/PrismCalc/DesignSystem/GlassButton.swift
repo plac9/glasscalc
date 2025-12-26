@@ -58,6 +58,7 @@ public struct GlassButton: View {
     @Environment(\EnvironmentValues.accessibilityReduceMotion) private var reduceMotion
     @Environment(\EnvironmentValues.accessibilityReduceTransparency) private var reduceTransparency
     @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+    @Environment(\.colorScheme) private var colorScheme
     @ScaledMetric(relativeTo: .title2) private var labelScale: CGFloat = 1.0
 
     private var isIncreasedContrast: Bool {
@@ -70,6 +71,50 @@ public struct GlassButton: View {
             return false
             #endif
         }
+    }
+
+    private var depthOverlayOpacity: Double {
+        #if os(macOS)
+        return isPressed ? 0.18 : 0.28
+        #else
+        return isPressed ? 0.12 : 0.2
+        #endif
+    }
+
+    private var pressedShadowOpacity: Double {
+        #if os(macOS)
+        return GlassTheme.glassShadowOpacityPrimary * 0.55
+        #else
+        return GlassTheme.glassShadowOpacityPrimary * 0.6
+        #endif
+    }
+
+    private var shadowRadius: CGFloat {
+        isPressed ? 3 : 8
+    }
+
+    private var shadowYOffset: CGFloat {
+        isPressed ? 1 : 4
+    }
+
+    private var usesMacContrastBoost: Bool {
+        #if os(macOS)
+        return true
+        #else
+        return false
+        #endif
+    }
+
+    private var borderLineWidth: CGFloat {
+        let base = GlassTheme.glassBorderLineWidth(
+            reduceTransparency: reduceTransparency,
+            increaseContrast: isIncreasedContrast || usesMacContrastBoost
+        )
+        #if os(macOS)
+        return base * 1.2
+        #else
+        return base
+        #endif
     }
 
     public init(
@@ -122,19 +167,35 @@ public struct GlassButton: View {
                         )
                         .overlay(
                             Circle()
-                                .stroke(
-                                    GlassTheme.glassBorderGradient(
-                                        reduceTransparency: reduceTransparency,
-                                        increaseContrast: isIncreasedContrast
-                                    ),
-                                    lineWidth: GlassTheme.glassBorderLineWidth(
-                                        reduceTransparency: reduceTransparency,
-                                        increaseContrast: isIncreasedContrast
+                                .fill(
+                                    LinearGradient(
+                                        colors: [
+                                            Color.white.opacity(depthOverlayOpacity),
+                                            Color.black.opacity(depthOverlayOpacity * 0.45)
+                                        ],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
                                     )
                                 )
+                                .blendMode(.overlay)
+                        )
+                        .overlay(
+                            Circle()
+                                .strokeBorder(
+                                    GlassTheme.glassBorderGradient(
+                                        reduceTransparency: reduceTransparency,
+                                        increaseContrast: isIncreasedContrast || usesMacContrastBoost
+                                    ),
+                                    lineWidth: borderLineWidth
+                                )
+                                .blendMode(GlassTheme.glassBorderBlendMode(for: colorScheme))
                         )
                 )
-                .shadow(color: Color.black.opacity(GlassTheme.glassShadowOpacityPrimary), radius: 8, y: 4)
+                .shadow(
+                    color: Color.black.opacity(isPressed ? pressedShadowOpacity : GlassTheme.glassShadowOpacityPrimary),
+                    radius: shadowRadius,
+                    y: shadowYOffset
+                )
                 .scaleEffect(isPressed ? 0.92 : 1.0)
         }
         .buttonStyle(GlassButtonStyle(isPressed: $isPressed, reduceMotion: reduceMotion))
@@ -160,7 +221,11 @@ public struct GlassButton: View {
     }
 
     private var buttonFontSize: CGFloat {
-        size * 0.4 * labelScale
+        #if os(macOS)
+        return size * 0.34 * labelScale
+        #else
+        return size * 0.4 * labelScale
+        #endif
     }
 
     @MainActor
@@ -207,6 +272,7 @@ public struct GlassSymbolButton: View {
     @Environment(\EnvironmentValues.accessibilityReduceMotion) private var reduceMotion
     @Environment(\EnvironmentValues.accessibilityReduceTransparency) private var reduceTransparency
     @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+    @Environment(\.colorScheme) private var colorScheme
     @ScaledMetric(relativeTo: .title2) private var iconScale: CGFloat = 1.0
 
     private var isIncreasedContrast: Bool {
@@ -219,6 +285,50 @@ public struct GlassSymbolButton: View {
             return false
             #endif
         }
+    }
+
+    private var depthOverlayOpacity: Double {
+        #if os(macOS)
+        return isPressed ? 0.18 : 0.28
+        #else
+        return isPressed ? 0.12 : 0.2
+        #endif
+    }
+
+    private var pressedShadowOpacity: Double {
+        #if os(macOS)
+        return GlassTheme.glassShadowOpacityPrimary * 0.55
+        #else
+        return GlassTheme.glassShadowOpacityPrimary * 0.6
+        #endif
+    }
+
+    private var shadowRadius: CGFloat {
+        isPressed ? 3 : 8
+    }
+
+    private var shadowYOffset: CGFloat {
+        isPressed ? 1 : 4
+    }
+
+    private var usesMacContrastBoost: Bool {
+        #if os(macOS)
+        return true
+        #else
+        return false
+        #endif
+    }
+
+    private var borderLineWidth: CGFloat {
+        let base = GlassTheme.glassBorderLineWidth(
+            reduceTransparency: reduceTransparency,
+            increaseContrast: isIncreasedContrast || usesMacContrastBoost
+        )
+        #if os(macOS)
+        return base * 1.2
+        #else
+        return base
+        #endif
     }
 
     public init(
@@ -254,19 +364,35 @@ public struct GlassSymbolButton: View {
                         )
                         .overlay(
                             Circle()
-                                .stroke(
-                                    GlassTheme.glassBorderGradient(
-                                        reduceTransparency: reduceTransparency,
-                                        increaseContrast: isIncreasedContrast
-                                    ),
-                                    lineWidth: GlassTheme.glassBorderLineWidth(
-                                        reduceTransparency: reduceTransparency,
-                                        increaseContrast: isIncreasedContrast
+                                .fill(
+                                    LinearGradient(
+                                        colors: [
+                                            Color.white.opacity(depthOverlayOpacity),
+                                            Color.black.opacity(depthOverlayOpacity * 0.45)
+                                        ],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
                                     )
                                 )
+                                .blendMode(.overlay)
+                        )
+                        .overlay(
+                            Circle()
+                                .strokeBorder(
+                                    GlassTheme.glassBorderGradient(
+                                        reduceTransparency: reduceTransparency,
+                                        increaseContrast: isIncreasedContrast || usesMacContrastBoost
+                                    ),
+                                    lineWidth: borderLineWidth
+                                )
+                                .blendMode(GlassTheme.glassBorderBlendMode(for: colorScheme))
                         )
                 )
-                .shadow(color: Color.black.opacity(GlassTheme.glassShadowOpacityPrimary), radius: 8, y: 4)
+                .shadow(
+                    color: Color.black.opacity(isPressed ? pressedShadowOpacity : GlassTheme.glassShadowOpacityPrimary),
+                    radius: shadowRadius,
+                    y: shadowYOffset
+                )
                 .scaleEffect(isPressed ? 0.92 : 1.0)
         }
         .buttonStyle(GlassButtonStyle(isPressed: $isPressed, reduceMotion: reduceMotion))
@@ -292,7 +418,11 @@ public struct GlassSymbolButton: View {
     }
 
     private var iconFontSize: CGFloat {
-        size * 0.35 * iconScale
+        #if os(macOS)
+        return size * 0.3 * iconScale
+        #else
+        return size * 0.35 * iconScale
+        #endif
     }
 
     @MainActor

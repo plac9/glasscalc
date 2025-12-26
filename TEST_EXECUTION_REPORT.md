@@ -1,9 +1,9 @@
 # PrismCalc - Test Execution Report
 
-**Date**: 2025-12-07
-**Execution Type**: Automated Test Suite
-**Environment**: iOS Simulator (iPhone 17 Pro, iOS 26.1)
-**Note**: Updated 2025-12-20 to reflect History as Pro-only.
+**Date**: 2025-12-25
+**Execution Type**: Xcode builds + UI tests (`xcodebuild build`, `xcodebuild test`)
+**Environment**: macOS (Xcode 17C52, iOS Simulator 26.2 iPhone 17)
+**Note**: Updated 2025-12-25 with UI test run + refreshed screenshot extraction.
 
 ---
 
@@ -11,14 +11,100 @@
 
 ✅ **ALL TESTS PASSED**
 
-**Total Tests Run**: 97 unit tests + UI tests
+**Total Tests Run**: 158 unit tests + 9 UI tests
 **Pass Rate**: 100%
 **Failures**: 0
-**Time**: ~4 minutes total
+**Time**: ~6 seconds (SwiftPM) + ~381 seconds (UI tests)
 
 ---
 
-## Test Suite Results
+## Latest Run (2025-12-25)
+
+### ✅ Builds: PASSED
+
+**Commands**:
+```
+xcodebuild -scheme PrismCalc -destination 'platform=iOS Simulator,name=iPhone 17' build
+xcodebuild -scheme PrismCalc -destination 'platform=iOS Simulator,name=iPad Pro 13-inch (M5)' build
+xcodebuild -scheme PrismCalcMac -configuration Debug build
+xcodebuild -scheme PrismCalcWatchApp -destination 'platform=watchOS Simulator,name=Apple Watch Series 11 (46mm)' build
+```
+
+**Status**: ✅ BUILD SUCCEEDED
+
+### ✅ UI Tests: PASSED (9 tests)
+
+**Command**:
+```
+xcodebuild test -scheme PrismCalc -destination 'platform=iOS Simulator,name=iPhone 17' -only-testing:PrismCalcUITests
+```
+
+**Status**: ✅ TEST SUCCEEDED
+**xcresult**: `~/Library/Developer/Xcode/DerivedData/PrismCalc-*/Logs/Test/Test-PrismCalc-2025.12.25_23-23-05--0500.xcresult`
+**Screenshots**: `screenshots/automated/2025-12-25-iphone-17-ui-refresh-2/`
+
+---
+
+## Latest Run (2025-12-24)
+
+### ✅ Unit Tests: PASSED (158 tests)
+
+**Command**:
+```
+swift test
+```
+
+**Status**: ✅ TEST SUCCEEDED
+
+**Notes**:
+- Target platform: `arm64e-apple-macos14.0` (SwiftPM default).
+
+### ✅ UI Tests: PASSED (9 tests)
+
+**Commands**:
+```
+xcodebuild build-for-testing -scheme PrismCalc -destination 'platform=iOS Simulator,name=iPhone 17' -derivedDataPath build/DerivedData
+xcodebuild test-without-building -scheme PrismCalc -destination 'platform=iOS Simulator,name=iPhone 17' -derivedDataPath build/DerivedData
+```
+
+**Status**: ✅ TEST EXECUTE SUCCEEDED
+
+**Result Bundle**:
+`build/DerivedData/Logs/Test/Test-PrismCalc-2025.12.24_17-58-22--0500.xcresult`
+
+---
+
+## Supplemental Screenshot Runs (2025-12-24)
+
+### ✅ UI Screenshot Tests: PASSED (iPhone 17 Pro Max)
+
+**Command**:
+```
+./scripts/run-screenshot-tests.sh "iPhone 17 Pro Max" "screenshots/automated/2025-12-24-iphone-17-pro-max" "iphone69"
+```
+
+**Result Bundle**:
+`DerivedData/Logs/Test/Test-PrismCalc-2025.12.24_18-23-43--0500.xcresult`
+
+**Exports**:
+`screenshots/automated/2025-12-24-iphone-17-pro-max/` (10 PNGs)
+
+### ✅ UI Screenshot Tests: PASSED (iPad Pro 13-inch (M5))
+
+**Command**:
+```
+./scripts/run-screenshot-tests.sh "iPad Pro 13-inch (M5)" "screenshots/automated/2025-12-24-ipad-13" "ipad13"
+```
+
+**Result Bundle**:
+`DerivedData/Logs/Test/Test-PrismCalc-2025.12.24_18-30-06--0500.xcresult`
+
+**Exports**:
+`screenshots/automated/2025-12-24-ipad-13/` (10 PNGs)
+
+---
+
+## Historical Run (2025-12-07)
 
 ### ✅ Unit Tests: PASSED (97 tests)
 
@@ -90,7 +176,7 @@
 ### ✅ UI Tests: PASSED
 
 **Test**: Screenshot Capture Test
-**Execution Time**: 121.895 seconds
+**Execution Time**: 380.840 seconds
 **Status**: ✅ TEST SUCCEEDED
 
 #### What Was Tested:
@@ -410,6 +496,6 @@ The app is production-ready from a code and automated testing perspective. Manua
 
 ---
 
-**Report Generated**: 2025-12-07
+**Report Generated**: 2025-12-25
 **Test Execution**: Automated
 **Final Status**: ✅ **READY FOR TESTFLIGHT**

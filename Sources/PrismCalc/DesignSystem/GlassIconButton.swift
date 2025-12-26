@@ -40,6 +40,7 @@ public struct GlassIconButton: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
     @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+    @Environment(\.colorScheme) private var colorScheme
 
     private var isIncreasedContrast: Bool {
         if #available(iOS 17.0, macOS 14.0, *) {
@@ -154,39 +155,7 @@ public struct GlassIconButton: View {
                 .fill(GlassTheme.primary.opacity(0.9))
                 .overlay(
                     Circle()
-                        .stroke(
-                                GlassTheme.glassBorderGradient(
-                                    reduceTransparency: reduceTransparency,
-                                    increaseContrast: isIncreasedContrast
-                                ),
-                                lineWidth: GlassTheme.glassBorderLineWidth(
-                                    reduceTransparency: reduceTransparency,
-                                    increaseContrast: isIncreasedContrast
-                                )
-                            )
-                    )
-        case .destructive:
-            Circle()
-                .fill(GlassTheme.error.opacity(0.9))
-                .overlay(
-                    Circle()
-                        .stroke(
-                                GlassTheme.glassBorderGradient(
-                                    reduceTransparency: reduceTransparency,
-                                    increaseContrast: isIncreasedContrast
-                                ),
-                                lineWidth: GlassTheme.glassBorderLineWidth(
-                                    reduceTransparency: reduceTransparency,
-                                    increaseContrast: isIncreasedContrast
-                                )
-                            )
-                    )
-        case .secondary, .plain:
-            glassBackground
-                .clipShape(Circle())
-                .overlay(
-                    Circle()
-                        .stroke(
+                        .strokeBorder(
                             GlassTheme.glassBorderGradient(
                                 reduceTransparency: reduceTransparency,
                                 increaseContrast: isIncreasedContrast
@@ -196,6 +165,41 @@ public struct GlassIconButton: View {
                                 increaseContrast: isIncreasedContrast
                             )
                         )
+                        .blendMode(GlassTheme.glassBorderBlendMode(for: colorScheme))
+                    )
+        case .destructive:
+            Circle()
+                .fill(GlassTheme.error.opacity(0.9))
+                .overlay(
+                    Circle()
+                        .strokeBorder(
+                            GlassTheme.glassBorderGradient(
+                                reduceTransparency: reduceTransparency,
+                                increaseContrast: isIncreasedContrast
+                            ),
+                            lineWidth: GlassTheme.glassBorderLineWidth(
+                                reduceTransparency: reduceTransparency,
+                                increaseContrast: isIncreasedContrast
+                            )
+                        )
+                        .blendMode(GlassTheme.glassBorderBlendMode(for: colorScheme))
+                    )
+        case .secondary, .plain:
+            glassBackground
+                .clipShape(Circle())
+                .overlay(
+                    Circle()
+                        .strokeBorder(
+                            GlassTheme.glassBorderGradient(
+                                reduceTransparency: reduceTransparency,
+                                increaseContrast: isIncreasedContrast
+                            ),
+                            lineWidth: GlassTheme.glassBorderLineWidth(
+                                reduceTransparency: reduceTransparency,
+                                increaseContrast: isIncreasedContrast
+                            )
+                        )
+                        .blendMode(GlassTheme.glassBorderBlendMode(for: colorScheme))
                 )
         }
     }
@@ -246,6 +250,7 @@ public struct GlassPillButton: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
     @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+    @Environment(\.colorScheme) private var colorScheme
 
     private var isIncreasedContrast: Bool {
         if #available(iOS 17.0, macOS 14.0, *) {
@@ -298,7 +303,7 @@ public struct GlassPillButton: View {
                 }
                 .overlay(
                     Capsule()
-                        .stroke(
+                        .strokeBorder(
                             GlassTheme.glassBorderGradient(
                                 reduceTransparency: reduceTransparency,
                                 increaseContrast: isIncreasedContrast
@@ -308,6 +313,7 @@ public struct GlassPillButton: View {
                                 increaseContrast: isIncreasedContrast
                             )
                         )
+                        .blendMode(GlassTheme.glassBorderBlendMode(for: colorScheme))
                 )
             )
             .shadow(color: Color.black.opacity(0.1), radius: 4, y: 2)

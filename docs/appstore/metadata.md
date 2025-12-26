@@ -13,11 +13,11 @@
 ## Description
 
 ### Short Description (170 chars)
-Beautiful glassmorphic calculator with tip splitting, discounts, unit conversion, and stunning iOS 18 visual effects. Pro tools for everyday math.
+Beautiful glassmorphic calculator for iOS and iPadOS with tip splitting, discounts, unit conversion, and a companion Apple Watch app.
 
 ### Full Description (4000 chars max)
 
-prismCalc is a beautifully designed calculator that combines powerful everyday tools with a stunning glassmorphic interface. Built exclusively for iOS 18, it showcases the latest Apple design language with animated mesh gradients, smooth transitions, and delightful micro-interactions.
+prismCalc is a beautifully designed calculator that combines powerful everyday tools with a stunning glassmorphic interface. Built for iOS 18+ and iPadOS 18+ with a companion Apple Watch app, it showcases the latest Apple design language with animated mesh gradients, smooth transitions, and Liquid Glass surfaces on iOS 26+.
 
 **CORE CALCULATOR**
 • Clean, intuitive interface for basic arithmetic
@@ -57,6 +57,10 @@ prismCalc is a beautifully designed calculator that combines powerful everyday t
 • Floating tab bar with iPad sidebar support
 • Smooth zoom transitions between views
 
+**APPLE WATCH**
+• Companion watchOS app for quick calculations on the wrist
+• Compact keypad and glass-inspired visuals tuned for small screens
+
 **WIDGETS & SIRI**
 • Home Screen widgets in 3 sizes
 • Control Center quick actions (iOS 18)
@@ -75,7 +79,7 @@ Download prismCalc and experience calculation the beautiful way.
 ## Keywords (100 chars max)
 
 ```
-calculator,tip,split,bill,discount,converter,glass,theme,widget,siri
+calculator,tip,split,bill,discount,converter,glass,theme,widget,siri,watch
 ```
 
 ---

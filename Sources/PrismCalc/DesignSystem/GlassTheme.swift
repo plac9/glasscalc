@@ -204,20 +204,11 @@ public struct GlassTheme: Sendable {
     // MARK: - Glass Effect Styling
 
     public static var glassBorderGradient: LinearGradient {
-        let startOpacity = AccessibilityTheme.isHighContrast ? 0.4 : 0.22
-        let endOpacity = AccessibilityTheme.isHighContrast ? 0.18 : 0.08
-        return LinearGradient(
-            colors: [
-                Color.white.opacity(startOpacity),
-                Color.white.opacity(endOpacity)
-            ],
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
-        )
+        glassBorderGradient(reduceTransparency: false, increaseContrast: false)
     }
 
     public static var glassBorderLineWidth: CGFloat {
-        AccessibilityTheme.isHighContrast ? 1.25 : 0.85
+        glassBorderLineWidth(reduceTransparency: false, increaseContrast: false)
     }
 
     public static var glassShadowOpacityPrimary: Double {
@@ -230,9 +221,9 @@ public struct GlassTheme: Sendable {
 
     public static func glassBorderGradient(reduceTransparency: Bool, increaseContrast: Bool) -> LinearGradient {
         let highContrast = AccessibilityTheme.isHighContrast || increaseContrast
-        let startOpacity = highContrast ? 0.4 : 0.22
-        let endOpacity = highContrast ? 0.18 : 0.08
-        let reduceMultiplier: Double = reduceTransparency ? 0.5 : 1.0
+        let startOpacity = highContrast ? 0.32 : 0.16
+        let endOpacity = highContrast ? 0.14 : 0.06
+        let reduceMultiplier: Double = reduceTransparency ? 0.6 : 1.0
         return LinearGradient(
             colors: [
                 Color.white.opacity(startOpacity * reduceMultiplier),
@@ -246,14 +237,18 @@ public struct GlassTheme: Sendable {
     public static func glassBorderLineWidth(reduceTransparency: Bool, increaseContrast: Bool) -> CGFloat {
         let highContrast = AccessibilityTheme.isHighContrast || increaseContrast
         if highContrast {
-            return reduceTransparency ? 1.0 : 1.25
+            return reduceTransparency ? 0.9 : 1.1
         }
-        return reduceTransparency ? 0.65 : 0.85
+        return reduceTransparency ? 0.5 : 0.7
+    }
+
+    public static func glassBorderBlendMode(for colorScheme: ColorScheme) -> BlendMode {
+        colorScheme == .dark ? .overlay : .softLight
     }
 
     public static func glassHighlightGradient(reduceTransparency: Bool) -> LinearGradient {
-        let topOpacity = reduceTransparency ? 0.28 : 0.18
-        let bottomOpacity = reduceTransparency ? 0.08 : 0.04
+        let topOpacity = reduceTransparency ? 0.2 : 0.12
+        let bottomOpacity = reduceTransparency ? 0.06 : 0.03
         return LinearGradient(
             colors: [
                 Color.white.opacity(topOpacity),
@@ -369,6 +364,28 @@ public struct GlassTheme: Sendable {
 
 public extension GlassTheme {
     @ViewBuilder
+    private static func glassFallbackLayered<ShapeType: Shape>(
+        _ shape: ShapeType,
+        material: Material,
+        reduceTransparency: Bool
+    ) -> some View {
+        let materialOpacity: Double = reduceTransparency ? 0.9 : 1.0
+        let secondaryOpacity: Double = reduceTransparency ? 0.12 : 0.28
+
+        ZStack {
+            shape
+                .fill(material)
+                .opacity(materialOpacity)
+            shape
+                .fill(.ultraThinMaterial)
+                .opacity(secondaryOpacity)
+            shape
+                .fill(glassHighlightGradient(reduceTransparency: reduceTransparency))
+                .blendMode(.softLight)
+        }
+    }
+
+    @ViewBuilder
     static func glassCardBackground(cornerRadius: CGFloat, material: Material) -> some View {
         glassCardBackground(cornerRadius: cornerRadius, material: material, reduceTransparency: false)
     }
@@ -383,25 +400,21 @@ public extension GlassTheme {
                 .overlay(
                     RoundedRectangle(cornerRadius: cornerRadius)
                         .fill(glassHighlightGradient(reduceTransparency: reduceTransparency))
-                        .blendMode(.screen)
+                        .blendMode(.softLight)
                 )
         } else {
-            RoundedRectangle(cornerRadius: cornerRadius)
-                .fill(material)
-                .overlay(
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                        .fill(glassHighlightGradient(reduceTransparency: reduceTransparency))
-                        .blendMode(.screen)
-                )
+            glassFallbackLayered(
+                RoundedRectangle(cornerRadius: cornerRadius),
+                material: material,
+                reduceTransparency: reduceTransparency
+            )
         }
         #else
-        RoundedRectangle(cornerRadius: cornerRadius)
-            .fill(material)
-            .overlay(
-                RoundedRectangle(cornerRadius: cornerRadius)
-                    .fill(glassHighlightGradient(reduceTransparency: reduceTransparency))
-                    .blendMode(.screen)
-            )
+        glassFallbackLayered(
+            RoundedRectangle(cornerRadius: cornerRadius),
+            material: material,
+            reduceTransparency: reduceTransparency
+        )
         #endif
     }
 
@@ -420,25 +433,21 @@ public extension GlassTheme {
                 .overlay(
                     Circle()
                         .fill(glassHighlightGradient(reduceTransparency: reduceTransparency))
-                        .blendMode(.screen)
+                        .blendMode(.softLight)
                 )
         } else {
-            Circle()
-                .fill(material)
-                .overlay(
-                    Circle()
-                        .fill(glassHighlightGradient(reduceTransparency: reduceTransparency))
-                        .blendMode(.screen)
-                )
+            glassFallbackLayered(
+                Circle(),
+                material: material,
+                reduceTransparency: reduceTransparency
+            )
         }
         #else
-        Circle()
-            .fill(material)
-            .overlay(
-                Circle()
-                    .fill(glassHighlightGradient(reduceTransparency: reduceTransparency))
-                    .blendMode(.screen)
-            )
+        glassFallbackLayered(
+            Circle(),
+            material: material,
+            reduceTransparency: reduceTransparency
+        )
         #endif
     }
 
@@ -457,25 +466,21 @@ public extension GlassTheme {
                 .overlay(
                     Capsule()
                         .fill(glassHighlightGradient(reduceTransparency: reduceTransparency))
-                        .blendMode(.screen)
+                        .blendMode(.softLight)
                 )
         } else {
-            Capsule()
-                .fill(material)
-                .overlay(
-                    Capsule()
-                        .fill(glassHighlightGradient(reduceTransparency: reduceTransparency))
-                        .blendMode(.screen)
-                )
+            glassFallbackLayered(
+                Capsule(),
+                material: material,
+                reduceTransparency: reduceTransparency
+            )
         }
         #else
-        Capsule()
-            .fill(material)
-            .overlay(
-                Capsule()
-                    .fill(glassHighlightGradient(reduceTransparency: reduceTransparency))
-                    .blendMode(.screen)
-            )
+        glassFallbackLayered(
+            Capsule(),
+            material: material,
+            reduceTransparency: reduceTransparency
+        )
         #endif
     }
 }

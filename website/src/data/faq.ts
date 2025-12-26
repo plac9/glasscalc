@@ -13,7 +13,7 @@ export const faqItems: FAQItem[] = [
     id: 'platforms',
     question: 'What platforms is PrismCalc available on?',
     answer:
-      'PrismCalc is available for iPhone (iOS 18+), iPad (iPadOS 18+), and Mac (macOS 15+ with Apple Silicon). The app is optimized for each platform with adaptive layouts.',
+      'PrismCalc is available for iPhone (iOS 18+), iPad (iPadOS 18+), Mac (macOS 15+ with Apple Silicon), and Apple Watch (watchOS 10+). The Watch app focuses on quick calculations, while iPhone/iPad/Mac provide the full toolkit.',
   },
   {
     id: 'privacy',

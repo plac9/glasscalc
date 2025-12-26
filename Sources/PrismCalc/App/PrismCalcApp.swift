@@ -1,5 +1,8 @@
 import SwiftUI
 import TipKit
+#if os(macOS)
+import AppKit
+#endif
 
 /// PrismCalc App Scene Configuration
 ///
@@ -18,6 +21,10 @@ import TipKit
 @MainActor
 public enum PrismCalcApp {
     private static var didHandleLaunchArguments = false
+    #if os(macOS)
+    private static let macWindowMinSize = CGSize(width: 320, height: 560)
+    private static let macWindowDefaultSize = CGSize(width: 320, height: 560)
+    #endif
 
     /// The main app scene
     public static var scene: some Scene {
@@ -28,13 +35,17 @@ public enum PrismCalcApp {
                 }
                 .onAppear {
                     handleLaunchArgumentsIfNeeded()
+                    #if os(macOS)
+                    applyMacWindowSizing()
+                    #endif
                 }
                 #if os(macOS)
-                .frame(minWidth: 860, minHeight: 640)
+                .frame(minWidth: macWindowMinSize.width, minHeight: macWindowMinSize.height)
                 #endif
         }
         #if os(macOS)
-        .defaultSize(width: 1000, height: 720)
+        .defaultSize(width: macWindowDefaultSize.width, height: macWindowDefaultSize.height)
+        .windowStyle(.hiddenTitleBar)
         #endif
     }
 
@@ -83,6 +94,17 @@ public enum PrismCalcApp {
             populateSampleData()
         }
     }
+
+    #if os(macOS)
+    private static func applyMacWindowSizing() {
+        DispatchQueue.main.async {
+            guard let window = NSApplication.shared.windows.first else { return }
+            window.titleVisibility = .hidden
+            window.titlebarAppearsTransparent = true
+            window.isMovableByWindowBackground = true
+        }
+    }
+    #endif
 
     /// Populate sample history data for testing
     private static func populateSampleData() {

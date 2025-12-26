@@ -7,6 +7,7 @@ public struct HistoryCardView: View {
     let onDelete: (HistoryEntry) -> Void
     let onToggleLock: (HistoryEntry) -> Void
     let onSelect: (HistoryEntry) -> Void
+    let allowsLocking: Bool
 
     @ScaledMetric(relativeTo: .caption2) private var timeFontSize: CGFloat = 11
     @ScaledMetric(relativeTo: .caption2) private var noteIconSize: CGFloat = 10
@@ -16,17 +17,19 @@ public struct HistoryCardView: View {
         namespace: Namespace.ID,
         onDelete: @escaping (HistoryEntry) -> Void,
         onToggleLock: @escaping (HistoryEntry) -> Void,
-        onSelect: @escaping (HistoryEntry) -> Void
+        onSelect: @escaping (HistoryEntry) -> Void,
+        allowsLocking: Bool = true
     ) {
         self.entry = entry
         self.namespace = namespace
         self.onDelete = onDelete
         self.onToggleLock = onToggleLock
         self.onSelect = onSelect
+        self.allowsLocking = allowsLocking
     }
 
     public var body: some View {
-        GlassCard(material: .ultraThinMaterial, padding: GlassTheme.spacingSmall) {
+        let baseCard = GlassCard(material: .ultraThinMaterial, padding: GlassTheme.spacingSmall) {
             HStack(spacing: GlassTheme.spacingSmall) {
                 typeIcon
                 entryDetails
@@ -43,23 +46,29 @@ public struct HistoryCardView: View {
                 }
             }
         }
-        .swipeActions(edge: .leading, allowsFullSwipe: true) {
-            Button {
-                onToggleLock(entry)
-            } label: {
-                Label(
-                    entry.isLocked ? "Unlock" : "Lock",
-                    systemImage: entry.isLocked ? "lock.open.fill" : "lock.fill"
-                )
+        let card = baseCard
+            .matchedTransitionSource(id: entry.id, in: namespace)
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel(accessibilityLabelText)
+            .accessibilityHint(accessibilityHintText)
+            .onTapGesture {
+                onSelect(entry)
             }
-            .tint(entry.isLocked ? GlassTheme.warning : GlassTheme.primary)
-        }
-        .matchedTransitionSource(id: entry.id, in: namespace)
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel(accessibilityLabelText)
-        .accessibilityHint(accessibilityHintText)
-        .onTapGesture {
-            onSelect(entry)
+
+        if allowsLocking {
+            card.swipeActions(edge: .leading, allowsFullSwipe: true) {
+                Button {
+                    onToggleLock(entry)
+                } label: {
+                    Label(
+                        entry.isLocked ? "Unlock" : "Lock",
+                        systemImage: entry.isLocked ? "lock.open.fill" : "lock.fill"
+                    )
+                }
+                .tint(entry.isLocked ? GlassTheme.warning : GlassTheme.primary)
+            }
+        } else {
+            card
         }
     }
 
@@ -131,8 +140,11 @@ public struct HistoryCardView: View {
     }
 
     private var accessibilityHintText: String {
-        "Double tap to view details, swipe left to delete" +
-        "\(entry.isLocked ? " (locked)" : ""), swipe right to " +
-        "\(entry.isLocked ? "unlock" : "lock")"
+        if allowsLocking {
+            return "Double tap to view details, swipe left to delete" +
+            "\(entry.isLocked ? " (locked)" : ""), swipe right to " +
+            "\(entry.isLocked ? "unlock" : "lock")"
+        }
+        return "Double tap to view details, swipe left to delete"
     }
 }

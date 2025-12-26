@@ -8,7 +8,7 @@ public final class SharedDataService: @unchecked Sendable {
     // MARK: - Constants
 
     public static let shared = SharedDataService()
-    public static let appGroupIdentifier = "group.com.laclairtech.prismcalc"
+    public static let appGroupIdentifier = "group.com.laclairtech.prismcalc.shared"
     private let userDefaults: UserDefaults
     private let shouldReloadWidgets: Bool
     private let lastResultKey = "lastResult"

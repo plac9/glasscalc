@@ -72,10 +72,10 @@
 2. [ ] Select "App Groups" → Continue
 3. [ ] Fill in details:
    - **Description**: `PrismCalc Shared Data`
-   - **Identifier**: `group.com.laclairtech.prismcalc`
+   - **Identifier**: `group.com.laclairtech.prismcalc.shared`
 4. [ ] Click Continue → Register
 
-**Verification**: App Group `group.com.laclairtech.prismcalc` appears in Identifiers list
+**Verification**: App Group `group.com.laclairtech.prismcalc.shared` appears in Identifiers list
 
 ---
 
@@ -88,7 +88,7 @@
 2. [ ] Click "Edit" (top right)
 3. [ ] Find "App Groups" in capabilities list
 4. [ ] Click "Configure"
-5. [ ] Check ✅ `group.com.laclairtech.prismcalc`
+5. [ ] Check ✅ `group.com.laclairtech.prismcalc.shared`
 6. [ ] Click Continue → Save
 
 **Verification**: `com.laclairtech.prismcalc` shows App Groups enabled with 1 group
@@ -104,7 +104,7 @@
 2. [ ] Click "Edit" (top right)
 3. [ ] Find "App Groups" in capabilities list
 4. [ ] Click "Configure"
-5. [ ] Check ✅ `group.com.laclairtech.prismcalc`
+5. [ ] Check ✅ `group.com.laclairtech.prismcalc.shared`
 6. [ ] Click Continue → Save
 
 **Verification**: `com.laclairtech.prismcalc.widget` shows App Groups enabled with 1 group
@@ -308,7 +308,8 @@ PrismCalc brings a spectacular glassmorphic design to your everyday calculations
 ✨ FREE FEATURES
 • Stunning glassmorphic design
 • Aurora theme included
-• iOS 18 optimized with smooth animations
+• iOS 18+ optimized with smooth animations
+• Liquid Glass on iOS 26+ with layered material fallback on iOS 18
 
 🎯 PRISMCALC PRO ($2.99)
 Unlock the complete experience:
@@ -331,8 +332,9 @@ FEATURES
 • Home Screen widgets
 • Control Center widget
 • Live Activities support
+• Apple Watch companion app + complications
 
-DESIGNED FOR iOS 18
+DESIGNED FOR iOS 18+ (Liquid Glass on iOS 26+)
 • Native floating tab bar
 • Smooth zoom transitions
 • Haptic feedback
@@ -357,7 +359,7 @@ Perfect for students, professionals, and anyone who appreciates beautiful design
 1. [ ] Scroll to "Keywords" field
 2. [ ] Paste (exactly 100 characters):
 ```
-calculator,tip,split,bill,discount,converter,glass,theme,widget,siri
+calculator,tip,split,bill,discount,converter,glass,theme,widget,siri,watch
 ```
 3. [ ] Click outside field to save
 

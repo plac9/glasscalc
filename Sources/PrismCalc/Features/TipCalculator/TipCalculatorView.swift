@@ -11,6 +11,7 @@ public struct TipCalculatorView: View {
     private let inputValueSize: CGFloat = 48
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @FocusState private var isInputFocused: Bool
 
     public init() {}
@@ -18,38 +19,45 @@ public struct TipCalculatorView: View {
     public var body: some View {
         let reduce = reduceMotion
 
-        ScrollView {
-            VStack(spacing: GlassTheme.spacingLarge) {
-                // Bill Amount Input
-                billInputSection
-                    .scrollTransition { content, phase in
-                        content.opacity(reduce || phase.isIdentity ? 1 : 0.85)
+        GeometryReader { proxy in
+            let isTwoColumn = horizontalSizeClass == .regular && proxy.size.width >= 760
+            ScrollView {
+                AdaptiveColumns(isSplit: isTwoColumn, spacing: GlassTheme.spacingLarge) {
+                    VStack(spacing: GlassTheme.spacingLarge) {
+                        // Bill Amount Input
+                        billInputSection
+                            .scrollTransition { content, phase in
+                                content.opacity(reduce || phase.isIdentity ? 1 : 0.85)
+                            }
+
+                        // Tip Percentage Arc Slider
+                        tipSliderSection
+                            .scrollTransition { content, phase in
+                                content
+                                    .opacity(reduce || phase.isIdentity ? 1 : 0.85)
+                                    .scaleEffect(reduce || phase.isIdentity ? 1 : 0.97)
+                            }
+
+                        // Quick Tip Buttons
+                        quickTipSection
                     }
+                } right: {
+                    VStack(spacing: GlassTheme.spacingLarge) {
+                        // Split Between People
+                        splitSection
 
-                // Tip Percentage Arc Slider
-                tipSliderSection
-                    .scrollTransition { content, phase in
-                        content
-                            .opacity(reduce || phase.isIdentity ? 1 : 0.85)
-                            .scaleEffect(reduce || phase.isIdentity ? 1 : 0.97)
+                        // Results
+                        TipResultsSection(viewModel: viewModel, noteText: $noteText)
+                            .scrollTransition { content, phase in
+                                content
+                                    .opacity(reduce || phase.isIdentity ? 1 : 0.9)
+                                    .offset(y: reduce || phase.isIdentity ? 0 : phase.value * 8)
+                            }
                     }
-
-                // Quick Tip Buttons
-                quickTipSection
-
-                // Split Between People
-                splitSection
-
-                // Results
-                TipResultsSection(viewModel: viewModel, noteText: $noteText)
-                    .scrollTransition { content, phase in
-                        content
-                            .opacity(reduce || phase.isIdentity ? 1 : 0.9)
-                            .offset(y: reduce || phase.isIdentity ? 0 : phase.value * 8)
-                    }
+                }
+                .padding()
+                .prismContentMaxWidth()
             }
-            .padding()
-            .prismContentMaxWidth()
         }
         .scrollDismissesKeyboard(.interactively)
         .toolbar {
@@ -90,6 +98,7 @@ public struct TipCalculatorView: View {
                 }
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     // MARK: - Tip Slider
@@ -106,6 +115,7 @@ public struct TipCalculatorView: View {
             }
             .padding(.vertical, GlassTheme.spacingSmall)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     // MARK: - Quick Tips
@@ -152,6 +162,7 @@ public struct TipCalculatorView: View {
                 .accessibilityHint(viewModel.tipPercentage == tip ? "Currently selected" : "Double tap to select")
             }
         }
+        .frame(maxWidth: .infinity)
     }
 
     // MARK: - Split Section
@@ -211,6 +222,7 @@ public struct TipCalculatorView: View {
                 .sensoryFeedback(.selection, trigger: viewModel.numberOfPeople)
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     // MARK: - Button Icons (Reduce Motion Support)

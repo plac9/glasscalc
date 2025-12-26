@@ -1,7 +1,7 @@
 # PrismCalc - Comprehensive QA Report
 
-**Version**: 1.0.0 (Build 2)
-**Test Date**: 2025-12-07
+**Version**: 1.0.0 (Build 1)
+**Test Date**: 2025-12-25
 **Tester**: Automated Code Review + Build Tests
 **Status**: ✅ READY FOR TESTFLIGHT
 
@@ -18,6 +18,62 @@
 - Performance: Time Profiler trace captured on iPhone 17 simulator (`/tmp/PrismCalc-TimeProfiler.trace`); device profiling still required.
 
 ---
+
+## Full Audit Update (2025-12-24)
+
+- Added layered glass fallback for iOS 18; Liquid Glass (`glassEffect`) remains iOS 26+ only.
+- macOS treated as large-screen for calculator layout/typography consistency.
+- watchOS UI now uses `@ScaledMetric` for spacing and sizing to improve accessibility.
+- StoreKit logs now include entitlement refresh and verification failures.
+- `swift test` passed (158 tests).
+- UI tests passed via `xcodebuild build-for-testing` + `test-without-building` on iPhone 17 simulator.
+- UI test result bundle: `build/DerivedData/Logs/Test/Test-PrismCalc-2025.12.24_17-58-22--0500.xcresult`.
+- Website build (`npm run build`) succeeded.
+- Glass edges polished: reduced border opacities, stroke borders, softer highlight blending, watch button edges refined.
+- Screenshot exports: `screenshots/automated/2025-12-24-iphone-17-pro-max/`, `screenshots/automated/2025-12-24-ipad-13/`, `screenshots/automated/2025-12-24-macos/`, `screenshots/automated/2025-12-24-watchos/`.
+- Screenshot UI test bundles: `DerivedData/Logs/Test/Test-PrismCalc-2025.12.24_18-23-43--0500.xcresult` (iPhone) and `DerivedData/Logs/Test/Test-PrismCalc-2025.12.24_18-30-06--0500.xcresult` (iPad).
+
+---
+
+## QA Refresh (2025-12-25)
+
+- macOS snap sizing locked to compact/expanded widths; history panel stays paired with calculator.
+- History now shows last 10 entries in free tier with upgrade CTA; More > History no longer Pro-gated.
+- watchOS calculator adds long-press backspace on the display.
+- iPad calculator button size capped to 140 for a tighter native layout.
+- Builds passed for iOS (iPhone 17), iPadOS (iPad Pro 13-inch M5), macOS, watchOS.
+- UI tests passed (`xcodebuild test -only-testing:PrismCalcUITests` on iPhone 17).
+- UI test result bundle: `~/Library/Developer/Xcode/DerivedData/PrismCalc-*/Logs/Test/Test-PrismCalc-2025.12.25_23-23-05--0500.xcresult`.
+- UI screenshot exports: `screenshots/automated/2025-12-25-iphone-17-ui-refresh-2/`.
+- iPad screenshots: `screenshots/automated/2025-12-25-ipad-13-refresh-2/`.
+- macOS screenshot: `screenshots/automated/2025-12-25-macos-native-refresh-2/`.
+- watchOS screenshot set: `screenshots/automated/2025-12-25-watchos-46mm-refresh-2/`.
+- Website build (`npm run build`) succeeded.
+
+**Build Commands (Release)**:
+```
+xcodebuild -scheme PrismCalc -configuration Release -destination 'platform=iOS Simulator,name=iPhone 17' build
+xcodebuild -scheme PrismCalc -configuration Release -destination 'platform=iOS Simulator,name=iPad Pro 13-inch (M5)' build
+xcodebuild -scheme PrismCalcWatchApp -configuration Release -destination 'generic/platform=watchOS' -allowProvisioningUpdates build
+xcodebuild -scheme PrismCalcMac -configuration Release -allowProvisioningUpdates build
+```
+
+**Result**: BUILD SUCCEEDED (all targets)
+
+---
+
+## Visual QA (Screenshots 2025-12-24)
+
+**iPhone (iPhone 17 Pro Max)**: ✅ No obvious glass artifacts; tab bar + cards render cleanly in captured states.
+
+**iPad (iPad Pro 13-inch)**:
+- ⚠️ Rounded container edges show system background (light edges) along left/right in all captures; likely `TabView` container background not themed for `.sidebarAdaptable` style.
+- ⚠️ Pro paywall card appears small relative to screen width; consider widening content or centering with stronger visual anchor.
+
+**macOS**:
+- ⚠️ Default window capture shows cropped calculator grid (lower rows off-screen at 1000x720); adjust default window size or scale layout to fit.
+
+**watchOS**: ✅ Layout renders correctly in initial calculator state; no edge artifacts observed.
 
 ## Executive Summary
 
@@ -79,8 +135,8 @@ Widget Extension:
 ```
 
 **App Groups**:
-- ✅ Main app entitlements: `group.com.laclairtech.prismcalc`
-- ✅ Widget entitlements: `group.com.laclairtech.prismcalc`
+- ✅ Main app entitlements: `group.com.laclairtech.prismcalc.shared`
+- ✅ Widget entitlements: `group.com.laclairtech.prismcalc.shared`
 - ✅ Configuration matches across both targets
 
 ---

@@ -54,6 +54,7 @@ struct TipResultsSection: View {
         .padding(GlassTheme.spacingMedium)
         .background(resultsBackground)
         .shadow(color: Color.black.opacity(GlassTheme.glassShadowOpacityPrimary), radius: 15, y: 8)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     // MARK: - Subviews
