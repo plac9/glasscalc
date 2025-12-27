@@ -19,31 +19,27 @@ public struct HistoryDetailView: View {
     }
 
     public var body: some View {
-        ZStack {
-            // Themed mesh background
-            ThemedMeshBackground()
-                .ignoresSafeArea()
+        ScrollView {
+            VStack(spacing: GlassTheme.spacingLarge) {
+                // Type icon with bounce effect
+                iconSection
 
-            ScrollView {
-                VStack(spacing: GlassTheme.spacingLarge) {
-                    // Type icon with bounce effect
-                    iconSection
+                // Result display
+                resultSection
 
-                    // Result display
-                    resultSection
+                // Details card
+                detailsCard
 
-                    // Details card
-                    detailsCard
+                // Action buttons
+                actionButtons
 
-                    // Action buttons
-                    actionButtons
-
-                    Spacer(minLength: GlassTheme.spacingXL)
-                }
-                .padding()
-                .prismContentMaxWidth()
+                Spacer(minLength: GlassTheme.spacingXL)
+            }
+            .padding()
+            .prismContentMaxWidth()
         }
-        }
+        .scrollContentBackground(.hidden)
+        .background(.clear)
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {

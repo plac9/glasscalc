@@ -3,6 +3,8 @@ import SwiftUI
 /// Settings view with organized sections for appearance, customization, and pro features
 public struct SettingsView: View {
     @AppStorage("selectedTheme") private var selectedThemeName: String = GlassTheme.Theme.aurora.rawValue
+    @AppStorage(MeshAnimationSettings.animationEnabledKey) private var meshAnimationEnabled: Bool = true
+    @AppStorage(MeshAnimationSettings.reducedFrameRateKey) private var meshReducedFrameRate: Bool = false
     @State private var showThemePicker: Bool = false
     @ScaledMetric(relativeTo: .caption2) private var proBadgeSize: CGFloat = 9
     @ScaledMetric(relativeTo: .title2) private var aboutIconSize: CGFloat = 48
@@ -50,6 +52,14 @@ public struct SettingsView: View {
 
                     // Customization Section
                     CustomizationSection()
+                        .scrollTransition { content, phase in
+                            content
+                                .opacity(reduce || phase.isIdentity ? 1 : 0.8)
+                                .scaleEffect(reduce || phase.isIdentity ? 1 : 0.98)
+                        }
+
+                    // Performance Section
+                    performanceSection
                         .scrollTransition { content, phase in
                             content
                                 .opacity(reduce || phase.isIdentity ? 1 : 0.8)
@@ -252,6 +262,55 @@ public struct SettingsView: View {
                     }
                     .buttonStyle(.plain)
                     .accessibilityLabel("Accessibility settings")
+                }
+            }
+        }
+    }
+
+    // MARK: - Performance Section
+
+    @MainActor
+    private var performanceSection: some View {
+        VStack(alignment: .leading, spacing: GlassTheme.spacingSmall) {
+            Text("Performance")
+                .font(GlassTheme.captionFont)
+                .foregroundStyle(GlassTheme.textSecondary)
+                .textCase(.uppercase)
+                .padding(.leading, GlassTheme.spacingSmall)
+
+            GlassCard(material: .thinMaterial, padding: GlassTheme.spacingMedium) {
+                VStack(alignment: .leading, spacing: GlassTheme.spacingMedium) {
+                    Toggle(isOn: $meshAnimationEnabled) {
+                        VStack(alignment: .leading, spacing: 6) {
+                            Text("Animated Background")
+                                .font(GlassTheme.bodyFont)
+                                .foregroundStyle(GlassTheme.text)
+                            Text("Enable the mesh gradient animation behind the UI.")
+                                .font(GlassTheme.captionFont)
+                                .foregroundStyle(GlassTheme.textSecondary)
+                        }
+                    }
+                    .toggleStyle(.switch)
+                    .accessibilityLabel("Animated Background")
+                    .accessibilityHint("Toggles the animated mesh background")
+
+                    Divider()
+                        .background(GlassTheme.text.opacity(0.1))
+
+                    Toggle(isOn: $meshReducedFrameRate) {
+                        VStack(alignment: .leading, spacing: 6) {
+                            Text("Reduced Animation Rate")
+                                .font(GlassTheme.bodyFont)
+                                .foregroundStyle(GlassTheme.text)
+                            Text("Lower animation frame rate to reduce resource usage.")
+                                .font(GlassTheme.captionFont)
+                                .foregroundStyle(GlassTheme.textSecondary)
+                        }
+                    }
+                    .toggleStyle(.switch)
+                    .disabled(!meshAnimationEnabled)
+                    .accessibilityLabel("Reduced Animation Rate")
+                    .accessibilityHint("Lowers the background animation frame rate")
                 }
             }
         }

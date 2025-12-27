@@ -8,6 +8,11 @@ public struct ThemePreviewView: View {
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.scenePhase) private var scenePhase
+    @AppStorage(MeshAnimationSettings.animationEnabledKey) private var meshAnimationEnabled: Bool = true
+    @AppStorage(MeshAnimationSettings.reducedFrameRateKey) private var meshReducedFrameRate: Bool = false
+    @State private var isLowPowerMode: Bool = ProcessInfo.processInfo.isLowPowerModeEnabled
+    @State private var thermalState: ProcessInfo.ThermalState = ProcessInfo.processInfo.thermalState
     @State private var showApplied = false
     @ScaledMetric(relativeTo: .title2) private var iconSize: CGFloat = 56
     @ScaledMetric(relativeTo: .caption2) private var proBadgeSize: CGFloat = 12
@@ -20,7 +25,11 @@ public struct ThemePreviewView: View {
     public var body: some View {
         ZStack {
             // Animated mesh gradient for this specific theme
-            AnimatedMeshBackground(config: meshConfig(for: theme))
+            AnimatedMeshBackground(
+                config: meshConfig(for: theme),
+                animated: shouldAnimateMesh,
+                frameInterval: meshFrameInterval
+            )
                 .ignoresSafeArea()
 
             // Content overlay
@@ -55,6 +64,14 @@ public struct ThemePreviewView: View {
             if showApplied {
                 appliedToast
             }
+        }
+        #if os(iOS)
+        .onReceive(NotificationCenter.default.publisher(for: .NSProcessInfoPowerStateDidChange)) { _ in
+            isLowPowerMode = ProcessInfo.processInfo.isLowPowerModeEnabled
+        }
+        #endif
+        .onReceive(NotificationCenter.default.publisher(for: ProcessInfo.thermalStateDidChangeNotification)) { _ in
+            thermalState = ProcessInfo.processInfo.thermalState
         }
     }
 
@@ -191,6 +208,24 @@ public struct ThemePreviewView: View {
                 dismiss()
             }
         }
+    }
+
+    private var shouldAnimateMesh: Bool {
+        guard meshAnimationEnabled else { return false }
+        guard !reduceMotion else { return false }
+        guard scenePhase == .active else { return false }
+        if isLowPowerMode { return false }
+        switch thermalState {
+        case .serious, .critical:
+            return false
+        default:
+            return true
+        }
+    }
+
+    private var meshFrameInterval: Double {
+        let useReducedRate = meshReducedFrameRate || thermalState == .fair
+        return useReducedRate ? (1.0 / 15.0) : (1.0 / 30.0)
     }
 }
 

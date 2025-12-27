@@ -15,56 +15,52 @@ public struct MoreView: View {
 
     public var body: some View {
         NavigationStack {
-            ZStack {
-                // Themed mesh gradient background - embedded directly
-                ThemedMeshBackground()
-                    .ignoresSafeArea()
-
-                ScrollView {
-                    VStack(spacing: GlassTheme.spacingMedium) {
-                        // Unit Converter
-                        moreItem(
-                            title: "Convert",
-                            icon: "arrow.left.arrow.right",
-                            isPro: true
-                        ) {
-                            ProGatedView(featureName: "Unit Converter", featureIcon: "arrow.left.arrow.right") {
-                                UnitConverterView()
-                            }
-                        }
-
-                        // History
-                        moreItem(
-                            title: "History",
-                            icon: "clock.arrow.circlepath",
-                            isPro: false
-                        ) {
-                            HistoryView()
-                        }
-
-                        // Settings
-                        moreItem(
-                            title: "Settings",
-                            icon: "gearshape",
-                            isPro: false
-                        ) {
-                            SettingsView()
+            ScrollView {
+                VStack(spacing: GlassTheme.spacingMedium) {
+                    // Unit Converter
+                    moreItem(
+                        title: "Convert",
+                        icon: "arrow.left.arrow.right",
+                        isPro: true
+                    ) {
+                        ProGatedView(featureName: "Unit Converter", featureIcon: "arrow.left.arrow.right") {
+                            UnitConverterView()
                         }
                     }
-                    .padding()
-                    #if os(macOS)
-                    .padding(.bottom, macBottomBarInset)
-                    #endif
-                    .prismContentMaxWidth()
+
+                    // History
+                    moreItem(
+                        title: "History",
+                        icon: "clock.arrow.circlepath",
+                        isPro: false
+                    ) {
+                        HistoryView()
+                    }
+
+                    // Settings
+                    moreItem(
+                        title: "Settings",
+                        icon: "gearshape",
+                        isPro: false
+                    ) {
+                        SettingsView()
+                    }
                 }
-                .scrollContentBackground(.hidden)
+                .padding()
+                #if os(macOS)
+                .padding(.bottom, macBottomBarInset)
+                #endif
+                .prismContentMaxWidth()
             }
+            .scrollContentBackground(.hidden)
+            .background(.clear)
             .navigationTitle("More")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(.ultraThinMaterial, for: .navigationBar)
             #endif
         }
+        .background(.clear)
     }
 
     @ViewBuilder
@@ -75,7 +71,7 @@ public struct MoreView: View {
         @ViewBuilder destination: @escaping () -> Destination
     ) -> some View {
         NavigationLink {
-            ThemedContent {
+            ThemedContent(includeBackground: false) {
                 destination()
             }
         } label: {

@@ -37,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - watchOS display supports long-press backspace on the calculator output.
 - macOS min window height increased; titlebar now transparent; history panel toggle is available on edge hover even when compact.
 - macOS history panel row sizing now fits 10 entries without scrolling; tab bar icon contrast increased.
+- Consolidated the mesh background into a single shared layer and added performance toggles for animation and reduced frame rate.
 
 ### Fixed
 - UI screenshot tests can tap calculator buttons via explicit accessibility identifiers.

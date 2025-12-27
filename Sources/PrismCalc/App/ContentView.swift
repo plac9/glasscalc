@@ -64,6 +64,12 @@ public struct ContentView: View {
     @AppStorage("tabCustomization") private var tabCustomization: TabViewCustomization
     @AppStorage("selectedTheme") private var selectedThemeName: String = GlassTheme.Theme.aurora.rawValue
     @AppStorage(AccessibilityTheme.highContrastKey) private var highContrastUI: Bool = false
+    @AppStorage(MeshAnimationSettings.animationEnabledKey) private var meshAnimationEnabled: Bool = true
+    @AppStorage(MeshAnimationSettings.reducedFrameRateKey) private var meshReducedFrameRate: Bool = false
+    @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var isLowPowerMode: Bool = ProcessInfo.processInfo.isLowPowerModeEnabled
+    @State private var thermalState: ProcessInfo.ThermalState = ProcessInfo.processInfo.thermalState
     #if os(macOS)
     @AppStorage("macTabBarMode") private var macTabBarMode: MacTabBarMode = .always
     #endif
@@ -114,7 +120,15 @@ public struct ContentView: View {
     }
 
     public var body: some View {
-        tabContent
+        ZStack {
+            ThemedMeshBackground(
+                animated: shouldAnimateMesh,
+                frameInterval: meshFrameInterval
+            )
+            .ignoresSafeArea()
+
+            tabContent
+        }
             // Force full re-render when theme changes by using theme as view identity
             .id("\(currentTheme.rawValue)-\(highContrastUI)")
             .onAppear {
@@ -124,12 +138,38 @@ public struct ContentView: View {
             .onChange(of: selectedThemeName) { _, _ in
                 syncTheme()
             }
+            #if os(iOS)
+            .onReceive(NotificationCenter.default.publisher(for: .NSProcessInfoPowerStateDidChange)) { _ in
+                isLowPowerMode = ProcessInfo.processInfo.isLowPowerModeEnabled
+            }
+            #endif
+            .onReceive(NotificationCenter.default.publisher(for: ProcessInfo.thermalStateDidChangeNotification)) { _ in
+                thermalState = ProcessInfo.processInfo.thermalState
+            }
     }
 
     /// Sync the static GlassTheme.currentTheme with stored value
     @MainActor
     private func syncTheme() {
         GlassTheme.currentTheme = currentTheme
+    }
+
+    private var shouldAnimateMesh: Bool {
+        guard meshAnimationEnabled else { return false }
+        guard !reduceMotion else { return false }
+        guard scenePhase == .active else { return false }
+        if isLowPowerMode { return false }
+        switch thermalState {
+        case .serious, .critical:
+            return false
+        default:
+            return true
+        }
+    }
+
+    private var meshFrameInterval: Double {
+        let useReducedRate = meshReducedFrameRate || thermalState == .fair
+        return useReducedRate ? (1.0 / 15.0) : (1.0 / 30.0)
     }
 
     /// Tab content using iOS 18's new Tab API
@@ -155,7 +195,7 @@ public struct ContentView: View {
         TabView(selection: $selectedTab) {
             // Calculator - primary feature (locked, cannot be moved or hidden)
             Tab(value: .calculator) {
-                ThemedContent {
+                ThemedContent(includeBackground: false) {
                     CalculatorView()
                 }
             } label: {
@@ -169,7 +209,7 @@ public struct ContentView: View {
 
             // Tip - Pro feature (most common after basic calc)
             Tab(value: .tip) {
-                ThemedContent {
+                ThemedContent(includeBackground: false) {
                     ProGatedView(featureName: "Tip Calculator", featureIcon: TabIdentifier.tip.icon) {
                         TipCalculatorView()
                     }
@@ -182,7 +222,7 @@ public struct ContentView: View {
 
             // Split - Pro feature (common dining scenario)
             Tab(value: .split) {
-                ThemedContent {
+                ThemedContent(includeBackground: false) {
                     ProGatedView(featureName: "Split Bill", featureIcon: TabIdentifier.split.icon) {
                         SplitBillView()
                     }
@@ -195,7 +235,7 @@ public struct ContentView: View {
 
             // Discount - Pro feature
             Tab(value: .discount) {
-                ThemedContent {
+                ThemedContent(includeBackground: false) {
                     ProGatedView(featureName: "Discount Calculator", featureIcon: TabIdentifier.discount.icon) {
                         DiscountCalculatorView()
                     }
@@ -207,9 +247,10 @@ public struct ContentView: View {
             .accessibilityIdentifier("tab-discount")
 
             // More - contains Convert, History, Settings with themed navigation
-            // MoreView has its own embedded ThemedMeshBackground to work with NavigationStack
             Tab(value: .more) {
-                MoreView()
+                ThemedContent(includeBackground: false) {
+                    MoreView()
+                }
             } label: {
                 tabLabel(title: "More", systemImage: TabIdentifier.more.icon)
             }
@@ -251,34 +292,36 @@ public struct ContentView: View {
         switch tab {
         case .calculator:
             #if os(macOS)
-            ThemedContent {
+            ThemedContent(includeBackground: false) {
                 MacCalculatorSplitView()
             }
             #else
-            ThemedContent {
+            ThemedContent(includeBackground: false) {
                 CalculatorView()
             }
             #endif
         case .tip:
-            ThemedContent {
+            ThemedContent(includeBackground: false) {
                 ProGatedView(featureName: "Tip Calculator", featureIcon: TabIdentifier.tip.icon) {
                     TipCalculatorView()
                 }
             }
         case .split:
-            ThemedContent {
+            ThemedContent(includeBackground: false) {
                 ProGatedView(featureName: "Split Bill", featureIcon: TabIdentifier.split.icon) {
                     SplitBillView()
                 }
             }
         case .discount:
-            ThemedContent {
+            ThemedContent(includeBackground: false) {
                 ProGatedView(featureName: "Discount Calculator", featureIcon: TabIdentifier.discount.icon) {
                     DiscountCalculatorView()
                 }
             }
         case .more:
-            MoreView()
+            ThemedContent(includeBackground: false) {
+                MoreView()
+            }
         }
     }
 
