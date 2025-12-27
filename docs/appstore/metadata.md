@@ -150,3 +150,14 @@ This app uses StoreKit 2 for in-app purchases. The Pro features can be tested us
 Siri Shortcuts require enabling in Settings > Siri & Search > prismCalc.
 
 Control Center widgets require iOS 18 and manual addition via Control Center customization.
+
+---
+
+## What to Test (App Review)
+
+- Launch the app and perform basic calculator operations.
+- Verify Pro tools: Tip Calculator, Split Bill, Discount Calculator, Unit Converter.
+- Confirm History shows last 10 entries for free users; Pro unlocks unlimited history and lock/unlock.
+- Check widgets and Control Center quick actions on iOS 18 (manual add required).
+- Open the Apple Watch companion app and run a quick calculation.
+- No account sign-in is required; iCloud sync is optional and uses the user’s Apple ID.
