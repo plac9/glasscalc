@@ -4,6 +4,8 @@ import { copy } from '../../data/copy';
 const navItems = [
   { id: 'demo', label: 'Demo', href: '#demo' },
   { id: 'features', label: 'Features', href: '#features' },
+  { id: 'platforms', label: 'Platforms', href: '#platforms' },
+  { id: 'widgets', label: 'Widgets', href: '#widgets' },
   { id: 'accessibility', label: 'Accessibility', href: '#accessibility' },
   { id: 'faq', label: 'FAQ', href: '#faq' },
   { id: 'about', label: 'About', href: '#about' },

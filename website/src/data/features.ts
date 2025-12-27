@@ -48,7 +48,7 @@ export const features: Feature[] = [
     id: 'history',
     title: 'History + Widgets',
     description:
-      'Keep your last calculations handy and add a widget for quick access. Pro unlocks unlimited history and more widget styles.',
+      'Keep your last calculations handy with widgets, Control Center, and Siri Shortcuts. Pro unlocks unlimited history and more widget styles.',
     icon: '🕘',
     isPro: true,
   },

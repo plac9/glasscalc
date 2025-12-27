@@ -19,8 +19,8 @@ export function About() {
             <p className="about__text">{copy.privacy.body}</p>
             <div className="about__badges">
               <span className="about__badge">🔒 No Tracking</span>
-              <span className="about__badge">📵 No Servers</span>
-              <span className="about__badge">🛡️ 100% Private</span>
+              <span className="about__badge">☁️ Optional iCloud</span>
+              <span className="about__badge">🛡️ Apple Ecosystem Only</span>
             </div>
           </GlassCard>
 

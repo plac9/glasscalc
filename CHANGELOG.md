@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Refreshed automated screenshot sets for iPhone 17 and iPad Pro 13-inch (M5) in `screenshots/automated/2025-12-26-*`.
 - Refreshed macOS snap screenshots and watchOS 46mm set in `screenshots/automated/2025-12-26-macos-snap/` and `screenshots/automated/2025-12-26-watchos-46mm/`.
 - Privacy policy page at `https://prismcalc.app/privacy` (website).
+- Website platforms + widgets sections with updated platform imagery and showcase gallery assets.
 
 ### Changed
 - Set iPhone + iPad targeting (`TARGETED_DEVICE_FAMILY = 1,2`) and codified team ID in `project.yml`.
@@ -39,6 +40,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - macOS min window height increased; titlebar now transparent; history panel toggle is available on edge hover even when compact.
 - macOS history panel row sizing now fits 10 entries without scrolling; tab bar icon contrast increased.
 - Consolidated the mesh background into a single shared layer and added performance toggles for animation and reduced frame rate.
+- Website copy, FAQ, and theme showcase updated for current feature set and privacy messaging.
+- App Store screenshot review doc now reflects App Store Connect upload status.
 
 ### Fixed
 - UI screenshot tests can tap calculator buttons via explicit accessibility identifiers.

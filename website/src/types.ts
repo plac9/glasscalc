@@ -39,3 +39,22 @@ export interface NavItem {
   label: string;
   href: string;
 }
+
+export interface Platform {
+  id: string;
+  title: string;
+  subtitle: string;
+  badge: string;
+  details: string[];
+  icon: string;
+  image: string;
+  imageAlt: string;
+}
+
+export interface WidgetFeature {
+  id: string;
+  title: string;
+  description: string;
+  detail: string;
+  icon: string;
+}

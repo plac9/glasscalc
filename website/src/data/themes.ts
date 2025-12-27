@@ -4,13 +4,13 @@ import type { Theme } from '../types';
 
 export const themes: Theme[] = [
   {
-    id: 'blue-green-harmony',
-    name: 'Blue-Green',
+    id: 'aurora',
+    name: 'Aurora',
     isPro: false,
     colors: {
-      primary: '#00CEC8',
-      secondary: '#20B2AA',
-      gradient: ['#008080', '#20B2AA', '#008B8B'],
+      primary: '#7B68EE',
+      secondary: '#00CED1',
+      gradient: ['#4059BF', '#7359CC', '#33408C'],
     },
   },
   {
@@ -44,13 +44,13 @@ export const themes: Theme[] = [
     },
   },
   {
-    id: 'aurora',
-    name: 'Aurora',
+    id: 'blue-green-harmony',
+    name: 'Blue-Green Harmony',
     isPro: true,
     colors: {
-      primary: '#7B68EE',
-      secondary: '#00CED1',
-      gradient: ['#4059BF', '#7359CC', '#33408C'],
+      primary: '#00B0A8',
+      secondary: '#009890',
+      gradient: ['#009999', '#008888', '#007070'],
     },
   },
   {

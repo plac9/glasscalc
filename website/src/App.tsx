@@ -1,6 +1,19 @@
 import { MeshGradient } from './components/ui';
 import { Header, Footer } from './components/layout';
-import { Hero, Features, Demo, Screenshots, Themes, Accessibility, Roadmap, FAQ, About, CTA } from './components/sections';
+import {
+  Hero,
+  Features,
+  Platforms,
+  Widgets,
+  Demo,
+  Screenshots,
+  Themes,
+  Accessibility,
+  Roadmap,
+  FAQ,
+  About,
+  CTA,
+} from './components/sections';
 
 import './styles/index.css';
 import './styles/animations.css';
@@ -15,6 +28,8 @@ function App() {
       <main>
         <Hero />
         <Features />
+        <Platforms />
+        <Widgets />
         <Demo />
         <Screenshots />
         <Themes />

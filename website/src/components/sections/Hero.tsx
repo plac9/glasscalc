@@ -39,7 +39,7 @@ export function Hero() {
         <div className="hero__mockup fade-in delay-2">
           <div className="hero__device float">
             <img
-              src="/screenshots/01_BlueGreen_Calculator.png"
+              src="/showcase/iphone_hero.png"
               alt="PrismCalc app screenshot"
               className="hero__screenshot"
               loading="eager"

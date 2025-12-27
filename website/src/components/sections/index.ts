@@ -1,5 +1,7 @@
 export { Hero } from './Hero';
 export { Features } from './Features';
+export { Platforms } from './Platforms';
+export { Widgets } from './Widgets';
 export { Demo } from './Demo';
 export { Screenshots } from './Screenshots';
 export { Themes } from './Themes';

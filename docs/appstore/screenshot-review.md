@@ -1,6 +1,6 @@
 # PrismCalc - App Store Screenshot Review
 
-**Status:** ready for upload (setup only)
+**Status:** uploaded to App Store Connect (setup only)
 **Date:** 2025-12-26
 
 ## Latest Sets (Candidate)
@@ -41,6 +41,12 @@
 - Count: **10** files
 - Notes: valid for iPad 13"/12.9" bucket; reviewed and ready.
 
+### Apple Watch (latest)
+- Path: `screenshots/automated/2025-12-26-watchos-46mm/`
+- Size (sample): **416 x 496** (`watch_calc.png`)
+- Count: **5** files
+- Notes: matches Series 11 bucket; ready for upload.
+
 ## Confirmed Buckets (App Store Connect)
 
 ### iPhone
@@ -49,6 +55,9 @@
 
 ### iPad
 - **13"/12.9" bucket** accepts: 2064×2752 or 2048×2732 (and landscape variants).\n  - Recommended target: **2064×2752**.
+
+### Apple Watch
+- **Series 11 bucket** accepts: 416×496. Other accepted sizes: 422×514, 410×502, 396×484, 368×448, 312×390.
 
 ## Shot Mapping (10‑shot plan)
 
@@ -75,6 +84,13 @@
 8. `ipad13_08.png` - Widgets (settings)
 9. `ipad13_09.png` - App Icon (settings)
 10. `ipad13_10.png` - Calculator Result
+
+**Apple Watch set (candidate: 2025-12-26-watchos-46mm)**
+1. `watch_calc.png` - Calculator
+2. `watch_tip.png` - Tip Calculator
+3. `watch_split.png` - Split Bill
+4. `watch_discount.png` - Discount Calculator
+5. `watch_history.png` - History
 
 ## Review Results (iPhone 6.9 root set)
 - `iphone67_01.png`: keep (clean hero calculator)
@@ -132,7 +148,17 @@
 
 **Result:** iPad v3 set is clean (no keyboard, no paywalls) and ready for upload.
 
+## Review Results (Apple Watch Series 11, watchOS 46mm)
+- `watch_calc.png`: keep
+- `watch_tip.png`: keep
+- `watch_split.png`: keep
+- `watch_discount.png`: keep
+- `watch_history.png`: keep
+
+**Result:** Watch set is clean and ready for upload (5 shots).
+
 ## Next Actions
 - Use iPhone v3 set (`screenshots/automated/2025-12-26-iphone-16-pro-max-v3/`) and iPad v3 set (`screenshots/automated/2025-12-26-ipad-13-m5-v3/`) as the upload sources.
-- Upload to App Store Connect (setup only, no submission).
+- Use Apple Watch set (`screenshots/automated/2025-12-26-watchos-46mm/`) for Series 11 bucket.
+- Verify App Store Connect still shows iPhone 10/10, iPad 10/10, and Watch 5/10.
 - Decide whether to archive or delete older v1/v2 directories after upload.

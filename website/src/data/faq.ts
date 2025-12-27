@@ -19,7 +19,7 @@ export const faqItems: FAQItem[] = [
     id: 'privacy',
     question: 'Does PrismCalc collect my data?',
     answer:
-      'No. PrismCalc does not collect any personal data. All calculations stay on your device. We have no servers, no analytics, and no tracking. Your privacy is completely protected.',
+      'No. PrismCalc does not collect or sell personal data. Optional iCloud sync keeps history in your private iCloud, and nothing leaves the Apple ecosystem. We have no servers, no analytics, and no tracking.',
   },
   {
     id: 'pro-features',
