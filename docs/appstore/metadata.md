@@ -27,6 +27,7 @@ prismCalc is a beautifully designed calculator that combines powerful everyday t
 **HISTORY (Pro)**
 • Save and review past calculations
 • Lock important entries for quick reference
+• iCloud sync across devices (optional)
 
 **TIP CALCULATOR (Pro)**
 • Calculate tips from 0-100% with an elegant arc slider
@@ -103,14 +104,14 @@ Introducing prismCalc - the beautiful way to calculate.
 ## App Privacy
 
 **Data Not Collected**
-prismCalc does not collect any data. All calculations are performed locally on your device.
+prismCalc does not collect data for third-party use. All calculations are performed locally on your device.
 
 **Privacy Practices**
 - No tracking
 - No analytics
-- No user accounts
-- No network requests
-- Calculation history stored only on device
+- No third-party data sharing
+- No external accounts required
+- Optional iCloud sync for history and settings (Apple ecosystem only)
 
 ---
 
@@ -135,9 +136,10 @@ prismCalc does not collect any data. All calculations are performed locally on y
 
 ## Support
 
-**Support URL**: https://laclairtech.com/support/prismcalc
-**Marketing URL**: https://laclairtech.com/prismcalc
-**Privacy Policy URL**: https://laclairtech.com/privacy
+**Support URL**: https://prismcalc.app
+**Marketing URL**: https://prismcalc.app
+**Privacy Policy URL**: https://prismcalc.app/privacy
+**Support Email**: info@prismcalc.app
 
 ---
 

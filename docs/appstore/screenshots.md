@@ -5,14 +5,14 @@
 ### iPhone
 | Device | Resolution | Required |
 |--------|------------|----------|
-| 6.7" (iPhone 15 Pro Max) | 1290 x 2796 | Yes |
-| 6.5" (iPhone 14 Plus) | 1284 x 2778 | Yes |
+| 6.9" bucket (App Store Connect) | 1320 x 2868 | Yes |
+| 6.5" bucket (App Store Connect) | 1284 x 2778 | Optional |
 | 5.5" (iPhone 8 Plus) | 1242 x 2208 | Optional |
 
 ### iPad
 | Device | Resolution | Required |
 |--------|------------|----------|
-| 12.9" iPad Pro (6th gen) | 2048 x 2732 | Yes |
+| 13"/12.9" bucket (App Store Connect) | 2064 x 2752 | Yes |
 | 11" iPad Pro (4th gen) | 1668 x 2388 | Optional |
 
 ---
@@ -26,7 +26,7 @@
 
 ### 2. Tip Calculator
 **Theme**: Blue-Green Harmony
-**Content**: Tip calculator with arc slider at 20%
+**Content**: Tip calculator with bill value + 20% tip
 **Caption**: "Smart Tip Calculator"
 
 ### 3. Bill Split
@@ -36,17 +36,17 @@
 
 ### 4. Discount Calculator
 **Theme**: Forest Earth
-**Content**: Discount calculator showing savings
+**Content**: Discount calculator showing savings and final price
 **Caption**: "Calculate Discounts"
 
 ### 5. Unit Converter
 **Theme**: Soft Tranquil
-**Content**: Converting miles to kilometers
+**Content**: Converting a non-zero value (e.g., meters to feet)
 **Caption**: "Convert Any Unit"
 
 ### 6. Theme Selection
 **Theme**: Multiple visible
-**Content**: Settings page showing theme grid
+**Content**: Theme picker grid with all themes visible
 **Caption**: "6 Stunning Themes"
 
 ### 7. Calculation History (Pro)
@@ -56,18 +56,20 @@
 
 ### 8. Widgets
 **Theme**: Aurora
-**Content**: Home Screen showing all 3 widget sizes
+**Content**: In-app Widgets settings screen with previews
 **Caption**: "Powerful Widgets"
 
-### 9. Siri Integration
-**Theme**: Any
-**Content**: Siri response for "Calculate 18% tip on $50"
-**Caption**: "Works with Siri"
+### 9. App Icons
+**Theme**: Aurora
+**Content**: App icon selection screen
+**Caption**: "Customize Your Icon"
 
-### 10. Control Center (iOS 18)
-**Theme**: N/A
-**Content**: Control Center showing prismCalc buttons
-**Caption**: "Quick Access Anywhere"
+### 10. Calculator Result
+**Theme**: Aurora
+**Content**: Calculator with a high-contrast result
+**Caption**: "Fast, Accurate Results"
+
+**Optional swaps**: If we capture OS-level shots later, replace #9/#10 with Siri and Control Center.
 
 ---
 
@@ -75,11 +77,11 @@
 
 ### Simulator Setup
 ```bash
-# iPhone 15 Pro Max (6.7")
-xcrun simctl boot "iPhone 15 Pro Max"
+# iPhone 6.9" bucket (1320 x 2868)
+xcrun simctl boot "iPhone 16 Pro Max"
 
-# iPad Pro 12.9" (6th gen)
-xcrun simctl boot "iPad Pro (12.9-inch) (6th generation)"
+# iPad 13"/12.9" bucket (2064 x 2752)
+xcrun simctl boot "iPad Pro (13-inch) (M4)"
 ```
 
 ### Screenshot Commands

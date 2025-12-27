@@ -20,11 +20,7 @@ final class ScreenshotTests: XCTestCase {
 
     /// Capture all 10 App Store screenshots automatically
     func testCaptureAllScreenshots() throws {
-        // Screenshot 1-4: Free Tier
-        captureFreeTierScreenshots()
-
-        // Screenshot 5-10: Pro Tier
-        captureProTierScreenshots()
+        captureAppStoreScreenshots()
     }
 
     /// M5-T3: Capture calculator screenshot for all 6 themes to establish baseline
@@ -52,99 +48,124 @@ final class ScreenshotTests: XCTestCase {
         }
     }
 
-    // MARK: - Free Tier Screenshots
+    // MARK: - App Store Screenshots
 
-    private func captureFreeTierScreenshots() {
+    private func captureAppStoreScreenshots() {
         // 1. Calculator - Hero shot
         captureScreenshotOnTab(
-            name: "01_Calculator_Free",
+            name: "01_Calculator_Hero",
             tab: "Calculator",
-            pro: false,
+            pro: true,
             theme: "Aurora",
             populateData: true
         ) {
             self.tapCalculatorButtons(["1", "2", "3", "4", "decimal", "5", "6"])
         }
 
-        // 2. History - Free tier (last 10 + upgrade CTA)
+        // 2. Tip Calculator
         captureScreenshotOnTab(
-            name: "02_History_Free",
-            tab: "History",
-            pro: false,
-            theme: "Aurora",
-            populateData: true
-        )
-
-        // 3. Paywall - Tip Calculator
-        captureScreenshotOnTab(
-            name: "03_Paywall_Tip",
-            tab: "Tip",
-            pro: false,
-            theme: "Aurora",
-            populateData: false
-        )
-
-        // 4. Settings - Themes (Aurora unlocked, others locked)
-        captureScreenshotOnTab(
-            name: "04_Themes_Free",
-            tab: "Settings",
-            pro: false,
-            theme: "Aurora",
-            populateData: false
-        )
-    }
-
-    // MARK: - Pro Tier Screenshots
-
-    private func captureProTierScreenshots() {
-        // 5. Tip Calculator - PRO
-        captureScreenshotOnTab(
-            name: "05_Tip_Calculator_Pro",
+            name: "02_Tip_Calculator",
             tab: "Tip",
             pro: true,
             theme: "Aurora",
             populateData: true
-        )
+        ) {
+            self.typeValue("75", into: "Bill amount")
+            self.tapButtonIfExists("20%")
+            self.tapButtonIfExists("Done")
+        }
 
-        // 6. Discount Calculator - PRO
+        // 3. Split Bill
         captureScreenshotOnTab(
-            name: "06_Discount_Calculator_Pro",
-            tab: "Discount",
-            pro: true,
-            theme: "Aurora",
-            populateData: true
-        )
-
-        // 7. Split Bill - PRO
-        captureScreenshotOnTab(
-            name: "07_Split_Bill_Pro",
+            name: "03_Split_Bill",
             tab: "Split",
             pro: true,
             theme: "Aurora",
             populateData: true
-        )
+        ) {
+            self.typeValue("120", into: "Total bill")
+            self.tapButtonIfExists("Increase people")
+            self.tapButtonIfExists("Increase people")
+            self.tapButtonIfExists("Increase people")
+            self.tapButtonIfExists("Done")
+        }
 
-        // 8. Unit Converter - PRO
+        // 4. Discount Calculator
         captureScreenshotOnTab(
-            name: "08_Unit_Converter_Pro",
+            name: "04_Discount",
+            tab: "Discount",
+            pro: true,
+            theme: "Aurora",
+            populateData: true
+        ) {
+            self.typeValue("120", into: "Original price")
+            self.tapButtonIfExists("25%")
+            self.tapButtonIfExists("Done")
+        }
+
+        // 5. Unit Converter
+        captureScreenshotOnTab(
+            name: "05_Unit_Converter",
             tab: "Convert",
             pro: true,
             theme: "Aurora",
             populateData: true
-        )
+        ) {
+            self.typeValue("5", into: "Input value")
+            self.tapButtonIfExists("Done")
+        }
 
-        // 9. History - PRO
+        // 6. Themes (open picker on the Settings screen)
         captureScreenshotOnTab(
-            name: "09_History_Pro",
+            name: "06_Themes",
+            tab: "Settings",
+            pro: true,
+            theme: "Aurora",
+            populateData: false
+        ) {
+            self.openThemePicker()
+            self.tapButtonIfExists("Done")
+        }
+
+        // 7. History
+        captureScreenshotOnTab(
+            name: "07_History",
             tab: "History",
             pro: true,
             theme: "Aurora",
             populateData: true
-        )
+        ) {
+            self.dismissTipIfPresent()
+            self.tapButtonIfExists("Done")
+        }
+
+        // 8. Widgets (open picker on the Settings screen)
+        captureScreenshotOnTab(
+            name: "08_Widgets",
+            tab: "Settings",
+            pro: true,
+            theme: "Aurora",
+            populateData: false
+        ) {
+            self.openSettingsRow("Widgets")
+            self.tapButtonIfExists("Done")
+        }
+
+        // 9. App Icon (open picker on the Settings screen)
+        captureScreenshotOnTab(
+            name: "09_App_Icon",
+            tab: "Settings",
+            pro: true,
+            theme: "Aurora",
+            populateData: false
+        ) {
+            self.openSettingsRow("App Icon")
+            self.tapButtonIfExists("Done")
+        }
 
         // 10. Calculator with result
         captureScreenshotOnTab(
-            name: "10_Calculator_Result_Pro",
+            name: "10_Calculator_Result",
             tab: "Calculator",
             pro: true,
             theme: "Aurora",
@@ -251,6 +272,88 @@ final class ScreenshotTests: XCTestCase {
             } else {
                 XCTFail("Calculator button '\(button)' not found (tried: \(identifier))")
             }
+        }
+    }
+
+    private func typeValue(_ value: String, into fieldLabel: String) {
+        let field = app.textFields[fieldLabel].firstMatch
+        XCTAssertTrue(field.waitForExistence(timeout: 5), "Text field '\(fieldLabel)' not found")
+        field.tap()
+        field.typeText(value)
+        dismissKeyboardIfPresent()
+    }
+
+    private func tapButtonIfExists(_ label: String, timeout: TimeInterval = 2) {
+        let button = app.buttons[label].firstMatch
+        if button.waitForExistence(timeout: timeout) {
+            button.tap()
+        }
+    }
+
+    private func dismissKeyboardIfPresent() {
+        guard app.keyboards.count > 0 else { return }
+
+        let doneButton = app.keyboards.buttons["Done"].firstMatch
+        if doneButton.exists {
+            doneButton.tap()
+            return
+        }
+
+        let returnButton = app.keyboards.buttons["Return"].firstMatch
+        if returnButton.exists {
+            returnButton.tap()
+            return
+        }
+
+        app.tap()
+    }
+
+    private func openThemePicker() {
+        let predicate = NSPredicate(format: "label BEGINSWITH %@", "Theme, currently")
+        let themeButton = app.buttons.matching(predicate).firstMatch
+        if themeButton.waitForExistence(timeout: 5) {
+            themeButton.tap()
+            return
+        }
+
+        let themeCell = app.cells.matching(predicate).firstMatch
+        XCTAssertTrue(themeCell.waitForExistence(timeout: 5), "Theme picker row not found")
+        themeCell.tap()
+    }
+
+    private func openSettingsRow(_ label: String) {
+        let button = app.buttons[label].firstMatch
+        let cell = app.cells[label].firstMatch
+
+        if button.waitForExistence(timeout: 2) {
+            button.tap()
+            return
+        }
+
+        if cell.waitForExistence(timeout: 2) {
+            cell.tap()
+            return
+        }
+
+        for _ in 0..<3 {
+            app.swipeUp()
+            if button.waitForExistence(timeout: 1) {
+                button.tap()
+                return
+            }
+            if cell.waitForExistence(timeout: 1) {
+                cell.tap()
+                return
+            }
+        }
+
+        XCTFail("Settings row '\(label)' not found")
+    }
+
+    private func dismissTipIfPresent() {
+        let gotItButton = app.buttons["Got It"].firstMatch
+        if gotItButton.waitForExistence(timeout: 1) {
+            gotItButton.tap()
         }
     }
 

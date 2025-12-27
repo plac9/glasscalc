@@ -50,6 +50,7 @@
 		3763CF84B70E24CD9C7504B3 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B816A3B1DB1B25E2793EBE /* PaywallView.swift */; };
 		41C6946A6A6F688A3269A54D /* ThemePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C228C0D8343BBC4BC4AD26A9 /* ThemePickerView.swift */; };
 		47069FF46CF36514A8CF4DD2 /* ProGatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A12B447B4864A04D20652CF /* ProGatedView.swift */; };
+		485C3099D996A9091FAE0490 /* MeshAnimationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA60D217647435A27D6B466 /* MeshAnimationSettings.swift */; };
 		4CD2689C981943E6639333F3 /* PrismCalcIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69813B6E869CB554F7414F40 /* PrismCalcIntents.swift */; };
 		4D812FF029E307E99554B05A /* PrismCalcWatchWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 028AA41A44F4AF86625A2E04 /* PrismCalcWatchWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4FA1E29059DC9F8733611CEB /* GlassButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BFC3E377C7A003C333D42B /* GlassButton.swift */; };
@@ -124,6 +125,7 @@
 		C0F72BC27BD2BDEDA12C98B0 /* PrismCalcWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B625E041228C8B1DB255F245 /* PrismCalcWidgetBundle.swift */; };
 		C15A520CDC52897454449C28 /* GlassIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214A5BC18578DBB7ED248C8E /* GlassIconButton.swift */; };
 		C31BE2C77D5692D81CB807AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8EB5F4578C65453638D979D /* Assets.xcassets */; };
+		C361D921DB0FF0FEE1A7CB2D /* MeshAnimationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA60D217647435A27D6B466 /* MeshAnimationSettings.swift */; };
 		C4E7A4C333ED6CAEC04DE6D6 /* SplitResultsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4032A2D0EDDA0230E4EAD7AF /* SplitResultsSection.swift */; };
 		C546C3499F659AE77C8FB38A /* SharedDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71565CF5E5341BE10949329 /* SharedDataService.swift */; };
 		C746DE45CB839E3D1164EA95 /* CustomizationFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B656073700EE2B78061BE369 /* CustomizationFlowTests.swift */; };
@@ -315,6 +317,7 @@
 		A2C014ABC95C8D372EBB1AC7 /* CalculatorViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewModelTests.swift; sourceTree = "<group>"; };
 		A2D0715FF0317C514E6F1951 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA1FD0ABEE01013B0EDAB877 /* SplitBillViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitBillViewModel.swift; sourceTree = "<group>"; };
+		AAA60D217647435A27D6B466 /* MeshAnimationSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshAnimationSettings.swift; sourceTree = "<group>"; };
 		AB362B6AFFBCCA93CE6B4B35 /* TipCalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipCalculatorViewModel.swift; sourceTree = "<group>"; };
 		AEA80662AF411BFB0599326E /* ProUpgradeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProUpgradeSection.swift; sourceTree = "<group>"; };
 		B074F9AC198B8A2488025590 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -634,6 +637,7 @@
 			children = (
 				E7DB731AB9039385861F5FD7 /* AccessibilityTheme.swift */,
 				0E5B7CAD29BB47584B6C95D7 /* Diagnostics.swift */,
+				AAA60D217647435A27D6B466 /* MeshAnimationSettings.swift */,
 				535B98FC8AD714533551AE68 /* Extensions */,
 				AF929CAEB90DB35B6F96B08A /* Intents */,
 				16880C24A3A7FFFF033E0081 /* Models */,
@@ -1032,6 +1036,7 @@
 				E9755B612561BC0E5411D030 /* HistoryView.swift in Sources */,
 				8CE9247086DC9069DC514930 /* MacMain.swift in Sources */,
 				188E8A45227D63C98B7EDA89 /* Main.swift in Sources */,
+				485C3099D996A9091FAE0490 /* MeshAnimationSettings.swift in Sources */,
 				9B861F1B3365BEA7AEF2BCAF /* MeshGradientConfig.swift in Sources */,
 				0284D5F9C894D068D25B1D3B /* MoreView.swift in Sources */,
 				3763CF84B70E24CD9C7504B3 /* PaywallView.swift in Sources */,
@@ -1124,6 +1129,7 @@
 				D2C627BEC0E3F804EDA9AEB0 /* HistoryView.swift in Sources */,
 				68D479D64633892374FAB45D /* MacMain.swift in Sources */,
 				36C7129ADA2832BD66B9A009 /* Main.swift in Sources */,
+				C361D921DB0FF0FEE1A7CB2D /* MeshAnimationSettings.swift in Sources */,
 				FE76CD71665F0215178FE479 /* MeshGradientConfig.swift in Sources */,
 				5E48F753DE9A34485F3DFBCD /* MoreView.swift in Sources */,
 				A569872904D9E3692CAB9EE4 /* PaywallView.swift in Sources */,
