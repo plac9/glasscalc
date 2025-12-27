@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Platform parity checklist and refreshed automated screenshots (iPhone 17, iPad Pro 13, watchOS 46mm, macOS native).
 - Refreshed automated screenshot sets for iPhone 17 and iPad Pro 13-inch (M5) in `screenshots/automated/2025-12-26-*`.
 - Refreshed macOS snap screenshots and watchOS 46mm set in `screenshots/automated/2025-12-26-macos-snap/` and `screenshots/automated/2025-12-26-watchos-46mm/`.
+- Privacy policy page at `https://prismcalc.app/privacy` (website).
 
 ### Changed
 - Set iPhone + iPad targeting (`TARGETED_DEVICE_FAMILY = 1,2`) and codified team ID in `project.yml`.

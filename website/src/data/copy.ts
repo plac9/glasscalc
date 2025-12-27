@@ -47,7 +47,7 @@ export const copy = {
       { label: 'About', href: '#about' },
       { label: 'Accessibility', href: '#accessibility' },
       { label: 'Roadmap', href: '#roadmap' },
-      { label: 'Privacy', href: '#privacy' },
+      { label: 'Privacy Policy', href: '/privacy' },
       { label: 'Support', href: 'mailto:support@laclairtech.com' },
     ],
   },

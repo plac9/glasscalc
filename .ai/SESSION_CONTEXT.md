@@ -9,8 +9,8 @@
 
 - **Current Phase**: Phase 4 - Launch preparation
 - **Active Work**: All TASKMASTER milestones complete (M1-M5), ready for submission
-- **Blockers**: Privacy policy URL, M4-T4 needs physical device for Instruments
-- **Next Steps**: Upload latest archive to App Store Connect, review macOS/watch screenshots, physical device performance profiling, finalize App Store metadata
+- **Blockers**: Privacy policy URL (drafted, needs deploy), M4-T4 needs physical device for Instruments
+- **Next Steps**: Deploy privacy policy page, upload latest archive to App Store Connect, review macOS/watch screenshots, physical device performance profiling, finalize App Store metadata
 
 ## Project Overview
 
@@ -57,7 +57,7 @@ Spectacular glassmorphic calculator for iOS with freemium model. Core calculator
 - [ ] Device performance profiling (Instruments)
 - [ ] Screenshot review/crop for App Store (latest device sets)
 - [ ] Review refreshed macOS/watch screenshots
-- [ ] Privacy policy URL live
+- [ ] Privacy policy URL live (drafted at `website/public/privacy/index.html`, pending deploy)
 - [ ] Upload latest archive to App Store Connect
 - [ ] App Store metadata completion
 - [ ] TestFlight beta submission
